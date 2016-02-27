@@ -22,16 +22,16 @@ INSERT INTO employees (first_name, last_name) VALUES ('Bob', 'Smith');
 INSERT INTO employees (first_name, last_name) VALUES ('Jane', 'Doe');
 
 INSERT INTO stores (store_name, 
-					store_location, 
-                    manager_id, 
-                    regional_manager_id) 
-	   VALUES ('McDonalds', 'Houston, TX', 2, 1);
+		store_location, 
+                manager_id, 
+                regional_manager_id) 
+	VALUES ('McDonalds', 'Houston, TX', 2, 1);
        
 INSERT INTO stores (store_name, 
-					store_location, 
-                    manager_id, 
-                    regional_manager_id) 
-	   VALUES ('McDonalds', 'Austin, TX', 3, 1);
+		store_location, 
+                manager_id, 
+                regional_manager_id) 
+	VALUES ('McDonalds', 'Austin, TX', 3, 1);
 
 SELECT * FROM employees;
 select * from stores;
