@@ -111,7 +111,6 @@ create table Event_Types (
 create table Events (
   Event_ID    int primary key,
   Type_ID     int,
-  Game_ID     int,
   Team_ID     int,
   Event_Time  datetime,  
   Winner      varchar(20),
