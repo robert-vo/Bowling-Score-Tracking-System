@@ -10,6 +10,8 @@ CREATE TABLE table_name (
 );
 */
 
+ -- bowling
+
 use bowling;
 
 drop table if exists Game;
