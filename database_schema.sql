@@ -13,14 +13,15 @@ CREATE TABLE table_name (
 use bowling;
 
 drop table if exists Game;
-drop table if exists Team;
 drop table if exists Events;
 drop table if exists Event_Types;
 drop table if exists Statistics;
 drop table if exists Frame;
 drop table if exists Roll;
-drop table if exists Players;
+drop table if exists Team;
+
 drop table if exists Ball;
+drop table if exists Players;
 
 create table Ball (
   Ball_ID  int  primary key,
@@ -47,26 +48,40 @@ create table Team (
   Name           varchar(20),
   Leader         int,
   Date_Created   datetime,
-  -- TODO: Add Players [Array?] 
   Game_Count     int,
   Win_Count      int,
   Phone_Number   varchar(15),
   Address        varchar(30),
-  foreign key (Leader) references Players(Player_ID)
+  Player_1	     int,
+  Player_2	     int,
+  Player_3	     int,
+  Player_4	     int,
+  Player_5	     int,
+  foreign key (Leader) references Players(Player_ID),
+  foreign key (Player_1) references Players(Player_ID),
+  foreign key (Player_2) references Players(Player_ID),
+  foreign key (Player_3) references Players(Player_ID),
+  foreign key (Player_4) references Players(Player_ID),
+  foreign key (Player_5) references Players(Player_ID)
 );
-
-
-
-
 
 create table Roll (
   Roll_ID     int primary key,
   Frame_ID    int,
   Ball_ID     int,
-  Is_Stike    boolean,
+  Is_Strike   boolean,
   Is_Spare    boolean,
-  Is_Foul     boolean
-  -- pins
+  Is_Foul     boolean,
+  Pin_1		  boolean,
+  Pin_2		  boolean,
+  Pin_3		  boolean,
+  Pin_4		  boolean,
+  Pin_5		  boolean,
+  Pin_6		  boolean,
+  Pin_7		  boolean,
+  Pin_8		  boolean,
+  Pin_9		  boolean,
+  Pin_10	  boolean
 );
 
 create table Frame(
@@ -94,21 +109,23 @@ create table Event_Types (
 create table Events (
   Event_ID    int primary key,
   Type_ID     int,
-  Game_ID     int ,
+  Game_ID     int,
+  Team_ID     int,
   Event_Time  datetime,  
   Winner      varchar(20),
   Title       varchar(20),
   Location    varchar(50),
-  foreign key (Type_ID) references Event_Types(Event_Type_ID)
+  foreign key (Type_ID) references Event_Types(Event_Type_ID),
+  foreign key (Team_ID) references Team(Team_ID)
 );
 
 create table Game (
   Game_ID     int  primary key,
   Event_ID    int,
-  Player_ID   int,
+  Team_ID     int,
   Frame_ID    int,
   foreign key (Event_ID) references Events(Event_ID),
-  foreign key (Player_ID) references Players(Player_ID),
+  foreign key (Team_ID) references Team(Team_ID),
   foreign key (Frame_ID) references Frame(Frame_ID)
 );
 
