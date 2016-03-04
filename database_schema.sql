@@ -2,7 +2,6 @@
 
 /*
 create table format
-
 CREATE TABLE table_name (
   attribute_name  data_type  any_other_special_properties,
   ...,
@@ -14,14 +13,14 @@ CREATE TABLE table_name (
 use bowling;
 
 drop table if exists Game;
-drop table if exists Roll;
-drop table if exists Ball;
 drop table if exists Team;
-drop table if exists Frame;
 drop table if exists Events;
 drop table if exists Event_Types;
 drop table if exists Statistics;
+drop table if exists Frame;
+drop table if exists Roll;
 drop table if exists Players;
+drop table if exists Ball;
 
 create table Ball (
   Ball_ID  int  primary key,
@@ -58,6 +57,18 @@ create table Team (
 
 
 
+
+
+create table Roll (
+  Roll_ID     int primary key,
+  Frame_ID    int,
+  Ball_ID     int,
+  Is_Stike    boolean,
+  Is_Spare    boolean,
+  Is_Foul     boolean
+  -- pins
+);
+
 create table Frame(
   Frame_ID        int primary key,
   Player_ID       int,
@@ -71,17 +82,9 @@ create table Frame(
   foreign key (Roll_Three_ID) references Roll(Roll_ID)
 );
 
-create table Roll (
-  Roll_ID     int primary key,
-  Frame_ID    int,
-  Ball_ID     int,
-  Is_Stike    boolean,
-  Is_Spare    boolean,
-  Is_Foul     boolean,
-  foreign key (Frame_ID) references Frame(Frame_ID),
-  foreign key (Ball_ID) references Ball(Ball_ID)
-  -- pins
-);
+ALTER TABLE Roll
+Add foreign key (Ball_ID) references Ball(Ball_ID) on delete cascade;
+
 
 create table Event_Types (
   Event_Type_ID   int primary key,
