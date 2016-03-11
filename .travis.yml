@@ -3,4 +3,4 @@ language: php
 php:
   - nightly
 
-script: phpunit --ignore-configuration --coverage-text
+script: phpunit
