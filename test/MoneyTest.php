@@ -1,6 +1,6 @@
 <?php
 
-include "Money.php";
+include "../src/Money.php";
 
 class MoneyTest extends PHPUnit_Framework_TestCase
 {
