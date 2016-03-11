@@ -13,7 +13,7 @@
 
 <?php
 
-function printAllFromBalls() {
+function retrieveAndPrintAllFromTable($tableName) {
     $servername = "localhost:3306";
     $username = "root";
     $password = "password";
@@ -26,33 +26,39 @@ function printAllFromBalls() {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM Ball";
+    $sql = "SELECT * FROM $tableName";
     $result = $conn->query($sql);
 
+    printResult($result);
+
+    $conn->close();
+}
+
+function printResult($result) {
     if ($result->num_rows > 0) {
         // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "<br> Color: ". $row["Color"]. " - Weight: ". $row["Weight"]. " - Size: " . $row["Size"] . "<br>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<br> Color: " . $row["Color"] . " - Weight: " . $row["Weight"] . " - Size: " . $row["Size"] . "<br>";
         }
     } else {
         echo "0 results";
     }
-
-    $conn->close();
 }
-?>
 
+?>
 
 
 <div class="container">
     <div class="jumbotron">
-        <h1>My First Bootstrap Page</h1>
-        <p>Resize this responsive page to see the effect!</p>
+        <h1>Bowling Score Tracking System</h1>
+        <p>Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various
+            statistics about players such as single-pin spares left, strike percentage, split-conversion percentage,
+            etc.)</p>
     </div>
     <div class="row">
         <div class="col-sm-4">
             <h3>Balls</h3>
-            <p><?php printAllFromBalls()?></p>
+            <p><?php retrieveAndPrintAllFromTable('Ball') ?></p>
         </div>
         <div class="col-sm-4">
             <h3>Column 2</h3>
