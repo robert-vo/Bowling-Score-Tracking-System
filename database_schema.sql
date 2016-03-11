@@ -10,8 +10,6 @@ CREATE TABLE table_name (
 );
 */
 
- -- bowling
-
 use bowling;
 
 drop table if exists Game;
@@ -26,14 +24,14 @@ drop table if exists Ball;
 drop table if exists Players;
 
 create table Ball (
-  Ball_ID  int  primary key,
+  Ball_ID  int  primary key AUTO_INCREMENT,
   Color    varchar(20),
   Weight   int,
   Size     varchar(2)
 );
 
 create table Players (
-  Player_ID       int primary key,
+  Player_ID       int primary key AUTO_INCREMENT,
   Gender          varchar(2),
   Phone_Number    varchar(15),
   Date_Joined     date,
@@ -46,7 +44,7 @@ create table Players (
 );
 
 create table Team (
-  Team_ID        int primary key,
+  Team_ID        int primary key AUTO_INCREMENT,
   Name           varchar(20),
   Leader         int,
   Date_Created   datetime,
@@ -68,7 +66,7 @@ create table Team (
 );
 
 create table Roll (
-  Roll_ID     int primary key,
+  Roll_ID     int primary key AUTO_INCREMENT,
   Frame_ID    int,
   Ball_ID     int,
   Is_Strike   boolean,
@@ -87,7 +85,7 @@ create table Roll (
 );
 
 create table Frame(
-  Frame_ID        int primary key,
+  Frame_ID        int primary key AUTO_INCREMENT,
   Player_ID       int,
   Roll_One_ID     int,
   Roll_Two_ID     int,
@@ -104,13 +102,14 @@ Add foreign key (Ball_ID) references Ball(Ball_ID) on delete cascade;
 
 
 create table Event_Types (
-  Event_Type_ID   int primary key,
+  Event_Type_ID   int primary key AUTO_INCREMENT,
   Event_Type_Name varchar(30)
 );
 
 create table Events (
-  Event_ID    int primary key,
+  Event_ID    int primary key AUTO_INCREMENT,
   Type_ID     int,
+  Game_ID     int,
   Team_ID     int,
   Event_Time  datetime,  
   Winner      varchar(20),
@@ -121,7 +120,7 @@ create table Events (
 );
 
 create table Game (
-  Game_ID     int  primary key,
+  Game_ID     int  primary key AUTO_INCREMENT,
   Event_ID    int,
   Team_ID     int,
   Frame_ID    int,
@@ -131,7 +130,7 @@ create table Game (
 );
 
 create table Statistics (
-  Stat_ID           int  primary key,
+  Stat_ID           int  primary key AUTO_INCREMENT,
   Player_ID         int,
   Strikes           int,
   Perfect_Games     int,
