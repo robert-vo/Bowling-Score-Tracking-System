@@ -139,5 +139,6 @@ create table Statistics (
   Worst_Score       int,
   Pins_Left         int,
   Average_Pin_Left  int,
-  foreign key (Player_ID) references Players(Player_ID) 
+  foreign key (Player_ID) references Players(Player_ID)
+  on delete CASCADE
 );
