@@ -20,18 +20,20 @@ function retrieveAndPrintAllFromTable($tableName) {
     $dbname = "bowling";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+
+    $conn = new PDO("mysql:host=localhost:3306;dbname=bowling", 'root', 'password');
+
+    $getUsers = $conn->prepare("SELECT * FROM BALL");
+    $getUsers->execute();
+
+    $users = $getUsers->fetchAll();
+    foreach ($users as $user) {
+        echo $user['Size'] . '<br />';
     }
 
-    $sql = "SELECT * FROM $tableName";
-    $result = $conn->query($sql);
-
-    printResult($result);
-
-    $conn->close();
+    //$conn->close();
 }
 
 function printResult($result) {
