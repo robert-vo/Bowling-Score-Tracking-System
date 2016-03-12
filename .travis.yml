@@ -11,5 +11,4 @@ env:
   - DB=mysql
 
 before_install:
-  - mysql -u root -e '../resources/database_schema.sql'
-
+  - mysql source resources\database_schema.sql;
