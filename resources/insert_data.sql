@@ -1,4 +1,4 @@
-use bowling;
+use sys;
 
 
 insert into Ball(Color, Weight, Size)

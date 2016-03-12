@@ -12,3 +12,4 @@ env:
 
 before_install:
   - mysql < resources/database_schema.sql
+  - mysql < resources/insert_data.sql

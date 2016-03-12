@@ -10,7 +10,7 @@ CREATE TABLE table_name (
 );
 */
 
-use bowling;
+use sys;
 
 drop table if exists Game;
 drop table if exists Events;
@@ -19,7 +19,6 @@ drop table if exists Statistics;
 drop table if exists Frame;
 drop table if exists Roll;
 drop table if exists Team;
-
 drop table if exists Ball;
 drop table if exists Players;
 
