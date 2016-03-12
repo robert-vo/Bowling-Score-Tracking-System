@@ -9,3 +9,7 @@ script: phpunit UnitTest test/MoneyTest.php
 
 env:
   - DB=mysql
+
+before_install:
+  - mysql -u root -e 'resources/database_schema.sql'
+
