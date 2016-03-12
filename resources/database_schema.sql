@@ -10,7 +10,9 @@ CREATE TABLE table_name (
 );
 */
 
-use sys;
+CREATE DATABASE if not exists bowling;
+
+use bowling;
 
 drop table if exists Game;
 drop table if exists Events;
