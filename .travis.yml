@@ -6,3 +6,6 @@ php:
   - nightly
 
 script: phpunit UnitTest test/MoneyTest.php
+
+env:
+  - DB=mysql
