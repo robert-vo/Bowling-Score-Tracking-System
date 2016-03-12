@@ -16,7 +16,7 @@
 function retrieveAndPrintAllFromTable($tableName) {
     $servername = "localhost:3306";
     $username = "root";
-    $password = "password"
+    $password = "password";
     $dbname = "bowling";
 
     // Create connection
