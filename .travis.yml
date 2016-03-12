@@ -11,4 +11,4 @@ env:
   - DB=mysql
 
 before_install:
-  - mysql < ..\resources\database_schema.sql
+  - mysql < resources/database_schema.sql
