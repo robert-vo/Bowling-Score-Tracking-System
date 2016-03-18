@@ -2,7 +2,7 @@ use bowling;
 
 
 insert into Ball(Color, Weight, Size)
-	Values('Blue', 10, 'X');
+	Values('Blue', 10, 'M');
     
 insert into Ball(Color, Weight, Size)
 	Values('Red', 05, 'S');
