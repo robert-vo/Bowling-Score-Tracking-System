@@ -14,10 +14,14 @@
 <?php
 
 function retrieveAndPrintAllFromTable($tableName) {
-    $servername = "localhost:3306";
-    $username = "root";
-    $password = "password";
+    $servername = "us-cdbr-azure-central-a.cloudapp.net";
+    $username = "ba27b2787a498a";
+    $password = "e24ebaaa";
     $dbname = "bowling";
+//    $servername = "localhost:3306";
+//    $username = "root";
+//    $password = "password";
+//    $dbname = "bowling";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
