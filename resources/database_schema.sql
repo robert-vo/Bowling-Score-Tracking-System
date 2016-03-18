@@ -100,21 +100,15 @@ create table Frame(
   foreign key (Roll_Three_ID) references Roll(Roll_ID)
 );
 
-create table Event_Types (
-  Event_Type_ID   int primary key AUTO_INCREMENT,
-  Event_Type_Name varchar(30) not null
-);
-
 create table Events (
   Event_ID    int primary key AUTO_INCREMENT,
-  Type_ID     int,
   Game_ID     int,
   Team_ID     int,
   Event_Time  datetime,
   Winner      varchar(20),
   Title       varchar(20),
   Location    varchar(50),
-  foreign key (Type_ID) references Event_Types(Event_Type_ID),
+  Event_Type  ENUM('Casual', 'Tournament'),
   foreign key (Team_ID) references Team(Team_ID)
 );
 
