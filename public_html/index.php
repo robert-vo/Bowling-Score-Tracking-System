@@ -13,7 +13,7 @@
 
 <?php
 
-function retrieveAndPrintAllFromTable($tableName, $destination) {
+function connectToDatabase($destination) {
     if($destination == 'Local') {
         $servername = "localhost:3306";
         $username = "root";
@@ -27,7 +27,11 @@ function retrieveAndPrintAllFromTable($tableName, $destination) {
         $dbname = "bowling";
     }
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    return new mysqli($servername, $username, $password, $dbname);
+}
+
+function retrieveAndPrintAllFromTable($tableName, $destination) {
+    $conn = connectToDatabase($destination);
 
     // Check connection
     if ($conn->connect_error) {
@@ -66,7 +70,7 @@ function printResult($result) {
     <div class="row">
         <div class="col-sm-4">
             <h3>Balls</h3>
-            <p><?php retrieveAndPrintAllFromTable('Ball', 'Remote') ?></p>
+            <p><?php retrieveAndPrintAllFromTable('Ball', 'Local') ?></p>
         </div>
         <div class="col-sm-4">
             <h3>Column 2</h3>
