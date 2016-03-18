@@ -10,6 +10,7 @@ CREATE TABLE table_name (
 );
 */
 
+drop database if exists bowling;
 CREATE DATABASE if not exists bowling;
 
 use bowling;
@@ -25,23 +26,23 @@ drop table if exists Ball;
 drop table if exists Players;
 
 create table Ball (
-  Ball_ID  int  primary key AUTO_INCREMENT,
-  Color    varchar(20),
-  Weight   int,
-  Size     varchar(2)
+  Ball_ID  int          primary key AUTO_INCREMENT,
+  Color    varchar(20)  not null,
+  Weight   int          not NULL,
+  Size     varchar(2)   not NULL
 );
 
 create table Players (
-  Player_ID       int primary key AUTO_INCREMENT,
+  Player_ID       int           primary key AUTO_INCREMENT,
   Gender          varchar(2),
   Phone_Number    varchar(15),
-  Date_Joined     date,
-  Date_Of_Birth   datetime,
+  Date_Joined     date          not null,
+  Date_Of_Birth   datetime      not null,
   Address         varchar(30),
-  First_Name      varchar(30),
-  Last_Name       varchar(30),
+  First_Name      varchar(30)   not null,
+  Last_Name       varchar(30)   not null,
   Middle_Initial  varchar(1),
-  Email           varchar(30) 
+  Email           varchar(30)   not null
 );
 
 create table Team (
@@ -54,10 +55,10 @@ create table Team (
   Phone_Number   varchar(15),
   Address        varchar(30),
   Player_1	     int,
-  Player_2	     int,
-  Player_3	     int,
-  Player_4	     int,
-  Player_5	     int,
+  Player_2	     int null,
+  Player_3	     int null,
+  Player_4	     int null,
+  Player_5	     int null,
   foreign key (Leader) references Players(Player_ID),
   foreign key (Player_1) references Players(Player_ID),
   foreign key (Player_2) references Players(Player_ID),
@@ -67,22 +68,23 @@ create table Team (
 );
 
 create table Roll (
-  Roll_ID     int primary key AUTO_INCREMENT,
-  Frame_ID    int,
-  Ball_ID     int,
+  Roll_ID     int     primary key AUTO_INCREMENT,
+  Frame_ID    int     not null,
+  Ball_ID     int     not null,
   Is_Strike   boolean,
   Is_Spare    boolean,
   Is_Foul     boolean,
-  Pin_1		  boolean,
-  Pin_2		  boolean,
-  Pin_3		  boolean,
-  Pin_4		  boolean,
-  Pin_5		  boolean,
-  Pin_6		  boolean,
-  Pin_7		  boolean,
-  Pin_8		  boolean,
-  Pin_9		  boolean,
-  Pin_10	  boolean
+  Pin_1		    boolean,
+  Pin_2		    boolean,
+  Pin_3		    boolean,
+  Pin_4		    boolean,
+  Pin_5		    boolean,
+  Pin_6		    boolean,
+  Pin_7		    boolean,
+  Pin_8		    boolean,
+  Pin_9		    boolean,
+  Pin_10	    boolean,
+  foreign key (Ball_ID) REFERENCES Ball(Ball_ID) on delete CASCADE
 );
 
 create table Frame(
@@ -90,7 +92,7 @@ create table Frame(
   Player_ID       int,
   Roll_One_ID     int,
   Roll_Two_ID     int,
-  Roll_Three_ID   int,
+  Roll_Three_ID   int null,
   Score           int,
   foreign key (Player_ID) references Players(Player_ID),
   foreign key (Roll_One_ID) references Roll(Roll_ID),
@@ -98,13 +100,9 @@ create table Frame(
   foreign key (Roll_Three_ID) references Roll(Roll_ID)
 );
 
-ALTER TABLE Roll
-Add foreign key (Ball_ID) references Ball(Ball_ID) on delete cascade;
-
-
 create table Event_Types (
   Event_Type_ID   int primary key AUTO_INCREMENT,
-  Event_Type_Name varchar(30)
+  Event_Type_Name varchar(30) not null
 );
 
 create table Events (
@@ -112,7 +110,7 @@ create table Events (
   Type_ID     int,
   Game_ID     int,
   Team_ID     int,
-  Event_Time  datetime,  
+  Event_Time  datetime,
   Winner      varchar(20),
   Title       varchar(20),
   Location    varchar(50),
@@ -141,5 +139,5 @@ create table Statistics (
   Pins_Left         int,
   Average_Pin_Left  int,
   foreign key (Player_ID) references Players(Player_ID)
-  on delete CASCADE
+    on delete CASCADE
 );
