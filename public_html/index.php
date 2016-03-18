@@ -13,14 +13,22 @@
 
 <?php
 
-function retrieveAndPrintAllFromTable($tableName) {
-    $servername = "localhost:3306";
-    $username = "root";
-    $password = "password";
-    $dbname = "bowling";
-
+function retrieveAndPrintAllFromTable($tableName, $destination) {
+    if($destination == 'Local') {
+        $servername = "localhost:3306";
+        $username = "root";
+        $password = "password";
+        $dbname = "bowling";
+    }
+    else { //Remote
+        $servername = "us-cdbr-azure-central-a.cloudapp.net";
+        $username = "ba27b2787a498a";
+        $password = "e24ebaaa";
+        $dbname = "bowling";
+    }
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
+
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -58,7 +66,7 @@ function printResult($result) {
     <div class="row">
         <div class="col-sm-4">
             <h3>Balls</h3>
-            <p><?php retrieveAndPrintAllFromTable('Ball') ?></p>
+            <p><?php retrieveAndPrintAllFromTable('Ball', 'Remote') ?></p>
         </div>
         <div class="col-sm-4">
             <h3>Column 2</h3>
