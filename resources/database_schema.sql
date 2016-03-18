@@ -29,12 +29,12 @@ create table Ball (
   Ball_ID  int          primary key AUTO_INCREMENT,
   Color    varchar(20)  not null,
   Weight   int          not NULL,
-  Size     varchar(2)   not NULL
+  Size     ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL')
 );
 
 create table Players (
   Player_ID       int           primary key AUTO_INCREMENT,
-  Gender          varchar(2),
+  Gender          ENUM('F', 'M'),
   Phone_Number    varchar(15),
   Date_Joined     date          not null,
   Date_Of_Birth   datetime      not null,
@@ -46,7 +46,7 @@ create table Players (
 );
 
 create table Team (
-  Team_ID        int primary key AUTO_INCREMENT,
+  Team_ID        int            primary key AUTO_INCREMENT,
   Name           varchar(20),
   Leader         int,
   Date_Created   datetime,
@@ -55,35 +55,35 @@ create table Team (
   Phone_Number   varchar(15),
   Address        varchar(30),
   Player_1	     int,
-  Player_2	     int null,
-  Player_3	     int null,
-  Player_4	     int null,
-  Player_5	     int null,
-  foreign key (Leader) references Players(Player_ID),
-  foreign key (Player_1) references Players(Player_ID),
-  foreign key (Player_2) references Players(Player_ID),
-  foreign key (Player_3) references Players(Player_ID),
-  foreign key (Player_4) references Players(Player_ID),
-  foreign key (Player_5) references Players(Player_ID)
+  Player_2	     int            null,
+  Player_3	     int            null,
+  Player_4	     int            null,
+  Player_5	     int            null,
+  foreign key    (Leader)       references Players(Player_ID),
+  foreign key    (Player_1)     references Players(Player_ID),
+  foreign key    (Player_2)     references Players(Player_ID),
+  foreign key    (Player_3)     references Players(Player_ID),
+  foreign key    (Player_4)     references Players(Player_ID),
+  foreign key    (Player_5)     references Players(Player_ID)
 );
 
 create table Roll (
   Roll_ID     int     primary key AUTO_INCREMENT,
   Frame_ID    int     not null,
   Ball_ID     int     not null,
-  Is_Strike   boolean,
-  Is_Spare    boolean,
-  Is_Foul     boolean,
-  Pin_1		    boolean,
-  Pin_2		    boolean,
-  Pin_3		    boolean,
-  Pin_4		    boolean,
-  Pin_5		    boolean,
-  Pin_6		    boolean,
-  Pin_7		    boolean,
-  Pin_8		    boolean,
-  Pin_9		    boolean,
-  Pin_10	    boolean,
+  Is_Strike   boolean not null,
+  Is_Spare    boolean not null,
+  Is_Foul     boolean not null,
+  Hit_Pin_1		boolean not null,
+  Hit_Pin_2		boolean not null,
+  Hit_Pin_3		boolean not null,
+  Hit_Pin_4		boolean not null,
+  Hit_Pin_5		boolean not null,
+  Hit_Pin_6		boolean not null,
+  Hit_Pin_7		boolean not null,
+  Hit_Pin_8		boolean not null,
+  Hit_Pin_9		boolean not null,
+  Hit_Pin_10	boolean not null,
   foreign key (Ball_ID) REFERENCES Ball(Ball_ID) on delete CASCADE
 );
 
@@ -140,4 +140,6 @@ create table Statistics (
   Average_Pin_Left  int,
   foreign key (Player_ID) references Players(Player_ID)
     on delete CASCADE
+    on update CASCADE
 );
+
