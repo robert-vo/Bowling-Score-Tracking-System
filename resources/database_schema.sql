@@ -11,7 +11,7 @@ CREATE TABLE table_name (
 */
 
 drop database if exists bowling;
-CREATE DATABASE if not exists bowling;
+CREATE DATABASE if NOT exists bowling;
 
 use bowling;
 
@@ -26,16 +26,17 @@ DROP TABLE IF EXISTS Ball;
 DROP TABLE IF EXISTS Players;
 
 CREATE TABLE Ball (
-  Ball_ID  INT          primary key AUTO_INCREMENT,
+  Ball_ID  INT          PRIMARY KEY AUTO_INCREMENT,
   Color    VARCHAR(20)  NOT NULL,
-  Weight   INT          not NULL,
-  Size     ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL') NOT NULL
+  Weight   INT          NOT NULL,
+  Size     ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL') NOT NULL,
+  CHECK (Weight > 0)
 );
 
 CREATE TABLE Players (
-  Player_ID       INT             primary key AUTO_INCREMENT,
+  Player_ID       INT             PRIMARY KEY AUTO_INCREMENT,
   Gender          ENUM('F', 'M')  NOT NULL,
-  PhONe_Number    VARCHAR(15),
+  Phone_Number    VARCHAR(15),
   Date_Joined     DATE            NOT NULL,
   Date_Of_Birth   DATETIME        NOT NULL,
   Address         VARCHAR(30),
@@ -46,39 +47,71 @@ CREATE TABLE Players (
 );
 
 CREATE TABLE Team (
-  Team_ID        INT            primary key AUTO_INCREMENT,
+  Team_ID        INT            PRIMARY KEY AUTO_INCREMENT,
   Name           VARCHAR(20)	  NOT NULL,
   Leader         INT			      NOT NULL,
   Date_Created   DATETIME		    NOT NULL,
-  Game_Count     INT			      default 0,
-  Win_Count      INT			      default 0,
-  PhONe_Number   VARCHAR(15),
+  Game_Count     INT			      DEFAULT 0,
+  Win_Count      INT			      DEFAULT 0,
+  Phone_Number   VARCHAR(15),
   Address        VARCHAR(30),
   Player_1	     INT,
-  Player_2	     INT            null,
-  Player_3	     INT            null,
-  Player_4	     INT            null,
-  Player_5	     INT            null,
-  FOREIGN KEY    (Leader)       REFERENCES Players(Player_ID),
-  FOREIGN KEY    (Player_1)     REFERENCES Players(Player_ID),
-  FOREIGN KEY    (Player_2)     REFERENCES Players(Player_ID),
-  FOREIGN KEY    (Player_3)     REFERENCES Players(Player_ID),
-  FOREIGN KEY    (Player_4)     REFERENCES Players(Player_ID),
+  Player_2	     INT            NULL,
+  Player_3	     INT            NULL,
+  Player_4	     INT            NULL,
+  Player_5	     INT            NULL,
+  FOREIGN KEY    (Leader)       REFERENCES Players(Player_ID)
+    ON DELETE RESTRICT,
+  FOREIGN KEY    (Player_1)     REFERENCES Players(Player_ID)
+    ON DELETE RESTRICT,
+  FOREIGN KEY    (Player_2)     REFERENCES Players(Player_ID)
+    ON DELETE RESTRICT,
+  FOREIGN KEY    (Player_3)     REFERENCES Players(Player_ID)
+    ON DELETE RESTRICT,
+  FOREIGN KEY    (Player_4)     REFERENCES Players(Player_ID)
+    ON DELETE RESTRICT,
   FOREIGN KEY    (Player_5)     REFERENCES Players(Player_ID)
+    ON DELETE RESTRICT,
+  CHECK (Game_Count >= 0),
+  CHECK (Win_Count >= 0)
+);
+
+CREATE TABLE Events (
+  Event_ID    INT PRIMARY KEY AUTO_INCREMENT,
+  Team_ID     INT,
+  Event_Time  DATETIME,
+  Winner      VARCHAR(20),
+  Title       VARCHAR(20),
+  Location    VARCHAR(50),
+  Event_Type  ENUM('Casual', 'Tournament') DEFAULT 'Casual',
+  FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
 );
 
 CREATE TABLE Frame(
-  Frame_ID        INT primary key AUTO_INCREMENT,
+  Frame_ID        INT PRIMARY KEY AUTO_INCREMENT,
+  Frame_Number    INT NOT NULL DEFAULT 0,
   Player_ID       INT,
   Roll_One_ID     INT,
   Roll_Two_ID     INT,
   Roll_Three_ID   INT,
   Score           INT DEFAULT 0,
+  Team_ID         INT,
+  Event_ID        INT,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (Event_ID) REFERENCES Events(Event_ID)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CHECK (Frame_Number BETWEEN 1 and 10),
+  CHECK (Score BETWEEN 0 and 300)
 );
 
 CREATE TABLE Roll (
-  Roll_ID     INT     primary key AUTO_INCREMENT,
+  Roll_ID     INT     PRIMARY KEY AUTO_INCREMENT,
   Frame_ID    INT     NOT NULL,
   Ball_ID     INT,
   Is_Strike   BOOLEAN NOT NULL DEFAULT FALSE,
@@ -102,55 +135,33 @@ CREATE TABLE Roll (
     ON UPDATE CASCADE
 );
 
-CREATE TABLE Events (
-  Event_ID    INT primary key AUTO_INCREMENT,
-  Game_ID     INT,
-  Team_ID     INT,
-  Event_Time  DATETIME,
-  Winner      VARCHAR(20),
-  Title       VARCHAR(20),
-  LocatiON    VARCHAR(50),
-  Event_Type  ENUM('Casual', 'Tournament'),
-  FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
-);
-
 CREATE TABLE Game (
-  Game_ID     INT  primary key AUTO_INCREMENT,
+  Game_ID     INT PRIMARY KEY AUTO_INCREMENT,
   Event_ID    INT,
-  Team_ID     INT,
-  Frame_ID    INT,
-  FOREIGN KEY (Event_ID) REFERENCES Events(Event_ID),
-  FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID),
-  FOREIGN KEY (Frame_ID) REFERENCES Frame(Frame_ID)
+  Teams       VARCHAR(100) not null, -- CSV of all teams
+  FOREIGN KEY (Event_ID) REFERENCES Events(Event_ID)
 );
 
 CREATE TABLE Statistics (
-  Stat_ID           INT primary key AUTO_INCREMENT,
+  Stat_ID           INT PRIMARY KEY AUTO_INCREMENT,
   Player_ID         INT,
-  Strikes           INT NOT NULL default 0,
-  Perfect_Games     INT NOT NULL default 0,
-  Spares            INT NOT NULL default 0,
-  Best_Score        INT NOT NULL default 0,
-  Worst_Score       INT NOT NULL default 0,
-  Pins_Left         INT NOT NULL default 0,
-  Average_Pin_Left  INT NOT NULL default 0,
+  Strikes           INT NOT NULL DEFAULT 0,
+  Games_Played      INT NOT NULL DEFAULT 0,
+  Perfect_Games     INT NOT NULL DEFAULT 0,
+  Spares            INT NOT NULL DEFAULT 0,
+  Best_Score        INT NOT NULL DEFAULT 0,
+  Worst_Score       INT NOT NULL DEFAULT 0,
+  Pins_Left         INT NOT NULL DEFAULT 0,
+  Average_Pin_Left  DOUBLE NOT NULL DEFAULT 0,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
-    ON UPDATE CASCADE
+    ON UPDATE CASCADE,
+  CHECK (Strikes >= 0),
+  CHECK (Games_Played >= 0),
+  CHECK (Perfect_Games >= 0),
+  CHECK (Spares >= 0),
+  CHECK (Best_Score >= 0),
+  CHECK (Worst_Score >= 0),
+  CHECK (Pins_Left >= 0),
+  CHECK (Average_Pin_Left >= 0)
 );
-
-INSERT INTO Ball(Color, Weight, Size)
-Values('hello world', 10, 'XS');
-
-INSERT INTO Ball(Color, Weight, Size)
-Values('this is cONnecting', 05, 'S');
-
-INSERT INTO Ball(Color, Weight, Size)
-Values('to an', 08, 'M');
-
-INSERT INTO Ball(Color, Weight, Size)
-Values('azure database', 15, 'XL');
-
-INSERT INTO Ball(Color, Weight, Size)
-Values('azure database', 15, 1);
-select * from ball;
