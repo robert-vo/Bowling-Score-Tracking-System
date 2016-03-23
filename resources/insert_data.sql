@@ -12,4 +12,6 @@ insert into Ball(Color, Weight, Size)
     
 insert into Ball(Color, Weight, Size)
 	Values('Pink', 15, 'XL');
-    
+
+ insert into Ball(Color, Weight, Size)
+	Values('William', 15, 'XL');
