@@ -70,7 +70,7 @@ function printResult($result) {
     <div class="row">
         <div class="col-sm-4">
             <h3>Balls</h3>
-            <p><?php retrieveAndPrintAllFromTable('Ball', 'Local') ?></p>
+            <p><?php retrieveAndPrintAllFromTable('Ball', 'Remote') ?></p>
         </div>
         <div class="col-sm-4">
             <h3>Column 2</h3>
