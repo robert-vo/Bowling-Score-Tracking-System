@@ -76,6 +76,7 @@ function printResult($result) {
             <h3>Column 2</h3>
             <p>Latin is weird.</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            <p>William testing</p>
         </div>
         <div class="col-sm-4">
             <h3>Column 3</h3>
