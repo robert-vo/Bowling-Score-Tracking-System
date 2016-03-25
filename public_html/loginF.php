@@ -57,9 +57,9 @@ function connectToDatabase($destination) {
 
 <form><div style="width: 250px; margin: 200px auto 0 auto; ">
 
-    <input type="text" name="username" placeholder="Username"/><br>
-    <input type="password" name="pass" placeholder="Password"/><br>
-    <input type="submit" name="valid" value="Login"/>
+    <input type="text" name="username" placeholder="Username"><br>
+    <input type="password" name="pass" placeholder="Password"><br>
+    <input type="submit" name="valid" value="Login">
     </div>
 </form>
 
