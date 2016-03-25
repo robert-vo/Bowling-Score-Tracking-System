@@ -62,6 +62,7 @@ function printResult($result) {
     <li><a class="active" href="index.php">Home</a></li>
     <li><a href="scores.php">Scores</a></li>
     <li style="float:right"><a href="about.php">About</a></li>
+    <li style="float:right"><a href="loginF.php">Login</a></li>
 </ul>
 
 
