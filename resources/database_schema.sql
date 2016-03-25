@@ -42,7 +42,8 @@ CREATE TABLE Players (
   First_Name      VARCHAR(30)     NOT NULL,
   Last_Name       VARCHAR(30)     NOT NULL,
   Middle_Initial  VARCHAR(1),
-  Email           VARCHAR(30)     NOT NULL
+  Email           VARCHAR(30)     NOT NULL UNIQUE,
+  Password        VARCHAR(256)
 );
 
 CREATE TABLE Team (
