@@ -1,3 +1,4 @@
+use bowling;
 INSERT INTO bowling.ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
 INSERT INTO bowling.ball (Color, Weight, Size) VALUES ('Red', 5, 'S');
 INSERT INTO bowling.ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
