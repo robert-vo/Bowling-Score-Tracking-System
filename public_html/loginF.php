@@ -4,17 +4,17 @@
     <style>
         div#box{
             background-color: white;
-            border: 1px solid navy;
+            border: 1px solid #4CAF50;
             width: 350px;
             margin:0 auto;
-            box-shadow: 1px 0px 15px navy;
+            box-shadow: 1px 0px 15px #4CAF50;
         }
         input{
             display: block;
             margin: 10px;
         }
         div#boxH{
-            background-color: navy;
+            background-color: #4CAF50;
             text-align: center;
             font-size: 22px;
             font-weight: bold;
@@ -25,13 +25,13 @@
             font-size: 15px;
             padding: 10px;
             border-radius: 3px;
-            border: 1px solid navy;
+            border: 1px solid #4CAF50;
         }
         input[type=submit]{
-            background-color: navy;
+            background-color: #4CAF50;
             padding: 5px 10px 5px 10px;
             border-radius:3px ;
-            border: 1px solid navy;
+            border: 1px solid #4CAF50;
             color: white;
             font-weight: bold;
         }
