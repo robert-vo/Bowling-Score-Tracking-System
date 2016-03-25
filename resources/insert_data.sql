@@ -1,6 +1,22 @@
 use bowling;
+
 INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
 INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 'S');
 INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
 INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 'XL');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 14, 'm');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 'XL');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 'S');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 'XL');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Yellow', 10, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Polka Dots', 20, 'S');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 10, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Black', 7, 'S');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('White', 12, 'XL');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 5, 'S');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Polka Dot', 12, 'M');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Dark Blue', 12, 'XL');
