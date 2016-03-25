@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .container {
+            margin: 50px auto;
+            width: 640px;
+        }
+
+        .login {
+            position: relative;
+            margin: 0 auto;
+            padding: 20px 20px 20px;
+            width: 310px;
+        }
+    </style>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,13 +45,24 @@ function connectToDatabase($destination) {
 
 ?>
 
-
 <ul>
     <li><a href="index.php">Home</a></li>
     <li><a href="scores.php">Scores</a></li>
     <li style="float:right"><a href="about.php">About</a></li>
     <li style="float:right"><a class = "active" href="loginF.php">Login</a></li>
 </ul>
+
+
+
+
+<form><div style="width: 250px; margin: 200px auto 0 auto; ">
+
+    <input type="text" name="username" placeholder="Username"/><br>
+    <input type="password" name="pass" placeholder="Password"/><br>
+    <input type="submit" name="valid" value="Login"/>
+    </div>
+</form>
+
 
 
 

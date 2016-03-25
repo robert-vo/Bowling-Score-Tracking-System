@@ -9,28 +9,8 @@
 
 <body>
 
-<?php
-
-function connectToDatabase($destination) {
-    if($destination == 'Local') {
-        $servername = "localhost:3306";
-        $username = "root";
-        $password = "password";
-        $dbname = "bowling";
-    }
-    else { //Remote
-        $servername = "us-cdbr-azure-central-a.cloudapp.net";
-        $username = "ba27b2787a498a";
-        $password = "e24ebaaa";
-        $dbname = "bowling";
-    }
-    // Create connection
-    return new mysqli($servername, $username, $password, $dbname);
-}
 
 
-
-?>
 
 
 <ul>
@@ -40,6 +20,12 @@ function connectToDatabase($destination) {
     <li style="float:right"><a href="loginF.php">Login</a></li>
 </ul>
 
+<div class="jumbotron">
+    <h1>Bowling Score Tracking System</h1>
+    <p>Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various
+        statistics about players such as single-pin spares left, strike percentage, split-conversion percentage,
+        etc.)</p>
+</div>
 
 
 </body>
