@@ -5,59 +5,83 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="audit.css">
 </head>
 
 <body>
-
 <?php
-
-function connectToDatabase($destination) {
-    if($destination == 'Local') {
-        $servername = "localhost:3306";
-        $username = "root";
-        $password = "password";
-        $dbname = "bowling";
-    }
-    else { //Remote
-        $servername = "us-cdbr-azure-central-a.cloudapp.net";
-        $username = "ba27b2787a498a";
-        $password = "e24ebaaa";
-        $dbname = "bowling";
-    }
-    // Create connection
+function connectToDatabase()
+{
+    $servername = "localhost:3306";
+    $username = "root";
+    $password = "password";
+    $dbname = "bowling";
+// Create connection
     return new mysqli($servername, $username, $password, $dbname);
 }
 
-
-
-?>
-<?php
-
-if(isset($_POST['formSubmit']) )
+function retrieveAndPrintAllFromTable($tableName)
 {
-    $varMovie = $_POST['formMovie'];
-    $varName = $_POST['formName'];
-    $varGender = $_POST['formGender'];
-    $errorMessage = "";
+    $conn = connectToDatabase();
 
-    // - - - snip - - -
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE 'Ball';";
+    $allColumns = $conn->query($sql);
+
+    $sql1 = "SELECT * FROM $tableName";
+    $result = $conn->query($sql1);
+
+
+    createTable($allColumns, $result);
+
+    $conn->close();
+}
+
+function createTable($allColumns, $result)
+{
+    $allColumnsAsArray = array();
+
+    echo "<table style =\"width:100%\">";
+    echo "<tr>";
+
+    if ($allColumns->num_rows > 0) {
+        while ($row = $allColumns->fetch_assoc()) {
+            array_push($allColumnsAsArray, $row["Column_name"]);
+            echo "<th>" . $row["Column_name"] . "</th>";
+        }
+        echo "<th> Perform Action </th>";
+        echo "</tr>";
+    } else {
+        echo "0 results";
+    }
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+
+            foreach ($allColumnsAsArray as $column) {
+                echo "<th>" . $row[$column] . "</th>";
+            }
+            echo "<th> <button type=button>Update</button><button type=button>Delete</button></th>" .
+                "</tr>";
+        }
+    } else {
+        echo "0 results";
+    }
+
+    echo "</table>";
 }
 
 ?>
-<?php
-
-if(!isset($_POST['formGender']))
-{
-    $errorMessage .= "<li>You forgot to select your Gender!</li>";
-}
-
-?>
-
 
 <ul>
     <li><a href="index.php">Home</a></li>
     <li><a href="scores.php">Scores</a></li>
-    <li style="float:right"><a class = "active"href="audit.php">Audit</a></li>
+    <li style="float:right"><a class="active" href="audit.php">Audit</a></li>
     <li style="float:right"><a href="about.php">About</a></li>
     <li style="float:right"><a href="loginF.php">Login</a></li>
 </ul>
@@ -78,6 +102,7 @@ if(!isset($_POST['formGender']))
 </p>
 
 
+<?php retrieveAndPrintAllFromTable('Ball') ?>
 
 
 </body>
