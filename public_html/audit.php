@@ -10,13 +10,23 @@
 
 <body>
 <?php
+
+//Change to Remote to test deployment on
+$typeOfConnection = getenv('Testing');
+
 function connectToDatabase()
 {
-    $servername = "localhost:3306";
-    $username = "root";
-    $password = "password";
-    $dbname = "bowling";
-// Create connection
+    if ($GLOBALS['typeOfConnection'] == 'Remote') {
+        $servername = "us-cdbr-azure-central-a.cloudapp.net";
+        $username = "ba27b2787a498a";
+        $password = "e24ebaaa";
+        $dbname = "bowling";
+    } else {
+        $servername = "localhost:3306";
+        $username = "root";
+        $password = "password";
+        $dbname = "bowling";
+    }
     return new mysqli($servername, $username, $password, $dbname);
 }
 
@@ -24,24 +34,23 @@ function retrieveAndPrintAllFromTable($tableName)
 {
     $conn = connectToDatabase();
 
-// Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE 'Ball';";
-    $allColumns = $conn->query($sql);
+    // TODO - Generalize the end of this sql query to include $tableName.
+    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE 'Ball';";
+    $allColumns = $conn->query($queryAllColumns);
 
-    $sql1 = "SELECT * FROM $tableName";
-    $result = $conn->query($sql1);
+    $queryToGetAllDataOfATable = "SELECT * FROM $tableName";
+    $result = $conn->query($queryToGetAllDataOfATable);
 
-
-    createTable($allColumns, $result);
+    createTableOnWebpage($allColumns, $result);
 
     $conn->close();
 }
 
-function createTable($allColumns, $result)
+function createTableOnWebpage($allColumns, $result)
 {
     $allColumnsAsArray = array();
 
