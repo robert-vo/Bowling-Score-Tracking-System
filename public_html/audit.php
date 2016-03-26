@@ -12,7 +12,7 @@
 <?php
 
 //Change to Remote to test deployment on
-$typeOfConnection = getenv('Testing');
+$typeOfConnection = getenv('typeOfConnection');
 
 function connectToDatabase()
 {
