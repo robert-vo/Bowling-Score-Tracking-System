@@ -38,8 +38,7 @@ function retrieveAndPrintAllFromTable($tableName)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // TODO - Generalize the end of this sql query to include $tableName.
-    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE 'Ball';";
+    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
     $allColumns = $conn->query($queryAllColumns);
 
     $queryToGetAllDataOfATable = "SELECT * FROM $tableName";
