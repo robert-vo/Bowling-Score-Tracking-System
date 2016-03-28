@@ -39,6 +39,10 @@
             display: flex;
             justify-content: center;
         }
+        div#centerT{
+            text-align: center;
+            color: blue;
+        }
     </style>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -89,9 +93,10 @@ function connectToDatabase($destination) {
             <input type="submit" name="valid" value="Login">
         </form>
     </div>
-    Need an account? <a href="Register.php">Register!</a>
-</div>
 
+</div>
+<br>
+<div id="centerT"> <a href="Register.php">Create account</a></div>
 
 </body>
 </html>
