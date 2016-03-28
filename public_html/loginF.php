@@ -83,9 +83,9 @@ function connectToDatabase($destination) {
         LOGIN
     </div>
     <div id="boxF">
-        <form>
+        <form action ="loginSuccessful.php" method="post">
             <input type="text" name="username" placeholder="Username" >
-            <input type="password" name="pass" placeholder="Password" >
+            <input type="password" name="password" placeholder="Password" >
             <input type="submit" name="valid" value="Login">
         </form>
     </div>
@@ -95,3 +95,4 @@ function connectToDatabase($destination) {
 
 </body>
 </html>
+
