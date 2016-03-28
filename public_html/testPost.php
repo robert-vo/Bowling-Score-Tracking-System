@@ -1,16 +1,5 @@
-<html>
-<body>
-<?php
-
-phpinfo();
-
-?>
-
-<form action="welcome.php" method="POST">
-    Name: <input type="text" name="name"><br>
-    E-mail: <input type="text" name="email"><br>
-    <input type="submit">
+<form action="welcome.php" method="post">
+    Name:  <input type="text" name="username" /><br />
+    Email: <input type="text" name="email" /><br />
+    <input type="submit" name="submit" value="Submit me!" />
 </form>
-
-</body>
-</html>
