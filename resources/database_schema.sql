@@ -36,7 +36,7 @@ CREATE TABLE Players (
   Player_ID       INT             PRIMARY KEY AUTO_INCREMENT,
   Gender          ENUM('F', 'M')  NOT NULL,
   Phone_Number    VARCHAR(15),
-  Date_Joined     DATE            NOT NULL,
+  Date_Joined     DATE            ,
   Date_Of_Birth   DATETIME        NOT NULL,
   Address         VARCHAR(30),
   First_Name      VARCHAR(30)     NOT NULL,
@@ -165,3 +165,4 @@ CREATE TABLE Statistics (
   CHECK (Pins_Left >= 0),
   CHECK (Average_Pin_Left >= 0)
 );
+

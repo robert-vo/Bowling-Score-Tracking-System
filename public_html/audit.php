@@ -11,24 +11,7 @@
 <body>
 <?php
 
-//Change to Remote to test deployment on
-$typeOfConnection = getenv('typeOfConnection');
-
-function connectToDatabase()
-{
-    if ($GLOBALS['typeOfConnection'] == 'Remote') {
-        $servername = "us-cdbr-azure-central-a.cloudapp.net";
-        $username = "ba27b2787a498a";
-        $password = "e24ebaaa";
-        $dbname = "bowling";
-    } else {
-        $servername = "localhost:3306";
-        $username = "root";
-        $password = "password";
-        $dbname = "bowling";
-    }
-    return new mysqli($servername, $username, $password, $dbname);
-}
+include 'databaseFunctions.php';
 
 function retrieveAndPrintAllFromTable($tableName)
 {
@@ -38,8 +21,7 @@ function retrieveAndPrintAllFromTable($tableName)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // TODO - Generalize the end of this sql query to include $tableName.
-    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE 'Ball';";
+    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
     $allColumns = $conn->query($queryAllColumns);
 
     $queryToGetAllDataOfATable = "SELECT * FROM $tableName";

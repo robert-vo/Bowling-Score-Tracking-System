@@ -2,16 +2,42 @@
 <html>
 <head>
     <style>
-        .container {
-            margin: 50px auto;
-            width: 640px;
+        div#box{
+            background-color: white;
+            border: 1px solid #4CAF50;
+            width: 350px;
+            margin:0 auto;
+            box-shadow: 1px 0px 15px #4CAF50;
         }
-
-        .login {
-            position: relative;
-            margin: 0 auto;
-            padding: 20px 20px 20px;
-            width: 310px;
+        input{
+            display: block;
+            margin: 10px;
+        }
+        div#boxH{
+            background-color: #4CAF50;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            padding: 20px;
+        }
+        input[type=text],input[type=password]{
+            font-size: 15px;
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #4CAF50;
+        }
+        input[type=submit]{
+            background-color: #4CAF50;
+            padding: 5px 10px 5px 10px;
+            border-radius:3px ;
+            border: 1px solid #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        div#boxF{
+            display: flex;
+            justify-content: center;
         }
     </style>
     <title>Bootstrap Example</title>
@@ -51,19 +77,20 @@ function connectToDatabase($destination) {
     <li style="float:right"><a href="about.php">About</a></li>
     <li style="float:right"><a class = "active" href="loginF.php">Login</a></li>
 </ul>
-
-
-
-
-<form><div  style="width: 250px; margin: 200px auto 0 auto;color: red ">
-
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="password" name="pass" placeholder="Password"><br>
-    <input type="submit" name="valid" value="Login">
+<br>
+<div id="box">
+    <div id="boxH">
+        LOGIN
     </div>
-</form>
-
-
+    <div id="boxF">
+        <form>
+            <input type="text" name="username" placeholder="Username" >
+            <input type="password" name="pass" placeholder="Password" >
+            <input type="submit" name="valid" value="Login">
+        </form>
+    </div>
+    Need an account? <a href="Register.php">Register!</a>
+</div>
 
 
 </body>

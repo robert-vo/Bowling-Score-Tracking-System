@@ -11,22 +11,7 @@
 
 <?php
 
-function connectToDatabase($destination) {
-    if($destination == 'Local') {
-        $servername = "localhost:3306";
-        $username = "root";
-        $password = "password";
-        $dbname = "bowling";
-    }
-    else { //Remote
-        $servername = "us-cdbr-azure-central-a.cloudapp.net";
-        $username = "ba27b2787a498a";
-        $password = "e24ebaaa";
-        $dbname = "bowling";
-    }
-    // Create connection
-    return new mysqli($servername, $username, $password, $dbname);
-}
+include 'databaseFunctions.php';
 
 function retrieveAndPrintAllFromTable($tableName, $destination) {
     $conn = connectToDatabase($destination);
