@@ -67,14 +67,6 @@ function connectToDatabase($destination) {
     return new mysqli($servername, $username, $password, $dbname);
 }
 
-$username = $_POST['username'];
-$password = $_POST['pass'];
-if ($username = "user" && $password = "admin"){
-    echo "logged in ";
-}
-else{
-    echo "failed";
-}
 
 ?>
 
@@ -90,7 +82,7 @@ else{
         LOGIN
     </div>
     <div id="boxF">
-        <form>
+        <form action="loginF.php" method="post">
             <input type="text" name="username" placeholder="Username" >
             <input type="password" name="pass" placeholder="Password" >
             <input type="submit" name="valid" value="Login">

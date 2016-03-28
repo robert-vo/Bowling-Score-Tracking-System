@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="57dfd83c-5c19-4b38-99c1-84ef3fbe9b24" name="test" url="http://localhost:8000/PhpstormProjects/Bowling-Score-Tracking-System/">
+        <fileTransfer port="0" mountedRoot="" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
