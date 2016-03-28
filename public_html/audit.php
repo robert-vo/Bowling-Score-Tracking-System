@@ -9,65 +9,7 @@
 </head>
 
 <body>
-<?php
 
-include 'databaseFunctions.php';
-
-function retrieveAndPrintAllFromTable($tableName)
-{
-    $conn = connectToDatabase();
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
-    $allColumns = $conn->query($queryAllColumns);
-
-    $queryToGetAllDataOfATable = "SELECT * FROM $tableName";
-    $result = $conn->query($queryToGetAllDataOfATable);
-
-    createTableOnWebpage($allColumns, $result);
-
-    $conn->close();
-}
-
-function createTableOnWebpage($allColumns, $result)
-{
-    $allColumnsAsArray = array();
-
-    echo "<table style =\"width:100%\">";
-    echo "<tr>";
-
-    if ($allColumns->num_rows > 0) {
-        while ($row = $allColumns->fetch_assoc()) {
-            array_push($allColumnsAsArray, $row["Column_name"]);
-            echo "<th>" . $row["Column_name"] . "</th>";
-        }
-        echo "<th> Perform Action </th>";
-        echo "</tr>";
-    } else {
-        echo "0 results";
-    }
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-
-            foreach ($allColumnsAsArray as $column) {
-                echo "<th>" . $row[$column] . "</th>";
-            }
-            echo "<th> <button type=button>Update</button><button type=button>Delete</button></th>" .
-                "</tr>";
-        }
-    } else {
-        echo "0 results";
-    }
-
-    echo "</table>";
-}
-
-?>
 
 <ul>
     <li><a href="index.php">Home</a></li>
@@ -79,6 +21,7 @@ function createTableOnWebpage($allColumns, $result)
 
 <p>
     Which table do you want to edit?
+    <form action="runAudit.php" method="post">
     <select name="bowlingAudit">
         <option value="">Select...</option>
         <option value="Ball">Ball</option>
@@ -90,10 +33,11 @@ function createTableOnWebpage($allColumns, $result)
         <option value="Statistics">Statistics</option>
         <option value="Team">Team</option>
     </select>
+    <input type="submit" value="Submit">
+</form>
 </p>
 
 
-<?php retrieveAndPrintAllFromTable('Ball') ?>
 
 
 </body>

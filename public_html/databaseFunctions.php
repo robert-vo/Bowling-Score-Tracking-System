@@ -13,7 +13,7 @@ function connectToDatabase()
     } else {
         $servername = "localhost:3306";
         $username = "root";
-        $password = "password";
+        $password = "mysql";
         $dbname = "bowling";
     }
     return new mysqli($servername, $username, $password, $dbname);
