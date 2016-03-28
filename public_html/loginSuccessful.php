@@ -8,12 +8,13 @@
 <body>
 <?php
 function validateLogin($username, $password) {
-    if($username == "admin" && $password == "123") {
-        echo "hello world";
-        echo '<h1><span style = "color:#00FF1D">You Succesfully Logged In!</span></h1>';
-    }
-    else {
-        echo "not an admin";
+
+    $hash = '$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq';
+    //rasmuslerdorf
+    if (password_verify($password, $hash)) {
+        echo 'Password is valid!';
+    } else {
+        echo 'Invalid password.';
     }
 }
 
