@@ -30,7 +30,7 @@
         <option value="Game">Game</option>
         <option value="Players">Players</option>
         <option value="Roll">Roll</option>
-        <option value="Player_States">Player Stats</option>
+        <option value="Player_Stats">Player Stats</option>
         <option value="Team">Team</option>
     </select>
     <input type="submit" value="Submit">
