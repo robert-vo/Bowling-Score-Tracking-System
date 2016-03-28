@@ -89,7 +89,7 @@ function connectToDatabase($destination) {
             <input type="submit" name="valid" value="Login">
         </form>
     </div>
-
+    Need an account? <a href="Register.php">Register!</a>
 </div>
 
 
