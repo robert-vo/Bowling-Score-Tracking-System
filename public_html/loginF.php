@@ -67,7 +67,14 @@ function connectToDatabase($destination) {
     return new mysqli($servername, $username, $password, $dbname);
 }
 
-
+$username = $_POST['username'];
+$password = $_POST['pass'];
+if ($username = "user" && $password = "admin"){
+    echo "logged in ";
+}
+else{
+    echo "failed";
+}
 
 ?>
 
