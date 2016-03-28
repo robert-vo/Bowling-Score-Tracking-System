@@ -25,12 +25,12 @@
     <select name="bowlingAudit">
         <option value="">Select...</option>
         <option value="Ball">Ball</option>
-        <option value="Events">Events</option>
+        <option value="Bowling_Events">Bowling Events</option>
         <option value="Frame">Frame</option>
         <option value="Game">Game</option>
         <option value="Players">Players</option>
         <option value="Roll">Roll</option>
-        <option value="Statistics">Statistics</option>
+        <option value="Player_States">Player Stats</option>
         <option value="Team">Team</option>
     </select>
     <input type="submit" value="Submit">
