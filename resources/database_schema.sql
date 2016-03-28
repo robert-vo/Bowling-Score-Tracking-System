@@ -37,13 +37,16 @@ CREATE TABLE Players (
   Gender          ENUM('F', 'M')  NOT NULL,
   Phone_Number    VARCHAR(15),
   Date_Joined     DATE            ,
-  Date_Of_Birth   DATETIME        NOT NULL,
-  Address         VARCHAR(30),
+  Date_Of_Birth   DATE            NOT NULL,
+  Street_Address  VARCHAR(30)     NOT NULL,
+  City            VARCHAR(30)     NOT NULL,
+  State           VARCHAR(15)     NOT NULL,
+  Zip_Code        INT             NOT NULL,
   First_Name      VARCHAR(30)     NOT NULL,
   Last_Name       VARCHAR(30)     NOT NULL,
   Middle_Initial  VARCHAR(1),
   Email           VARCHAR(30)     NOT NULL UNIQUE,
-  Password        VARCHAR(256)
+  Password        VARCHAR(256)    NOT NULL
 );
 
 CREATE TABLE Team (
@@ -76,7 +79,7 @@ CREATE TABLE Team (
   CHECK (Win_Count >= 0)
 );
 
-CREATE TABLE Events (
+CREATE TABLE Bowling_Events (
   Event_ID    INT PRIMARY KEY AUTO_INCREMENT,
   Team_ID     INT,
   Event_Time  DATETIME,
@@ -103,7 +106,7 @@ CREATE TABLE Frame(
   FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  FOREIGN KEY (Event_ID) REFERENCES Events(Event_ID)
+  FOREIGN KEY (Event_ID) REFERENCES Bowling_Events(Event_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CHECK (Frame_Number BETWEEN 1 and 10),
@@ -139,10 +142,10 @@ CREATE TABLE Game (
   Game_ID     INT PRIMARY KEY AUTO_INCREMENT,
   Event_ID    INT,
   Teams       VARCHAR(100) not null, -- CSV of all teams
-  FOREIGN KEY (Event_ID) REFERENCES Events(Event_ID)
+  FOREIGN KEY (Event_ID) REFERENCES Bowling_Events(Event_ID)
 );
 
-CREATE TABLE Statistics (
+CREATE TABLE Player_Stats (
   Stat_ID           INT PRIMARY KEY AUTO_INCREMENT,
   Player_ID         INT,
   Strikes           INT NOT NULL DEFAULT 0,
@@ -165,4 +168,3 @@ CREATE TABLE Statistics (
   CHECK (Pins_Left >= 0),
   CHECK (Average_Pin_Left >= 0)
 );
-
