@@ -13,10 +13,17 @@ else {
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
+        <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
-    <?= $_SESSION['sess_user'] ?>! <a href="logout.php">Logout</a>
-    fffff
+    <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="scores.php">Scores</a></li>
+        <li style="float:right"><a href="about.php">About</a></li>
+        <li style="float:right"><a class = "active" href="logout.php">Logout</a></li>
+    </ul>
+    <?= $_SESSION['sess_user'] ?>!
+    
     </body>
     </html>
 
