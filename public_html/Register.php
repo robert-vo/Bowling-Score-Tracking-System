@@ -64,7 +64,6 @@ if(isset($_POST['valid'])){
     $pass1 = $_POST['password'];
     $pas2 = $_POST['vpassword'];
     if ($pass1 == $pas2){
-        echo 'passwords match';
 
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
@@ -86,6 +85,13 @@ if(isset($_POST['valid'])){
                                      VALUES ('$gender', '$phone', '$birth', '$street', '$city', '$state','$zip', '$fname', '$lname','$middle', '$email', '$password') ";
 
         mysqli_query($conn, $sql);
+
+        if (mysqli_query($conn, $sql)) {
+            echo "insertion successful";
+        }
+        else {
+            echo "error";
+        }
 
         $conn->close();
     }
