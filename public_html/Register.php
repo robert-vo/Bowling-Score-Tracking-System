@@ -3,6 +3,7 @@
 <head>
     <style>
         div#box{
+            text-align: center;
             background-color: white;
             border: 1px solid #4CAF50;
             width: 350px;
@@ -70,10 +71,11 @@
             <input type="text" name="email" placeholder="Email" >
             <input type="password" name="password" placeholder="Password" >
             <input type="text" name="vpassword" placeholder="Verify Password" >
-            <input type="submit" name="valid" value="Submit">
+            <input type="submit" name="valid" value="Submit" >
+
         </form>
     </div>
-    Already have an about?  <a href="loginF.php">Login!</a>
+    Already have an account?  <a href="loginF.php">Login!</a>
 </div>
 
 </body>
