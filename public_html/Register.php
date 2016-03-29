@@ -64,6 +64,7 @@ if(isset($_POST['valid'])){
     $pass1 = $_POST['password'];
     $pas2 = $_POST['vpassword'];
     if ($pass1 == $pas2){
+        echo 'passwords match';
 
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
@@ -81,8 +82,12 @@ if(isset($_POST['valid'])){
         echo "$password $state $lname $city $fname $middle $zip $street";
         $conn = connectToDatabase();
 
-        $sql = "INSERT INTO bowling.Players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin) VALUES (NULL, '$gender', '$phone', '$birth', '$street', '$city', '$state','$zip', '$fname', '$lname','$middle', '$email', '$password') ";
-        $result = $conn->query($sql);
+        $sql = "INSERT INTO bowling.Players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password) 
+                                     VALUES ('$gender', '$phone', '$birth', '$street', '$city', '$state','$zip', '$fname', '$lname','$middle', '$email', '$password') ";
+
+        mysqli_query($conn, $sql);
+
+        $conn->close();
     }
     else{
         echo "Sorry, passwords do not match.";
