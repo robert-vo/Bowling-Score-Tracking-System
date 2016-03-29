@@ -65,7 +65,7 @@
         LOGIN
     </div>
     <div id="boxF">
-        <form action ="loginF.phpf" method="post">
+        <form action ="loginF.php" method="POST">
             <input type="text" name="username" placeholder="Username" >
             <input type="password" name="password" placeholder="Password" >
             <input type="submit" name="valid" value="Login">
@@ -78,23 +78,24 @@
 <?php
 include 'databaseFunctions.php';
 
-if(isset($_post["submit"])){
+if(isset($_POST["valid"])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $conn = connectToDatabase();
     $query = "SELECT * FROM players WHERE Email = '$username' AND Password = '$password'";
     $result = $conn->query($query);
-    $numrows = mysql_num_rows($result);
+    $numrows = $result->num_rows;
     if($numrows != 0){
         while ($row=mysqli_fetch_assoc($result)){
             $dbuser = $row['Email'];
             $dbpass = $row['Password'];
         }
         if($username == $dbuser and $password == $dbpass){
+            session_start();
             $_SESSION['sess_user']=$username;
-
-            header("location: loginSuccessful.php");
+            
+            header("location:loginSuccessful.php");
         }
     }
     else{
@@ -106,4 +107,3 @@ if(isset($_post["submit"])){
 
 </body>
 </html>
-

@@ -1,10 +1,12 @@
 
 <?php
 session_start();
-if(!isset($_session["sess_user"])){
+if(!isset($_SESSION["sess_user"])){
+    echo "ehllo";
     header("location:loginF.php");
+    
 }
-else{
+else {
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -13,10 +15,11 @@ else{
         <title>Title</title>
     </head>
     <body>
-    <?=$_SESSION['sess_user']?>! <a href="logout.php">Logout</a>
+    <?= $_SESSION['sess_user'] ?>! <a href="logout.php">Logout</a>
     fffff
     </body>
     </html>
-<?php
+
+    <?php
 }
 ?>
