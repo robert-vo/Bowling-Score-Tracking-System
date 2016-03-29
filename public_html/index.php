@@ -13,6 +13,8 @@
 
 include 'databaseFunctions.php';
 
+//joseph test
+
 function retrieveAndPrintAllFromTable($tableName, $destination) {
     $conn = connectToDatabase($destination);
 
