@@ -51,28 +51,7 @@
 
 <body>
 
-<?php
 
-function connectToDatabase($destination) {
-    if($destination == 'Local') {
-        $servername = "localhost:3306";
-        $username = "root";
-        $password = "password";
-        $dbname = "bowling";
-    }
-    else { //Remote
-        $servername = "us-cdbr-azure-central-a.cloudapp.net";
-        $username = "ba27b2787a498a";
-        $password = "e24ebaaa";
-        $dbname = "bowling";
-    }
-    // Create connection
-    return new mysqli($servername, $username, $password, $dbname);
-}
-
-
-
-?>
 
 <ul>
     <li><a href="index.php">Home</a></li>
@@ -86,7 +65,7 @@ function connectToDatabase($destination) {
         LOGIN
     </div>
     <div id="boxF">
-        <form action ="loginSuccessful.php" method="post">
+        <form action ="loginF.phpf" method="post">
             <input type="text" name="username" placeholder="Username" >
             <input type="password" name="password" placeholder="Password" >
             <input type="submit" name="valid" value="Login">
@@ -96,6 +75,34 @@ function connectToDatabase($destination) {
 </div>
 <br>
 <div id="centerT"> <a href="Register.php">Create account</a></div>
+<?php
+include 'databaseFunctions.php';
+
+if(isset($_post["submit"])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $conn = connectToDatabase();
+    $query = "SELECT * FROM players WHERE Email = '$username' AND Password = '$password'";
+    $result = $conn->query($query);
+    $numrows = mysql_num_rows($result);
+    if($numrows != 0){
+        while ($row=mysqli_fetch_assoc($result)){
+            $dbuser = $row['Email'];
+            $dbpass = $row['Password'];
+        }
+        if($username == $dbuser and $password == $dbpass){
+            $_SESSION['sess_user']=$username;
+
+            header("location: loginSuccessful.php");
+        }
+    }
+    else{
+        echo "invalid username or password";
+    }
+
+}
+?>
 
 </body>
 </html>

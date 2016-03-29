@@ -78,18 +78,19 @@ if(isset($_POST['valid'])){
         $birth =$_POST['birth'];
         $email = $_POST['email'];
 
-       
+
+
         $conn = connectToDatabase();
 
-        $sql = "INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin) 
-                                     VALUES (NULL, '$gender', '$phone', null, '$birth', '$street', '$city', '$state', '$zip', '$fname', '$lname', '$middle', '$email', '$password', 0) ";
+        $sql = "INSERT INTO players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
+                                     VALUES ('$gender', '$phone', null, '$birth', '$street', '$city', '$state', '$zip', '$fname', '$lname', '$middle', '$email', '$password', 0) ";
 
-        mysqli_query($conn, $sql);
-        if (mysqli_query($conn, $sql)) {
+
+        if (mysqli_query($conn, $sql)== TRUE) {
             echo "insertion successful";
         }
         else {
-            echo "error";
+            echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
         $conn->close();
@@ -109,7 +110,7 @@ if(isset($_POST['valid'])){
             <input type="text" name="lname" placeholder="Last Name" >
             <input type="text" name="middle" placeholder="Middle Initial" >
              <input type="text" name="phone" placeholder="Phone Number" >
-              <input type="text" name="birth" placeholder="Date of Birth" >
+              <input type="text" name="birth" placeholder="YYYY-MM-DD" >
              <input type="text" name="gender" placeholder="Gender: F or M" >
             <input type="text" name="streeta" placeholder="Street Address" >
             <input type="text" name="city" placeholder="City" >
