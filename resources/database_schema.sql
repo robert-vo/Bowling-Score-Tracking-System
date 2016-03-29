@@ -46,7 +46,8 @@ CREATE TABLE Players (
   Last_Name       VARCHAR(30)     NOT NULL,
   Middle_Initial  VARCHAR(1),
   Email           VARCHAR(30)     NOT NULL UNIQUE,
-  Password        VARCHAR(256)    NOT NULL
+  Password        VARCHAR(256)    NOT NULL,
+  Is_Admin        BOOLEAN         DEFAULT FALSE
 );
 
 CREATE TABLE Team (
