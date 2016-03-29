@@ -41,7 +41,6 @@
         }
         div#centerT{
             text-align: center;
-            color: blue;
         }
     </style>
     <title>Bootstrap Example</title>
