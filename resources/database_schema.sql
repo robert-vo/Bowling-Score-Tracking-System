@@ -148,7 +148,7 @@ CREATE TABLE Game (
 
 CREATE TABLE Player_Stats (
   Stat_ID           INT PRIMARY KEY AUTO_INCREMENT,
-  Player_ID         INT,
+  Player_ID         INT UNIQUE,
   Strikes           INT NOT NULL DEFAULT 0,
   Games_Played      INT NOT NULL DEFAULT 0,
   Perfect_Games     INT NOT NULL DEFAULT 0,
