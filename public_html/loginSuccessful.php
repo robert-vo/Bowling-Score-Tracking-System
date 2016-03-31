@@ -14,16 +14,39 @@ else {
         <meta charset="UTF-8">
         <title>Title</title>
         <link rel="stylesheet" type="text/css" href="index.css">
+        <style>
+            div#id{
+                font-size: x-large;
+                font-weight: bold;
+                color: #4CAF50;
+            }
+        </style>
     </head>
     <body>
-    <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="scores.php">Scores</a></li>
-        <li style="float:right"><a href="about.php">About</a></li>
-        <li style="float:right"><a class = "active" href="logout.php">Logout</a></li>
-    </ul>
-    <?= $_SESSION['sess_user'] ?>!
-    
+    <?php include 'menuBar.php';
+    generateMenuBar(basename(__FILE__));
+    ?>
+
+    <div id="id">PROFILE:</div>
+    <?php
+    $user = $_SESSION['sess_user'];
+    include 'databaseFunctions.php';
+    $conn = connectToDatabase();
+    $query = "SELECT * FROM players WHERE Email = '$user'";
+    $result = $conn->query($query);
+    $numrows = $result->num_rows;
+    if ($numrows != 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $fname = $row['First_Name'];
+            $lname = $row['Last_Name'];
+        }
+    }
+    $fname = ucfirst($fname);
+    $lname = ucfirst($lname);
+    echo "$fname $lname";
+
+    ?>
+
     </body>
     </html>
 

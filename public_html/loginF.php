@@ -50,15 +50,12 @@
 </head>
 
 <body>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 
 
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="scores.php">Scores</a></li>
-    <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a class = "active" href="loginF.php">Login</a></li>
-</ul>
 <br>
 <div id="box">
     <div id="boxH">
