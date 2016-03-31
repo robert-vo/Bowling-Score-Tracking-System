@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
+    <style>
+        div#error{
+            color: red;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,7 +59,9 @@ if (isset($_POST["valid"])) {
             header("location:loginSuccessful.php");
         }
     } else {
-        echo "invalid username or password";
+        ?>
+        <div id="error">Invalid username or password</div>
+<?php
     }
 
 }

@@ -5,6 +5,11 @@
     <title> Registration</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
+    <style>
+        div#error{
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,7 +30,7 @@ if (isset($_POST['valid'])) {
         $lname = ucfirst($_POST['lname']);
         $middle = $_POST['middle'];
         $street = $_POST['streeta'];
-        $city = $_POST['city'];
+        $city = ucfirst($_POST['city']);
         $state = $_POST['state'];
         $zip = $_POST['zipcode'];
         $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
@@ -40,13 +45,15 @@ if (isset($_POST['valid'])) {
         $sql = "INSERT INTO players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
                                      VALUES ('$gender', '$phone', null, '$birth', '$street', '$city', '$state', '$zip', '$fname', '$lname', '$middle', '$email', '$password', 0) ";
         if (mysqli_query($conn, $sql) == TRUE) {
-            echo "insertion successful";
+            echo "Insertion successful";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
     } else {
-        echo "Sorry, passwords do not match.";
+        ?>
+        <div id="error">Sorry passwords do not match. Click <a href="register.php">here</a> to try again.</div>
+<?php
     }
 } else {
     $form = <<<EOT
