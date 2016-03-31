@@ -17,12 +17,10 @@ generateMenuBar(basename(__FILE__));
 
 <?php
 include 'databaseFunctions.php';
-
 if (isset($_POST['valid'])) {
     $pass1 = $_POST['password'];
     $pas2 = $_POST['vpassword'];
     if ($pass1 == $pas2) {
-
         $fname = ucfirst($_POST['fname']);
         $lname = ucfirst($_POST['lname']);
         $middle = $_POST['middle'];
@@ -38,21 +36,14 @@ if (isset($_POST['valid'])) {
         $dobd = $_POST['day'];
         $birth = "$doby-$dobm-$dobd";
         $email = $_POST['email'];
-
-
         $conn = connectToDatabase();
-
         $sql = "INSERT INTO players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
                                      VALUES ('$gender', '$phone', null, '$birth', '$street', '$city', '$state', '$zip', '$fname', '$lname', '$middle', '$email', '$password', 0) ";
-
-
         if (mysqli_query($conn, $sql) == TRUE) {
             echo "insertion successful";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
-
         }
-
         $conn->close();
     } else {
         echo "Sorry, passwords do not match.";
@@ -72,11 +63,10 @@ if (isset($_POST['valid'])) {
 	<option>  Gender   </option>
 	<option value="F">Female</option>
 	<option value="M">Male</option>
-
 </select>
             <input type="text" name="phone" placeholder="Phone Number" >
     <select name="month">
-	<option> - Month -  </option>
+	<option>Month</option>
 	<option value="01">January</option>
 	<option value="02">Febuary</option>
 	<option value="03">March</option>
@@ -90,9 +80,8 @@ if (isset($_POST['valid'])) {
 	<option value="11">November</option>
 	<option value="12">December</option>
 </select>
-
 <select name="day">
-	<option> - Day - </option>
+	<option>Day</option>
 	<option value="1">1</option>
 	<option value="2">2</option>
 	<option value="3">3</option>
@@ -125,9 +114,8 @@ if (isset($_POST['valid'])) {
 	<option value="30">30</option>
 	<option value="31">31</option>
 </select>
-
 <select name="year">
-	<option> - Year - </option>
+	<option >Year</option>
 	<option value="1993">1993</option>
 	<option value="1992">1992</option>
 	<option value="1991">1991</option>
@@ -176,8 +164,6 @@ if (isset($_POST['valid'])) {
 	<option value="1948">1948</option>
 	<option value="1947">1947</option>
 	</select>
-
-
              
             <input type="text" name="streeta" placeholder="Street Address" >
             <input type="text" name="city" placeholder="City" >
@@ -241,10 +227,8 @@ if (isset($_POST['valid'])) {
             <input type="password" name="password" placeholder="Password" >
             <input type="password" name="vpassword" placeholder="Verify Password" >
             <input type="submit" name="valid" value="Submit" >
-
         </form>
     </div>
-
 </div>
 EOT;
     echo $form;
