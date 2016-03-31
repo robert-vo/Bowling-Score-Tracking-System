@@ -16,7 +16,7 @@
     <li><a href="scores.php">Scores</a></li>
     <li style="float:right"><a class="active" href="audit.php">Audit</a></li>
     <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginF.php">Login</a></li>
+    <li style="float:right"><a href="loginForm.php">Login</a></li>
 </ul>
 
 <p>

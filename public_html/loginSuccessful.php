@@ -1,12 +1,10 @@
-
 <?php
 session_start();
-if(!isset($_SESSION["sess_user"])){
+if (!isset($_SESSION["sess_user"])) {
     echo "ehllo";
-    header("location:loginF.php");
-    
-}
-else {
+    header("location:loginForm.php");
+
+} else {
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -15,7 +13,7 @@ else {
         <title>Title</title>
         <link rel="stylesheet" type="text/css" href="index.css">
         <style>
-            div#id{
+            div#id {
                 font-size: x-large;
                 font-weight: bold;
                 color: #4CAF50;

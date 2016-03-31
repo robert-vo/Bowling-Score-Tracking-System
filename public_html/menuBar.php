@@ -25,17 +25,17 @@ function generateMenuBar($currentPage) {
         echo '<li style="float:right"><a href="about.php">About</a></li>';
     }
 
-    if($currentPage == "loginF.php" or $currentPage == "loginSuccessful.php") {
+    if($currentPage == "loginForm.php" or $currentPage == "loginSuccessful.php" or $currentPage == "register.php") {
         if($currentPage == "loginSuccessful.php"){
             echo '<li style="float:right"><a class = "active" href="logout.php">Logout</a></li>';
         }
         else {
-            echo '<li style="float:right"><a class = "active" href="loginF.php">Login</a></li>';
+            echo '<li style="float:right"><a class = "active" href="loginForm.php">Login</a></li>';
         }
 
     }
     else {
-        echo '<li style="float:right"><a href="loginF.php">Login</a></li>';
+        echo '<li style="float:right"><a href="loginForm.php">Login</a></li>';
     }
 
 

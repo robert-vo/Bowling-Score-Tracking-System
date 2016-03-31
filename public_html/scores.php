@@ -37,7 +37,7 @@ function connectToDatabase($destination) {
     <li><a href="index.php">Home</a></li>
     <li><a class = "active" href="scores.php">Scores</a></li>
     <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginF.php">Login</a></li>
+    <li style="float:right"><a href="loginForm.php">Login</a></li>
 </ul>
 
 
