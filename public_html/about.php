@@ -13,12 +13,9 @@
 
 
 
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="scores.php">Scores</a></li>
-    <li style="float:right"><a class = "active" href="about.php">About</a></li>
-    <li style="float:right"><a href="loginForm.php">Login</a></li>
-</ul>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 <div class="jumbotron">
     <h1><div text align="center"> Bowling Score Tracking System</div></h1>
