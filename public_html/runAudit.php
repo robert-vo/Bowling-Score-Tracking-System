@@ -9,6 +9,9 @@
 
 </html>
 
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 <?php
 

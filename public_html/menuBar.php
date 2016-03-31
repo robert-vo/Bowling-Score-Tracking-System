@@ -37,6 +37,10 @@ function generateMenuBar($currentPage) {
     else {
         echo '<li style="float:right"><a href="loginForm.php">Login</a></li>';
     }
+    
+    if($currentPage == "audit.php" or $currentPage == "runAudit.php") {
+        echo '<li style="float:right"><a class="active" href="audit.php">Audit</a></li>';
+    }
 
 
     
