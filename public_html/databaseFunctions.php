@@ -10,11 +10,6 @@ function connectToDatabase()
         $username = "awsuser";
         $password = "password";
         $dbname = "bowling";
-        
-//        $servername = "us-cdbr-azure-central-a.cloudapp.net";
-//        $username = "ba27b2787a498a";
-//        $password = "e24ebaaa";
-//        $dbname = "bowling";
     } else {
         $servername = "localhost:3306";
         $username = "root";
