@@ -20,7 +20,7 @@ div#boxH {
     padding: 20px;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], select[typeof= 'state'] {
     font-size: 15px;
     padding: 10px;
     border-radius: 3px;
