@@ -54,7 +54,7 @@ CREATE TABLE Team (
   Team_ID        INT            PRIMARY KEY AUTO_INCREMENT,
   Name           VARCHAR(20)	  NOT NULL,
   Leader         INT			      NOT NULL,
-  Date_Created   DATETIME		    NOT NULL,
+  Date_Created   DATETIME,
   Game_Count     INT			      DEFAULT 0,
   Win_Count      INT			      DEFAULT 0,
   Phone_Number   VARCHAR(15),
