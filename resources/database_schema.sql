@@ -57,7 +57,7 @@ CREATE TABLE Team (
   Date_Created   DATETIME,
   Game_Count     INT			      DEFAULT 0,
   Win_Count      INT			      DEFAULT 0,
-  Player_1	     INT,
+  Player_1	     INT            NULL,
   Player_2	     INT            NULL,
   Player_3	     INT            NULL,
   Player_4	     INT            NULL,
