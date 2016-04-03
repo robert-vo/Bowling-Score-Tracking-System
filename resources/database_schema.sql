@@ -52,7 +52,7 @@ CREATE TABLE Players (
 
 CREATE TABLE Team (
   Team_ID        INT            PRIMARY KEY AUTO_INCREMENT,
-  Name           VARCHAR(20)	  NOT NULL,
+  Name           VARCHAR(50)	  NOT NULL,
   Leader         INT			      NOT NULL,
   Date_Created   DATETIME,
   Game_Count     INT			      DEFAULT 0,
