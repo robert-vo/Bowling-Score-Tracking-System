@@ -19,3 +19,10 @@ drop trigger if exists team_date_joined;
 CREATE TRIGGER team_date_joined BEFORE INSERT ON Team
 FOR EACH ROW
   SET NEW.Date_Created = NOW();
+
+-- Other triggers for archiving other tables
+drop trigger if exists delete_from_ball;
+CREATE TRIGGER delete_from_ball AFTER DELETE ON Ball
+  FOR EACH ROW
+  insert into Ball_Archive VALUES (old.Ball_ID, old.Color, old.Weight, old.Size, now());
+
