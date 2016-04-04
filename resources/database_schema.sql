@@ -10,7 +10,7 @@ CREATE TABLE table_name (
 );
 */
 
-
+CREATE DATABASE if NOT exists bowling;
 use bowling;
 
 DROP TABLE IF EXISTS Game;
