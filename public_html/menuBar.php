@@ -19,19 +19,26 @@ function generateMenuBar($currentPage) {
     }
     
     if($currentPage == "about.php") {
-        echo '<li style="float:right"><a class="active" href="about.php">About</a></li>';
+        echo '<li><a class="active" href="about.php">About</a></li>';
     }
     else {
-        echo '<li style="float:right"><a href="about.php">About</a></li>';
+        echo '<li><a href="about.php">About</a></li>';
     }
 
-    if($currentPage == "loginForm.php" or $currentPage == "loginSuccessful.php" or $currentPage == "register.php") {
-        if($currentPage == "loginSuccessful.php"){
+
+
+
+    if(isset($_SESSION['sess_user'])) {
+        if($currentPage == "loginSuccessful.php" or "team.php" or "about.php" or "settings.php"){
             echo '<li style="float:right"><a class = "active" href="logout.php">Logout</a></li>';
+            echo '<li style="float:right"><a class = "active" href="settings.php">Settings</a></li>';
+            echo '<li style="float:right"><a class = "active" href="team.php">Team</a></li>';
+
         }
         else {
             echo '<li style="float:right"><a class = "active" href="loginForm.php">Login</a></li>';
         }
+
 
     }
     else {

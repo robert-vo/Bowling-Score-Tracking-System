@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION["sess_user"])) {
     echo "ehllo";
-    header("location:loginForm.php");
+    header("location:team.php");
 
 } else {
     ?>
