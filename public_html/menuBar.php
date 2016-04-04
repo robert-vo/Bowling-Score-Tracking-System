@@ -43,7 +43,7 @@ function generateMenuBar($currentPage) {
     }
 
 
-    
+
     echo '</ul>';
 }
 ?>
