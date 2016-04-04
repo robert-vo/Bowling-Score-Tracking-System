@@ -10,8 +10,6 @@ CREATE TABLE table_name (
 );
 */
 
-drop database if exists bowling;
-CREATE DATABASE if NOT exists bowling;
 
 use bowling;
 
@@ -36,7 +34,7 @@ CREATE TABLE Players (
   Player_ID       INT             PRIMARY KEY AUTO_INCREMENT,
   Gender          ENUM('F', 'M')  NOT NULL,
   Phone_Number    VARCHAR(15),
-  Date_Joined     DATE            ,
+  Date_Joined     DATE,
   Date_Of_Birth   DATE            NOT NULL,
   Street_Address  VARCHAR(30)     NOT NULL,
   City            VARCHAR(30)     NOT NULL,
