@@ -87,44 +87,45 @@ INSERT INTO bowling.Player_Stats (Player_ID) VALUES (18);
 INSERT INTO bowling.Player_Stats (Player_ID) VALUES (19);
 INSERT INTO bowling.Player_Stats (Player_ID) VALUES (20);
 
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('The Bowling Maniacs', 1, 10, 2, 2, 3, 4, 5, 6);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Lone Warrior', 18, 18, 12, null, null, null, null, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Texas Fans', 3, 4, 3, 4, 20, 19, null, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Houston Cougar Lovers', 9, 7, 5, 10, 15, null, null, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Generic Team #1', 14, 2, 0, 15, 8, 4, 2, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Dallas Boys', 13, 3, 2, 3, null, null, null, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Perfect Games All Day', 17, 10, 10, 13, 1, 4, 9, 11);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Red Box', 12, 2, 1, 1, 7, 14, 19, 11);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Crusher', 5, 10, 4, 3, 8, 12, 16, 14);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('I Love Bowling', 11, 12, 6, 6, 13, 14, 15, 18);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Final Four', 15, 4, 4, 16, 17, 18, null, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('We Are The Champions', 19, 4, 2, 1, 8, 3, 5, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Apple Fans', 19, 12, 0, 2, 6, 18, 11, 5);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Database Masters', 7, 7, 0, 3, 12, 11, 17, 10);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Lucky 7s', 7, 7, 2, 17, null, null, null, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Casual Bowlers', 8, 21, 6, 9, 13, 12, 11, null);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Houston Rockets', 2, 12, 9, 10, 19, 20, 14, 11);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Katy Bowlers', 6, 15, 7, 9, 11, 14, 2, 10);
-INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
-                  VALUES ('Perfect Guys', 2, 11, 11, 8, 9, 18, 12, 1);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('The Bowling Maniacs', 1, 10, 2, 2, 3, 4, 5, 6);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Lone Warrior', 18, 18, 12, null, null, null, null, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Texas Fans', 3, 4, 3, 4, 20, 19, null, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Houston Cougar Lovers', 9, 7, 5, 10, 15, null, null, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Generic Team #1', 14, 2, 0, 15, 8, 4, 2, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Dallas Boys', 13, 3, 2, 3, null, null, null, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Perfect Games All Day', 17, 10, 10, 13, 1, 4, 9, 11);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Red Box', 12, 2, 1, 1, 7, 14, 19, 11);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Crusher', 5, 10, 4, 3, 8, 12, 16, 14);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('I Love Bowling', 11, 12, 6, 6, 13, 14, 15, 18);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Final Four', 15, 4, 4, 16, 17, 18, null, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('We Are The Champions', 19, 4, 2, 1, 8, 3, 5, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Apple Fans', 19, 12, 0, 2, 6, 18, 11, 5);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Database Masters', 7, 7, 0, 3, 12, 11, 17, 10);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Lucky 7s', 7, 7, 2, 17, null, null, null, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Casual Bowlers', 8, 21, 6, 9, 13, 12, 11, null);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Houston Rockets', 2, 12, 9, 10, 19, 20, 14, 11);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Katy Bowlers', 6, 15, 7, 9, 11, 14, 2, 10);
+# INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
+#                   VALUES ('Perfect Guys', 2, 11, 11, 8, 9, 18, 12, 1);
 
 
 delete from Ball where Ball.Color = 'Red';
+delete from Players where Players.Gender = 'M';
