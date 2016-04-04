@@ -125,3 +125,6 @@ INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_
                   VALUES ('Katy Bowlers', 6, 15, 7, 9, 11, 14, 2, 10);
 INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
                   VALUES ('Perfect Guys', 2, 11, 11, 8, 9, 18, 12, 1);
+
+
+delete from Ball where Ball.Color = 'Red';
