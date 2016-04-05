@@ -59,13 +59,15 @@ if (!isset($_SESSION["sess_user"])) {
         while ($row = mysqli_fetch_assoc($result)){
             $teamname = $row['Name'];
         }
+        echo "<br> Team Name: ". $teamname;
     } else{
         ?>
+        <br>
         Would you like to create a team click <a href="createTeam.php">here</a>
         <?php
     }
 
-    echo "<br> Team Name: ". $teamname;
+    
 
 
     ?>

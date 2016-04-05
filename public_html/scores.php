@@ -11,6 +11,7 @@
 
 <?php
 
+session_start();
 function connectToDatabase($destination) {
     if($destination == 'Local') {
         $servername = "localhost:3306";
@@ -31,14 +32,9 @@ function connectToDatabase($destination) {
 
 
 ?>
-
-
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a class = "active" href="scores.php">Scores</a></li>
-    <li><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginForm.php">Login</a></li>
-</ul>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 
 

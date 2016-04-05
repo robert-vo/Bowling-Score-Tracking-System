@@ -10,7 +10,7 @@
 <body>
 
 <?php
-
+session_start();
 include 'databaseFunctions.php';
 
 //joseph test
