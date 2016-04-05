@@ -1,7 +1,10 @@
 <?php
 session_start();
-?>
+if (!isset($_SESSION["sess_user"])) {
+    header("location:loginForm.php");
 
+} else {
+?>
 <!doctype html>
 <html>
 <head>
@@ -13,7 +16,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="settings.css">
 
     <style>
-        div#error{
+        div#error {
             color: red;
         }
     </style>
@@ -24,5 +27,5 @@ session_start();
 
 <?php include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
-
+}
 ?>

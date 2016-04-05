@@ -30,9 +30,10 @@ function generateMenuBar($currentPage) {
 
     if(isset($_SESSION['sess_user'])) {
         if($currentPage == "loginSuccessful.php" or "team.php" or "about.php" or "settings.php"){
-            echo '<li style="float:right"><a class = "active" href="logout.php">Logout</a></li>';
+            echo '<li style="float:right"><a class = "active" href="loginSuccessful.php.php">login</a></li>';
             echo '<li style="float:right"><a class = "active" href="settings.php">Settings</a></li>';
             echo '<li style="float:right"><a class = "active" href="team.php">Team</a></li>';
+            echo '<li style="float:right"><a class = "active" href="loginSuccessful.php.php">Profile</a></li>';
 
         }
         else {
