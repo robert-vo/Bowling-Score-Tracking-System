@@ -1,12 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"])) {
-<<<<<<< Updated upstream
-    echo "ehllo";
+
     header("location:team.php");
-=======
-    header("location:loginForm.php");
->>>>>>> Stashed changes
 
 } else {
     ?>
