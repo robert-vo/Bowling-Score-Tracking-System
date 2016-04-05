@@ -58,6 +58,11 @@ if (isset($_POST["valid"])) {
             $_SESSION['sess_user'] = $username;
             header("location:loginSuccessful.php");
         }
+        else{
+            ?>
+            <div id="error">Invalid username or password</div>
+            <?php
+        }
     } else {
         ?>
         <div id="error">Invalid username or password</div>

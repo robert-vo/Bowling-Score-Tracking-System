@@ -1,8 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"])) {
+<<<<<<< Updated upstream
     echo "ehllo";
     header("location:team.php");
+=======
+    header("location:loginForm.php");
+>>>>>>> Stashed changes
 
 } else {
     ?>
@@ -42,6 +46,31 @@ if (!isset($_SESSION["sess_user"])) {
     $fname = ucfirst($fname);
     $lname = ucfirst($lname);
     echo "$fname $lname";
+    
+    $query2 = "SELECT * FROM players WHERE Email = '$user'";
+    $result = $conn->query($query2);
+    $numrows = $result->num_rows;
+    if($numrows != 0){
+        while ($row = mysqli_fetch_assoc($result)){
+            $playerid = $row['Player_ID'];
+        }
+    }
+
+    $query2 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+    $result = $conn->query($query2);
+    $numrows = $result->num_rows;
+    if($numrows != 0){
+        while ($row = mysqli_fetch_assoc($result)){
+            $teamname = $row['Name'];
+        }
+    } else{
+        ?>
+        Would you like to create a team click <a href="createTeam.php">here</a>
+        <?php
+    }
+
+    echo "<br> Team Name: ". $teamname;
+
 
     ?>
 
