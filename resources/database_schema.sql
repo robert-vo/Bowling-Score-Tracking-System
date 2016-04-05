@@ -9,18 +9,7 @@ CREATE TABLE table_name (
   any_other_constraints
 );
 */
-
-CREATE DATABASE if NOT exists bowling;
 use bowling;
-
-DROP TABLE IF EXISTS Game;
-DROP TABLE IF EXISTS Events;
-DROP TABLE IF EXISTS Statistics;
-DROP TABLE IF EXISTS Frame;
-DROP TABLE IF EXISTS Roll;
-DROP TABLE IF EXISTS Team;
-DROP TABLE IF EXISTS Ball;
-DROP TABLE IF EXISTS Players;
 
 CREATE TABLE Ball (
   Ball_ID  INT          PRIMARY KEY AUTO_INCREMENT,
@@ -76,15 +65,16 @@ CREATE TABLE Team (
   CHECK (Win_Count >= 0)
 );
 
-CREATE TABLE Bowling_Events (
-  Event_ID    INT PRIMARY KEY AUTO_INCREMENT,
-  Team_ID     INT,
-  Event_Time  DATETIME,
-  Winner      VARCHAR(20),
-  Title       VARCHAR(20),
-  Location    VARCHAR(50),
-  Event_Type  ENUM('Casual', 'Tournament') DEFAULT 'Casual',
-  FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
+CREATE TABLE Game (
+  Game_ID           INT PRIMARY KEY AUTO_INCREMENT,
+  Teams             VARCHAR(100) not null, -- CSV of all teams
+  Game_Start_Time   DATETIME,
+  Game_End_Time     DATETIME,
+  Winner_Team_ID    INT,
+  Title             VARCHAR(20),
+  Location          VARCHAR(50),
+  Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
+  FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID)
 );
 
 CREATE TABLE Frame(
@@ -96,14 +86,14 @@ CREATE TABLE Frame(
   Roll_Three_ID   INT,
   Score           INT DEFAULT 0,
   Team_ID         INT,
-  Event_ID        INT,
+  Game_ID         INT,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  FOREIGN KEY (Event_ID) REFERENCES Bowling_Events(Event_ID)
+  FOREIGN KEY (Game_ID) REFERENCES Game(Game_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CHECK (Frame_Number BETWEEN 1 and 10),
@@ -133,13 +123,6 @@ CREATE TABLE Roll (
   FOREIGN KEY (Frame_ID) REFERENCES Frame(Frame_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE
-);
-
-CREATE TABLE Game (
-  Game_ID     INT PRIMARY KEY AUTO_INCREMENT,
-  Event_ID    INT,
-  Teams       VARCHAR(100) not null, -- CSV of all teams
-  FOREIGN KEY (Event_ID) REFERENCES Bowling_Events(Event_ID)
 );
 
 CREATE TABLE Player_Stats (

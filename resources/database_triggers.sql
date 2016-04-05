@@ -11,6 +11,7 @@ CREATE TRIGGER trigger_name
  */
 use bowling;
 
+-- Auto populates the Date_Joined attribute of Players to the current time.
 drop trigger if exists players_date_joined;
 CREATE TRIGGER players_date_joined BEFORE INSERT ON Players
 FOR EACH ROW
@@ -35,31 +36,26 @@ CREATE TRIGGER delete_from_player AFTER DELETE ON Players
 drop trigger if exists delete_from_teams;
 CREATE TRIGGER delete_from_teams AFTER DELETE ON Team
   FOR EACH ROW
-  insert into Team_Archive VALUES (old.TEAM_ID, old.Name, old.Leader, old.Date_Created, old.Game_Count, old.Win_Count, old.Player_1, old.Player_2, old.Player_3, old.Player_4, old.Player_5);
-
-drop trigger if exists delete_from_bowlingEvents;
-CREATE TRIGGER delete_from_bowlingEvents AFTER DELETE ON Bowling_Events
-FOR EACH ROW
-  insert into Bowling_Events_Archive VALUES (old.Event_ID, old.Team_ID, old.Event_Time, old.Winner, old.Title, old.Location, old.Event_Type);
+  insert into Team_Archive VALUES (old.TEAM_ID, old.Name, old.Leader, old.Date_Created, old.Game_Count, old.Win_Count, old.Player_1, old.Player_2, old.Player_3, old.Player_4, old.Player_5, now());
 
 drop trigger if exists delete_from_Frame;
 CREATE TRIGGER delete_from_Frame AFTER DELETE ON Frame
 FOR EACH ROW
-  insert into Frame_Archive VALUES (old.Frame_ID, old.Frame_Number, old.Player_ID, old.Roll_One_ID, old.Roll_Two_ID, old.Roll_Three_ID, old.Score, old.Team_ID, old.Event_ID);
+  insert into Frame_Archive VALUES (old.Frame_ID, old.Frame_Number, old.Player_ID, old.Roll_One_ID, old.Roll_Two_ID, old.Roll_Three_ID, old.Score, old.Team_ID, old.Game_ID, now());
 
 drop trigger if exists delete_from_Roll;
 CREATE TRIGGER delete_from_Roll AFTER DELETE ON Roll
 FOR EACH ROW
-  insert into Roll_Archive VALUES (old.Roll_ID, old.Frame_ID, old.Ball_ID);
+  insert into Roll_Archive VALUES (old.Roll_ID, old.Frame_ID, old.Ball_ID, old.Is_Strike, old.Is_Spare, old.Is_Foul, old.Hit_Pin_1, old.Hit_Pin_2, old.Hit_Pin_3, old.Hit_Pin_4, old.Hit_Pin_5, old.Hit_Pin_6, old.Hit_Pin_7, old.Hit_Pin_8, old.Hit_Pin_9, old.Hit_Pin_10, now());
 
 drop trigger if exists delete_from_Game;
 CREATE TRIGGER delete_from_Game AFTER DELETE ON Game
 FOR EACH ROW
-  insert into Game_Archive VALUES (old.Game_ID, old.Event_ID, old.Teams);
+  insert into Game_Archive VALUES (old.Game_ID, old.Teams, old.Game_Start_Time, old.Game_End_Time, old.Winner_Team_ID, old.Title, old.Location, old.Event_Type, now());
 
 drop trigger if exists delete_from_PlayerStats;
 CREATE TRIGGER delete_from_PlayerStats AFTER DELETE ON Player_Stats
 FOR EACH ROW
-  insert into Player_Stats_Archive VALUES (old.Stat_ID, old.Player_ID, old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares, old.Best_Score, old.Worst_Score, old.Pins_Left, old.Average_Pin_Left);
+  insert into Player_Stats_Archive VALUES (old.Stat_ID, old.Player_ID, old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares, old.Best_Score, old.Worst_Score, old.Pins_Left, old.Average_Pin_Left, now());
 
 
