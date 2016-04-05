@@ -7,7 +7,7 @@ function generateMenuBar($currentPage) {
     if($currentPage == "index.php") {
         echo '<li><a class="active" href="index.php">Home</a></li>';
         if(isset($_SESSION['sess_user'])){
-            echo '<li style="float:right"><a href="logout.php.php">Logout</a></li>';
+            echo '<li style="float:right"><a href="logout.php">Logout</a></li>';
             echo '<li style="float:right"><a href="settings.php">Settings</a></li>';
             echo '<li style="float:right"><a  href="team.php">Team</a></li>';
             echo '<li style="float:right"><a href="loginSuccessful.php">Profile</a></li>';
@@ -22,7 +22,7 @@ function generateMenuBar($currentPage) {
     if($currentPage == "scores.php") {
         echo '<li><a class="active" href="scores.php">Scores</a></li>';
         if(isset($_SESSION['sess_user'])){
-            echo '<li style="float:right"><a href="logout.php.php">Logout</a></li>';
+            echo '<li style="float:right"><a href="logout.php">Logout</a></li>';
             echo '<li style="float:right"><a href="settings.php">Settings</a></li>';
             echo '<li style="float:right"><a  href="team.php">Team</a></li>';
             echo '<li style="float:right"><a href="loginSuccessful.php">Profile</a></li>';
@@ -35,7 +35,7 @@ function generateMenuBar($currentPage) {
     if($currentPage == "about.php") {
         echo '<li><a class="active" href="about.php">About</a></li>';
         if(isset($_SESSION['sess_user'])){
-            echo '<li style="float:right"><a href="logout.php.php">Logout</a></li>';
+            echo '<li style="float:right"><a href="logout.php">Logout</a></li>';
             echo '<li style="float:right"><a href="settings.php">Settings</a></li>';
             echo '<li style="float:right"><a  href="team.php">Team</a></li>';
             echo '<li style="float:right"><a href="loginSuccessful.php">Profile</a></li>';
