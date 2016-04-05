@@ -39,7 +39,7 @@ CREATE TABLE Players_Archive (
   Email           VARCHAR(30)     NOT NULL UNIQUE,
   Password        VARCHAR(256)    NOT NULL,
   Is_Admin        BOOLEAN         DEFAULT FALSE,
-  Date_Deleted  DATETIME
+  Date_Deleted    DATETIME
 );
 
 CREATE TABLE Team_Archive (
@@ -57,15 +57,16 @@ CREATE TABLE Team_Archive (
   Date_Deleted   DATETIME
 );
 
-CREATE TABLE Bowling_Events_Archive (
-  Event_ID      INT PRIMARY KEY AUTO_INCREMENT,
-  Team_ID       INT,
-  Event_Time    DATETIME,
-  Winner        VARCHAR(20),
-  Title         VARCHAR(20),
-  Location      VARCHAR(50),
-  Event_Type    ENUM('Casual', 'Tournament') DEFAULT 'Casual',
-  Date_Deleted  DATETIME
+CREATE TABLE Game_Archive (
+  Game_ID           INT PRIMARY KEY AUTO_INCREMENT,
+  Teams             VARCHAR(100) not null, -- CSV of all teams
+  Game_Start_Time   DATETIME,
+  Game_End_Time     DATETIME,
+  Winner_Team_ID    VARCHAR(20),
+  Title             VARCHAR(20),
+  Location          VARCHAR(50),
+  Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
+  Date_Deleted      DATETIME
 );
 
 CREATE TABLE Frame_Archive (
@@ -101,12 +102,6 @@ CREATE TABLE Roll_Archive (
   Date_Deleted  DATETIME
 );
 
-CREATE TABLE Game_Archive (
-  Game_ID       INT PRIMARY KEY AUTO_INCREMENT,
-  Event_ID      INT,
-  Teams         VARCHAR(100) not null, -- CSV of all teams
-  Date_Deleted  DATETIME
-);
 
 CREATE TABLE Player_Stats_Archive (
   Stat_ID           INT PRIMARY KEY AUTO_INCREMENT,
