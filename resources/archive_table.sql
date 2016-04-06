@@ -66,7 +66,8 @@ CREATE TABLE Game_Archive (
   Title             VARCHAR(20),
   Location          VARCHAR(50),
   Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
-  Date_Deleted      DATETIME
+  Date_Deleted      DATETIME,
+  Game_Finished     BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE Frame_Archive (

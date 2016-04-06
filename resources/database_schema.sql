@@ -70,10 +70,11 @@ CREATE TABLE Game (
   Teams             VARCHAR(100) not null, -- CSV of all teams
   Game_Start_Time   DATETIME,
   Game_End_Time     DATETIME,
-  Winner_Team_ID    INT,
+  Winner_Team_ID    INT          null,
   Title             VARCHAR(20),
   Location          VARCHAR(50),
   Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
+  Game_Finished     BOOLEAN DEFAULT FALSE,
   FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID)
 );
 
