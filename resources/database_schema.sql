@@ -9,6 +9,7 @@ CREATE TABLE table_name (
   any_other_constraints
 );
 */
+CREATE DATABASE if NOT exists bowling;
 use bowling;
 
 CREATE TABLE Ball (
