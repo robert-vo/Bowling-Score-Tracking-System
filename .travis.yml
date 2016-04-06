@@ -10,5 +10,7 @@ env:
   - DB=mysql
 
 before_install:
+  - mysql < resources/archive_table.sql
   - mysql < resources/database_schema.sql
+  - mysql < resources/database_triggers.sql
   - mysql < resources/insert_data.sql
