@@ -16,7 +16,7 @@ if (!isset($_SESSION["sess_user"])) {
             div#id {
                 font-size: x-large;
                 font-weight: bold;
-                color: #4CAF50;
+                color: black;
             }
         </style>
     </head>
