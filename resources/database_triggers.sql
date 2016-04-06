@@ -36,6 +36,15 @@ FOR EACH ROW
     end IF;
   END;
 
+drop trigger if exists game_finished;
+CREATE TRIGGER game_finished before insert ON Game
+FOR EACH ROW
+  BEGIN
+    if (new.Game_Finished = true) then
+      set new.Game_End_Time = now();
+    end IF;
+  END;
+
 -- Other triggers for archiving other tables
 drop trigger if exists delete_from_ball;
 CREATE TRIGGER delete_from_ball AFTER DELETE ON Ball
