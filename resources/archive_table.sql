@@ -63,8 +63,8 @@ CREATE TABLE Game_Archive (
   Game_Start_Time   DATETIME,
   Game_End_Time     DATETIME,
   Winner_Team_ID    VARCHAR(20),
-  Title             VARCHAR(20),
-  Location          VARCHAR(50),
+  Title             VARCHAR(100),
+  Location          VARCHAR(100),
   Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
   Game_Finished     BOOLEAN DEFAULT FALSE,
   Date_Deleted      DATETIME
