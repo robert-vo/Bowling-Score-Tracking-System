@@ -22,6 +22,20 @@ CREATE TRIGGER team_date_joined BEFORE INSERT ON Team
 FOR EACH ROW
   SET NEW.Date_Created = NOW();
 
+drop trigger if exists game_start_time;
+CREATE TRIGGER game_start_time BEFORE INSERT ON Game
+FOR EACH ROW
+  SET NEW.Game_Start_Time = NOW();
+
+drop trigger if exists game_finished;
+CREATE TRIGGER game_finished before UPDATE ON Game
+FOR EACH ROW
+  BEGIN
+    if (new.Game_Finished = true) then
+        set new.Game_End_Time = now();
+    end IF;
+  END;
+
 -- Other triggers for archiving other tables
 drop trigger if exists delete_from_ball;
 CREATE TRIGGER delete_from_ball AFTER DELETE ON Ball
@@ -51,7 +65,7 @@ FOR EACH ROW
 drop trigger if exists delete_from_Game;
 CREATE TRIGGER delete_from_Game AFTER DELETE ON Game
 FOR EACH ROW
-  insert into Game_Archive VALUES (old.Game_ID, old.Teams, old.Game_Start_Time, old.Game_End_Time, old.Winner_Team_ID, old.Title, old.Location, old.Event_Type, now());
+  insert into Game_Archive VALUES (old.Game_ID, old.Teams, old.Game_Start_Time, old.Game_End_Time, old.Winner_Team_ID, old.Title, old.Location, old.Event_Type, old.Game_Finished , now());
 
 drop trigger if exists delete_from_PlayerStats;
 CREATE TRIGGER delete_from_PlayerStats AFTER DELETE ON Player_Stats
