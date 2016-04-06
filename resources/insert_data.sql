@@ -126,12 +126,28 @@ INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_
 INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
                   VALUES ('Perfect Guys', 2, 11, 11, 8, 9, 18, 12, 1);
 
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('1,2,3,4,5', '2016-04-06 09:00:37', null, null, 'Casual Games', 'Houston Bowling Alley', 'Casual', 0);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,16,15,19', '2016-04-06 09:00:37', '2016-04-06 09:00:37', 14, 'Casual Games', 'Houston Bowling Alley', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('13,12,14,2,5', '2016-04-06 09:08:27', '2016-04-06 09:08:27', 5, 'Half off Tuesdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('15,1,5,18,13', '2016-04-06 09:15:27', '2016-04-06 09:15:27', 1, 'Half off Tuesdays', 'Austin Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('10,17,01,16,09', '2016-04-06 09:16:39', null, 9, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('18,07,17,19,05', '2016-04-06 09:20:13', null, 18, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,16,03,13,05', '2016-04-06 09:21:06', '2016-04-06 09:21:06', 3, 'Freaky Fridays', 'Lucky Strike Bowling Lane', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('04,02,09,08,16', '2016-04-06 09:21:37', '2016-04-06 09:21:37', 9, 'Freaky Fridays', 'Lucky Strike Bowling Lane', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Game_Start_Time, Game_End_Time, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('05,18,14,02,19', null, null, 2, '$100 Prize Tournament', 'San Antonio Bowling Alley', '2', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('1,2,3,4,5', null, 'Casual Games', 'Houston Bowling Alley', 'Casual', 0);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,16,15,19', 14, 'Casual Games', 'Houston Bowling Alley', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('13,12,14,2,5', 5, 'Half off Tuesdays', 'Houston Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('15,1,5,18,13', 1, 'Half off Tuesdays', 'Austin Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('10,17,01,16,09', 9, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('18,07,17,19,05', 18, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,16,03,13,05', 3, 'Freaky Fridays', 'Lucky Strike Bowling Lane', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('04,02,09,08,16', 9, 'Freaky Fridays', 'Lucky Strike Bowling Lane', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('05,18,14,02,19', 2, '$100 Prize Tournament', 'San Antonio Bowling Alley', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('12,14,15,02', 12, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('03,05', 5, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,08', 7, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,02', 14, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('12,5', 5, 'UofH Bowling Tournament', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('7,14', 7, 'UofH Bowling Tournament', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('5,7', 5, 'UofH Bowling Championship', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('06,16,03,10,17,05,18', 6, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('01,05,18,13,08,07,12', 12, 'Just Another Game', 'Katy Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('18,06,05', null, 'Just Another Game', 'Katy Bowling Alley', 'Casual', 0);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,12,16', 16, 'Just Another Game', 'Katy Bowling Alley', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('03,17,08,16,15', 3, 'Developer Bowling Meetup', 'Lucky Strike Bowling', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('02,08,15,03,10', 8, 'Texans Fans Showcase', 'NRG Stadium Complex 1', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('08,17,14,13,04', 13, 'Texans Fans Showcase', 'NRG Stadium Complex 1', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,18,19,06,02', 19, 'Freaky Fridays', 'Lucky Strike Bowling', 'Casual', 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('17,08,12,10', 12, 'UofH Employees Tournament', 'University of Houston Game Rooms', 'Tournament', 1);
