@@ -1,9 +1,16 @@
 div#box {
     background-color: white;
-    border: 1px solid #4CAF50;
+    border: 1px solid saddlebrown;
     width: 350px;
     margin: 0 auto;
-    box-shadow: 1px 0px 15px #4CAF50;
+    box-shadow: 1px 0px 15px saddlebrown;
+}
+div#box1 {
+    background-color: darkgray;
+    border: 1px solid saddlebrown;
+    width: 350px;
+    margin: 0 auto;
+    box-shadow: 1px 0px 15px saddlebrown;
 }
 
 input {
@@ -12,7 +19,7 @@ input {
 }
 
 div#boxH {
-    background-color: #4CAF50;
+    background-color: saddlebrown;
     text-align: center;
     font-size: 22px;
     font-weight: bold;
@@ -24,20 +31,20 @@ input[type=text], input[type=password]{
     font-size: 15px;
     padding: 10px;
     border-radius: 3px;
-    border: 1px solid #4CAF50;
+    border: 1px solid saddlebrown;
 }
 select{
     font-size: 13px;
     padding: 7px;
     border-radius: 3px;
-    border: 1px solid #4CAF50;
+    border: 1px solid saddlebrown;
 }
 
 input[type=submit] {
-    background-color: #4CAF50;
+    background-color: saddlebrown;
     padding: 5px 10px 5px 10px;
     border-radius: 3px;
-    border: 1px solid #4CAF50;
+    border: 1px solid saddlebrown;
     color: white;
     font-weight: bold;
 }

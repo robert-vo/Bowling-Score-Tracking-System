@@ -20,7 +20,7 @@ generateMenuBar(basename(__FILE__));
 ?>
 
 <br>
-<div id="box">
+<div id="box1">
     <div id="boxH">
         LOGIN
     </div>

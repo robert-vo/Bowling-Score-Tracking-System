@@ -57,7 +57,7 @@ if (isset($_POST['valid'])) {
     }
 } else {
     $form = <<<EOT
-    <div id="box">
+    <div id="box" background-color: white;>
     <div id="boxH">
         REGISTER
     </div>
