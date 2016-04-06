@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap Example</title>
+    <title>Scores</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -11,6 +11,7 @@
 
 <?php
 
+session_start();
 function connectToDatabase($destination) {
     if($destination == 'Local') {
         $servername = "localhost:3306";
@@ -31,14 +32,9 @@ function connectToDatabase($destination) {
 
 
 ?>
-
-
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a class = "active" href="scores.php">Scores</a></li>
-    <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginF.php">Login</a></li>
-</ul>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 
 

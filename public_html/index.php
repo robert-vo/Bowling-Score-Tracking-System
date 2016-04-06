@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap Example</title>
+    <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
@@ -10,8 +10,10 @@
 <body>
 
 <?php
-
+session_start();
 include 'databaseFunctions.php';
+
+//joseph test
 
 function retrieveAndPrintAllFromTable($tableName, $destination) {
     $conn = connectToDatabase($destination);
@@ -43,12 +45,9 @@ function printResult($result) {
 ?>
 
 
-<ul>
-    <li><a class="active" href="index.php">Home</a></li>
-    <li><a href="scores.php">Scores</a></li>
-    <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginF.php">Login</a></li>
-</ul>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 
 <div class="container">

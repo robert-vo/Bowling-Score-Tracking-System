@@ -9,20 +9,8 @@ CREATE TABLE table_name (
   any_other_constraints
 );
 */
-
-drop database if exists bowling;
 CREATE DATABASE if NOT exists bowling;
-
 use bowling;
-
-DROP TABLE IF EXISTS Game;
-DROP TABLE IF EXISTS Events;
-DROP TABLE IF EXISTS Statistics;
-DROP TABLE IF EXISTS Frame;
-DROP TABLE IF EXISTS Roll;
-DROP TABLE IF EXISTS Team;
-DROP TABLE IF EXISTS Ball;
-DROP TABLE IF EXISTS Players;
 
 CREATE TABLE Ball (
   Ball_ID  INT          PRIMARY KEY AUTO_INCREMENT,
@@ -36,7 +24,7 @@ CREATE TABLE Players (
   Player_ID       INT             PRIMARY KEY AUTO_INCREMENT,
   Gender          ENUM('F', 'M')  NOT NULL,
   Phone_Number    VARCHAR(15),
-  Date_Joined     DATE            ,
+  Date_Joined     DATE,
   Date_Of_Birth   DATE            NOT NULL,
   Street_Address  VARCHAR(30)     NOT NULL,
   City            VARCHAR(30)     NOT NULL,
@@ -46,19 +34,18 @@ CREATE TABLE Players (
   Last_Name       VARCHAR(30)     NOT NULL,
   Middle_Initial  VARCHAR(1),
   Email           VARCHAR(30)     NOT NULL UNIQUE,
-  Password        VARCHAR(256)    NOT NULL
+  Password        VARCHAR(256)    NOT NULL,
+  Is_Admin        BOOLEAN         DEFAULT FALSE
 );
 
 CREATE TABLE Team (
   Team_ID        INT            PRIMARY KEY AUTO_INCREMENT,
-  Name           VARCHAR(20)	  NOT NULL,
+  Name           VARCHAR(50)	  NOT NULL,
   Leader         INT			      NOT NULL,
-  Date_Created   DATETIME		    NOT NULL,
+  Date_Created   DATETIME,
   Game_Count     INT			      DEFAULT 0,
   Win_Count      INT			      DEFAULT 0,
-  Phone_Number   VARCHAR(15),
-  Address        VARCHAR(30),
-  Player_1	     INT,
+  Player_1	     INT            NULL,
   Player_2	     INT            NULL,
   Player_3	     INT            NULL,
   Player_4	     INT            NULL,
@@ -79,15 +66,17 @@ CREATE TABLE Team (
   CHECK (Win_Count >= 0)
 );
 
-CREATE TABLE Bowling_Events (
-  Event_ID    INT PRIMARY KEY AUTO_INCREMENT,
-  Team_ID     INT,
-  Event_Time  DATETIME,
-  Winner      VARCHAR(20),
-  Title       VARCHAR(20),
-  Location    VARCHAR(50),
-  Event_Type  ENUM('Casual', 'Tournament') DEFAULT 'Casual',
-  FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
+CREATE TABLE Game (
+  Game_ID           INT PRIMARY KEY AUTO_INCREMENT,
+  Teams             VARCHAR(100) not null, -- CSV of all teams
+  Game_Start_Time   DATETIME,
+  Game_End_Time     DATETIME,
+  Winner_Team_ID    INT          null,
+  Title             VARCHAR(100)  not null,
+  Location          VARCHAR(100)  not null,
+  Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
+  Game_Finished     BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID)
 );
 
 CREATE TABLE Frame(
@@ -99,14 +88,14 @@ CREATE TABLE Frame(
   Roll_Three_ID   INT,
   Score           INT DEFAULT 0,
   Team_ID         INT,
-  Event_ID        INT,
+  Game_ID         INT,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (Team_ID) REFERENCES Team(Team_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  FOREIGN KEY (Event_ID) REFERENCES Bowling_Events(Event_ID)
+  FOREIGN KEY (Game_ID) REFERENCES Game(Game_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CHECK (Frame_Number BETWEEN 1 and 10),
@@ -138,16 +127,9 @@ CREATE TABLE Roll (
     ON UPDATE CASCADE
 );
 
-CREATE TABLE Game (
-  Game_ID     INT PRIMARY KEY AUTO_INCREMENT,
-  Event_ID    INT,
-  Teams       VARCHAR(100) not null, -- CSV of all teams
-  FOREIGN KEY (Event_ID) REFERENCES Bowling_Events(Event_ID)
-);
-
 CREATE TABLE Player_Stats (
   Stat_ID           INT PRIMARY KEY AUTO_INCREMENT,
-  Player_ID         INT,
+  Player_ID         INT UNIQUE,
   Strikes           INT NOT NULL DEFAULT 0,
   Games_Played      INT NOT NULL DEFAULT 0,
   Perfect_Games     INT NOT NULL DEFAULT 0,
@@ -168,3 +150,5 @@ CREATE TABLE Player_Stats (
   CHECK (Pins_Left >= 0),
   CHECK (Average_Pin_Left >= 0)
 );
+
+ALTER TABLE Game
