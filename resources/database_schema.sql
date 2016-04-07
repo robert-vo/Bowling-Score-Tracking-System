@@ -17,6 +17,8 @@ CREATE TABLE Ball (
   Color    VARCHAR(20)  NOT NULL,
   Weight   INT          NOT NULL,
   Size     ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL') NOT NULL,
+  date_added DATETIME NULL,
+  last_date_modified DATETIME NULL,
   CHECK (Weight > 0)
 );
 
@@ -35,7 +37,10 @@ CREATE TABLE Players (
   Middle_Initial  VARCHAR(1),
   Email           VARCHAR(30)     NOT NULL UNIQUE,
   Password        VARCHAR(256)    NOT NULL,
+  date_added      DATETIME        NULL,
+  last_date_modified DATETIME     NULL,
   Is_Admin        BOOLEAN         DEFAULT FALSE
+
 );
 
 CREATE TABLE Team (
@@ -50,6 +55,8 @@ CREATE TABLE Team (
   Player_3	     INT            NULL,
   Player_4	     INT            NULL,
   Player_5	     INT            NULL,
+  date_added    DATETIME        NULL,
+  last_date_modified DATETIME   NULL,
   FOREIGN KEY    (Leader)       REFERENCES Players(Player_ID)
     ON DELETE RESTRICT,
   FOREIGN KEY    (Player_1)     REFERENCES Players(Player_ID)
@@ -76,6 +83,8 @@ CREATE TABLE Game (
   Location          VARCHAR(100)  not null,
   Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
   Game_Finished     BOOLEAN DEFAULT FALSE,
+  date_added        DATETIME NULL,
+  last_date_modified DATETIME NULL,
   FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID)
 );
 
@@ -89,6 +98,8 @@ CREATE TABLE Frame(
   Score           INT DEFAULT 0,
   Team_ID         INT,
   Game_ID         INT,
+  date_added DATETIME NULL,
+  last_date_modified DATETIME NULL,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -106,6 +117,8 @@ CREATE TABLE Roll (
   Roll_ID     INT     PRIMARY KEY AUTO_INCREMENT,
   Frame_ID    INT     NOT NULL,
   Ball_ID     INT,
+  date_added DATETIME NULL,
+  last_date_modified DATETIME NULL,
   Is_Strike   BOOLEAN NOT NULL DEFAULT FALSE,
   Is_Spare    BOOLEAN NOT NULL DEFAULT FALSE,
   Is_Foul     BOOLEAN NOT NULL DEFAULT FALSE,
@@ -138,6 +151,8 @@ CREATE TABLE Player_Stats (
   Worst_Score       INT NOT NULL DEFAULT 0,
   Pins_Left         INT NOT NULL DEFAULT 0,
   Average_Pin_Left  DOUBLE NOT NULL DEFAULT 0,
+  date_added DATETIME NULL,
+  last_date_modified DATETIME NULL,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
