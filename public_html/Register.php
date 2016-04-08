@@ -5,11 +5,6 @@
     <title>Registration</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
-    <style>
-        div#error{
-            color: red;
-        }
-    </style>
 </head>
 
 <body>
@@ -22,57 +17,161 @@ generateMenuBar(basename(__FILE__));
 
 <?php
 include 'databaseFunctions.php';
-if (isset($_POST['valid'])) {
-    $pass1 = $_POST['password'];
-    $pas2 = $_POST['vpassword'];
-    if ($pass1 == $pas2) {
-        $fname = ucfirst($_POST['fname']);
-        $lname = ucfirst($_POST['lname']);
-        $middle = $_POST['middle'];
-        $street = $_POST['streeta'];
-        $city = ucfirst($_POST['city']);
-        $state = $_POST['state'];
-        $zip = $_POST['zipcode'];
-        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-        $phone = $_POST['phone'];
-        $gender = $_POST['gender'];
-        $doby = $_POST['year'];
-        $dobm = $_POST['month'];
-        $dobd = $_POST['day'];
-        $birth = "$doby-$dobm-$dobd";
-        $email = $_POST['email'];
-        $conn = connectToDatabase();
-        $sql = "INSERT INTO players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
-                                     VALUES ('$gender', '$phone', null, '$birth', '$street', '$city', '$state', '$zip', '$fname', '$lname', '$middle', '$email', '$password', 0) ";
-        if (mysqli_query($conn, $sql) == TRUE) {
-            echo "Insertion successful";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+
+$firstNameError = '';
+$lastNameError = $genderError = $phoneNumberError = '';
+$dateOfBirthError = $streetAddressError = $cityError = $zipCodeError = '';
+$stateError = '';
+$emailError = $passwordError = $verifyPasswordError = '';
+
+function postReturnsValidData() {
+
+    $formIsValid = true;
+
+    if(isset($_POST['valid'])) {
+        if(!preg_match("/^[a-zA-Z ]*$/",$_POST["firstName"])) {
+            $GLOBALS['firstNameError'] = 'First Name cannot contain any numbers.';
+            $formIsValid = false;
         }
-        $conn->close();
-    } else {
-        ?>
-        <div id="error">Sorry passwords do not match. Click <a href="register.php">here</a> to try again.</div>
-<?php
+        else if(empty($_POST["firstName"])) {
+            $GLOBALS['firstNameError'] = 'First Name is required.';
+            $formIsValid = false;
+        }
+
+        if(empty($_POST['lastName'])) {
+            $GLOBALS['lastNameError'] = 'Last Name is required.';
+            $formIsValid = false;
+        }
+
+        if(empty($_POST['gender'])) {
+            $GLOBALS['genderError'] = 'Please select either M or F.';
+            $formIsValid = false;
+        }
+
+        if(!is_numeric($_POST["phone"]) and !empty($_POST["phone"])) {
+            $GLOBALS['phoneNumberError'] = 'Please only input numbers the phone number field.';
+            $formIsValid = false;
+        }
+        else if(strlen($_POST["phone"]) != 10 and !empty($_POST["phone"])) {
+            $GLOBALS['phoneNumberError'] = 'Phone number can only contain 10 numbers.';
+            $formIsValid = false;
+        }
+        else if(empty($_POST["phone"])) {
+            $GLOBALS['phoneNumberError'] = 'Phone Number is required.';
+            $formIsValid = false;
+        }
+
+        if(empty($_POST['year']) or empty($_POST['day']) or empty($_POST['month'])) {
+            $GLOBALS['dateOfBirthError'] = 'Date of Birth is required.';
+            $formIsValid = false;
+        }
+
+        if(empty($_POST['streeta'])) {
+            $GLOBALS['streetAddressError'] = 'Street Address is required.';
+            $formIsValid = false;
+        }
+
+        if(!preg_match("/^[a-zA-Z ]*$/",$_POST["city"])) {
+            $GLOBALS['cityError'] = 'City cannot contain any numbers.';
+            $formIsValid = false;
+        }
+        else if(empty($_POST['city'])) {
+            $GLOBALS['cityError'] = 'City is required.';
+            $formIsValid = false;
+        }
+
+        if(!is_numeric($_POST["zipcode"]) and !empty($_POST["zipcode"])) {
+            $GLOBALS['zipCodeError'] = 'Please only input numbers the zip code field.';
+            $formIsValid = false;
+        }
+        else if(strlen($_POST["zipcode"]) != 5 and !empty($_POST["zipcode"])) {
+            $GLOBALS['zipCodeError'] = 'Zip code can only contain 5 numbers.';
+            $formIsValid = false;
+        }
+        else if(empty($_POST['zipcode'])) {
+            $GLOBALS['zipCodeError'] = 'Zip Code is required.';
+            $formIsValid = false;
+        }
+
+        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $GLOBALS['emailError'] = 'A valid email address is required.';
+            $formIsValid = false;
+        }
+
+        if(strlen($_POST["password"]) < 8 and !empty($_POST["password"])) {
+            $GLOBALS['passwordError'] = 'Password must be at least 8 characters of length.';
+            $formIsValid = false;
+        }
+        else if(empty($_POST['password'])) {
+            $GLOBALS['passwordError'] = 'A password of character length with at least 8 characters is required.';
+            $formIsValid = false;
+        }
+
+        if(strcmp($_POST['vpassword'], $_POST['password']) != 0) {
+            $GLOBALS['verifyPasswordError'] = '*Passwords do not match!';
+            $formIsValid = false;
+        }
+
     }
-} else {
-    $form = <<<EOT
-    <div id="box">
-    <div id="boxH">
-        REGISTER
-    </div>
-    <div id="boxF">
-        <form action="register.php" method="POST">
-            <input type="text" name="fname" placeholder="First Name" >
-            <input type="text" name="lname" placeholder="Last Name" >
-            <input type="text" name="middle" placeholder="Middle Initial" >
-                <select name="gender">
-	<option>  Gender   </option>
+    else {
+        $formIsValid = false;
+    }
+
+    return $formIsValid;
+}
+
+if (postReturnsValidData()) {
+    $firstName = ucfirst($_POST['firstName']);
+    $lastName = ucfirst($_POST['lastName']);
+    $middle = $_POST['middle'];
+    $street = $_POST['streeta'];
+    $city = ucfirst($_POST['city']);
+    $state = $_POST['state'];
+    $zip = $_POST['zipcode'];
+    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    $phone = $_POST['phone'];
+    $gender = $_POST['gender'];
+    $doby = $_POST['year'];
+    $dobm = $_POST['month'];
+    $dobd = $_POST['day'];
+    $birth = "$doby-$dobm-$dobd";
+    $email = $_POST['email'];
+    $conn = connectToDatabase();
+    $sql = "INSERT INTO players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
+                                 VALUES ('$gender', '$phone', '$birth', '$street', '$city', '$state', '$zip', '$firstName', '$lastName', '$middle', '$email', '$password', 0) ";
+    if (mysqli_query($conn, $sql) == TRUE) {
+        echo "Insertion successful";
+    } else {
+        echo "<div id=\"error\">Sorry, $conn->error,  please try registering again. </div> <br>Click <a href=\"register.php\">here</a> to go back to the registration page.</div>";
+    }
+    $conn->close();
+    }
+else {
+    echo '<div id="box"><div id="boxH">REGISTER</div>
+            <span style="margin:auto" class = "error">* Denotes a required field.</span>
+            <div id="boxF">
+            <form action="Register.php" method="POST">
+            <input type="text" name="firstName" placeholder="First Name">';
+
+    echo '<span class="error">*' . $firstNameError . '</span>';
+
+    echo '<input type="text" name="lastName" placeholder="Last Name" >';
+
+    echo '<span class="error">*' . $lastNameError . '</span>';
+
+    echo '<input type="text" name="middle" placeholder="Middle Initial" >';
+
+    echo '<select name="gender">
+	<option>Gender</option>
 	<option value="F">Female</option>
-	<option value="M">Male</option>
-</select>
-            <input type="text" name="phone" placeholder="Phone Number" >
-    <select name="month">
+	<option value="M">Male</option></select>';
+    echo '<span class="error">*' . $genderError . '</span>';
+
+
+    echo '<input type="text" name="phone" placeholder="Phone Number." >';
+    echo '<span class="error">*' . $phoneNumberError . '</span><br>';
+
+    echo '<select name="month">
 	<option>Month</option>
 	<option value="01">January</option>
 	<option value="02">Febuary</option>
@@ -86,7 +185,7 @@ if (isset($_POST['valid'])) {
 	<option value="10">October</option>
 	<option value="11">November</option>
 	<option value="12">December</option>
-</select>
+	    </select>
 <select name="day">
 	<option>Day</option>
 	<option value="1">1</option>
@@ -170,13 +269,18 @@ if (isset($_POST['valid'])) {
 	<option value="1949">1949</option>
 	<option value="1948">1948</option>
 	<option value="1947">1947</option>
-	</select>
-             
-            <input type="text" name="streeta" placeholder="Street Address" >
-            <input type="text" name="city" placeholder="City" >
-            
-            
-    <select name="state">
+	</select>';
+
+    echo '<span class="error">*' . $dateOfBirthError . '</span>';
+
+    echo '<input type="text" name="streeta" placeholder="Street Address">';
+    echo '<span class="error">*' . $streetAddressError . '</span>';
+
+    echo '<input type="text" name="city" placeholder="City">';
+    echo '<span class="error">*' . $cityError . '</span>';
+
+
+    echo '<br><select name="state">
     <option value="AL">AL</option>
     <option value="AK">AK</option>
     <option value="AZ">AZ</option>
@@ -228,17 +332,25 @@ if (isset($_POST['valid'])) {
 	<option value="WV">WV</option>
 	<option value="WI">WI</option>
 	<option value="WY">WY</option>
-	</select>
-            <input type="text" name="zipcode" placeholder="Zip Code" >
-            <input type="text" name="email" placeholder="Email" >
-            <input type="password" name="password" placeholder="Password" >
-            <input type="password" name="vpassword" placeholder="Verify Password" >
-            <input type="submit" name="valid" value="Submit" >
-        </form>
-    </div>
-</div>
-EOT;
-    echo $form;
+	</select>';
+
+    echo '<input type="text" name="zipcode" placeholder="Zip Code" >';
+
+    echo '<span class="error">*' . $zipCodeError . '</span>';
+
+    echo '<input type="text" name="email" placeholder="Email" >';
+
+    echo '<span class="error">*' . $emailError . '</span>';
+
+    echo '<input type="password" name="password" placeholder="Password">';
+
+    echo '<span class="error">*' . $passwordError . '</span>';
+
+    echo '<input type="password" name="vpassword" placeholder="Verify Password">';
+
+    echo '<span class="error">' . $verifyPasswordError . '</span>';
+
+    echo '<input type="submit" name="valid" value="Submit" ></form></div></div>';
 }
 ?>
 
