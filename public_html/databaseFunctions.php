@@ -6,10 +6,10 @@ $typeOfConnection = getenv('typeOfConnection');
 function connectToDatabase()
 {
     if ($GLOBALS['typeOfConnection'] == 'Remote') {
-        $servername = "mydbinstance1.cnotb9fanxgq.us-west-2.rds.amazonaws.com";
-        $username = "awsuser";
-        $password = "password";
-        $dbname = "bowling";
+        $servername = getenv('connectionURL');
+        $username = getenv('username');
+        $password = getenv('password');
+        $dbname = getenv('databaseName');
     } else {
         $servername = "localhost:3306";
         $username = "root";
@@ -18,6 +18,5 @@ function connectToDatabase()
     }
     return new mysqli($servername, $username, $password, $dbname);
 }
-
 
 ?>
