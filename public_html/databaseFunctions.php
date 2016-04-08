@@ -6,9 +6,9 @@ $typeOfConnection = getenv('typeOfConnection');
 function connectToDatabase()
 {
     if ($GLOBALS['typeOfConnection'] == 'Remote') {
-        $servername = getenv('connectionURL');
-        $username = getenv('username');
-        $password = getenv('password');
+        $servername = getenv('databaseConnection');
+        $username = getenv('databaseUsername');
+        $password = getenv('databasePassword');
         $dbname = getenv('databaseName');
     } else {
         $servername = "localhost:3306";
