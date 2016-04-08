@@ -12,10 +12,10 @@ function connectToDatabase()
     echo getenv('databaseName');
     echo getenv('typeOfConnection');
 //    if ($GLOBALS['typeOfConnection'] == 'Remote') {
-        $servername = "mydbinstance2.cnotb9fanxgq.us-west-2.rds.amazonaws.com:3306/bowling";
-        $username = "bowlingdb";
-        $password = "bowlingdb";
-        $dbname = "bowling";
+        $servername = getenv('databaseConnection');
+        $username = getenv('databaseUsername');
+        $password = getenv('databasePassword');
+        $dbname = getenv('databaseName');
 //    } else {
 //        $servername = "localhost:3306";
 //        $username = "root";
