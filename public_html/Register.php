@@ -150,7 +150,7 @@ else {
     echo '<div id="box"><div id="boxH">REGISTER</div>
             <span style="margin:auto" class = "error">* Denotes a required field.</span>
             <div id="boxF">
-            <form action="Register.php" method="POST">
+            <form action="register.php" method="POST">
             <input type="text" name="firstName" placeholder="First Name">';
 
     echo '<span class="error">*' . $firstNameError . '</span>';
