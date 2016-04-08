@@ -5,6 +5,7 @@ $typeOfConnection = getenv('typeOfConnection');
 
 function connectToDatabase()
 {
+    echo 'in function';
     echo getenv('databaseUsername');
     echo getenv('databaseConnection');
     echo getenv('databasePassword');
@@ -23,5 +24,8 @@ function connectToDatabase()
 //    }
     return new mysqli($servername, $username, $password, $dbname);
 }
+
+echo 'hello';
+$test = connectToDatabase();
 
 ?>
