@@ -19,7 +19,4 @@ function connectToDatabase()
     return new mysqli($servername, $username, $password, $dbname);
 }
 
-echo 'hello';
-$test = connectToDatabase();
-
 ?>
