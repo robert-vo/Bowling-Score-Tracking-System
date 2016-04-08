@@ -5,6 +5,11 @@ $typeOfConnection = getenv('typeOfConnection');
 
 function connectToDatabase()
 {
+    echo getenv('databaseUsername');
+    echo getenv('databaseConnection');
+    echo getenv('databasePassword');
+    echo getenv('databaseName');
+    echo getenv('typeOfConnection');
 //    if ($GLOBALS['typeOfConnection'] == 'Remote') {
         $servername = "mydbinstance2.cnotb9fanxgq.us-west-2.rds.amazonaws.com:3306/bowling";
         $username = "bowlingdb";
