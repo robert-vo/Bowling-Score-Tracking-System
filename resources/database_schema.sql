@@ -35,7 +35,8 @@ CREATE TABLE Players (
   Middle_Initial  VARCHAR(1),
   Email           VARCHAR(30)     NOT NULL UNIQUE,
   Password        VARCHAR(256)    NOT NULL,
-  Is_Admin        BOOLEAN         DEFAULT FALSE
+  Is_Admin        BOOLEAN         DEFAULT FALSE,
+  Reset_Key       VARCHAR(100)    DEFAULT ''
 );
 
 CREATE TABLE Team (
@@ -66,6 +67,12 @@ CREATE TABLE Team (
   CHECK (Win_Count >= 0)
 );
 
+CREATE TABLE Game_Location (
+  Game_Location_ID    INT PRIMARY KEY AUTO_INCREMENT,
+  Game_Address        VARCHAR(100) not null,
+  Game_Location_Name  VARCHAR(100) not null
+);
+
 CREATE TABLE Game (
   Game_ID           INT PRIMARY KEY AUTO_INCREMENT,
   Teams             VARCHAR(100) not null, -- CSV of all teams
@@ -73,10 +80,11 @@ CREATE TABLE Game (
   Game_End_Time     DATETIME,
   Winner_Team_ID    INT          null,
   Title             VARCHAR(100)  not null,
-  Location          VARCHAR(100)  not null,
+  Location_ID       INT,
   Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
   Game_Finished     BOOLEAN DEFAULT FALSE,
-  FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID)
+  FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID),
+  FOREIGN KEY (Location_ID) REFERENCES Game_Location(Game_Location_ID)
 );
 
 CREATE TABLE Frame(
@@ -151,4 +159,3 @@ CREATE TABLE Player_Stats (
   CHECK (Average_Pin_Left >= 0)
 );
 
-ALTER TABLE Game
