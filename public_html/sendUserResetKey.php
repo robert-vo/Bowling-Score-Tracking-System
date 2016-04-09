@@ -12,11 +12,11 @@ function sendEmailTo($email, $reset_key, $firstName, $lastName) {
     $pass = 'cosc3380';
     $link = "http://bowling-score-tracking-system.azurewebsites.net/public_html/resetPassword.php?key=$reset_key";
     $message = "Hello $firstName $lastName! <br>You can change your password <a href=$link>here!</a><br><br>Have a good day!";
-    
+
     $params = array(
         'api_user' => $user,
         'api_key' => $pass,
-        'to' => 'robert.vo@outlook.com',
+        'to' => $email,
         'subject' => 'Password Reset for Bowling Score Tracking System',
         'html' => $message,
         'from' => 'noreply@bowling-score-tracking-system.com'
