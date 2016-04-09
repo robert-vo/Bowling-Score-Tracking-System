@@ -11,8 +11,8 @@ function sendEmailTo($email, $reset_key, $firstName, $lastName) {
     $user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
     $pass = 'cosc3380';
     $link = "http://bowling-score-tracking-system.azurewebsites.net/public_html/resetPassword.php?key=$reset_key";
-    $message = "Hello $firstName $lastName! You can change your password at the following link: $link. Have a good day!";
-
+    $message = "Hello $firstName $lastName! <br>You can change your password <a href=$link>here!</a><br><br>Have a good day!";
+    
     $params = array(
         'api_user' => $user,
         'api_key' => $pass,
