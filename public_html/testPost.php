@@ -6,8 +6,8 @@
 <?php
 
 $url = 'https://api.sendgrid.com/';
-$user = 'robertvo';
-$pass = 'runescape202';
+$user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
+$pass = 'cosc3380';
 
 $params = array(
     'api_user' => $user,
