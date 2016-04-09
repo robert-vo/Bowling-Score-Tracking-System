@@ -57,7 +57,7 @@ CREATE TRIGGER delete_from_ball AFTER DELETE ON Ball
 drop trigger if exists delete_from_player;
 CREATE TRIGGER delete_from_player AFTER DELETE ON Players
   FOR EACH ROW
-  insert into Players_Archive VALUES (old.Player_ID, old.Gender, old.Phone_Number, old.Date_Joined, old.Date_of_Birth, old.Street_Address ,old.City, old.State, old.Zip_Code, old.First_Name, old.Last_Name, old.Middle_Initial, old.Email, old.Password, old.Is_Admin, now());
+  insert into Players_Archive VALUES (old.Player_ID, old.Gender, old.Phone_Number, old.Date_Joined, old.Date_of_Birth, old.Street_Address ,old.City, old.State, old.Zip_Code, old.First_Name, old.Last_Name, old.Middle_Initial, old.Email, old.Password, old.Is_Admin, old.Reset_Key, now());
 
 drop trigger if exists delete_from_teams;
 CREATE TRIGGER delete_from_teams AFTER DELETE ON Team
