@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="audit.css">
+    <style>
+        tr:nth-child(even) {
+            background-color: #e6e6e6;
+        }
+    </style>
 </head>
 
 
@@ -14,6 +19,7 @@ generateMenuBar(basename(__FILE__));
 ?>
 
 <body>
+
 
 
 <?php
@@ -44,7 +50,7 @@ function retrieveAndPrintAllFromTable($tableName)
 function createTableOnWebpage($allColumns, $result, $tableName)
 {
     $allColumnsAsArray = array();
-
+    echo "<form action='audit.php'><input type='submit' value='Go back'></form><br>";
     echo "<div id=\"display\">";
     echo "<div id='asdf'></div>";
 
@@ -74,15 +80,6 @@ function createTableOnWebpage($allColumns, $result, $tableName)
                 }
                 echo "<td align='center'>" . $row[$column] . "</td>";
             }
-            //<button type=button>Delete</button></td>";
-            //$string = $tableName . "," . $id_column . "," . $rowid;
-            //$table = json_encode($tableName);
-            //$rowId = json_encode($rowid);
-            //$columnName = json_encode($id_column);
-
-            /*echo "<td align='center'>
-                <button type='button' onclick='showTable(" . $table . "," . $column_name . "," . $row_id . ")'>Update</button>
-                <button type='button'>Delete</button>";*/
 
             echo    "<td align='center'>
                         <form action='updateRow.php' method='get'>
