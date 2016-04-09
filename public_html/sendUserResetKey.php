@@ -6,7 +6,35 @@ generateMenuBar(basename(__FILE__));
 
 include 'databaseFunctions.php';
 
-function updateResetKeyOfPlayerWithEmail($email) {
+function sendEmailTo($email, $reset_key, $firstName, $lastName) {
+    $url = 'https://api.sendgrid.com/';
+    $user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
+    $pass = 'cosc3380';
+    $link = "http://localhost:8000/PhpstormProjects/Bowling-Score-Tracking-System/public_html/resetPassword.php?key=$reset_key";
+    $message = "Hello $firstName $lastName! You can change your password at the following link: $link. Have a good day!";
+
+    $params = array(
+        'api_user' => $user,
+        'api_key' => $pass,
+        'to' => 'robert.vo@outlook.com',
+        'subject' => 'Password Reset for Bowling Score Tracking System',
+        'html' => $message,
+        'from' => 'noreply@bowling-score-tracking-system.com'
+    );
+    $request = $url.'api/mail.send.json';
+    $session = curl_init($request);
+    curl_setopt ($session, CURLOPT_POST, true);
+    curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($session, CURLOPT_HEADER, false);
+    curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($session);
+    if (curl_errno($session)) { echo 'Curl error: ' . curl_error($session); }
+    curl_close($session);
+    print_r($response);
+}
+
+function updateResetKeyOfPlayerWithEmail($email, $firstName, $lastName) {
     $conn = connectToDatabase();
 
     $md5VersionOFEmail = md5($email);
@@ -14,13 +42,7 @@ function updateResetKeyOfPlayerWithEmail($email) {
     $sql = "update Players set Players.Reset_Key = '$md5VersionOFEmail' where Email = '$email'";
 
     if (mysqli_query($conn, $sql) == TRUE) {
-        $subject = 'Bowling Score Tracking System Password Reset';
-        $message = 'hello' . $md5VersionOFEmail;
-        $headers = 'From: bowling@bowling-score-tracking-system.com' . "\r\n" .
-            'Reply-To: noreply@bowling-score-tracking-system.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-        mail('robertvo79@gmail.com', $subject, $message, $headers);
-
+        sendEmailTo($email, $md5VersionOFEmail, $firstName, $lastName);
         echo "<script type='text/javascript'>
             alert('Email sent to your following email account! Please check your email address for more information.');
             history.go(-2);</script>";
@@ -33,7 +55,7 @@ function updateResetKeyOfPlayerWithEmail($email) {
 
 }
 
-function sendEmailToCorrespondingUser() {
+function checkIfEmailExists() {
     $conn = connectToDatabase();
 
     // Check connection
@@ -48,10 +70,9 @@ function sendEmailToCorrespondingUser() {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        $count = 0;
-        while ($row = $result->fetch_assoc() and $count == 0) {
-            $count = 1;
-            updateResetKeyOfPlayerWithEmail($email);
+        while ($row = $result->fetch_assoc()) {
+            updateResetKeyOfPlayerWithEmail($email, $row['First_Name'], $row['Last_Name']);
+            break;
         }
     } else {
         echo "<script type='text/javascript'>
@@ -69,8 +90,8 @@ if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             history.go(-1);
         </script>";
 }
-else { 
-    sendEmailToCorrespondingUser();
+else {
+    checkIfEmailExists();
 
 }
 
