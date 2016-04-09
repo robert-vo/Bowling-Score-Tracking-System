@@ -12,11 +12,11 @@ $pass = 'cosc3380';
 $params = array(
     'api_user' => $user,
     'api_key' => $pass,
-    'to' => 'robertvo79@gmail.com',
+    'to' => 'rvo@uh.eduu',
     'subject' => 'testing from azure',
-    'html' => 'testing body',
-    'text' => 'testing body',
-    'from' => 'smtp.sendgrid.net',
+    'html' => 'testing from azure',
+    'text' => 'testing from azure',
+    'from' => 'noreply@smtp.sendgrid.net'
 );
 
 $request = $url.'api/mail.send.json';
