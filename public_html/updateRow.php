@@ -54,7 +54,7 @@ function retrieveAndPrintAllFromTable($tableName, $id_column, $rowid)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
+    $queryAllColumns = "SELECT distinct Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
     $allColumns = $conn->query($queryAllColumns);
 
     $queryToGetAllDataOfATable = "SELECT * FROM $tableName WHERE $id_column = $rowid";
