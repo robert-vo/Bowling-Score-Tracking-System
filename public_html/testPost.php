@@ -38,6 +38,8 @@ curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
 curl_setopt($session, CURLOPT_HEADER, false);
 curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
+curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
+
 // obtain response
 $response = curl_exec($session);
 
