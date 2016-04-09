@@ -27,24 +27,22 @@ FOR EACH ROW
   SET NEW.Game_Start_Time = NOW();
 
 drop trigger if exists game_finished;
-delimiter $$
-CREATE TRIGGER game_finished before UPDATE ON Game
+CREATE TRIGGER `game_finished` before UPDATE ON `Game`
 FOR EACH ROW
   BEGIN
     if (new.Game_Finished = true) then
         set new.Game_End_Time = now();
     end IF;
-  END$$
+end;
 
 drop trigger if exists game_finished;
-delimiter $$
-CREATE TRIGGER game_finished before insert ON Game
+CREATE TRIGGER `game_finished` before insert ON `Game`
 FOR EACH ROW
   BEGIN
     if (new.Game_Finished = true) then
       set new.Game_End_Time = now();
     end IF;
-  END$$
+end;
 
 -- Other triggers for archiving other tables
 drop trigger if exists delete_from_ball;
