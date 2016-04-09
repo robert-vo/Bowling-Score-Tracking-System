@@ -10,7 +10,7 @@ function sendEmailTo($email, $reset_key, $firstName, $lastName) {
     $url = 'https://api.sendgrid.com/';
     $user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
     $pass = 'cosc3380';
-    $link = "http://localhost:8000/PhpstormProjects/Bowling-Score-Tracking-System/public_html/resetPassword.php?key=$reset_key";
+    $link = "http://bowling-score-tracking-system.azurewebsites.net/public_html/resetPassword.php?key=$reset_key";
     $message = "Hello $firstName $lastName! You can change your password at the following link: $link. Have a good day!";
 
     $params = array(
