@@ -35,6 +35,8 @@ generateMenuBar(basename(__FILE__));
 </div>
 <br>
 <div id="centerT"><a href="register.php">Create account</a></div>
+<div id="centerT"><a href="passwordReset.php">Forgot your password?</a></div>
+
 <?php
 include 'databaseFunctions.php';
 
@@ -56,6 +58,7 @@ if (isset($_POST["valid"])) {
         if ($username == $dbuser and password_verify($password, $dbpass)) {
             session_start();
             $_SESSION['sess_user'] = $username;
+            $_SESSION['user_type'] = 'test';
             header("location:loginSuccessful.php");
         }
         else{

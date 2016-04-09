@@ -1,69 +1,72 @@
 use bowling;
 
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 'S');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 'XL');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 'XL');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 'S');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 'XL');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Yellow', 10, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Polka Dots', 20, 'S');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 10, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Black', 7, 'S');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('White', 12, 'XL');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 5, 'S');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Polka Dot', 12, 'M');
-INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Dark Blue', 12, 'XL');
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Black', 7, 2);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 10, 3);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 11, 3);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Blue', 6, 2);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Dark Blue', 12, 5);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 15, 6);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 17, 6);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 12, 5);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Pink', 5, 2);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Polka Dot', 12, 3);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Polka Dots', 20, 6);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 8, 2);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 17, 5);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 10, 3);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Purple', 10, 3);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 5, 1);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 7, 3);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Red', 9, 4);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('White', 12, 5);
+INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Yellow', 10, 3);
 
-
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '9320241311', null, '1990-03-10', '9683 Josephs Street', 'Austin', 'TX', 78705, 'Joseph', 'Obeahon', null, 'joseph@joseph.com', '$2y$10$sAvEfUYrEgyjDtKIhoyZFO0XopFj0OGYX8cqQ0QvgBUeTFueAqN3q');
+VALUES (2, '9320241311', null, '1990-03-10', '9683 Josephs Street', 'Austin', 'TX', 78705, 'Joseph', 'Obeahon', null, 'joseph@joseph.com', '$2y$10$sAvEfUYrEgyjDtKIhoyZFO0XopFj0OGYX8cqQ0QvgBUeTFueAqN3q');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '8328328322', null, '1993-10-27', '9611 Butterfly Ridge', 'Houston', 'TX', 77098, 'Robert', 'Vo', null, 'robert@robert.com', '$2y$10$4LkMrCGB4IcjrMxRtozB2OI7dfv04LVS1uf1OFbJyy1zDmd/CgbG.');
+VALUES (2, '8328328322', null, '1993-10-27', '9611 Butterfly Ridge', 'Houston', 'TX', 77098, 'Robert', 'Vo', null, 'robert@robert.com', '$2y$10$4LkMrCGB4IcjrMxRtozB2OI7dfv04LVS1uf1OFbJyy1zDmd/CgbG.');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '9721231234', null, '1990-05-08', '1234 Dallas St', 'Dallas', 'TX', 75025, 'Michael', 'Pham', 'K', 'michael@michael.com', '$2y$10$gUhulnsjS4Fhq/8BAAyiJOW1HCYqahYSNhK7lppC3MVLLOx7tbU76');
+VALUES (2, '9721231234', null, '1990-05-08', '1234 Dallas St', 'Dallas', 'TX', 75025, 'Michael', 'Pham', 'K', 'michael@michael.com', '$2y$10$gUhulnsjS4Fhq/8BAAyiJOW1HCYqahYSNhK7lppC3MVLLOx7tbU76');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '8329057311', null, '1997-07-16', '10101 Wills Way', 'San Antonio', 'TX', 77777, 'William', 'Nguyen', null, 'william@william.com', '$2y$10$TXJ1FobARzWRDFDOqJu3E.suICVX3eljY581QB/Pv3G0qZ3y4.F/u');
+VALUES (2, '8329057311', null, '1997-07-16', '10101 Wills Way', 'San Antonio', 'TX', 77777, 'William', 'Nguyen', null, 'william@william.com', '$2y$10$TXJ1FobARzWRDFDOqJu3E.suICVX3eljY581QB/Pv3G0qZ3y4.F/u');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '71239395858', null, '2000-06-15', '2222 Calhoun Street', 'Houston', 'TX', 77007, 'Rolando', 'Rivera', null, 'rolando@rolando.com', '$2y$10$SZhDYVFgCOGCV42iKr.LAO0K/3BqFZyfwBDLRDvbYKtJGaZZF1bBq');
+VALUES (2, '71239395858', null, '2000-06-15', '2222 Calhoun Street', 'Houston', 'TX', 77007, 'Rolando', 'Rivera', null, 'rolando@rolando.com', '$2y$10$SZhDYVFgCOGCV42iKr.LAO0K/3BqFZyfwBDLRDvbYKtJGaZZF1bBq');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('F', '8329449240', null, '1992-03-18', '4800 Calhoun Road', 'Houston', 'TX', 77004, 'Melinda', 'Cougar', 'U', 'uofh@cougar.com', '$2y$10$rtbBDISVt2PzWcJEGj8t.uWRtnw7rwhdI6zU4nS82OKdv4RDxx9iy');
+VALUES (1, '8329449240', null, '1992-03-18', '4800 Calhoun Road', 'Houston', 'TX', 77004, 'Melinda', 'Cougar', 'U', 'uofh@cougar.com', '$2y$10$rtbBDISVt2PzWcJEGj8t.uWRtnw7rwhdI6zU4nS82OKdv4RDxx9iy');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('F', '9720492949', null, '1980-07-22', '1234 Bowling Alley', 'New York', 'NY', 10001, 'Juan', 'Chavez', 'F', 'bowlingisfun@notreally.com', '$2y$10$YK/5peAg3WeD3J3txeDIteLL1QzBh.Fgq.9d03lZpyHC9WU/2yjIa');
+VALUES (1, '9720492949', null, '1980-07-22', '1234 Bowling Alley', 'New York', 'NY', 10001, 'Juan', 'Chavez', 1, 'bowlingisfun@notreally.com', '$2y$10$YK/5peAg3WeD3J3txeDIteLL1QzBh.Fgq.9d03lZpyHC9WU/2yjIa');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '2132132134', null, '1985-01-02', '5555 Hollywood Blvd', 'Los Angeles', 'CA', 90020, 'Adam', 'Smith', 'V', 'adam@smith.com', '$2y$10$DCjT/q0VV4ZXjGZNFZIYreh7tlu3U74K2xwLQArQs5zADUttnlIEW');
+VALUES (2, '2132132134', null, '1985-01-02', '5555 Hollywood Blvd', 'Los Angeles', 'CA', 90020, 'Adam', 'Smith', 'V', 'adam@smith.com', '$2y$10$DCjT/q0VV4ZXjGZNFZIYreh7tlu3U74K2xwLQArQs5zADUttnlIEW');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '8325723869', null, '1972-12-28', '4321 Landing Way', 'Houston', 'TX', 77009, 'Robert', 'Nguyen', 'T', 'robertnguyen@gmail.com', '$2y$10$DL5ObbTmoqVVvvQnTrrgm.LM.6mgyD.tm.Fdio8nNREncMLFcyH1G');
+VALUES (2, '8325723869', null, '1972-12-28', '4321 Landing Way', 'Houston', 'TX', 77009, 'Robert', 'Nguyen', 'T', 'robertnguyen@gmail.com', '$2y$10$DL5ObbTmoqVVvvQnTrrgm.LM.6mgyD.tm.Fdio8nNREncMLFcyH1G');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('F', '7133333333', null, '1972-06-07', '4820 Calhoun Road', 'Houston', 'TX', 77004, 'Renu', 'Khator', null, 'uhpres@uh.edu', '$2y$10$0A8CglU54BYf/1gv9Ks3oeP6yh59MazvKY4wQ/u/ooWYhAy7FmOB6');
+VALUES (1, '7133333333', null, '1972-06-07', '4820 Calhoun Road', 'Houston', 'TX', 77004, 'Renu', 'Khator', null, 'uhpres@uh.edu', '$2y$10$0A8CglU54BYf/1gv9Ks3oeP6yh59MazvKY4wQ/u/ooWYhAy7FmOB6');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '3031234567', null, '1966-09-12', '1 Chipotle Way', 'Denver', 'CO', 80123, 'Steve', 'Ells', null, 'ilovechipotle@gmail.com', '$2y$10$y3EkK22sgaxOOFBNyLWlZuOBjipnQ5o1Jx/YT9.be5.DPXmlk5Cpi');
+VALUES (2, '3031234567', null, '1966-09-12', '1 Chipotle Way', 'Denver', 'CO', 80123, 'Steve', 'Ells', null, 'ilovechipotle@gmail.com', '$2y$10$y3EkK22sgaxOOFBNyLWlZuOBjipnQ5o1Jx/YT9.be5.DPXmlk5Cpi');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '6761468395', null, '2002-07-12', '1 Infinite Loop', 'Cupertino', 'CA', 95014, 'Steve', 'Jobs', null, 'awesomeboy@hotmail.com', '$2y$10$jFGJWtsBy5k9YQceQ2V9NOXm2Mnep/VJUH.ciHb3ux1orYkq6mP6e');
+VALUES (2, '6761468395', null, '2002-07-12', '1 Infinite Loop', 'Cupertino', 'CA', 95014, 'Steve', 'Jobs', null, 'awesomeboy@hotmail.com', '$2y$10$jFGJWtsBy5k9YQceQ2V9NOXm2Mnep/VJUH.ciHb3ux1orYkq6mP6e');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '7138684926', null, '1991-07-18', '123 Main Street', 'Fort Worth', 'TX', 75022, 'Billy', 'Smith', 'P', 'billysmith@gmail.com', '$2y$10$5haS5LjPXDxyfmv03MlQteTfDIvjvcFOQPAhmSgxAgVv9DROesEZ6');
+VALUES (2, '7138684926', null, '1991-07-18', '123 Main Street', 'Fort Worth', 'TX', 75022, 'Billy', 'Smith', 'P', 'billysmith@gmail.com', '$2y$10$5haS5LjPXDxyfmv03MlQteTfDIvjvcFOQPAhmSgxAgVv9DROesEZ6');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '9721111111', null, '1940-05-08', '1 AT&T Way', 'Arlington', 'TX', 76011, 'Jerry', 'Jones', null, 'jerrys@world.com', '$2y$10$PXxAz9rPrkWc754alJBZd.6HUhziTWCDGkxfK6ZI3XAzhNhcT.s1O');
+VALUES (2, '9721111111', null, '1940-05-08', '1 AT&T Way', 'Arlington', 'TX', 76011, 'Jerry', 'Jones', null, 'jerrys@world.com', '$2y$10$PXxAz9rPrkWc754alJBZd.6HUhziTWCDGkxfK6ZI3XAzhNhcT.s1O');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '832968175', null, '1997-11-27', '4200 Calhoun Rd. Apt #416', 'Houston', 'TX', 77024, 'Randall', 'Nguyen', null, 'randallnguyen@outlook.com', '$2y$10$HXIDgwANP/gCf93egfYmc.qHM7BYod4SCIma.KhKsx4TgFPRbZs4G');
+VALUES (2, '832968175', null, '1997-11-27', '4200 Calhoun Rd. Apt #416', 'Houston', 'TX', 77024, 'Randall', 'Nguyen', null, 'randallnguyen@outlook.com', '$2y$10$HXIDgwANP/gCf93egfYmc.qHM7BYod4SCIma.KhKsx4TgFPRbZs4G');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '2139685746', null, '2000-09-20', '1212 Riverstone Lane', 'Houston', 'TX', 77089, 'Peter', 'Travison', null, 'peteriscool@gmail.com', '$2y$10$wNiEfkxZ1w7RdE4BhWST2.H9JY8agskW9ZVx/43Y5XZB9rc7EkVg2');
+VALUES (2, '2139685746', null, '2000-09-20', '1212 Riverstone Lane', 'Houston', 'TX', 77089, 'Peter', 'Travison', null, 'peteriscool@gmail.com', '$2y$10$wNiEfkxZ1w7RdE4BhWST2.H9JY8agskW9ZVx/43Y5XZB9rc7EkVg2');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('F', '8329449595', null, '1994-02-14', '10001 Beamer Rd', 'Houston', 'TX', 77089, 'Elizabeth', 'Johnson', 'T', 'elizabeth94@gmail.com', '$2y$10$T25pQqORwPf/RfWUNSgK4OoNrfKP4jIcZe3R3qsIE.ymSxlbzRAom');
+VALUES (1, '8329449595', null, '1994-02-14', '10001 Beamer Rd', 'Houston', 'TX', 77089, 'Elizabeth', 'Johnson', 'T', 'elizabeth94@gmail.com', '$2y$10$T25pQqORwPf/RfWUNSgK4OoNrfKP4jIcZe3R3qsIE.ymSxlbzRAom');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('M', '2022022020', null, '1995-11-27', '1 Nye Road', 'Seattle', 'WA', 98101, 'Bill', 'Nye', null, 'bill@nye.com', '$2y$10$5ZnDyJ0TWVQBNiYSGlG6nen64HM.pDehfJheE8Ixit8J9GOHQCzuq');
+VALUES (2, '2022022020', null, '1995-11-27', '1 Nye Road', 'Seattle', 'WA', 98101, 'Bill', 'Nye', null, 'bill@nye.com', '$2y$10$5ZnDyJ0TWVQBNiYSGlG6nen64HM.pDehfJheE8Ixit8J9GOHQCzuq');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('F', '8322732737', null, '1994-03-19', '2300 Austin Road', 'Austin', 'TX', 78705, 'Carol', 'Mills', 'F', 'carolmills@gmail.com', '$2y$10$YDIxtb57JwnIqC6r.YkBS.bJmMJjbuS4OmGu28KMGECTi0X4UgmaO');
+VALUES (1, '8322732737', null, '1994-03-19', '2300 Austin Road', 'Austin', 'TX', 78705, 'Carol', 'Mills', 1, 'carolmills@gmail.com', '$2y$10$YDIxtb57JwnIqC6r.YkBS.bJmMJjbuS4OmGu28KMGECTi0X4UgmaO');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-                     VALUES ('F', '2718583949', null, '1983-03-19', '1 BCM Road', 'Houston', 'TX', 77003, 'Sheila', 'Turner', 'F', 'sheilaturner@gmail.com', '$2y$10$/XopsBwMNYa8pL.50xpTU.gPuvBvA6Tm2ojUOHb52u0ZSqmPQ54Ma');
+VALUES (1, '2718583949', null, '1983-03-19', '1 BCM Road', 'Houston', 'TX', 77003, 'Sheila', 'Turner', 1, 'sheilaturner@gmail.com', '$2y$10$/XopsBwMNYa8pL.50xpTU.gPuvBvA6Tm2ojUOHb52u0ZSqmPQ54Ma');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
-                     VALUES ('F', '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'admin@admin.admin', '$2y$10$sEKgeWf/U9exlqdpUOeUc.jQSTbuTTEFQni3UctrmCv01jq2byCX.', 1);
+VALUES (1, '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'admin@admin.admin', '$2y$10$sEKgeWf/U9exlqdpUOeUc.jQSTbuTTEFQni3UctrmCv01jq2byCX.', 1);
+
+INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
+VALUES (1, '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'robertvo79@gmail.com', '$2y$10$uiyTPJ882yXWy8F98/L9dexriQw5diCDIbI9pYd8OvDQ2u5NNuigy', 1);
+
 
 
 INSERT INTO bowling.Player_Stats (Player_ID) VALUES (1);
@@ -126,28 +129,37 @@ INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_
 INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
                   VALUES ('Perfect Guys', 2, 11, 11, 8, 9, 18, 12, 1);
 
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('1,2,3,4,5', null, 'Casual Games', 'Houston Bowling Alley', 'Casual', 0);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,16,15,19', 14, 'Casual Games', 'Houston Bowling Alley', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('13,12,14,2,5', 5, 'Half off Tuesdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('15,1,5,18,13', 1, 'Half off Tuesdays', 'Austin Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('10,17,01,16,09', 9, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('18,07,17,19,05', 18, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,16,03,13,05', 3, 'Freaky Fridays', 'Lucky Strike Bowling Lane', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('04,02,09,08,16', 9, 'Freaky Fridays', 'Lucky Strike Bowling Lane', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('05,18,14,02,19', 2, '$100 Prize Tournament', 'San Antonio Bowling Alley', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('12,14,15,02', 12, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('03,05', 5, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,08', 7, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,02', 14, 'UofH Tournament Qualifier', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('12,5', 5, 'UofH Bowling Tournament', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('7,14', 7, 'UofH Bowling Tournament', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('5,7', 5, 'UofH Bowling Championship', 'University of Houston Game Rooms', 'Tournament', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('06,16,03,10,17,05,18', 6, 'Student Thursdays', 'Houston Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('01,05,18,13,08,07,12', 12, 'Just Another Game', 'Katy Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('18,06,05', null, 'Just Another Game', 'Katy Bowling Alley', 'Casual', 0);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('07,12,16', 16, 'Just Another Game', 'Katy Bowling Alley', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('03,17,08,16,15', 3, 'Developer Bowling Meetup', 'Lucky Strike Bowling', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('02,08,15,03,10', 8, 'Texans Fans Showcase', 'NRG Stadium Complex 1', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('08,17,14,13,04', 13, 'Texans Fans Showcase', 'NRG Stadium Complex 1', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('14,18,19,06,02', 19, 'Freaky Fridays', 'Lucky Strike Bowling', 'Casual', 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location, Event_Type, Game_Finished) VALUES ('17,08,12,10', 12, 'UofH Employees Tournament', 'University of Houston Game Rooms', 'Tournament', 1);
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('925 Bunker Hill Rd, Houston, TX 77024', 'Houston Bowling Alley');
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('1201 San Jacinto Street, Houston, TX, 77002', 'Lucky Strike Bowling Lane');
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('2118 Goliad Rd, San Antonio, TX 78223', 'San Antonio Bowling Alley');
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('4100 University Dr, Houston, TX 77004', 'University of Houston Game Rooms');
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('19936 Saums Rd, Katy, TX 77449', 'Katy Bowling Alley');
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('5700 Grover Ave, Austin, TX 78756', 'Austin Bowling Alley');
+INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('Reliant Pkwy Houston, TX 77054', 'NRG Stadium Complex 1');
+
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,2,3,4,5', null, 'Casual Games', 1, 1, 0);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,16,15,19', 14, 'Casual Games', 1, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('13,12,14,2,5', 5, 'Half off Tuesdays', 1, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('15,1,5,18,13', 1, 'Half off Tuesdays', 6, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('10,17,01,16,09', 9, 'Student Thursdays', 1, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('18,07,17,19,05', 18, 'Student Thursdays', 1, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('07,16,03,13,05', 3, 'Freaky Fridays', 2, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('04,02,09,08,16', 9, 'Freaky Fridays', 2, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('05,18,14,02,19', 2, '$100 Prize Tournament', 3, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('12,14,15,02', 12, 'UofH Tournament Qualifier', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('03,05', 5, 'UofH Tournament Qualifier', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('07,08', 7, 'UofH Tournament Qualifier', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,02', 14, 'UofH Tournament Qualifier', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('12,5', 5, 'UofH Bowling Tournament', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,14', 7, 'UofH Bowling Tournament', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('5,7', 5, 'UofH Bowling Championship', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('06,16,03,10,17,05,18', 6, 'Student Thursdays', 1, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('01,05,18,13,08,07,12', 12, 'Just Another Game', 5, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('18,06,05', null, 'Just Another Game', 5, 1, 0);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('07,12,16', 16, 'Just Another Game', 5, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('03,17,08,16,15', 3, 'Developer Bowling Meetup', 2, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('02,08,15,03,10', 8, 'Texans Fans Showcase', 7, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('08,17,14,13,04', 13, 'Texans Fans Showcase', 7, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,18,19,06,02', 19, 'Freaky Fridays', 2, 1, 1);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('17,08,12,10', 12, 'UofH Employees Tournament', 4, 2, 1);
+

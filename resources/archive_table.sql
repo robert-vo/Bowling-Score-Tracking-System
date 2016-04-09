@@ -39,7 +39,8 @@ CREATE TABLE Players_Archive (
   Email           VARCHAR(30)     NOT NULL UNIQUE,
   Password        VARCHAR(256)    NOT NULL,
   Is_Admin        BOOLEAN         DEFAULT FALSE,
-  Date_Deleted    DATETIME
+  Date_Deleted    DATETIME,
+  Reset_Key       VARCHAR(100)    DEFAULT ''
 );
 
 CREATE TABLE Team_Archive (
@@ -57,14 +58,21 @@ CREATE TABLE Team_Archive (
   Date_Deleted   DATETIME
 );
 
+CREATE TABLE Game_Location_Archive (
+  Game_Location_ID    INT PRIMARY KEY AUTO_INCREMENT,
+  Game_Address        VARCHAR(100) not null,
+  Game_Location_Name  VARCHAR(100) not null,
+  Date_Deleted        DATETIME
+);
+
 CREATE TABLE Game_Archive (
   Game_ID           INT PRIMARY KEY AUTO_INCREMENT,
   Teams             VARCHAR(100) not null, -- CSV of all teams
   Game_Start_Time   DATETIME,
   Game_End_Time     DATETIME,
-  Winner_Team_ID    VARCHAR(20),
+  Winner_Team_ID    INT,
   Title             VARCHAR(100),
-  Location          VARCHAR(100),
+  Location_ID       INT,
   Event_Type        ENUM('Casual', 'Tournament') DEFAULT 'Casual',
   Game_Finished     BOOLEAN DEFAULT FALSE,
   Date_Deleted      DATETIME

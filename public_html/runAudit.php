@@ -1,17 +1,26 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap Example</title>
+    <title>Bowling Score Tracking System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="audit.css">
+    <style>
+        tr:nth-child(even) {
+            background-color: #e6e6e6;
+        }
+    </style>
 </head>
 
-</html>
 
 <?php include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 ?>
+
+<body>
+
+
 
 <?php
 
@@ -20,7 +29,7 @@ include 'databaseFunctions.php';
 
 function retrieveAndPrintAllFromTable($tableName)
 {
-    $conn = connectToDatabase();
+    $conn = connectToDatabase(); //mysqli object
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -32,14 +41,18 @@ function retrieveAndPrintAllFromTable($tableName)
     $queryToGetAllDataOfATable = "SELECT * FROM $tableName";
     $result = $conn->query($queryToGetAllDataOfATable);
 
-    createTableOnWebpage($allColumns, $result);
+    createTableOnWebpage($allColumns, $result, $tableName);
 
     $conn->close();
 }
 
-function createTableOnWebpage($allColumns, $result)
+
+function createTableOnWebpage($allColumns, $result, $tableName)
 {
     $allColumnsAsArray = array();
+    echo "<form action='audit.php'><input type='submit' value='Go back'></form><br>";
+    echo "<div id=\"display\">";
+    echo "<div id='asdf'></div>";
 
     echo "<table style =\"width:100%\">";
     echo "<tr>";
@@ -47,7 +60,7 @@ function createTableOnWebpage($allColumns, $result)
     if ($allColumns->num_rows > 0) {
         while ($row = $allColumns->fetch_assoc()) {
             array_push($allColumnsAsArray, $row["Column_name"]);
-            echo "<th>" . $row["Column_name"] . "</th>";
+            echo "<th><b>" . $row["Column_name"] . "</b></th>";
         }
         echo "<th> Perform Action </th>";
         echo "</tr>";
@@ -57,27 +70,39 @@ function createTableOnWebpage($allColumns, $result)
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            $rowid = -1;
+            $id_column = "";
             echo "<tr>";
-
             foreach ($allColumnsAsArray as $column) {
-                echo "<th>" . $row[$column] . "</th>";
+                if($column == $allColumnsAsArray[0]) {  // Checks to see if the column is the id-column in in the table.
+                    $columnName = $column;
+                    $rowid = $row[$column];
+                }
+                echo "<td align='center'>" . $row[$column] . "</td>";
             }
-            echo "<th> <button type=button>Update</button><button type=button>Delete</button></th>" .
-                "</tr>";
+
+            echo    "<td align='center'>
+                        <form action='updateRow.php' method='get'>
+                            <input type='hidden' name='table' value='$tableName'>
+                            <input type='hidden' name='column' value='$columnName'>
+                            <input type='hidden' name='rowid' value='$rowid'>
+                            <input type='submit' value='Update'>
+                        </form>
+                    </td>";
+
+            echo "</tr>";
         }
     } else {
         echo "0 results";
     }
 
     echo "</table>";
+    
+    echo "</div>";
 }
 
 
-echo $_POST["bowlingAudit"];
-
-
 if($_POST["bowlingAudit"] == "") {
-    //echo "if";
     echo "
         <script type='text/javascript'>
             alert('You forgot to select a table!');
@@ -85,9 +110,11 @@ if($_POST["bowlingAudit"] == "") {
         </script>
     ";
 } else {
-    //echo "else";
-    echo $_POST["bowlingAudit"];
+    echo "<br>";
     retrieveAndPrintAllFromTable($_POST["bowlingAudit"]);
 }
-
 ?>
+
+</body>
+
+</html>
