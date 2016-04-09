@@ -2,13 +2,12 @@
 
 -- This trigger automatically creates the date for when the player joins.
 
-/*
-CREATE TRIGGER trigger_name
-  [before | after]
-  [delete | insert | update [of column]]
-  [for each row]
-  ....
- */
+# CREATE TRIGGER trigger_name
+#   [before | after]
+#   [delete | insert | update [of column]]
+#   [for each row]
+
+CREATE DATABASE if NOT exists bowling;
 use bowling;
 
 -- Auto populates the Date_Joined attribute of Players to the current time.
@@ -74,11 +73,15 @@ FOR EACH ROW
 drop trigger if exists delete_from_Game;
 CREATE TRIGGER delete_from_Game AFTER DELETE ON Game
 FOR EACH ROW
-  insert into Game_Archive VALUES (old.Game_ID, old.Teams, old.Game_Start_Time, old.Game_End_Time, old.Winner_Team_ID, old.Title, old.Location, old.Event_Type, old.Game_Finished , now());
+  insert into Game_Archive VALUES (old.Game_ID, old.Teams, old.Game_Start_Time, old.Game_End_Time, old.Winner_Team_ID, old.Title, old.Location_ID, old.Event_Type, old.Game_Finished , now());
 
 drop trigger if exists delete_from_PlayerStats;
 CREATE TRIGGER delete_from_PlayerStats AFTER DELETE ON Player_Stats
 FOR EACH ROW
   insert into Player_Stats_Archive VALUES (old.Stat_ID, old.Player_ID, old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares, old.Best_Score, old.Worst_Score, old.Pins_Left, old.Average_Pin_Left, now());
 
+drop trigger if exists delete_from_game_location;
+CREATE TRIGGER delete_from_game_location AFTER DELETE ON Game_Location
+FOR EACH ROW
+  insert into Game_Location_Archive VALUES (old.Game_Location_ID, old.Game_Address, old.Game_Location_Name, now());
 
