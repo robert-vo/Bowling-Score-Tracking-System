@@ -29,15 +29,14 @@
 
 <body>
 
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="scores.php">Scores</a></li>
-    <li style="float:right"><a class="active" href="audit.php">Audit</a></li>
-    <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginF.php">Login</a></li>
-</ul>
+
 
 <?php
+
+include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+
+
 
 include 'databaseFunctions.php';
 
@@ -45,9 +44,8 @@ include 'databaseFunctions.php';
 function getColumnNames($tableName)
 {
     $conn = connectToDatabase();
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if($conn->connect_error) {
+        die("Connction failed: " . $conn->connect_error);
     }
 
     $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
@@ -76,6 +74,7 @@ function retrieveRow($table, $id)
     {
         die("Connection failed: " . $conn->connect_error);
     }
+
     $query = "SELECT * FROM $table WHERE $column = $id";
     $result = $conn->query($query);
     $conn->close();
@@ -91,33 +90,65 @@ function updateDB() {
 
 function displayMessage()
 {
-    echo "<p>The " . $_POST['table'] . " has been updated to</p>";
-    echo "<table>";
+    $conn = connectToDatabase();
+    if($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
 
-    $columnNames = getColumnNames($_POST['table']);
-    $result = retrieveRow($_POST['table'], $_POST['id']);
+    }
+    $table = $_POST['table'];
+    $id = $_POST['id'];
+    // Send the update query, check to see if the update was successful.
 
-    if((count($columnNames) > 0) and ($result->num_rows > 0)) {
-        while($row = $result->fetch_assoc()) {
-            if(count($row) == count($columnNames)) {
-                for($i = 0; $i < count($row); $i++) {
-                    echo "<tr>";
-                    echo "<td><b>" . $columnNames[$i] . "</b></td>";
-                    echo "<td>" . $row[$columnNames[$i]] . "</td>";
+    $columnNames = getColumnNames($table);
 
-                    echo "</tr>";
-                }
-             }
+    $query = "UPDATE $table SET ";
+    for($i = 0; $i < count($columnNames); $i++) {
+        if($_POST[$columnNames[$i]] == "") {
+            echo "Skipping " . $columnNames[$i] . ". ";
+            continue;
         }
+
+        $query .= "$columnNames[$i] = " . "'" . $_POST[$columnNames[$i]] . "'";
+        if($i + 1 < count($columnNames)) {
+            $query .= ", ";
+        }
+    }
+    $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
+    //echo $query;
+
+    if(mysqli_query($conn, $query) == TRUE) {
+        $result = retrieveRow($table, $id);
+
+        echo "<p>The " . $_POST['table'] . " has been updated to</p>";
+        echo "<table>";
+
+        if((count($columnNames) > 0) and ($result->num_rows > 0)) {
+            while($row = $result->fetch_assoc()) {
+                if(count($row) == count($columnNames)) {
+                    for($i = 0; $i < count($row); $i++) {
+                        echo "<tr>";
+                        echo "<td><b>" . $columnNames[$i] . "</b></td>";
+                        echo "<td>" . $row[$columnNames[$i]] . "</td>";
+
+                        echo "</tr>";
+                    }
+                }
+            }
+        } else {
+            echo "0 results";
+        }
+
+        echo "</table>";
     } else {
-        echo "0 results";
+        echo "Error: " . $conn->error;
     }
 
-    echo "</table>";
     echo    "<form action='runAudit.php' method='post'>
                 <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
                 <input type='submit' value='Back to table'>
             </form>";
+
+    $conn->close();
 }
 
 
