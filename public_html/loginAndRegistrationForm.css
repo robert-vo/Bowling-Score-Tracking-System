@@ -1,7 +1,7 @@
 div#box {
     background-color: white;
     border: 1px solid #4CAF50;
-    width: 350px;
+    width: 400px;
     margin: 0 auto;
     box-shadow: 1px 0px 15px #4CAF50;
 }
@@ -9,6 +9,10 @@ div#box {
 input {
     display: block;
     margin: 10px;
+}
+
+div#error{
+    color: red;
 }
 
 div#boxH {
@@ -25,6 +29,7 @@ input[type=text], input[type=password]{
     padding: 10px;
     border-radius: 3px;
     border: 1px solid #4CAF50;
+
 }
 select{
     font-size: 13px;
@@ -49,4 +54,8 @@ div#boxF {
 
 div#centerT {
     text-align: center;
+}
+
+.error {
+    color: #FF0000;
 }

@@ -11,27 +11,27 @@
 <body>
 
 
-<ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="scores.php">Scores</a></li>
-    <li style="float:right"><a class="active" href="audit.php">Audit</a></li>
-    <li style="float:right"><a href="about.php">About</a></li>
-    <li style="float:right"><a href="loginF.php">Login</a></li>
-</ul>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
 
 <p>
     Which table do you want to edit?
     <form action="runAudit.php" method="post">
     <select name="bowlingAudit">
         <option value="">Select...</option>
-        <option value="Ball">Ball</option>
-        <option value="Bowling_Events">Bowling Events</option>
-        <option value="Frame">Frame</option>
-        <option value="Game">Game</option>
-        <option value="Players">Players</option>
-        <option value="Roll">Roll</option>
-        <option value="Player_Stats">Player Stats</option>
-        <option value="Team">Team</option>
+        <?php
+        include 'databaseFunctions.php';
+
+        $connection = connectToDatabase();
+
+        $result = $connection->query("select table_name from information_schema.tables where table_schema = 'bowling';");
+        $rows = [];
+        while($row = $result->fetch_assoc())
+        {
+            echo "<option value =\"" . $row["table_name"] . "\">" . $row["table_name"] . "</option>";
+        }
+        ?>
     </select>
     <input type="submit" value="Submit">
 </form>
