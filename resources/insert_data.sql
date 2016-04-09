@@ -65,7 +65,7 @@ INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, S
 VALUES (1, '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'admin@admin.admin', '$2y$10$sEKgeWf/U9exlqdpUOeUc.jQSTbuTTEFQni3UctrmCv01jq2byCX.', 1);
 
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
-VALUES (1, '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'robertvo79@gmail.com', '$2y$10$uiyTPJ882yXWy8F98/L9dexriQw5diCDIbI9pYd8OvDQ2u5NNuigy', 1);
+VALUES (1, '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'robert.vo@outlook.com', '$2y$10$uiyTPJ882yXWy8F98/L9dexriQw5diCDIbI9pYd8OvDQ2u5NNuigy', 1);
 
 
 
