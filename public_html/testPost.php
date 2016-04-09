@@ -13,10 +13,10 @@ $params = array(
     'api_user' => $user,
     'api_key' => $pass,
     'to' => 'robertvo79@gmail.com',
-    'subject' => 'testing from curl',
+    'subject' => 'testing from azure',
     'html' => 'testing body',
     'text' => 'testing body',
-    'from' => 'anna@contoso.com',
+    'from' => 'smtp.sendgrid.net',
 );
 
 $request = $url.'api/mail.send.json';
