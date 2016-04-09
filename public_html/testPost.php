@@ -9,6 +9,10 @@ $url = 'https://api.sendgrid.com/';
 $user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
 $pass = 'cosc3380';
 
+echo $url;
+echo $user;
+echo $pass;
+
 $params = array(
     'api_user' => $user,
     'api_key' => $pass,
@@ -36,6 +40,9 @@ curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
 // obtain response
 $response = curl_exec($session);
+
+if (curl_errno($session)) { echo 'Curl error: ' . curl_error($session); }
+
 curl_close($session);
 
 // print everything out
