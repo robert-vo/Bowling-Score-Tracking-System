@@ -14,7 +14,8 @@ else
         <title> Team Members </title>
 
         <link rel="stylesheet" type="text/css" href="index.css">
-        <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
+        <link rel="stylesheet" type="text/css"
+              href="loginAndRegistrationForm.css">
         <link rel="stylesheet" type="text/css" href="team.css">
 
         <style>
@@ -59,7 +60,9 @@ else
         }
     }
 
-    $query3 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+    $query3 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR
+Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
+'$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query3);
     $numrows = $result->num_rows;
     if($numrows != 0){
@@ -70,7 +73,9 @@ else
 
     }
 
-    $query4 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+    $query4 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR
+Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
+'$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query3);
     $numrows = $result->num_rows;
     if($numrows != 0) {
@@ -82,25 +87,53 @@ else
             $teamMember4 = $row['Player_3'];
             $teamMember5 = $row['Player_4'];
             $teamMember6 = $row['Player_5'];
-            echo "<br> TEAM: ". $teamname;
-        };
+
+        }
     }
 
-    $query5 = "SELECT * FROM players WHERE Player_ID = '$teamMember1' OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID = '$teamMember6'";
-    $result = $conn->query($query5);
+    $query5 = "SELECT * FROM players WHERE Player_ID = '$teamMember1'
+OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR
+Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID
+= '$teamMember6'";
+    $result = $conn->query($query4);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $memberName = $row['First_Name'];
-            $memberLastName = $row['Last_Name'];
-            echo "<br> Your team member is: ". $memberName,' ', $memberLastName;
+            $teamname = $row['Name'];
+            $teamMember1 = $row['Leader'];
+            $teamMember2 = $row['Player_1'];
+            $teamMember3 = $row['Player_2'];
+            $teamMember4 = $row['Player_3'];
+            $teamMember5 = $row['Player_4'];
+            $teamMember6 = $row['Player_5'];
+
+            echo "<br> You are part of team: ". $teamname;
+            if($teamMember1 and $teamMember1 != $playerid) {
+                echo "<br> Your team member is: " . $teamMember1;
+            }
+            if($teamMember2 and $teamMember2 != $playerid) {
+                echo "<br> Your team member is: " . $teamMember2;
+            }
+            if($teamMember3 and $teamMember3 != $playerid) {
+                echo "<br> Your team member is: " . $teamMember3;
+            }
+            if($teamMember4 and $teamMember4 != $playerid) {
+                echo "<br> Your team member is: " . $teamMember4;
+            }
+            if($teamMember5 and $teamMember5 != $playerid) {
+                echo "<br> Your team member is: " . $teamMember5;
+            }
+            if($teamMember6 and $teamMember6 != $playerid) {
+                echo "<br> Your team member is: " . $teamMember6;
+            }
         }
 
+
+
     }
+
+
 
 }
 
 ?>
-
-
-
