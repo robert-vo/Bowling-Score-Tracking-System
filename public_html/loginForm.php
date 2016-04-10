@@ -54,11 +54,13 @@ if (isset($_POST["valid"])) {
             $dbuser = $row['Email'];
             $dbpass = $row['Password'];
             $userRole = $row['Is_Admin'];
+            $playerID = $row['Player_ID'];
         }
 
         if ($username == $dbuser and password_verify($password, $dbpass)) {
             session_start();
             $_SESSION['sess_user'] = $username;
+            $_SESSION['player_id'] = $playerID;
             $_SESSION['user_role'] = $userRole;
             header("location:loginSuccessful.php");
         }
