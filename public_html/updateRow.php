@@ -69,10 +69,17 @@ function createTableOnWebpage($allColumns, $result)
         while ($row = $result->fetch_assoc()) {
             if(count($allColumnsAsArray) == count($row)) {
                 for($i = 0; $i < count($row); $i++) {
-                    echo "<tr>";
-                    echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
-                    echo "<td><input type='text' name='" . $allColumnsAsArray[$i] . "' value='" . $row[$allColumnsAsArray[$i]] . "'> </td>";
-                    echo "</tr>";
+                    if($i == 0) {
+                        echo "<tr>";
+                        echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
+                        echo "<td>" . $row[$allColumnsAsArray[$i]]. "</td>";
+                        echo "</tr>";
+                    } else {
+                        echo "<tr>";
+                        echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
+                        echo "<td><input type='text' name='" . $allColumnsAsArray[$i] . "' value='" . $row[$allColumnsAsArray[$i]] . "'> </td>";
+                        echo "</tr>";
+                    }
                 }
             }
         }
