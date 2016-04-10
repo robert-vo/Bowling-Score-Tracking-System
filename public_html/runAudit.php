@@ -7,8 +7,17 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="audit.css">
     <style>
-        tr:nth-child(even) {
+        tr:nth-child(odd) {
             background-color: #e6e6e6;
+        }
+
+        .center {
+            text-align:center;
+        }
+
+        #tableheader {
+            background: #4CAF50;
+            color: #FFFFFF;
         }
     </style>
 </head>
@@ -19,6 +28,7 @@ generateMenuBar(basename(__FILE__));
 ?>
 
 <body>
+
 
 
 
@@ -50,14 +60,17 @@ function retrieveAndPrintAllFromTable($tableName)
 function createTableOnWebpage($allColumns, $result, $tableName)
 {
     $allColumnsAsArray = array();
+
+    echo "<h1 class='center'>$tableName Table</h1>";
+
     echo "<form action='audit.php'><input type='submit' value='Go back'></form><br>";
     echo "<div id=\"display\">";
-    echo "<div id='asdf'></div>";
 
     echo "<table style =\"width:100%\">";
-    echo "<tr>";
 
-    if ($allColumns->num_rows > 0) {
+    echo "<tr id='tableheader'>";
+
+    if ($allColumns->num_rows > 0) { //Prints the column names as the table header
         while ($row = $allColumns->fetch_assoc()) {
             array_push($allColumnsAsArray, $row["Column_name"]);
             echo "<th><b>" . $row["Column_name"] . "</b></th>";
@@ -67,6 +80,19 @@ function createTableOnWebpage($allColumns, $result, $tableName)
     } else {
         echo "0 results";
     }
+
+    //Creates an empty row for the add entry button
+    echo "<tr>";
+    for($i = 0; $i < count($allColumnsAsArray); $i++) {
+        echo "<td></td>";
+    }
+    echo    "<td align='center'>
+                        <form action='createRow.php' method='post'>
+                            <input type='hidden' name='table' value='$tableName'>
+                            <input type='submit' value='Add Entry'>
+                        </form>
+                    </td>";
+    echo "</tr>";
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {

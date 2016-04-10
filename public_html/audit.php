@@ -12,7 +12,6 @@
 
 
 <?php
-session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 ?>
