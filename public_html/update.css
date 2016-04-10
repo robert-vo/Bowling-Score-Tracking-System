@@ -1,0 +1,22 @@
+table {
+    width: 35%;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+th, td {
+    padding: 5px;
+}
+
+div#center {
+    justify-content: center;
+    text-align: center;
+}
+
+fieldset {
+    display: inline;
+    margin: auto;
+}

@@ -5,27 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <style>
-        table {
-            width: 35%;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        th, td {
-            padding: 5px;
-        }
-        div#center {
-            justify-content: center;
-            text-align: center;
-        }
-        fieldset {
-            display: inline;
-            margin: auto;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="update.css">
 </head>
 
 <body>

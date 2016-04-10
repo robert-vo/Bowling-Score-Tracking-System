@@ -5,26 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <style>
-        table {
-            width: 35%;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        th, td {
-            padding: 5px;
-        }
-        div#center {
-            justify-content: center;
-            text-align: center;
-        }
-        fieldset {
-            display: inline;
-            margin: auto;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="update.css">
 </head>
 
 <body>
@@ -45,7 +26,7 @@ function getColumnNames($tableName)
 {
     $conn = connectToDatabase();
     if($conn->connect_error) {
-        die("Connction failed: " . $conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);
     }
 
     $queryAllColumns = "SELECT distinct Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
@@ -83,11 +64,6 @@ function retrieveRow($table, $id)
 }
 
 
-function updateDB() {
-    $columnNames = getColumnNames($_POST['table']);
-}
-
-
 function displayMessage()
 {
     $conn = connectToDatabase();
@@ -104,7 +80,6 @@ function displayMessage()
     $query = "UPDATE $table SET ";
     for($i = 0; $i < count($columnNames); $i++) {
         if($_POST[$columnNames[$i]] == "") {
-            echo "Skipping " . $columnNames[$i] . ". ";
             continue;
         }
 
@@ -114,7 +89,6 @@ function displayMessage()
         }
     }
     $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
-    //echo $query;
 
     if(mysqli_query($conn, $query) == TRUE) {
         $result = retrieveRow($table, $id);
@@ -139,14 +113,24 @@ function displayMessage()
         }
 
         echo "</table>";
-    } else {
-        echo "Error: " . $conn->error;
-    }
 
-    echo    "<form action='runAudit.php' method='post'>
+        echo    "<form action='runAudit.php' method='post'>
                 <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
                 <input type='submit' value='Back to table'>
             </form>";
+
+    } else {
+        $error = "Unable to update.\n\nError: " . $conn->error;
+        echo $error;
+
+        $error = json_encode($error);
+        echo "
+        <script type='text/javascript'>
+            alert($error);
+            history.go(-1);
+        </script>";
+    }
+
 
     $conn->close();
 }
