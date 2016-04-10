@@ -101,7 +101,7 @@ function displayMessage()
     }
     $query .= ");";
 
-    echo $query;
+    //echo $query;
     if(mysqli_query($conn, $query) == TRUE) {
         $id = $conn->insert_id;
         $result = retrieveRow($table, $id, $columnNames[0]);
@@ -134,7 +134,7 @@ function displayMessage()
 
     } else {
         $error = "Unable to update.\n\nError: " . $conn->error;
-        echo $error;
+        //echo $error;
 
         $error = json_encode($error);
         echo "
