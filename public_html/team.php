@@ -1,8 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION["sess_user"])) {
+if (!isset($_SESSION["sess_user"]))
+{
     header("location:loginForm.php");
-} else {
+}
+else
+{
     ?>
     <!doctype html>
     <html>
@@ -62,22 +65,24 @@ if (!isset($_SESSION["sess_user"])) {
     if($numrows != 0){
         while ($row = mysqli_fetch_assoc($result)){
             $teamname = $row['Name'];
+//            echo "<br> TEAM: ". $teamname;
         }
-        echo "<br> TEAM: ". $teamname;
+
     }
 
     $query4 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
-    $result = $conn->query($query4);
+    $result = $conn->query($query3);
     $numrows = $result->num_rows;
     if($numrows != 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+            $teamname = $row['Name'];
             $teamMember1 = $row['Leader'];
             $teamMember2 = $row['Player_1'];
             $teamMember3 = $row['Player_2'];
             $teamMember4 = $row['Player_3'];
             $teamMember5 = $row['Player_4'];
             $teamMember6 = $row['Player_5'];
-
+            echo "<br> TEAM: ". $teamname;
         };
     }
 
@@ -92,5 +97,10 @@ if (!isset($_SESSION["sess_user"])) {
         }
 
     }
+
 }
+//else{echo "<br> Would you like to join a team?";}
 ?>
+
+
+

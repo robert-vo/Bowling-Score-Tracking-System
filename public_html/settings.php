@@ -61,26 +61,25 @@ if (!isset($_SESSION["sess_user"])) {
 
         while ($row = mysqli_fetch_assoc($result)){
             $teamname = $row['Name'];
-            echo "<br> You are the team leader of: ". $teamname;
-            echo "\n";
+
         }
     }
 
     $query3 = "SELECT * FROM team WHERE Name = '$teamname'";
-    $result = $conn->query($query3);
-
-    $numrows = $result->num_rows;
+    $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if($numrows != 0){
 
         while ($row = mysqli_fetch_assoc($result)){
+            $teamname = $row['Name'];
             $gamecount = $row['Game_Count'];
             $teamwin = $row['Win_Count'];
             $percentage =  ($teamwin / $gamecount) * 100;
+            echo "<br> You are the team leader of: ". $teamname;
             echo "<br> The team you manage has played a total of: ". $gamecount, ' games';
             echo "<br> The team you manage has a total win of: ". $teamwin;
-            echo "<br> The team you manage has a win percentage of: ". $percentage, '%';
-            echo "\n";
+            echo "<br> The team you manage has a win percentage of: ". $percentage, '%', "<br>";
+
         }
     }
 
