@@ -1,31 +1,101 @@
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"])) {
+
     header("location:loginForm.php");
 
 } else {
-?>
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title> Settings </title>
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <style>
+            div#id {
+                font-size: x-large;
+                font-weight: bold;
+                color: #4CAF50;
+            }
+        </style>
+    </head>
+    <body>
+    <?php include 'menuBar.php';
+    generateMenuBar(basename(__FILE__));
+    ?>
 
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
-    <link rel="stylesheet" type="text/css" href="settings.css">
-
-    <style>
-        div#error {
-            color: red;
+    <div id="id">PROFILE:</div>
+    <?php
+    $user = $_SESSION['sess_user'];
+    include 'databaseFunctions.php';
+    $conn = connectToDatabase();
+    $query = "SELECT * FROM players WHERE Email = '$user'";
+    $result = $conn->query($query);
+    $numrows = $result->num_rows;
+    if ($numrows != 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $fname = $row['First_Name'];
+            $lname = $row['Last_Name'];
         }
-    </style>
-</head>
+    }
+    $fname = ucfirst($fname);
+    $lname = ucfirst($lname);
+    echo "$fname $lname";
 
-<body>
+    $query2 = "SELECT * FROM players WHERE Email = '$user'";
+    $result = $conn->query($query2);
+    $numrows = $result->num_rows;
+    if($numrows != 0){
+        while ($row = mysqli_fetch_assoc($result)){
+            $playerid = $row['Player_ID'];
+        }
+    }
+
+    //Displays Team Leader
+
+    $query2 = "SELECT * FROM team WHERE Leader = '$playerid'";
+    $result = $conn->query($query2);
+    $numrows = $result->num_rows;
+    if($numrows != 0){
+
+        while ($row = mysqli_fetch_assoc($result)){
+            $teamname = $row['Name'];
+            echo "<br> You are the team leader of: ". $teamname;
+            echo "\n";
+        }
+    }
+
+    $query3 = "SELECT * FROM team WHERE Name = '$teamname'";
+    $result = $conn->query($query3);
+
+    $numrows = $result->num_rows;
+    $numrows = $result->num_rows;
+    if($numrows != 0){
+
+        while ($row = mysqli_fetch_assoc($result)){
+            $gamecount = $row['Game_Count'];
+            $teamwin = $row['Win_Count'];
+            $percentage =  ($teamwin / $gamecount) * 100;
+            echo "<br> The team you manage has played a total of: ". $gamecount, ' games';
+            echo "<br> The team you manage has a total win of: ". $teamwin;
+            echo "<br> The team you manage has a win percentage of: ". $percentage, '%';
+            echo "\n";
+        }
+    }
 
 
-<?php include 'menuBar.php';
-generateMenuBar(basename(__FILE__));
+
+
+
+
+
+
+    ?>
+
+    </body>
+    </html>
+
+    <?php
 }
 ?>

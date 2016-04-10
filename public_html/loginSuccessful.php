@@ -61,7 +61,8 @@ if (!isset($_SESSION["sess_user"])) {
 
         while ($row = mysqli_fetch_assoc($result)){
             $teamname = $row['Name'];
-            echo "<br> Leader of Team: ". $teamname;
+            echo "<br> You are the team leader of: ". $teamname;
+            echo "\n";
         }
     }
 
@@ -91,7 +92,7 @@ if (!isset($_SESSION["sess_user"])) {
 
     }
 
-    //Display Team Members
+    //Display Team Members ID
 
 
     $query4 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
@@ -116,18 +117,19 @@ if (!isset($_SESSION["sess_user"])) {
 
     }
 
+    //Displays Team Member Name
 
-    $query5 = "SELECT * FROM players WHERE Player_ID = '$teamMember1' OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID = '$teamMember6'";
-    $result = $conn->query($query5);
-    $numrows = $result->num_rows;
-    if ($numrows != 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $memberName = $row['First_Name'];
-            $memberLastName = $row['Last_Name'];
-            echo "<br> Your team member is: ". $memberName, $memberLastName;
-        }
-
-    }
+//    $query5 = "SELECT * FROM players WHERE Player_ID = '$teamMember1' OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID = '$teamMember6'";
+//    $result = $conn->query($query5);
+//    $numrows = $result->num_rows;
+//    if ($numrows != 0) {
+//        while ($row = mysqli_fetch_assoc($result)) {
+//            $memberName = $row['First_Name'];
+//            $memberLastName = $row['Last_Name'];
+//            echo "<br> Your team member is: ". $memberName, $memberLastName;
+//        }
+//
+//    }
 
 
 
