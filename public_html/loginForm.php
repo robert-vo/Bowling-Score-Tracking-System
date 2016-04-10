@@ -53,12 +53,13 @@ if (isset($_POST["valid"])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $dbuser = $row['Email'];
             $dbpass = $row['Password'];
+            $userRole = $row['Is_Admin'];
         }
 
         if ($username == $dbuser and password_verify($password, $dbpass)) {
             session_start();
             $_SESSION['sess_user'] = $username;
-            $_SESSION['user_type'] = 'test';
+            $_SESSION['user_role'] = $userRole;
             header("location:loginSuccessful.php");
         }
         else{

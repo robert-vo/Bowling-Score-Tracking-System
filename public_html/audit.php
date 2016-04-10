@@ -12,6 +12,20 @@
 
 
 <?php
+
+//Starts the session (logged in user)
+session_start();
+
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively. 
+//This if statement is equivalent to $_SESSION['user_role'] == 1
+//To see how this session variable is accessible, check loginForm.php, line 62. 
+if($_SESSION['user_role']) {
+    echo 'is admin';
+}
+else {
+    echo 'is not admin';
+};
+
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 ?>
