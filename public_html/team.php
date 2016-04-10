@@ -99,7 +99,7 @@ else
     }
 
 }
-//else{echo "<br> Would you like to join a team?";}
+
 ?>
 
 

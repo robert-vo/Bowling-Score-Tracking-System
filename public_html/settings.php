@@ -83,6 +83,7 @@ if (!isset($_SESSION["sess_user"])) {
         }
     }
 
+    //write statement for players who are not team leaders, currently displays error
 
 
 
