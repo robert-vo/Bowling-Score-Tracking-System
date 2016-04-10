@@ -18,6 +18,11 @@ if(isset($_SESSION['sess_user'])){
             echo '<li><a href="scores.php">Score</a></li>';
         }
 
+        if ($currentPage == "games.php") {
+            echo '<li><a class="active" href="games.php">Games</a></li>';
+        } else {
+            echo '<li><a href="games.php">Games</a></li>';
+        }
 
         if ($currentPage == "about.php") {
             echo '<li><a class="active" href="about.php">About</a></li>';
@@ -70,6 +75,11 @@ else{
             echo '<li><a href="scores.php">Score</a></li>';
         }
 
+        if ($currentPage == "games.php") {
+            echo '<li><a class="active" href="games.php">Games</a></li>';
+        } else {
+            echo '<li><a href="games.php">Games</a></li>';
+        }
 
         if ($currentPage == "about.php") {
             echo '<li><a class="active" href="about.php">About</a></li>';
