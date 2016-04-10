@@ -48,7 +48,7 @@ function getColumnNames($tableName)
         die("Connction failed: " . $conn->connect_error);
     }
 
-    $queryAllColumns = "SELECT Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
+    $queryAllColumns = "SELECT distinct Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
     $allColumns = $conn->query($queryAllColumns);
 
     $conn->close();

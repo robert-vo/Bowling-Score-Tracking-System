@@ -22,18 +22,22 @@ generateMenuBar(basename(__FILE__));
     <form action="runAudit.php" method="post">
     <select name="bowlingAudit">
         <option value="">Select...</option>
-        <?php
-        include 'databaseFunctions.php';
-
-        $connection = connectToDatabase();
-
-        $result = $connection->query("select table_name from information_schema.tables where table_schema = 'bowling';");
-        $rows = [];
-        while($row = $result->fetch_assoc())
-        {
-            echo "<option value =\"" . $row["table_name"] . "\">" . $row["table_name"] . "</option>";
-        }
-        ?>
+            <option value ="Ball">Ball</option>
+            <option value ="Frame">Frame</option>
+            <option value ="Game">Game</option>
+            <option value ="Game_Location">Game Location</option>
+            <option value ="Player_Stats">Player Statistics</option>
+            <option value ="Players">Players</option>
+            <option value ="Roll">Roll</option>
+            <option value ="Team">Team</option>
+            <option value ="Ball_Archive">Ball Archive</option>
+            <option value ="Frame_Archive">Frame Archive</option>
+            <option value ="Game_Archive">Game Archive</option>
+            <option value ="Game_Location_Archive">Game Location Archive</option>
+            <option value ="Player_Stats_Archive">Player Statistics Archive</option>
+            <option value ="Players_Archive">Players Archive</option>
+            <option value ="Roll_Archive">Roll Archive</option>
+            <option value ="Team_Archive">Team Archive</option>
     </select>
     <input type="submit" value="Submit">
 </form>
