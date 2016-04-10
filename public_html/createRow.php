@@ -42,7 +42,7 @@ function createTableOnWebpage($allColumns)
     $allColumnsAsArray = array();
     echo    "<div>
             <form action='created.php' method='post' onsubmit=\"return confirm('Are you sure you want to submit this form?');\">
-                <fieldset><legend>Update " . $_POST['table'] . "</legend>
+                <fieldset><legend>Add " . $_POST['table'] . "</legend>
                 <input type='hidden' name='table' value='" . $_POST['table'] . "'>
                     <table align='center'>";
 
