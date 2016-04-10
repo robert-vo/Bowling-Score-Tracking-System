@@ -102,7 +102,7 @@ function displayMessage()
 
     $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
     //echo $query;
-    if(mysqli_query($conn, $query) == TRUE) {
+    if((mysqli_query($conn, $query) == TRUE) AND count($values) > 0) {
         $result = retrieveRow($table, $id);
 
         echo "<p>The " . $_POST['table'] . " has been updated to</p>";
@@ -132,15 +132,25 @@ function displayMessage()
             </form>";
 
     } else {
-        $error = "Unable to update.\n\nError: " . $conn->error;
-        echo $error;
+        if(count($values) < 1) {
+            $error = "<br>No fields have been updated.";
+            echo $error;
+            echo    "<br><br><form action='runAudit.php' method='post'>
+                <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
+                <input type='submit' value='Back to table'>
+            </form>";
+        } else {
 
-        $error = json_encode($error);
-        echo "
-        <script type='text/javascript'>
-            alert($error);
-            history.go(-1);
-        </script>";
+            $error = "Unable to update.\n\nError: " . $conn->error;
+            //echo $error;
+
+            $error = json_encode($error);
+            echo "
+            <script type='text/javascript'>
+                alert($error);
+                history.go(-1);
+            </script>";
+        }
     }
 
 
