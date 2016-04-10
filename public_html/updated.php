@@ -76,20 +76,32 @@ function displayMessage()
     // Send the update query, check to see if the update was successful.
 
     $columnNames = getColumnNames($table);
+    $columns = array(); // Array that holds the column names of the values to be inserted.
+    $values = array(); // Array that holds the values to be inserted.
 
-    $query = "UPDATE $table SET ";
-    for($i = 0; $i < count($columnNames); $i++) {
+    for($i = 1; $i < count($columnNames); $i++) {
         if($_POST[$columnNames[$i]] == "") {
             continue;
-        }
-
-        $query .= "$columnNames[$i] = " . "'" . $_POST[$columnNames[$i]] . "'";
-        if($i + 1 < count($columnNames)) {
-            $query .= ", ";
+        } else {
+            array_push($columns, $columnNames[$i]);
+            array_push($values, $_POST[$columnNames[$i]]);
         }
     }
-    $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
 
+    $query = "UPDATE $table SET ";
+
+    if(count($columns) == count($values)) {
+        for ($i = 0; $i < count($values); $i++) {
+            $query .= "$columns[$i] = " . "'" . $values[$i] . "'";
+            if ($i + 1 < count($columns)) {
+                $query .= ", ";
+            }
+        }
+    }
+
+
+    $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
+    //echo $query;
     if(mysqli_query($conn, $query) == TRUE) {
         $result = retrieveRow($table, $id);
 
