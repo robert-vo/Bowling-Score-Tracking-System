@@ -109,41 +109,76 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
     $numrows = $result->num_rows;
     if($numrows != 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-                $teamname = $row['Name'];
-                $teamMember1 = $row['Leader'];
-                $teamMember2 = $row['Player_1'];
-                $teamMember3 = $row['Player_2'];
-                $teamMember4 = $row['Player_3'];
-                $teamMember5 = $row['Player_4'];
-                $teamMember6 = $row['Player_5'];
+            $teamname = $row['Name'];
+            $teamMember1 = $row['Leader'];
+            $teamMember2 = $row['Player_1'];
+            $teamMember3 = $row['Player_2'];
+            $teamMember4 = $row['Player_3'];
+            $teamMember5 = $row['Player_4'];
+            $teamMember6 = $row['Player_5'];
+            $teamID = $row['Team_ID'];
 
             $teams = createPlayersArray();
             $allEmails = createPlayerEmailArray();
 
             echo "<br> You are part of team: ". $teamname;
             if($teamMember1 and $teamMember1 != $playerid) {
-                echo "<br> Your team member is: " . $teams[$teamMember1];
-//                echo '<p>
-//                <a href=mailto:. $allEmails[$teamMember1]" target="_top">Email Team Member</a>
-//                </p>';
+                if($teamMember1 == $playerid) {
+                    $yourPlayerID = 'Leader';
+                }
+                else {
+                    echo "<br> Your team leader is: " . $teams[$teamMember1];
+                }
             }
-            if($teamMember2 and $teamMember2 != $playerid) {
-                echo "<br> Your team member is: " . $teams[$teamMember2];
+
+            if($teamMember2) {
+                if($teamMember2 == $playerid) {
+                    $yourPlayerID = 'Player_1';
+                }
+                else {
+                    echo "<br> Your team member is: " . $teams[$teamMember2];
+                }
             }
-            if($teamMember3 and $teamMember3 != $playerid) {
-                echo "<br> Your team member is: " . $teams[$teamMember3];
+
+            if($teamMember3) {
+                if($teamMember3 == $playerid) {
+                    $yourPlayerID = 'Player_2';
+                }
+                else {
+                    echo "<br> Your team member is: " . $teams[$teamMember3];
+                }
             }
-            if($teamMember4 and $teamMember4 != $playerid) {
-                echo "<br> Your team member is: " . $teams[$teamMember4];
+            if($teamMember4) {
+                if($teamMember4 == $playerid) {
+                    $yourPlayerID = 'Player_3';
+                }
+                else {
+                    echo "<br> Your team member is: " . $teams[$teamMember4];
+                }
             }
-            if($teamMember5 and $teamMember5 != $playerid) {
-                echo "<br> Your team member is: " . $teams[$teamMember5];
+            if($teamMember5) {
+                if($teamMember5 == $playerid) {
+                    $yourPlayerID = 'Player_4';
+                }
+                else {
+                    echo "<br> Your team member is: " . $teams[$teamMember5];
+                }
             }
-            if($teamMember6 and $teamMember6 != $playerid) {
-                echo "<br> Your team member is: " . $teams[$teamMember6];
+            if($teamMember6) {
+                if($teamMember6 == $playerid) {
+                    $yourPlayerID = 'Player_5';
+                }
+                else {
+                    echo "<br> Your team member is: " . $teams[$teamMember6];
+                }
             }
             echo "<br>";
 
+            echo 'Would you like to leave the team, ' . $teamname . '? ';
+            $preparedGetQuery = '?teamID=' . $teamID . '&player=' . $yourPlayerID;
+            echo '<a href=leaveTeam.php' . $preparedGetQuery . '>';
+
+            echo 'Click here</a><br>';
         }
     }
 

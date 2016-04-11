@@ -90,7 +90,6 @@ function printResult($result) {
             echo '<tr><th>' . $place. '</th>' . $row['Name'];
             $place++;
             echo '<th>' . $row['Name'] . '</th>';
-
             echo '<th>' . $teams[$row['Leader']] . '</th>';
             echo '<th>' . $row['Game_Count'] . '</th>';
             echo '<th>' . $row['Win_Count'] . '</th>';

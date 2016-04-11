@@ -46,7 +46,7 @@ if(isset($_SESSION['sess_user'])){
                 echo '<li><a href="scores.php">High Scores</a></li>';
             }
 
-            if ($currentPage == "team.php") {
+            if ($currentPage == "team.php" or $currentPage == "leaveTeam.php") {
                 echo '<li style="float:right"><a class="active" href="team.php">Team</a></li>';
             } else {
                 echo '<li style="float:right"><a href="team.php">Team</a></li>';
