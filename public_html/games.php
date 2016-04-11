@@ -136,7 +136,7 @@ function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {
             findAllGamesATeamIsAPartOf($row['TEAM_ID'], $gameStatus);
         }
     } else {
-        echo "not a part of a team!";
+        echo "Not a part of a team! Join a team today!";
     }
 }
 
