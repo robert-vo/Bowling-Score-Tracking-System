@@ -136,7 +136,7 @@ INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('19
 INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('5700 Grover Ave, Austin, TX 78756', 'Austin Bowling Alley');
 INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('Reliant Pkwy Houston, TX 77054', 'NRG Stadium Complex 1');
 
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,2,3,4,5', null, 'Casual Games', 1, 1, 0);
+INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,2,3,4', null, 'Casual Games', 1, 1, 0);
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,16,15,19', 14, 'Casual Games', 1, 2, 1);
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('13,12,14,2,5', 5, 'Half off Tuesdays', 1, 1, 1);
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('15,1,5,18,13', 1, 'Half off Tuesdays', 6, 1, 1);
@@ -309,10 +309,11 @@ INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (144, 0, null, null, null, null, 0, null, null, null, null);
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (145, 0, null, null, null, null, 0, null, null, null, null);
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (146, 0, null, null, null, null, 0, null, null, null, null);
-INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (1, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (1, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (2, 3, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0);
+INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (2, 4, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (3, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (3, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);

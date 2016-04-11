@@ -85,7 +85,9 @@ CREATE TABLE Game_Archive (
   Game_Finished       BOOLEAN DEFAULT FALSE,
   Date_Deleted        DATETIME,
   Date_Added          DATETIME,
-  Last_Date_Modified  DATETIME
+  Last_Date_Modified  DATETIME,
+  Scores              VARCHAR(100)
+
 );
 
 CREATE TABLE Frame_Archive (

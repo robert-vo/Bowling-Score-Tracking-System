@@ -51,6 +51,24 @@ function getLocationForId($location_id) {
     return $location;
 }
 
+function grabScoresFor($game, $index) {
+    $conn = connectToDatabase();
+    $sql = "SELECT Scores from Game where Game.Game_ID = $game";
+
+    $result = $conn->query($sql);
+    while($row = $result->fetch_assoc()) {
+        $allScores = $row['Scores'];
+        $scores = explode(",", $allScores);
+    }
+
+    if(isset($scores[$index])) {
+        return $scores[$index];
+    }
+    else {
+        return 0;
+    }
+
+}
 function printGames($result, $teamID) {
     if ($result->num_rows > 0) {
         // output data of each row
@@ -67,6 +85,8 @@ function printGames($result, $teamID) {
             echo '<tr><th>Team Name</th><th>Total Score</th><th>Winner</th></tr>';
             $allTeams = $row['Teams'];
             $separatedTeams = explode(",", $allTeams);
+
+            $index = 0;
             foreach ($separatedTeams as $team) {
                 echo '<tr><th>';
                 if($teamID == $team) {
@@ -78,7 +98,8 @@ function printGames($result, $teamID) {
                 echo '</th>';
 
                 //TODO somehow calculate score :(
-                echo '<th>123</th>';
+                echo '<th>' . grabScoresFor($row['Game_ID'], $index) . '</th>';
+                $index++;
 
                 echo '<th>';
 
