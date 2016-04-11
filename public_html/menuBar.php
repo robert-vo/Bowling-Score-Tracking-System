@@ -38,12 +38,6 @@ if(isset($_SESSION['sess_user'])){
         }
 
 
-        if ($currentPage == "settings.php") {
-            echo '<li style="float:right"><a class="active" href="settings.php">Settings</a></li>';
-        } else {
-            echo '<li style="float:right"><a href="settings.php">Settings</a></li>';
-        }
-
         if ($currentPage == "team.php") {
             echo '<li style="float:right"><a class="active" href="team.php">Team</a></li>';
          } else {

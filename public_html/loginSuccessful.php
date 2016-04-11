@@ -53,7 +53,7 @@ if (!isset($_SESSION["sess_user"])) {
     }
 
     //Displays Team Leader
-
+    echo "$fname $lname";
     $query2 = "SELECT * FROM team WHERE Leader = '$playerid'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;

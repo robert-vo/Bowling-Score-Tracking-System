@@ -1,4 +1,3 @@
--- https://docs.google.com/document/d/1SkxY0NnXMzxtM450nEUy3GQ_7iAWJgRgjFCNVYfvdiE/edit
 
 /*
 CREATE TABLE format
@@ -17,8 +16,8 @@ CREATE TABLE Ball (
   Color    VARCHAR(20)  NOT NULL,
   Weight   INT          NOT NULL,
   Size                  ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL') NOT NULL,
-  Date_Added_Ball            DATETIME,
-  Last_Date_Modified_Ball    DATETIME,
+  Date_Added            DATETIME,
+  Last_Date_Modified    DATETIME,
   CHECK (Weight > 0)
 );
 
@@ -39,8 +38,8 @@ CREATE TABLE Players (
   Password            VARCHAR(256)    NOT NULL,
   Is_Admin            BOOLEAN         DEFAULT FALSE,
   Reset_Key           VARCHAR(100)    DEFAULT '',
-  Date_Added_Players          DATETIME,
-  Last_Date_Modified_Players  DATETIME
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME
 
 );
 
@@ -56,8 +55,8 @@ CREATE TABLE Team (
   Player_3	          INT             NULL,
   Player_4	          INT             NULL,
   Player_5	          INT             NULL,
-  Date_Added_Team          DATETIME,
-  Last_Date_Modified_Team  DATETIME,
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME,
   FOREIGN KEY    (Leader)       REFERENCES Players(Player_ID)
     ON DELETE RESTRICT,
   FOREIGN KEY    (Player_1)     REFERENCES Players(Player_ID)
@@ -78,8 +77,8 @@ CREATE TABLE Game_Location (
   Game_Location_ID    INT PRIMARY KEY AUTO_INCREMENT,
   Game_Address        VARCHAR(100) not null,
   Game_Location_Name  VARCHAR(100) not null,
-  Date_Added_Game_Location          DATETIME,
-  Last_Date_Modified_Game_Location  DATETIME
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME
 );
 
 CREATE TABLE Game (
@@ -92,8 +91,8 @@ CREATE TABLE Game (
   Location_ID         INT,
   Event_Type          ENUM('Casual', 'Tournament') DEFAULT 'Casual',
   Game_Finished       BOOLEAN DEFAULT FALSE,
-  Date_Added_Game          DATETIME,
-  Last_Date_Modified_Game  DATETIME,
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME,
   FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID),
   FOREIGN KEY (Location_ID) REFERENCES Game_Location(Game_Location_ID)
 );
@@ -108,8 +107,8 @@ CREATE TABLE Frame(
   Score               INT DEFAULT 0,
   Team_ID             INT,
   Game_ID             INT,
-  Date_Added_Frame          DATETIME,
-  Last_Date_Modified_Frame  DATETIME,
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -140,8 +139,8 @@ CREATE TABLE Roll (
   Hit_Pin_8		        BOOLEAN NOT NULL DEFAULT FALSE,
   Hit_Pin_9		        BOOLEAN NOT NULL DEFAULT FALSE,
   Hit_Pin_10	        BOOLEAN NOT NULL DEFAULT FALSE,
-  Date_Added_Roll          DATETIME,
-  Last_Date_Modified_Roll  DATETIME,
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME,
   FOREIGN KEY (Ball_ID) REFERENCES Ball(Ball_ID)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
@@ -161,8 +160,8 @@ CREATE TABLE Player_Stats (
   Worst_Score         INT NOT NULL DEFAULT 0,
   Pins_Left           INT NOT NULL DEFAULT 0,
   Average_Pin_Left    DOUBLE NOT NULL DEFAULT 0,
-  Date_Added_Player_Stats          DATETIME,
-  Last_Date_Modified_Player_Stats  DATETIME,
+  Date_Added          DATETIME,
+  Last_Date_Modified  DATETIME,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -175,4 +174,3 @@ CREATE TABLE Player_Stats (
   CHECK (Pins_Left >= 0),
   CHECK (Average_Pin_Left >= 0)
 );
-
