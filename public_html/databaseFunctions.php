@@ -19,4 +19,21 @@ function connectToDatabase()
     return new mysqli($servername, $username, $password, $dbname);
 }
 
+function returnResultForQuery($query) {
+    $connection = connectToDatabase();
+    return $connection->query($query);
+}
+
+function getAllTeamsForAPlayerID($playerID) {
+    $query = "SELECT * FROM team 
+              WHERE Leader = '$playerID' 
+                OR Player_1 = '$playerID' 
+                OR Player_2 = '$playerID' 
+                OR Player_3 = '$playerID' 
+                OR Player_4 = '$playerID' 
+                OR Player_5 = '$playerID'";
+
+    return returnResultForQuery($query);
+}
+
 ?>

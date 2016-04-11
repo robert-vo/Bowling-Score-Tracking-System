@@ -1,4 +1,3 @@
--- https://docs.google.com/document/d/1SkxY0NnXMzxtM450nEUy3GQ_7iAWJgRgjFCNVYfvdiE/edit
 
 /*
 CREATE TABLE format
@@ -175,4 +174,3 @@ CREATE TABLE Player_Stats (
   CHECK (Pins_Left >= 0),
   CHECK (Average_Pin_Left >= 0)
 );
-

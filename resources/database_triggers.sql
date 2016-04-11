@@ -81,87 +81,87 @@ FOR EACH ROW
 
 -- Trigger for date_added
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Ball
+drop trigger if exists Date_Added_Ball;
+CREATE TRIGGER Date_Added_Ball BEFORE INSERT ON Ball
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Game_Location
+drop trigger if exists Date_Added_Game_Location;
+CREATE TRIGGER Date_Added_Game_Location BEFORE INSERT ON Game_Location
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Frame
+drop trigger if exists Date_Added_Game_Frame;
+CREATE TRIGGER Date_Added_Game_Frame BEFORE INSERT ON Frame
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Game
+drop trigger if exists Date_Added_Game;
+CREATE TRIGGER Date_Added_Game BEFORE INSERT ON Game
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Player_Stats
+drop trigger if exists Date_Added_Player_Stats;
+CREATE TRIGGER Date_Added_Player_Stats BEFORE INSERT ON Player_Stats
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Players
+drop trigger if exists Date_Added_Player;
+CREATE TRIGGER Date_Added_Player BEFORE INSERT ON Players
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Roll
+drop trigger if exists Date_Added_Roll;
+CREATE TRIGGER Date_Added_Roll BEFORE INSERT ON Roll
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
-drop trigger if exists date_added;
-CREATE TRIGGER date_added BEFORE INSERT ON Team
+drop trigger if exists Date_Added_Team;
+CREATE TRIGGER Date_Added_Team BEFORE INSERT ON Team
 FOR EACH ROW
-  SET NEW.date_added = NOW();
+  SET NEW.Date_Added = NOW();
 
 -- Trigger for last date modified
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Ball
+drop trigger if exists Last_Date_Modified_Ball;
+CREATE TRIGGER Last_Date_Modified_Ball BEFORE UPDATE ON Ball
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Game_Location
+drop trigger if exists Last_Date_Modified_Game_Location;
+CREATE TRIGGER Last_Date_Modified_Game_Location BEFORE UPDATE ON Game_Location
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Frame
+drop trigger if exists Last_Date_Modified_Frame;
+CREATE TRIGGER Last_Date_Modified_Frame BEFORE UPDATE ON Frame
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Game
+drop trigger if exists Last_Date_Modified_Game;
+CREATE TRIGGER Last_Date_Modified_Game BEFORE UPDATE ON Game
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Player_Stats
+drop trigger if exists Last_Date_Modified_Player_Stats;
+CREATE TRIGGER  Last_Date_Modified_Player_Stats BEFORE UPDATE ON Player_Stats
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Players
+drop trigger if exists Last_Date_Modified_Players;
+CREATE TRIGGER Last_Date_Modified_Players BEFORE UPDATE ON Players
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Roll
+drop trigger if exists Last_Date_Modified_Roll;
+CREATE TRIGGER Last_Date_Modified_Roll BEFORE UPDATE ON Roll
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified  = NOW();
 
-drop trigger if exists last_date_modified;
-CREATE TRIGGER last_date_modified BEFORE UPDATE ON Team
+drop trigger if exists Last_Date_Modified_Team;
+CREATE TRIGGER Last_Date_Modified_Team BEFORE UPDATE ON Team
 FOR EACH ROW
-  SET NEW.last_date_modified = NOW();
+  SET NEW.Last_Date_Modified = NOW();
