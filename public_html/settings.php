@@ -65,7 +65,7 @@ if (!isset($_SESSION["sess_user"])) {
         }
     }
 
-    $query3 = "SELECT * FROM team WHERE Name = '$teamname'";
+    $query2 = "SELECT * FROM team WHERE Name = '$teamname'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if($numrows != 0){
