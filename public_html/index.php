@@ -49,31 +49,5 @@ function printResult($result) {
 generateMenuBar(basename(__FILE__));
 ?>
 
-
-<div class="container">
-    <div class="jumbotron">
-        <h1>Bowling Score Tracking System</h1>
-        <p>Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various
-            statistics about players such as single-pin spares left, strike percentage, split-conversion percentage,
-            etc.)</p>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>Balls</h3>
-            <p><?php retrieveAndPrintAllFromTable('Ball', 'Remote') ?></p>
-        </div>
-        <div class="col-sm-4">
-            <h3>Column 2</h3>
-            <p>Latin is weird.</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            <p>William testing</p>
-        </div>
-        <div class="col-sm-4">
-            <h3>Column 3</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-        </div>
-    </div>
-</div>
 </body>
 </html>

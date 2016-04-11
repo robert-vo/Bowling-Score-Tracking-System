@@ -10,7 +10,7 @@ if(isset($_SESSION['sess_user'])){
         } else {
             echo '<li><a href="index.php">Home</a></li>';
         }
-        
+
         if ($currentPage == "about.php") {
             echo '<li><a class="active" href="about.php">About</a></li>';
         } else {
@@ -41,9 +41,9 @@ if(isset($_SESSION['sess_user'])){
         }
         else { //not admin
             if ($currentPage == "scores.php") {
-                echo '<li><a class="active" href="scores.php">Score</a></li>';
+                echo '<li><a class="active" href="scores.php">High Scores</a></li>';
             } else {
-                echo '<li><a href="scores.php">Score</a></li>';
+                echo '<li><a href="scores.php">High Scores</a></li>';
             }
 
             if ($currentPage == "team.php") {
@@ -79,9 +79,9 @@ else{
 
 
         if ($currentPage == "scores.php") {
-            echo '<li><a class="active" href="scores.php">Score</a></li>';
+            echo '<li><a class="active" href="scores.php">High Scores</a></li>';
         } else {
-            echo '<li><a href="scores.php">Score</a></li>';
+            echo '<li><a href="scores.php">High Scores</a></li>';
         }
         
 
