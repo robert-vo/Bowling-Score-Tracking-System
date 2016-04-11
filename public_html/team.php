@@ -69,8 +69,10 @@ else
     generateMenuBar(basename(__FILE__));
     include 'databaseFunctions.php';
     $conn = connectToDatabase();
+
     ?>
-    <div id="id">Team Members:</div>
+    <br>Would you like to create a team today? <a href="createTeam.php">Click here to do so.</a>
+    <div id="id"><br>Team Members:</div>
 
     </body>
     </html>
