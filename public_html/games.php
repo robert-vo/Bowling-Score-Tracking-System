@@ -1,9 +1,5 @@
 <link rel="stylesheet" type="text/css" href="audit.css">
-<style>
-    h3 {
-        text-decoration: underline;
-    }
-</style>
+
 <?php
 session_start();
 
@@ -79,7 +75,7 @@ function getLocationForId($location_id) {
     return $location;
 }
 
-function printGames($result) {
+function printGames($result, $teamID) {
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
@@ -94,8 +90,16 @@ function printGames($result) {
             $allTeams = $row['Teams'];
             $separatedTeams = explode(",", $allTeams);
             foreach ($separatedTeams as $team) {
-                echo '<tr><th>' . getTeamNameForTeamId($team) . '</th>';
+                echo '<tr><th>';
+                if($teamID == $team) {
+                    echo '<u>' . getTeamNameForTeamId($team) . '</u>';
+                }
+                else {
+                    echo getTeamNameForTeamId($team);
+                }
+                echo '</th>';
 
+                //TODO somehow calculate score :(
                 echo '<th>123</th>';
 
                 echo '<th>';
@@ -113,36 +117,46 @@ function printGames($result) {
             }
             echo '</table>';
             echo "<br>";
+            echo "<br>";
+            echo "<br>";
         }
     } else {
-        echo "0 results";
+
     }
 }
 
-
-function findAllGamesAPlayerIsAPartOf($playerID, $gameStatus) {
-    $query = "select * from game where 
-                game.Game_Finished = $gameStatus and (
-                  game.Teams like '$playerID,%'
-                    or game.Teams like '%,$playerID'
-                    or game.Teams like '%,$playerID,%')";
-
+function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {
+    $findAllTeamsQuery = "select TEAM_ID from Team where Leader = $playerID or Player_1 = $playerID or Player_2 = $playerID or Player_3 = $playerID or Player_4 = $playerID or Player_5 = $playerID";
     $conn = connectToDatabase();
+    $result = $conn->query($findAllTeamsQuery);
 
-    $result = $conn->query($query);
-    printGames($result);
 
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            findAllGamesATeamIsAPartOf($row['TEAM_ID'], $gameStatus);
+        }
+    } else {
+        echo "not a part of a team!";
+    }
 }
 
-echo '<div>';
-echo '<h3>Here are the incompleted games that you are participating in!</h3>';
-findAllGamesAPlayerIsAPartOf($_SESSION['player_id'], 0);
+function findAllGamesATeamIsAPartOf($teamID, $gameStatus) {
+    $query = "select * from game where 
+                game.Game_Finished = $gameStatus and (
+                  game.Teams like '$teamID,%'
+                    or game.Teams like '%,$teamID'
+                    or game.Teams like '%,$teamID,%')";
 
-echo '</div>';
-echo '<div>';
+    $conn = connectToDatabase();
+    $result = $conn->query($query);
+    printGames($result, $teamID);
+}
+
+echo '<a href="createGame.php">Click here to start a new game!</a></b>';
+echo '<h3>Here are the incompleted games that you are participating in!</h3>';
+findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 0);
 echo '<h3>Here are the completed games that you participated in!</h3>';
-findAllGamesAPlayerIsAPartOf($_SESSION['player_id'], 1);
-echo '</div>';
+findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 1);
 
 
 
