@@ -37,12 +37,13 @@ if (!isset($_SESSION["sess_user"])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $fname = $row['First_Name'];
             $lname = $row['Last_Name'];
+
         }
     }
     $fname = ucfirst($fname);
     $lname = ucfirst($lname);
-    echo "$fname $lname";
-    
+    echo "You are currently logged in as: $fname $lname";
+    echo '<br>Here is the information you have on file with us:';
     $query2 = "SELECT * FROM players WHERE Email = '$user'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
@@ -53,7 +54,6 @@ if (!isset($_SESSION["sess_user"])) {
     }
 
     //Displays Team Leader
-    echo "$fname $lname";
     $query2 = "SELECT * FROM team WHERE Leader = '$playerid'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
