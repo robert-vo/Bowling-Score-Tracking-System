@@ -12,13 +12,26 @@
 <body>
 
 <?php
-include 'menuBar.php';
-include 'databaseFunctions.php';
+session_start();
 
+include 'databaseFunctions.php';
+include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 echo "<br>";
 
+//Starts the session (logged in user)
 
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively.
+//This if statement is equivalent to $_SESSION['user_role'] == 1
+//To see how this session variable is accessible, check loginForm.php, line 62.
+if (!$_SESSION['user_role']) {
+    header("location:loginForm.php");
+}
+else
+{
+?>
+
+<?php
 function retrieveAndPrintAllFromTable($table)
 {
     $conn = connectToDatabase();
@@ -40,7 +53,7 @@ function retrieveAndPrintAllFromTable($table)
 function createTableOnWebpage($allColumns)
 {
     $allColumnsAsArray = array();
-    echo    "<div>
+    echo "<div>
             <form action='created.php' method='post' onsubmit=\"return confirm('Are you sure you want to submit this form?');\">
                 <fieldset><legend>Add " . $_POST['table'] . "</legend>
                 <input type='hidden' name='table' value='" . $_POST['table'] . "'>
@@ -50,7 +63,7 @@ function createTableOnWebpage($allColumns)
         while ($row = $allColumns->fetch_assoc()) {
             array_push($allColumnsAsArray, $row["Column_name"]);
         }
-        for($i = 1; $i < count($allColumnsAsArray); $i++) {
+        for ($i = 1; $i < count($allColumnsAsArray); $i++) {
             echo "<tr>";
             echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
             echo "<td><input type='text' name='" . $allColumnsAsArray[$i] . "' value=''> </td>";
@@ -72,12 +85,9 @@ retrieveAndPrintAllFromTable($table);
 ?>
 
 
-
-
-
-
-
 </body>
-
-
 </html>
+
+<?php
+}
+?>

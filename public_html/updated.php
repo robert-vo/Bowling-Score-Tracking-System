@@ -12,20 +12,34 @@
 
 
 
+
 <?php
+session_start();
 
 include 'menuBar.php';
+include 'databaseFunctions.php';
 generateMenuBar(basename(__FILE__));
 
 
+//Starts the session (logged in user)
 
-include 'databaseFunctions.php';
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively.
+//This if statement is equivalent to $_SESSION['user_role'] == 1
+//To see how this session variable is accessible, check loginForm.php, line 62.
+if (!$_SESSION['user_role']) {
+    header("location:loginForm.php");
+}
+else
+{
+?>
 
+
+<?php
 
 function getColumnNames($tableName)
 {
     $conn = connectToDatabase();
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
@@ -51,8 +65,7 @@ function retrieveRow($table, $id)
     $column = $_POST['id_column'];
     $conn = connectToDatabase();
 
-    if($conn->connect_error)
-    {
+    if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
@@ -67,7 +80,7 @@ function retrieveRow($table, $id)
 function displayMessage()
 {
     $conn = connectToDatabase();
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
 
     }
@@ -79,8 +92,8 @@ function displayMessage()
     $columns = array(); // Array that holds the column names of the values to be inserted.
     $values = array(); // Array that holds the values to be inserted.
 
-    for($i = 1; $i < count($columnNames); $i++) {
-        if($_POST[$columnNames[$i]] == "") {
+    for ($i = 1; $i < count($columnNames); $i++) {
+        if ($_POST[$columnNames[$i]] == "") {
             continue;
         } else {
             array_push($columns, $columnNames[$i]);
@@ -90,7 +103,7 @@ function displayMessage()
 
     $query = "UPDATE $table SET ";
 
-    if(count($columns) == count($values)) {
+    if (count($columns) == count($values)) {
         for ($i = 0; $i < count($values); $i++) {
             $query .= "$columns[$i] = " . "'" . $values[$i] . "'";
             if ($i + 1 < count($columns)) {
@@ -102,16 +115,16 @@ function displayMessage()
 
     $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
     //echo $query;
-    if((mysqli_query($conn, $query) == TRUE) AND count($values) > 0) {
+    if ((mysqli_query($conn, $query) == TRUE) AND count($values) > 0) {
         $result = retrieveRow($table, $id);
 
         echo "<p>The " . $_POST['table'] . " has been updated to</p>";
         echo "<table>";
 
-        if((count($columnNames) > 0) and ($result->num_rows > 0)) {
-            while($row = $result->fetch_assoc()) {
-                if(count($row) == count($columnNames)) {
-                    for($i = 0; $i < count($row); $i++) {
+        if ((count($columnNames) > 0) and ($result->num_rows > 0)) {
+            while ($row = $result->fetch_assoc()) {
+                if (count($row) == count($columnNames)) {
+                    for ($i = 0; $i < count($row); $i++) {
                         echo "<tr>";
                         echo "<td><b>" . $columnNames[$i] . "</b></td>";
                         echo "<td>" . $row[$columnNames[$i]] . "</td>";
@@ -126,16 +139,16 @@ function displayMessage()
 
         echo "</table>";
 
-        echo    "<form action='runAudit.php' method='post'>
+        echo "<form action='runAudit.php' method='post'>
                 <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
                 <input type='submit' value='Back to table'>
             </form>";
 
     } else {
-        if(count($values) < 1) {
+        if (count($values) < 1) {
             $error = "<br>No fields have been updated.";
             echo $error;
-            echo    "<br><br><form action='runAudit.php' method='post'>
+            echo "<br><br><form action='runAudit.php' method='post'>
                 <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
                 <input type='submit' value='Back to table'>
             </form>";
@@ -158,14 +171,15 @@ function displayMessage()
 }
 
 
-
 displayMessage();
 
 ?>
 
 
-
-
 </body>
 
 </html>
+
+<?php
+}
+?>

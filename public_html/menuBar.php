@@ -39,11 +39,29 @@ if(isset($_SESSION['sess_user'])){
             echo '<li style="float:right"><a href="settings.php">Settings</a></li>';
         }
 
+
+        if ($_SESSION['user_role']) {
+            $auditPages = array();
+            $auditPages[] = "audit.php";
+            $auditPages[] = "runAudit.php";
+            $auditPages[] = "updateRow.php";
+            $auditPages[] = "updated.php";
+            $auditPages[] = "createRow.php";
+            $auditPages[] = "created.php";
+            if (in_array($currentPage, $auditPages)) {
+                echo '<li style="float:right"><a class="active" href="audit.php">Audit</a></li>';
+            } else {
+                echo '<li style="float:right"><a href="audit.php">Audit</a></li>';
+            }
+        }
+
+
         if ($currentPage == "team.php") {
             echo '<li style="float:right"><a class="active" href="team.php">Team</a></li>';
          } else {
             echo '<li style="float:right"><a href="team.php">Team</a></li>';
-       }
+        }
+
 
         if ($currentPage == "loginSuccessful.php") {
             echo '<li style="float:right"><a class="active" href="loginSuccessful.php">Profile</a></li>';

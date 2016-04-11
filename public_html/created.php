@@ -12,17 +12,31 @@
 <body>
 
 <?php
+session_start();
 
-include 'menuBar.php';
 include 'databaseFunctions.php';
-
+include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 
 
+//Starts the session (logged in user)
+
+
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively. 
+//This if statement is equivalent to $_SESSION['user_role'] == 1
+//To see how this session variable is accessible, check loginForm.php, line 62. 
+if (!$_SESSION['user_role']) {
+    header("location:loginForm.php");
+}
+else
+{
+?>
+
+<?php
 function getColumnNames($tableName)
 {
     $conn = connectToDatabase();
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
@@ -47,8 +61,7 @@ function retrieveRow($table, $id, $column)
 {
     $conn = connectToDatabase();
 
-    if($conn->connect_error)
-    {
+    if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
@@ -63,7 +76,7 @@ function retrieveRow($table, $id, $column)
 function displayMessage()
 {
     $conn = connectToDatabase();
-    if($conn->connect_error) {
+    if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
 
     }
@@ -77,8 +90,8 @@ function displayMessage()
     $columns = array(); // Array that holds column names of the values to be inserted
     $values = array(); // Array that holds values to be inserted
 
-    for($i = 1; $i < count($columnNames); $i++) {
-        if($_POST[$columnNames[$i]] == "") {
+    for ($i = 1; $i < count($columnNames); $i++) {
+        if ($_POST[$columnNames[$i]] == "") {
             continue;
         } else {
             array_push($columns, $columnNames[$i]);
@@ -86,14 +99,14 @@ function displayMessage()
         }
     }
 
-    for($i = 0; $i < count($columns); $i++) {
+    for ($i = 0; $i < count($columns); $i++) {
         $query .= "$columns[$i]";
-        if($i + 1 < count($columns)) {
+        if ($i + 1 < count($columns)) {
             $query .= ", ";
         }
     }
     $query .= ") VALUES (";
-    for($i = 0; $i < count($values); $i++) {
+    for ($i = 0; $i < count($values); $i++) {
         $query .= "'" . $values[$i] . "'";
         if ($i + 1 < count($values)) {
             $query .= ", ";
@@ -102,17 +115,17 @@ function displayMessage()
     $query .= ");";
 
     //echo $query;
-    if(mysqli_query($conn, $query) == TRUE) {
+    if (mysqli_query($conn, $query) == TRUE) {
         $id = $conn->insert_id;
         $result = retrieveRow($table, $id, $columnNames[0]);
 
         echo "<p>A new  " . $_POST['table'] . " has been added with the following values </p>";
         echo "<table>";
 
-        if((count($columnNames) > 0) and ($result->num_rows > 0)) {
-            while($row = $result->fetch_assoc()) {
-                if(count($row) == count($columnNames)) {
-                    for($i = 0; $i < count($row); $i++) {
+        if ((count($columnNames) > 0) and ($result->num_rows > 0)) {
+            while ($row = $result->fetch_assoc()) {
+                if (count($row) == count($columnNames)) {
+                    for ($i = 0; $i < count($row); $i++) {
                         echo "<tr>";
                         echo "<td><b>" . $columnNames[$i] . "</b></td>";
                         echo "<td>" . $row[$columnNames[$i]] . "</td>";
@@ -127,7 +140,7 @@ function displayMessage()
 
         echo "</table>";
 
-        echo    "<form action='runAudit.php' method='post'>
+        echo "<form action='runAudit.php' method='post'>
                 <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
                 <input type='submit' value='Back to table'>
             </form>";
@@ -157,3 +170,8 @@ displayMessage();
 
 
 </html>
+
+<?php
+}
+
+?>

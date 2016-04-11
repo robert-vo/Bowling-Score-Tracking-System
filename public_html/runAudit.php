@@ -23,18 +23,31 @@
 </head>
 
 
-<?php include 'menuBar.php';
+<?php
+session_start();
+
+include 'databaseFunctions.php';
+include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
+
+
+//Starts the session (logged in user)
+
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively. 
+//This if statement is equivalent to $_SESSION['user_role'] == 1
+//To see how this session variable is accessible, check loginForm.php, line 62. 
+if (!$_SESSION['user_role']) {
+    header("location:loginForm.php");
+}
+else
+{
 ?>
 
 <body>
 
 
-
-
 <?php
 
-include 'databaseFunctions.php';
 
 
 function retrieveAndPrintAllFromTable($tableName)
@@ -83,10 +96,10 @@ function createTableOnWebpage($allColumns, $result, $tableName)
 
     //Creates an empty row for the add entry button
     echo "<tr>";
-    for($i = 0; $i < count($allColumnsAsArray); $i++) {
+    for ($i = 0; $i < count($allColumnsAsArray); $i++) {
         echo "<td></td>";
     }
-    echo    "<td align='center'>
+    echo "<td align='center'>
                         <form action='createRow.php' method='post'>
                             <input type='hidden' name='table' value='$tableName'>
                             <input type='submit' value='Add Entry'>
@@ -100,14 +113,14 @@ function createTableOnWebpage($allColumns, $result, $tableName)
             $id_column = "";
             echo "<tr>";
             foreach ($allColumnsAsArray as $column) {
-                if($column == $allColumnsAsArray[0]) {  // Checks to see if the column is the id-column in in the table.
+                if ($column == $allColumnsAsArray[0]) {  // Checks to see if the column is the id-column in in the table.
                     $columnName = $column;
                     $rowid = $row[$column];
                 }
                 echo "<td align='center'>" . $row[$column] . "</td>";
             }
 
-            echo    "<td align='center'>
+            echo "<td align='center'>
                         <form action='updateRow.php' method='get'>
                             <input type='hidden' name='table' value='$tableName'>
                             <input type='hidden' name='column' value='$columnName'>
@@ -123,12 +136,12 @@ function createTableOnWebpage($allColumns, $result, $tableName)
     }
 
     echo "</table>";
-    
+
     echo "</div>";
 }
 
 
-if($_POST["bowlingAudit"] == "") {
+if ($_POST["bowlingAudit"] == "") {
     echo "
         <script type='text/javascript'>
             alert('You forgot to select a table!');
@@ -144,3 +157,7 @@ if($_POST["bowlingAudit"] == "") {
 </body>
 
 </html>
+
+<?php
+}
+?>

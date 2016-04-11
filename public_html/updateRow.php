@@ -10,17 +10,29 @@
 
 <body>
 
-<?php include 'menuBar.php';
+<?php
+session_start();
+
+include 'menuBar.php';
+include 'databaseFunctions.php';
 generateMenuBar(basename(__FILE__));
+echo "<br>";
+
+
+//Starts the session (logged in user)
+
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively.
+//This if statement is equivalent to $_SESSION['user_role'] == 1
+//To see how this session variable is accessible, check loginForm.php, line 62.
+if (!$_SESSION['user_role']) {
+    header("location:loginForm.php");
+}
+else
+{
 ?>
 
-<br>
 
 <?php
-
-include 'databaseFunctions.php';
-
-
 $table = $_GET['table'];
 $column = $_GET['column'];
 $rowid = $_GET['rowid'];
@@ -48,7 +60,7 @@ function retrieveAndPrintAllFromTable($tableName, $id_column, $rowid)
 function createTableOnWebpage($allColumns, $result)
 {
     $allColumnsAsArray = array();
-    echo    "<div>
+    echo "<div>
             <form action='updated.php' method='post' onsubmit=\"return confirm('Are you sure you want to submit this form?');\">
                 <fieldset><legend>Update " . $_GET['table'] . "</legend>
                 <input type='hidden' name='id' value='" . $_GET['rowid'] . "'>
@@ -67,12 +79,12 @@ function createTableOnWebpage($allColumns, $result)
     if ($result->num_rows > 0) {
 
         while ($row = $result->fetch_assoc()) {
-            if(count($allColumnsAsArray) == count($row)) {
-                for($i = 0; $i < count($row); $i++) {
-                    if($i == 0) {
+            if (count($allColumnsAsArray) == count($row)) {
+                for ($i = 0; $i < count($row); $i++) {
+                    if ($i == 0) {
                         echo "<tr>";
                         echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
-                        echo "<td>" . $row[$allColumnsAsArray[$i]]. "</td>";
+                        echo "<td>" . $row[$allColumnsAsArray[$i]] . "</td>";
                         echo "</tr>";
                     } else {
                         echo "<tr>";
@@ -101,3 +113,6 @@ retrieveAndPrintAllFromTable($table, $column, $rowid);
 </html>
 
 
+<?php
+}
+?>
