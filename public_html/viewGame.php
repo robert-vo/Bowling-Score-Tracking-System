@@ -65,7 +65,7 @@ function printFrameInformationForPlayer($playerID, $teamID, $gameID) {
         $totalScore = 0;
         while($row = $result->fetch_assoc()) {
             $totalScore += $row["Score"];
-            $preparedURL = 'viewFrame.php?frameID=' . $row["Frame_ID"];
+            $preparedURL = 'viewFrame.php?frameID=' . $row["Frame_ID"] . '&frameNumber=' . $row['Frame_Number'];
             echo '<th><a href=' . $preparedURL . '>' . $row["Score"] . '</a></th>';
         }
         echo '<th>' . $totalScore . '</th>';
