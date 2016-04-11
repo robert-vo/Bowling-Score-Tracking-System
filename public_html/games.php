@@ -1,5 +1,9 @@
 <link rel="stylesheet" type="text/css" href="audit.css">
-
+<style>
+    h3 {
+        text-decoration: underline;
+    }
+</style>
 <?php
 session_start();
 
@@ -48,44 +52,66 @@ function getTeamNameForTeamId($teamId) {
 
     $result = $conn->query($sql);
 
-    printResult($result);
-
-    $conn->close();
+    $teamName = '';
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $teamName = $row["Name"];
+        }
+    } else {
+        $teamName = "0 results";
+    }
+    return $teamName;
 }
 
-function printResultOf2($result) {
+function getLocationForId($location_id) {
+    $conn = connectToDatabase();
+    $sql = "select Game_Location_Name from Game_Location where Game_Location_ID = '$location_id'";
+    $result = $conn->query($sql);
+
+    $location = '';
+    if($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $location = $row['Game_Location_Name'];
+        }
+    } else {
+        $location = "N/A";
+    }
+    return $location;
+}
+
+function printGames($result) {
     if ($result->num_rows > 0) {
-
-        $gameNumber = 1;
-
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            echo '<table style = "width:100%"';
-            echo '<caption>Game Number ' . $gameNumber . '</caption>';
-            echo '<tr><th>First</th><th>Second</th>';
-            $gameNumber++;
+
+            echo '<table>';
+            echo '<caption>';
+            echo 'Game Title: ' . $row['Title'] . '<br>Type of game: ' . $row['Event_Type'];
+            echo '<br>Game Location: ' . getLocationForId($row['Location_ID']);
+            echo "<br>The game occurred on: " . date("D, M d, Y @h:ia", (strtotime($row['Game_Start_Time'])));
+            echo '</caption>';
+            echo '<tr><th>Team Name</th><th>Total Score</th><th>Winner</th></tr>';
             $allTeams = $row['Teams'];
             $separatedTeams = explode(",", $allTeams);
             foreach ($separatedTeams as $team) {
-                echo $team;
-                getTeamNameForTeamId($team);
+                echo '<tr><th>' . getTeamNameForTeamId($team) . '</th>';
+
+                echo '<th>123</th>';
+
+                echo '<th>';
+
+                if($row['Winner_Team_ID'] == $team) {
+                    echo '🔥✓🔥';
+                }
+                else {
+                    echo '✖';
+                }
+
+                echo '</th>';
+
+                echo '</tr>';
             }
-//    <tr>
-//        <th>Month</th>
-//        <th>Savings</th>
-//    </tr>
-//    <tr>
-//        <td>January</td>
-//        <td>$100</td>
-//    </tr>
-//    <tr>
-//        <td>February</td>
-//        <td>$50</td>
-//    </tr>
-//</table>
-
-
-            //echo "<br>" . $row['Teams'] . "<br>" . $row['Title'];
+            echo '</table>';
             echo "<br>";
         }
     } else {
@@ -104,14 +130,20 @@ function findAllGamesAPlayerIsAPartOf($playerID, $gameStatus) {
     $conn = connectToDatabase();
 
     $result = $conn->query($query);
-
-    printResultOf2($result);
+    printGames($result);
 
 }
-echo '<p><font size="6"><b><u>Here are the incompleted games that you are participating in!</u></b></font></p>';
+
+echo '<div>';
+echo '<h3>Here are the incompleted games that you are participating in!</h3>';
 findAllGamesAPlayerIsAPartOf($_SESSION['player_id'], 0);
-echo '<p><font size="6"><b><u>Here are the completed games that you participated in!</u></b></font></p>';
+
+echo '</div>';
+echo '<div>';
+echo '<h3>Here are the completed games that you participated in!</h3>';
 findAllGamesAPlayerIsAPartOf($_SESSION['player_id'], 1);
+echo '</div>';
+
 
 
 //echo $pieces[0]; // piece1
