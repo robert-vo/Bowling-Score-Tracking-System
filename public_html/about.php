@@ -20,7 +20,7 @@ session_start();
 generateMenuBar(basename(__FILE__));
 ?>
 
-<div class="jumbotron">
+<div>
     <h1><div text align="center"> Bowling Score Tracking System</div></h1>
     <p>Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various
         statistics about players such as single-pin spares left, strike percentage, split-conversion percentage,
