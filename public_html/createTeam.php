@@ -2,7 +2,6 @@
 session_start();
 if (!isset($_SESSION["sess_user"])) {
     header("location:loginForm.php");
-
 } else {
     ?>
     <!doctype html>
@@ -22,38 +21,24 @@ if (!isset($_SESSION["sess_user"])) {
     generateMenuBar(basename(__FILE__));
     include 'databaseFunctions.php';
 
-    $user = $_SESSION['sess_user'];
-if (isset($_POST['create'])) {
-    $teamname = $_POST['name'];
-    $conn = connectToDatabase();
-    if ($teamname != NULL) {
-
-        $query = "SELECT * FROM players WHERE Email = '$user'";
-        $result = $conn->query($query);
-        $numrows = $result->num_rows;
-        if($numrows != 0){
-            while ($row = mysqli_fetch_assoc($result)){
-                $playerid = $row['Player_ID'];
-            }
-        }
-        echo $playerid;
-        echo $user;
-        $sql ="INSERT INTO team "
-
-    } else {
-        echo "Please enter a team name. Click <a href=\"createTeam.php\">here</a> to try again";
-    }
-} else {
     ?>
-    <form method="POST">
-        <input type="text" name="name" placeholder="Team Name">
-        <input type="submit" value="Create" name="create">
+    <br><b>Create a team! * denotes that it is required.</b>
+    <form action="createTeamPart2.php" method="post">
+        <input type="text" name="name" placeholder="Team Name*">
+        How many other players do you want on your team?
+            <select name="numberOfPlayers">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+        <input type="submit" value="Next Page" name="submit">
     </form>
     <?php
 }
 ?>
     </body>
     </html>
-    <?php
-}
-?>

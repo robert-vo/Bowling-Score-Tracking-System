@@ -190,7 +190,12 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 $teamname = $row['Name'];
                 $gamecount = $row['Game_Count'];
                 $teamwin = $row['Win_Count'];
-                $percentage =  ($teamwin / $gamecount) * 100;
+                if($gamecount == 0) {
+                    $percentage = 0;
+                }
+                else {
+                    $percentage =  ($teamwin / $gamecount) * 100;
+                }
                 echo "<br> Stats of Team: ". $teamname;
                 echo "<br> The team you manage has played a total of: ". $gamecount, ' games';
                 echo "<br> The team you manage has a total win of: ". $teamwin;
