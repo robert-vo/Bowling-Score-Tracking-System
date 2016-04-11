@@ -64,6 +64,12 @@ if(isset($_SESSION['sess_user'])){
         } else {
             echo '<li style="float:right"><a href="loginSuccessful.php">Profile</a></li>';
         }
+
+        if ($currentPage == "statistics.php") {
+            echo '<li style="float:right"><a class="active" href="statistics.php">Player Stats</a></li>';
+        } else {
+            echo '<li style="float:right"><a href="statistics.php">Player Stats</a></li>';
+        }
         echo '</ul>';
     }
 }
