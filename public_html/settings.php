@@ -43,8 +43,8 @@ if (!isset($_SESSION["sess_user"])) {
     $lname = ucfirst($lname);
     echo "$fname $lname";
 
-    $query2 = "SELECT * FROM players WHERE Email = '$user'";
-    $result = $conn->query($query2);
+    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if($numrows != 0){
         while ($row = mysqli_fetch_assoc($result)){
@@ -65,7 +65,7 @@ if (!isset($_SESSION["sess_user"])) {
         }
     }
 
-    $query2 = "SELECT * FROM team WHERE Name = '$teamname'";
+    $query3 = "SELECT * FROM team WHERE Name = '$teamname'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if($numrows != 0){
