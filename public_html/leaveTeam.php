@@ -7,12 +7,10 @@ include 'databaseFunctions.php';
 
 function leaveTeam($teamID, $playerPosition) {
     $conn = connectToDatabase();
-    echo $playerPosition;
     $sql = "UPDATE TEAM SET " . $playerPosition . " = NULL where Team_ID = $teamID";
-    echo '<br>' . $sql;
 
     if(mysqli_query($conn, $sql) == TRUE) {
-        echo '<br>Boo hoo :( Your team members will miss you. <a href=team.php>Click Here</a> to go back to the team page.';
+        echo '<br>Boo hoo! Your team members will miss you. <a href=team.php>Click Here</a> to go back to the team page.';
     }
     else {
         echo '<br>For some reason you were unable to leave your team. The error is ' . $conn->error . '<a href=team.php>Click Here</a> to go back to the team page.';

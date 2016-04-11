@@ -6,7 +6,6 @@ function createPlayersArray()
     $result = $conn->query($sql);
     $teams = array();
     if ($result->num_rows > 0) {
-        // output data of each row
         while ($row = $result->fetch_assoc()) {
             $teams[$row['Player_ID']] = $row['First_Name'] . ' ' . $row['Last_Name'];
         }
@@ -128,6 +127,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 }
                 else {
                     echo "<br> Your team leader is: " . $teams[$teamMember1];
+                    echo "<a href='mailto:".$allEmails[$teamMember1]."'> Email Team Member</a></br>";
                 }
             }
 
@@ -137,6 +137,8 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 }
                 else {
                     echo "<br> Your team member is: " . $teams[$teamMember2];
+                    echo "<a href='mailto:".$allEmails[$teamMember2]."'> Email Team Member</a></br>";
+
                 }
             }
 
@@ -146,6 +148,8 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 }
                 else {
                     echo "<br> Your team member is: " . $teams[$teamMember3];
+                    echo "<a href='mailto:".$allEmails[$teamMember3]."'> Email Team Member</a></br>";
+
                 }
             }
             if($teamMember4) {
@@ -154,6 +158,8 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 }
                 else {
                     echo "<br> Your team member is: " . $teams[$teamMember4];
+                    echo "<a href='mailto:".$allEmails[$teamMember4]."'> Email Team Member</a></br>";
+
                 }
             }
             if($teamMember5) {
@@ -162,6 +168,8 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 }
                 else {
                     echo "<br> Your team member is: " . $teams[$teamMember5];
+                    echo "<a href='mailto:".$allEmails[$teamMember5]."'> Email Team Member</a></br>";
+
                 }
             }
             if($teamMember6) {
@@ -170,6 +178,8 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 }
                 else {
                     echo "<br> Your team member is: " . $teams[$teamMember6];
+                    echo "<a href='mailto:".$allEmails[$teamMember6]."'> Email Team Member</a></br>";
+
                 }
             }
             echo "<br>";

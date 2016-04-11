@@ -52,7 +52,7 @@ if(isset($_SESSION['sess_user'])){
                 echo '<li style="float:right"><a href="team.php">Team</a></li>';
             }
 
-            if ($currentPage == "games.php" or $currentPage == "createGame.php" or $currentPage == "runCreateGame.php") {
+            if ($currentPage == "games.php" or $currentPage == "createGame.php" or $currentPage == "runCreateGame.php" or $currentPage == "viewGame.php" or $currentPage == "viewFrame.php") {
                 echo '<li style="float:right"><a class="active" href="games.php">Games</a></li>';
             } else {
                 echo '<li style="float:right"><a href="games.php">Games</a></li>';
@@ -75,7 +75,7 @@ if(isset($_SESSION['sess_user'])){
         echo '</ul>';
     }
 }
-else{
+else {
     function generateMenuBar($currentPage)
     {
         echo '<ul>';
@@ -91,15 +91,12 @@ else{
         } else {
             echo '<li><a href="scores.php">High Scores</a></li>';
         }
-        
-
 
         if ($currentPage == "about.php") {
             echo '<li><a class="active" href="about.php">About</a></li>';
         } else {
             echo '<li><a href="about.php">About</a></li>';
         }
-
 
         if ($currentPage == "loginForm.php") {
             echo '<li style="float:right"><a class="active" href="loginForm.php">Login</a></li>';
@@ -108,6 +105,5 @@ else{
         }
         echo '</ul>';
     }
-
 }
 ?>

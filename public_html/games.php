@@ -2,32 +2,8 @@
 
 <?php
 session_start();
-
 include 'menuBar.php';
-
 generateMenuBar(basename(__FILE__));
-
-
-//Reuse for frame stuff
-//echo '<form action="">
-//<input type="checkbox" name="vehicle" value="Bike">Pin 1<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 2<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 3<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 4<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 5<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 6<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 7<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 8<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 9<br>
-//<input type="checkbox" name="vehicle" value="Car">Pin 10<br>
-//</form>';
-//getFramesForLoggedInPlayer();
-//function getFramesForLoggedInPlayer() {
-//    $result = getAllTeamsForAPlayerID($_SESSION['player_id']);
-//    printResult($result);
-//}
-
-
 include 'databaseFunctions.php';
 
 
@@ -85,6 +61,8 @@ function printGames($result, $teamID) {
             echo 'Game Title: ' . $row['Title'] . '<br>Type of game: ' . $row['Event_Type'];
             echo '<br>Game Location: ' . getLocationForId($row['Location_ID']);
             echo "<br>The game occurred on: " . date("D, M d, Y @h:ia", (strtotime($row['Game_Start_Time'])));
+            echo '<br><a href=viewGame.php?gameID=' . $row['Game_ID'];
+            echo '>View the game here!</a>';
             echo '</caption>';
             echo '<tr><th>Team Name</th><th>Total Score</th><th>Winner</th></tr>';
             $allTeams = $row['Teams'];
@@ -157,29 +135,6 @@ echo '<h3>Here are the incompleted games that you are participating in!</h3>';
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 0);
 echo '<h3>Here are the completed games that you participated in!</h3>';
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 1);
-
-
-
-//echo $pieces[0]; // piece1
-//echo $pieces[1]; // piece2
-
-//$mystring = '1,2,3,4,5';
-//$findme   = 'as';
-//$pos = strpos($mystring, $findme);
-//
-//// Note our use of ===.  Simply == would not work as expected
-//// because the position of 'a' was the 0th (first) character.
-//if ($pos === false) {
-//    echo "The string '$findme' was not found in the string '$mystring'";
-//} else {
-//    echo "The string '$findme' was found in the string '$mystring'";
-//    echo " and exists at position $pos";
-//}
-
-
-
-
-
 
 ?>
 
