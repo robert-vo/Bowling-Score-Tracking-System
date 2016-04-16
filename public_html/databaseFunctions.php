@@ -23,7 +23,7 @@ function returnResultForQuery($query) {
     $connection = connectToDatabase();
     return $connection->query($query);
 }
-
+    
 function getAllTeamsForAPlayerID($playerID) {
     $query = "SELECT * FROM team 
               WHERE Leader = '$playerID' 
@@ -34,6 +34,25 @@ function getAllTeamsForAPlayerID($playerID) {
                 OR Player_5 = '$playerID'";
 
     return returnResultForQuery($query);
+}
+
+function getAllBalls() {
+    $query = "SELECT * FROM BALL";
+    return returnResultForQuery($query);
+}
+
+function printColorSizeWeightFromBall() {
+    $toPrint = getAllBalls();
+
+    if($toPrint->num_rows > 0) {
+        while($row = $toPrint->fetch_assoc()) {
+            echo '<option value=';
+            echo $row['Ball_ID'];
+            echo '>';
+            echo 'Color:' . $row['Color'] . ' Weight:' . $row['Weight'] . ' Size:' . $row['Size'];
+            echo '</option>';
+        }
+    }
 }
 
 ?>
