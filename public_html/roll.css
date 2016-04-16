@@ -1,23 +1,73 @@
+input.pin1 {
+    position: static;
+    border: 3px solid #73AD21;
+}
+
+
+input.pin2 {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+
+.pin1 {
+    position: static;
+    border: 3px solid #73AD21;
+}
+
+
+
+input.pin3 {
+
+}
+
+input.pin4 {
+
+}
+
+input.pin5 {
+
+}
+
+input.pin6 {
+
+}
+
+input.pin7 {
+
+}
+
+input.pin8 {
+
+}
+
+input.pin9 {
+
+}
+
+input.pin10 {
+
+}
+
 input[type=checkbox] {
     display:none;
 }
-input[type=checkbox] + label
-{
-    background: #7cffbc url("../resources/img/pin.png");
-    background-repeat: no-repeat;
-    background-size: 80px 60px;
 
-    height: 10%;
-    width: 10%;
+input[type=checkbox] + label {
+    background: #7cffbc url("../resources/img/pin.png") no-repeat;
+    background-size: 50px 80px;
+    height: 12%;
+    width: 4%;
     display: inline-block;
-    padding: 0 0 0 0px;
+    padding: 0 0 0 0;
 }
-input[type=checkbox]:checked + label
-{
+
+input[type=checkbox]:checked + label {
     background: #4855ff url("../resources/img/pin.png") no-repeat;
-    background-size: 80px 60px;
-    height: 10%;
-    width: 10%;
-    display:inline-block;
-    padding: 0 0 0 0px;
+    background-size: 50px 80px;
+    height: 12%;
+    width: 4%;
+    display: inline-block;
+    padding: 0 0 0 0;
 }
