@@ -1,0 +1,23 @@
+input[type=checkbox] {
+    display:none;
+}
+input[type=checkbox] + label
+{
+    background: #7cffbc url("../resources/img/pin.png");
+    background-repeat: no-repeat;
+    background-size: 80px 60px;
+
+    height: 10%;
+    width: 10%;
+    display: inline-block;
+    padding: 0 0 0 0px;
+}
+input[type=checkbox]:checked + label
+{
+    background: #4855ff url("../resources/img/pin.png") no-repeat;
+    background-size: 80px 60px;
+    height: 10%;
+    width: 10%;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
