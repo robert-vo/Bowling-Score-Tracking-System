@@ -5,14 +5,19 @@ generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 
 if(isset($_POST['submit'])) {
-    echo 'submitting roll';
-    if(!isset($_POST['pins'])) {
-        echo 'no pins hit!';
-    }
-    else {
-        foreach($_POST['pins'] as $pin) {
-            echo 'You have hit pin ' . $pin . '<br>';
+    if(isset($_POST['color'])) {
+        if(!isset($_POST['pins'])) {
+            echo 'No pins hit!';
         }
+        else {
+            echo 'You hit ' . count($_POST['pins']) . ' balls!<br>';
+            foreach($_POST['pins'] as $pin) {
+                echo 'You have hit pin ' . $pin . '<br>';
+            }
+        }
+        }
+    else {
+        echo "<script type='text/javascript'>alert('Forgot to select a ball!');</script>";;
     }
 }
 else if(isset($_POST['ballInsertion'])) {
@@ -32,16 +37,25 @@ function generateCheckboxesForAllPins () {
 
 <head>
     <link rel="stylesheet" type="text/css" href="roll.css">
+    <link rel="stylesheet" type="text/css" href="audit.css">
+
     <title>Roll</title>
 </head>
 <body>
 
 <p>
 <form action="addRoll.php" method="POST">
-    <select name="balls">
-        <?php printColorSizeWeightFromBall() ?>
-    </select>
     <input type="submit" value="Add new ball" name = "ballInsertion">
+
+    <?php
+    if(!isset($_GET['orderBy'])) {
+        $toPrint = getAllBalls();
+        printColorSizeWeightFromBall($toPrint);
+    }
+    else {
+        $toPrint = getAllBallsFiltered($_GET['orderBy']);
+        printColorSizeWeightFromBall($toPrint);
+    }?>
     <?php generateCheckboxesForAllPins() ?>
     <br>
     <input type="submit" value="Submit Roll" name="submit">

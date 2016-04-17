@@ -23,7 +23,7 @@ input[type=checkbox]:checked + label {
 .pin1 {
     position: fixed;
     bottom: -400px;
-    right: -375px;
+    right: -600px;
     width: 100%;
     height: 100%;
     z-index: 4;
@@ -32,7 +32,7 @@ input[type=checkbox]:checked + label {
 .pin2 {
     position: fixed;
     bottom: -325px;
-    right: -325px;
+    right: -550px;
     width: 100%;
     height: 100%;
     z-index: 3;
@@ -41,7 +41,7 @@ input[type=checkbox]:checked + label {
 .pin3 {
     position: fixed;
     bottom: -325px;
-    right: -425px;
+    right: -650px;
     width: 100%;
     height: 100%;
     z-index: 3;
@@ -50,7 +50,7 @@ input[type=checkbox]:checked + label {
 .pin4 {
     position: fixed;
     bottom: -250px;
-    right: -275px;
+    right: -500px;
     width: 100%;
     height: 100%;
     z-index: 2;
@@ -60,7 +60,7 @@ input[type=checkbox]:checked + label {
 .pin5 {
     position: fixed;
     bottom: -250px;
-    right: -375px;
+    right: -600px;
     width: 100%;
     height: 100%;
     z-index: 2;
@@ -69,7 +69,7 @@ input[type=checkbox]:checked + label {
 .pin6 {
     position: fixed;
     bottom: -250px;
-    right: -475px;
+    right: -700px;
     width: 100%;
     height: 100%;
     z-index: 2;
@@ -78,7 +78,7 @@ input[type=checkbox]:checked + label {
 .pin7 {
     position: fixed;
     bottom: -175px;
-    right: -225px;
+    right: -450px;
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -87,7 +87,7 @@ input[type=checkbox]:checked + label {
 .pin8 {
     position: fixed;
     bottom: -175px;
-    right: -325px;
+    right: -550px;
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -97,7 +97,7 @@ input[type=checkbox]:checked + label {
 .pin9 {
     position: fixed;
     bottom: -175px;
-    right: -425px;
+    right: -650px;
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -106,8 +106,17 @@ input[type=checkbox]:checked + label {
 .pin10 {
     position: fixed;
     bottom: -175px;
-    right: -525px;
+    right: -750px;
     width: 100%;
     height: 100%;
     z-index: 1;
+}
+
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#menu li {
+    display: inline-block;
 }
