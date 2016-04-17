@@ -61,7 +61,7 @@ To add a new ball, please fill in every single item in the following form.
 </form>
 
 <form action="createBall.php" method="POST">
-    <input type="submit" value="Go Back To Games Page" name="goBack" onclick="return confirm('Are you want to go back to the games page?');">
+    <input type="submit" value="Go Back To Games Page" name="goBack" onclick="return confirm('Are you sure you want to go back to the games page?');">
 </form>
 
 </p>
