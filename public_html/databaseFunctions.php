@@ -19,6 +19,17 @@ function connectToDatabase()
     return new mysqli($servername, $username, $password, $dbname);
 }
 
+function attemptDataManipulationLanguageQuery($query) {
+    $connection = connectToDatabase();
+
+    if(mysqli_query($connection, $query) == TRUE) {
+        return true;
+    }
+    else {
+        return $connection->error;
+    }
+}
+
 function returnResultForQuery($query) {
     $connection = connectToDatabase();
     return $connection->query($query);
@@ -52,6 +63,19 @@ function printColorSizeWeightFromBall() {
             echo 'Color:' . $row['Color'] . ' Weight:' . $row['Weight'] . ' Size:' . $row['Size'];
             echo '</option>';
         }
+    }
+}
+
+function attemptToInsertIntoBalls($color, $weight, $size) {
+    $query = "INSERT INTO Ball(Color, Weight, Size) VALUES ('$color', $weight, $size)";
+
+    $result = attemptDataManipulationLanguageQuery($query);
+
+    if($result == TRUE) {
+        echo '<br>Ball successfully created! You can go back to the previous page to use your new ball!';
+    }
+    else {
+        echo $result;
     }
 }
 

@@ -5,7 +5,7 @@ generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 
 if(isset($_POST['submit'])) {
-    echo $_POST['balls'];
+    echo 'submitting roll';
     if(!isset($_POST['pins'])) {
         echo 'no pins hit!';
     }
@@ -14,6 +14,9 @@ if(isset($_POST['submit'])) {
             echo 'You have hit pin ' . $pin . '<br>';
         }
     }
+}
+else if(isset($_POST['ballInsertion'])) {
+    header("location:createBall.php");
 }
 
 function generateCheckboxesForAllPins () {
@@ -26,6 +29,7 @@ function generateCheckboxesForAllPins () {
 }
 ?>
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="roll.css">
     <title>Roll</title>
@@ -37,6 +41,7 @@ function generateCheckboxesForAllPins () {
     <select name="balls">
         <?php printColorSizeWeightFromBall() ?>
     </select>
+    <input type="submit" value="Add new ball" name = "ballInsertion">
     <?php generateCheckboxesForAllPins() ?>
     <br>
     <input type="submit" value="Submit Roll" name="submit">
