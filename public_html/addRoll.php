@@ -45,8 +45,7 @@ function generateCheckboxesForAllPins () {
 
 <p>
 <form action="addRoll.php" method="POST">
-    <input type="submit" value="Add new ball" name = "ballInsertion">
-
+    <input type="submit" value="Click here to add a new ball!" name = "ballInsertion">
     <?php
     if(!isset($_GET['orderBy'])) {
         $toPrint = getAllBalls();
@@ -57,8 +56,10 @@ function generateCheckboxesForAllPins () {
         printColorSizeWeightFromBall($toPrint);
     }?>
     <?php generateCheckboxesForAllPins() ?>
+    <h5>
+        <input type="submit" value="Submit Roll" name="submit" class="submitButton" onclick="return confirm('Are you sure you have selected the correct pins and a ball for this frame?');">
+    </h5>
     <br>
-    <input type="submit" value="Submit Roll" name="submit">
 </form>
 </body>
 </html>
