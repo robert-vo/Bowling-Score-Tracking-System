@@ -171,7 +171,7 @@ else {
     echo '<input type="text" name="phone" placeholder="Phone Number." >';
     echo '<span class="error">*' . $phoneNumberError . '</span><br>';
 
-    echo '<select name="month">
+    echo 'Date of birth <select name="month">
 	<option>Month</option>
 	<option value="01">January</option>
 	<option value="02">Febuary</option>
@@ -280,7 +280,7 @@ else {
     echo '<span class="error">*' . $cityError . '</span>';
 
 
-    echo '<br><select name="state">
+    echo 'State <br><select name="state">
     <option value="AL">AL</option>
     <option value="AK">AK</option>
     <option value="AZ">AZ</option>
