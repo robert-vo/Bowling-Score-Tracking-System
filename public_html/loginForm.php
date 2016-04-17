@@ -19,7 +19,6 @@
 session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
-echo $_SESSION['user_role'];
 
 if (isset($_SESSION['user_role'])) {
     header("location:index.php");
