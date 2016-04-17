@@ -93,7 +93,6 @@ CREATE TABLE Game (
   Game_Finished       BOOLEAN DEFAULT FALSE,
   Date_Added          DATETIME,
   Last_Date_Modified  DATETIME,
-  Scores              VARCHAR(100),
   FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID),
   FOREIGN KEY (Location_ID) REFERENCES Game_Location(Game_Location_ID)
 );

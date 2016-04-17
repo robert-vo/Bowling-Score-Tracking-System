@@ -15,8 +15,15 @@
 
 <body>
 
-<?php include 'menuBar.php';
+<?php
+session_start();
+include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
+
+if (isset($_SESSION['user_role'])) {
+    header("location:index.php");
+}
+else {
 ?>
 
 <br>
@@ -40,41 +47,41 @@ generateMenuBar(basename(__FILE__));
 <?php
 include 'databaseFunctions.php';
 
-if (isset($_POST["valid"])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    if (isset($_POST["valid"])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-    $conn = connectToDatabase();
-    $query = "SELECT * FROM players WHERE Email = '$username'";
-    $result = $conn->query($query);
-    $numrows = $result->num_rows;
+        $conn = connectToDatabase();
+        $query = "SELECT * FROM players WHERE Email = '$username'";
+        $result = $conn->query($query);
+        $numrows = $result->num_rows;
 
-    if ($numrows != 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $dbuser = $row['Email'];
-            $dbpass = $row['Password'];
-            $userRole = $row['Is_Admin'];
-            $playerID = $row['Player_ID'];
-        }
+        if ($numrows != 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $dbuser = $row['Email'];
+                $dbpass = $row['Password'];
+                $userRole = $row['Is_Admin'];
+                $playerID = $row['Player_ID'];
+            }
 
-        if ($username == $dbuser and password_verify($password, $dbpass)) {
-            session_start();
-            $_SESSION['sess_user'] = $username;
-            $_SESSION['player_id'] = $playerID;
-            $_SESSION['user_role'] = $userRole;
-            header("location:loginSuccessful.php");
-        }
-        else{
+            if ($username == $dbuser and password_verify($password, $dbpass)) {
+                session_start();
+                $_SESSION['sess_user'] = $username;
+                $_SESSION['player_id'] = $playerID;
+                $_SESSION['user_role'] = $userRole;
+                header("location:loginSuccessful.php");
+            } else {
+                ?>
+                <div id="error">Invalid username or password</div>
+                <?php
+            }
+        } else {
             ?>
             <div id="error">Invalid username or password</div>
             <?php
         }
-    } else {
-        ?>
-        <div id="error">Invalid username or password</div>
-<?php
-    }
 
+    }
 }
 ?>
 
