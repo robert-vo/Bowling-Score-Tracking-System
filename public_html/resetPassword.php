@@ -67,8 +67,8 @@ if(isset($_GET['key'])) {
         <form method="POST" action="resetPassword.php?key=';
             echo $_GET['key'];
             echo '<input type="text" name="gake" placeholder="Password">';
-            echo '<input type="text" name="password" placeholder="Password">';
-            echo '<input type="text" name="verifyPassword" placeholder="Verify Password">
+            echo '<input type="password" name="password" placeholder="Password">';
+            echo '<input type="password" name="verifyPassword" placeholder="Verify Password">
             <input type="submit" name="valid" value="Reset">
         </form></div></div><br>';
         }

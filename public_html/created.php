@@ -6,26 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="update.css">
+
 </head>
 
 <body>
 
-
-
-
 <?php
 session_start();
 
-include 'menuBar.php';
 include 'databaseFunctions.php';
+include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 
 
 //Starts the session (logged in user)
 
-//IS_ADMIN returns a 0 or 1, or also false or true, respectively.
+
+//IS_ADMIN returns a 0 or 1, or also false or true, respectively. 
 //This if statement is equivalent to $_SESSION['user_role'] == 1
-//To see how this session variable is accessible, check loginForm.php, line 62.
+//To see how this session variable is accessible, check loginForm.php, line 62. 
 if (!$_SESSION['user_role']) {
     header("location:loginForm.php");
 }
@@ -33,9 +32,7 @@ else
 {
 ?>
 
-
 <?php
-
 function getColumnNames($tableName)
 {
     $conn = connectToDatabase();
@@ -60,9 +57,8 @@ function getColumnNames($tableName)
 }
 
 
-function retrieveRow($table, $id)
+function retrieveRow($table, $id, $column)
 {
-    $column = $_POST['id_column'];
     $conn = connectToDatabase();
 
     if ($conn->connect_error) {
@@ -85,12 +81,14 @@ function displayMessage()
 
     }
     $table = $_POST['table'];
-    $id = $_POST['id'];
     // Send the update query, check to see if the update was successful.
 
     $columnNames = getColumnNames($table);
-    $columns = array(); // Array that holds the column names of the values to be inserted.
-    $values = array(); // Array that holds the values to be inserted.
+    //INSERT INTO bowling.Ball (Color, Weight, Size) VALUES ('Black', 7, 2);
+
+    $query = "INSERT INTO bowling.$table (";
+    $columns = array(); // Array that holds column names of the values to be inserted
+    $values = array(); // Array that holds values to be inserted
 
     for ($i = 1; $i < count($columnNames); $i++) {
         if ($_POST[$columnNames[$i]] == "") {
@@ -101,24 +99,27 @@ function displayMessage()
         }
     }
 
-    $query = "UPDATE $table SET ";
-
-    if (count($columns) == count($values)) {
-        for ($i = 0; $i < count($values); $i++) {
-            $query .= "$columns[$i] = " . "'" . $values[$i] . "'";
-            if ($i + 1 < count($columns)) {
-                $query .= ", ";
-            }
+    for ($i = 0; $i < count($columns); $i++) {
+        $query .= "$columns[$i]";
+        if ($i + 1 < count($columns)) {
+            $query .= ", ";
         }
     }
+    $query .= ") VALUES (";
+    for ($i = 0; $i < count($values); $i++) {
+        $query .= "'" . $values[$i] . "'";
+        if ($i + 1 < count($values)) {
+            $query .= ", ";
+        }
+    }
+    $query .= ");";
 
-
-    $query .= " WHERE " . $_POST['id_column'] . " = " . $_POST['id'];
     //echo $query;
-    if ((mysqli_query($conn, $query) == TRUE) AND count($values) > 0) {
-        $result = retrieveRow($table, $id);
+    if (mysqli_query($conn, $query) == TRUE) {
+        $id = $conn->insert_id;
+        $result = retrieveRow($table, $id, $columnNames[0]);
 
-        echo "<p>The " . $_POST['table'] . " has been updated to</p>";
+        echo "<p>A new  " . $_POST['table'] . " has been added with the following values </p>";
         echo "<table>";
 
         if ((count($columnNames) > 0) and ($result->num_rows > 0)) {
@@ -145,27 +146,16 @@ function displayMessage()
             </form>";
 
     } else {
-        if (count($values) < 1) {
-            $error = "<br>No fields have been updated.";
-            echo $error;
-            echo "<br><br><form action='runAudit.php' method='post'>
-                <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
-                <input type='submit' value='Back to table'>
-            </form>";
-        } else {
+        $error = "Unable to update.\n\nError: " . $conn->error;
+        //echo $error;
 
-            $error = "Unable to update.\n\nError: " . $conn->error;
-            //echo $error;
-
-            $error = json_encode($error);
-            echo "
-            <script type='text/javascript'>
-                alert($error);
-                history.go(-1);
-            </script>";
-        }
+        $error = json_encode($error);
+        echo "
+        <script type='text/javascript'>
+            alert($error);
+            history.go(-1);
+        </script>";
     }
-
 
     $conn->close();
 }
@@ -178,8 +168,10 @@ displayMessage();
 
 </body>
 
+
 </html>
 
 <?php
 }
+
 ?>
