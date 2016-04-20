@@ -71,6 +71,7 @@ else
 
     ?>
     <br>Would you like to create a team today? <a href="createTeam.php">Click here to do so.</a>
+    <br>Would you like to join a team today? <a href="joinTeam.php">Click here to do so.</a>
     <div id="id"><br>Team Members:</div>
 
     </body>
