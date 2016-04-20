@@ -16,9 +16,13 @@ if(isset($_POST['submit'])) {
             }
             if(count($_POST['pins']) == 10) {
                 playMarioVideo();
+                header( "refresh:6;url=test.php" );
+
             }
             else {
                 playAndyVideo();
+                header( "refresh:3;url=test.php" );
+
             }
         }
     }
