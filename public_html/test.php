@@ -32,7 +32,7 @@ else if(isset($_POST['ballInsertion'])) {
 
 function playMarioVideo() {
     echo '<div style=\'position:absolute;z-index:9;left:50px;top:0;width:100%;height:100%\'><video width="1000" height="1000" autoplay>
-  <source src="resources/img/strike.mp4" type="video/mp4">
+  <source src="/resources/img/strike.mp4" type="video/mp4">
 </video></div>';
 }
 function generateCheckboxesForAllPins () {
