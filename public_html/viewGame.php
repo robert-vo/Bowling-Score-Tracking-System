@@ -1,25 +1,17 @@
-<link rel="stylesheet" type="text/css" href="audit.css">
-
 <?php
 session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 
-function createPlayersArray()
-{
-    $conn = connectToDatabase();
-    $sql = "SELECT First_Name, Last_Name, Player_ID from Players";
-    $result = $conn->query($sql);
-    $teams = array();
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $teams[$row['Player_ID']] = $row['First_Name'] . ' ' . $row['Last_Name'];
-        }
-    } else {
-        echo "0 results";
+function printColumnLegend() {
+    echo '<tr>';
+    echo '<th colspan=12>Team and Player Name</th>';
+    foreach (range(1, 10) as $item) {
+        echo "<th colspan=6>Frame $item</th>";
     }
-    return $teams;
+    echo "<th colspan=6>Score</th>";
+    echo '</tr>';
 }
 
 function getTeamNameForTeamId($teamId) {
@@ -39,114 +31,251 @@ function getTeamNameForTeamId($teamId) {
     return $teamName;
 }
 
+function createPlayersArray()
+{
+    $conn = connectToDatabase();
+    $sql = "SELECT First_Name, Last_Name, Player_ID from Players";
+    $result = $conn->query($sql);
+    $teams = array();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $teams[$row['Player_ID']] = $row['First_Name'] . ' ' . $row['Last_Name'];
+        }
+    } else {
+        echo "0 results";
+    }
+    return $teams;
+}
+
+function getPlayerNameForPlayerId($playerId)
+{
+    $conn = connectToDatabase();
+    $sql = "SELECT First_Name, Last_Name, Player_ID from Players where Player_ID = $playerId";
+    $result = $conn->query($sql);
+
+    $playerName = '';
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $playerName = $row['First_Name'] . ' ' . $row['Last_Name'];
+        }
+    } else {
+        echo "0 results";
+    }
+    return $playerName;
+}
+
+
+function printRollsInformation($playerID, $gameID, $teamID) {
+    $sql = "select Frame_Number, Roll_One_ID, Roll_Two_ID, Roll_Three_ID 
+            from frame 
+            where Game_ID = $gameID 
+              and Team_ID = $teamID 
+              and Player_ID = $playerID";
+
+    $conn = connectToDatabase();
+
+    $result = $conn->query($sql);
+    if($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if($row['Frame_Number'] != 10) {
+                echo "<td colspan='3'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . '</td>';
+
+                if(isset($row['Roll_Two_ID'])) {
+                    echo "<td colspan='3'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . '</td>';
+                }
+                else {
+                    echo "<td colspan=3>&nbsp;</td>";
+                }
+            }
+            else {
+                echo "<td colspan='2'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . '</td>';
+
+                if(isset($row['Roll_Two_ID'])) {
+                    echo "<td colspan='2'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . '</td>';
+                }
+                else {
+                    echo "<td colspan=2>&nbsp;</td>";
+                }
+
+                if(isset($row['Roll_Three_ID'])) {
+                    echo "<td colspan='2'>" . getNumberOfPinsHitForRollID($row['Roll_Three_ID']) . '</td>';
+                }
+                else {
+                    echo "<td colspan=2>&nbsp;</td>";
+                }
+            }
+        }
+    }
+    else { // no rolls yet
+        foreach(range(0, 17) as $item) {
+            echo "<td colspan = 3>&nbsp;</td>";
+        }
+        echo "<td colspan = 2>&nbsp;</td>";
+        echo "<td colspan = 2>&nbsp;</td>";
+        echo "<td colspan = 2>&nbsp;</td>";
+
+    }
+}
+function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
+    $teamName = getTeamNameForTeamId($teamID);
+    $playerName = getPlayerNameForPlayerId($playerID);
+    echo '<tr>';
+    echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+    printRollsInformation($playerID, $gameID, $teamID);
+    echo calculateTotalScore();
+    echo '</tr>';
+}
+
 function getInformationAboutGame($gameID) {
     $conn = connectToDatabase();
     $sql = "SELECT * FROM GAME, Game_Location WHERE Game.Game_ID = $gameID and Game.Location_ID = Game_Location.Game_Location_ID";
-    
+
     $result = $conn->query($sql);
 
-    printInformationAboutTheGame($result);
-}
-
-
-function getAllInformationFromAPlayer($playerID) {
-    $conn = connectToDatabase();
-    $sql = "SELECT * FROM Players where Players.Player_ID = $playerID";
-    $result = $conn->query($sql);
     return $result;
 }
 
-function printFrameInformationForPlayer($playerID, $teamID, $gameID) {
+
+function calculateTotalScore() {
+    $totalScore = 300; // TODO - Calculate Total Score. Right now it'll return 300.
+    $total = "<th colspan='6' rowspan=2>$totalScore</th>";
+    return $total;
+}
+
+function printOutFrameTotals($playerID, $gameID, $teamID) {
+    echo '<tr>';
+
     $conn = connectToDatabase();
-    $sql = "SELECT * FROM Frame where Frame.Player_ID = $playerID and Frame.Team_ID = $teamID and Frame.Game_ID = $gameID";
+    $sql = "SELECT Frame_ID, Frame_Number, Score FROM Frame where Frame.Player_ID = $playerID and Frame.Team_ID = $teamID and Frame.Game_ID = $gameID";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
-        $totalScore = 0;
         while($row = $result->fetch_assoc()) {
-            $totalScore += $row["Score"];
             $preparedURL = 'viewFrame.php?frameID=' . $row["Frame_ID"] . '&frameNumber=' . $row['Frame_Number'];
-            echo '<th><a href=' . $preparedURL . '>' . $row["Score"] . '</a></th>';
+            echo '<td colspan=6><a href=' . $preparedURL . '>' . $row["Score"] . '</a></td colspan=6>';
         }
-        echo '<th>' . $totalScore . '</th>';
-
     }
-
+    echo '</tr>';
 }
-function printGameInfoForEachPlayer($teamID) {
+
+function getNumberOfPinsHitForRollID($rollID) {
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from roll where roll_id = $rollID;";
+    $conn = connectToDatabase();
+
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if($row['Is_Foul']) {
+                return 'F';
+            }
+            else if ($row['Is_Spare']) {
+                return '/';
+            }
+            else if($row['Is_Strike']) {
+                return 'X';
+            }
+            else {
+                return calculateNumberOfPinsHit($row['Hit_Pin_1'],
+                    $row['Hit_Pin_2'], $row['Hit_Pin_3'], $row['Hit_Pin_4'],
+                    $row['Hit_Pin_5'], $row['Hit_Pin_6'], $row['Hit_Pin_7'],
+                    $row['Hit_Pin_8'], $row['Hit_Pin_9'], $row['Hit_Pin_10']
+                );
+            }
+        }
+    }
+    return '&nbsp';
+}
+
+function calculateNumberOfPinsHit(...$pins) {
+    return array_sum($pins) == 0 ? '-' : array_sum($pins);
+}
+
+function printInformationAboutGame($result, $gameID) {
+    if($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $allTeams = $row['Teams'];
+            $separatedTeams = explode(",", $allTeams);
+            foreach ($separatedTeams as $team) {
+                printGameInfoForEachPlayer($team, $gameID);
+                echo '<tr><td></td></tr>';
+
+            }
+        }
+    }
+}
+
+function printGameInfoForEachPlayer($teamID, $gameID) {
     $conn = connectToDatabase();
     $sql = "SELECT Leader, Player_1, Player_2, Player_3, Player_4, Player_5 FROM Team where Team.Team_ID = $teamID";
     $result = $conn->query($sql);
-    $allPlayers = createPlayersArray();
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            echo '<tr><th>' . getTeamNameForTeamId($teamID) . '<br>Leader:' . $allPlayers[$row["Leader"]] . '</th>';
-            printFrameInformationForPlayer($row["Leader"], $teamID, $_GET['gameID']);
+            if(isset($row['Leader'])) {
+                printOutPlayerInfoOnTeam($row['Leader'], $gameID, $teamID, 'Leader');
+                printOutFrameTotals($row['Leader'], $gameID, $teamID);
+            }
             if(isset($row['Player_1'])) {
-                echo '<tr><th>' . getTeamNameForTeamId($teamID) . '<br>Player 1:' . $allPlayers[$row["Player_1"]] . '</th>';
-                printFrameInformationForPlayer($row['Player_1'], $teamID, $_GET['gameID']);
+                printOutPlayerInfoOnTeam($row['Player_1'], $gameID, $teamID, 'Player 1');
+                printOutFrameTotals($row['Player_1'], $gameID, $teamID);
             }
             if(isset($row['Player_2'])) {
-                echo '<tr><th>' . getTeamNameForTeamId($teamID) . '<br>Player 2:' . $allPlayers[$row["Player_2"]] . '</th>';
-                printFrameInformationForPlayer($row['Player_2'], $teamID, $_GET['gameID']);
+                printOutPlayerInfoOnTeam($row['Player_2'], $gameID, $teamID, 'Player 2');
+                printOutFrameTotals($row['Player_2'], $gameID, $teamID);
             }
             if(isset($row['Player_3'])) {
-                echo '<tr><th>' . getTeamNameForTeamId($teamID) . '<br>Player 3:' . $allPlayers[$row["Player_3"]] . '</th>';
-                printFrameInformationForPlayer($row['Player_3'], $teamID, $_GET['gameID']);
+                printOutPlayerInfoOnTeam($row['Player_3'], $gameID, $teamID, 'Player 3');
+                printOutFrameTotals($row['Player_3'], $gameID, $teamID);
             }
             if(isset($row['Player_4'])) {
-                echo '<tr><th>' . getTeamNameForTeamId($teamID) . '<br>Player 4:' . $allPlayers[$row["Player_4"]] . '</th>';
-                printFrameInformationForPlayer($row['Player_4'], $teamID, $_GET['gameID']);
+                printOutPlayerInfoOnTeam($row['Player_4'], $gameID, $teamID, 'Player 4');
+                printOutFrameTotals($row['Player_4'], $gameID, $teamID);
             }
             if(isset($row['Player_5'])) {
-                echo '<tr><th>' . getTeamNameForTeamId($teamID) . '<br>Player 5:' . $allPlayers[$row["Player_5"]] . '</th>';
-                printFrameInformationForPlayer($row['Player_5'], $teamID, $_GET['gameID']);
+                printOutPlayerInfoOnTeam($row['Player_5'], $gameID, $teamID, 'Player 5');
+                printOutFrameTotals($row['Player_5'], $gameID, $teamID);
             }
-            echo '</tr>';
-            echo '<tr><th></th></tr>';
         }
     } else {
         die("ERROR");
     }
 }
-function printInformationAboutTheGame($result) {
-    if($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
 
-            echo '<table>';
-            echo '<caption>For current game</caption>';
-            echo '<tr><th>Team Name</th>';
-            echo '<th>Frame 1</th>';
-            echo '<th>Frame 2</th>';
-            echo '<th>Frame 3</th>';
-            echo '<th>Frame 4</th>';
-            echo '<th>Frame 5</th>';
-            echo '<th>Frame 6</th>';
-            echo '<th>Frame 7</th>';
-            echo '<th>Frame 8</th>';
-            echo '<th>Frame 9</th>';
-            echo '<th>Frame 10</th>';
-            echo '<th>Total Score</th>';
+?>
 
-            echo '</tr>';
-            $allTeams = $row['Teams'];
-            $separatedTeams = explode(",", $allTeams);
-            foreach ($separatedTeams as $team) {
-                echo '<tr>';
-                if($_GET['gameID'] == $team) {
-                    //echo '<u>' . getTeamNameForTeamId($team) . '</u>';
-                }
-                else {
-                    //echo getTeamNameForTeamId($team);
-                }
-                printGameInfoForEachPlayer($team);
 
-                echo '</tr>';
-            }
-        }
+<br>
+<?php echo getNumberOfPinsHitForRollID(300); ?>
 
-        echo '</table>';
+<div id='scoresheet'>
+    <table id='scoresheetTable' class='scoresheet' cellpadding='1' cellspacing='0'>
+        <?php
+        $gameID = $_GET['gameID'];
+        $result = getInformationAboutGame($gameID);
+        printColumnLegend();
+        printInformationAboutGame($result, $gameID);
+        ?>
+    </table>
+</div>
+
+
+<style type="text/css">
+    table.scoresheet {margin: 0 auto; width:80%; font-size:12px; border:1px solid; text-align: center; table-layout: fixed; margin-bottom: 40px;}
+    table.scoresheet th, tr, td {padding: 0; vertical-align: middle; font-family: Arial, Helvetica, sans-serif; font-weight: bold;}
+    table.scoresheet th {border-bottom:1px solid; background-color: #fff6f9; height:30px;}
+    table.scoresheet th:not(:last-child) {border-right:1px solid;}
+    table.scoresheet td {height:30px; background: rgba(255, 255, 255, 0.5);}
+    table.scoresheet tr td:not(:last-child) {border-right:1px solid;}
+    table.scoresheet tr:nth-child(2) td:nth-child(even) {border-bottom:1px solid;}
+    table.scoresheet tr:nth-child(2) td:last-child {border-bottom:1px solid;}
+
+    table {
+        border-spacing: 0;
     }
-}
 
-getInformationAboutGame($_GET['gameID']);
+    table tr td {
+        border: 1px solid black;
+
+    }
+</style>
+
