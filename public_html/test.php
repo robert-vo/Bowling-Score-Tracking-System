@@ -14,12 +14,7 @@ if(isset($_POST['submit'])) {
             foreach($_POST['pins'] as $pin) {
                 echo 'You have hit pin ' . $pin . '<br>';
             }
-            if(count($_POST['pins']) == 10) {
                 playMarioVideo();
-            }
-            else {
-                echo 'no video :(';
-            }
         }
     }
     else {
@@ -39,7 +34,7 @@ function generateCheckboxesForAllPins () {
     foreach (range(1, 10) as $pin) {
         echo "<span class = pin$pin>";
         echo "<input type = checkbox name =pins[] value = $pin id = 'pin$pin'/>";
-        echo "<label for = 'p in$pin'>$pin</label>";
+        echo "<label for = 'pin$pin'>$pin</label>";
         echo "</span>";
     }
 }
