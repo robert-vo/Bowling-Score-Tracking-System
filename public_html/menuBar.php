@@ -51,17 +51,24 @@ if(isset($_SESSION['sess_user'])){
             } else {
                 echo '<li style="float:right"><a href="team.php">Team</a></li>';
             }
+            if ($currentPage == "manager.php") {
+                echo '<li style="float:right"><a class="active" href="manager.php">Manage Team</a></li>';
+            } else {
+                echo '<li style="float:right"><a href="manager.php">Manage Team</a></li>';
+            }
 
             if ($currentPage == "games.php" or $currentPage == "createGame.php" or $currentPage == "runCreateGame.php" or $currentPage == "viewGame.php" or $currentPage == "viewFrame.php") {
                 echo '<li style="float:right"><a class="active" href="games.php">Games</a></li>';
             } else {
                 echo '<li style="float:right"><a href="games.php">Games</a></li>';
             }
+
             if ($currentPage == "statistics.php") {
                 echo '<li style="float:right"><a class="active" href="statistics.php">Player Stats</a></li>';
             } else {
                 echo '<li style="float:right"><a href="statistics.php">Player Stats</a></li>';
             }
+
             
         }
 
