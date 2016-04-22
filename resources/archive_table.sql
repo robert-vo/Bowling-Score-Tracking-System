@@ -139,6 +139,7 @@ CREATE TABLE Player_Stats_Archive (
   Average_Pin_Left    DOUBLE NOT NULL DEFAULT 0,
   Date_Deleted        DATETIME,
   Date_Added          DATETIME,
-  Last_Date_Modified  DATETIME
-
+  Last_Date_Modified  DATETIME,
+  Foul_Count          INT NOT NULL DEFAULT 0,
+  Pins_Hit            INT NOT NULL DEFAULT 0
 );

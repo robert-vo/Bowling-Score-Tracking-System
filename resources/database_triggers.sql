@@ -60,12 +60,42 @@ FOR EACH ROW
 drop trigger if exists delete_from_PlayerStats;
 CREATE TRIGGER delete_from_PlayerStats AFTER DELETE ON Player_Stats
 FOR EACH ROW
-  insert into Player_Stats_Archive VALUES (old.Stat_ID, old.Player_ID, old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares, old.Best_Score, old.Worst_Score, old.Pins_Left, old.Average_Pin_Left, old.Date_Added, old.Last_Date_Modified, now());
+  insert into Player_Stats_Archive VALUES (old.Stat_ID, old.Player_ID, old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares, old.Best_Score, old.Worst_Score, old.Pins_Left, old.Average_Pin_Left, old.Date_Added, old.Last_Date_Modified, old.Foul_Count, old.Pins_Hit, now());
 
 drop trigger if exists delete_from_game_location;
 CREATE TRIGGER delete_from_game_location AFTER DELETE ON Game_Location
 FOR EACH ROW
   insert into Game_Location_Archive VALUES (old.Game_Location_ID, old.Game_Address, old.Game_Location_Name, old.Date_Added, old.Last_Date_Modified, now());
+
+drop trigger if exists update_player_spares;
+create trigger update_player_spares after insert on Roll
+  for each ROW
+  if(new.Is_Spare = 1) THEN
+    update Player_Stats, Frame SET Player_Stats.Spares = Player_Stats.Spares + 1 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+  END IF;
+
+
+drop trigger if exists update_player_strikes;
+create trigger update_player_strikes after insert on Roll
+for each ROW
+  if(new.Is_Strike = 1) THEN
+    update Player_Stats, Frame SET Player_Stats.Strikes = Player_Stats.Strikes + 1 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+  END IF;
+
+
+drop trigger if exists update_player_fouls;
+create trigger update_player_fouls after insert on Roll
+for each ROW
+  if(new.Is_Foul = 1) THEN
+    update Player_Stats, Frame SET Player_Stats.Foul_Count = Player_Stats.Foul_Count + 1 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+  END IF;
+
+drop trigger if exists update_player_pins_hit;
+create trigger update_player_pins_hit after insert on Roll
+  for each ROW
+  UPDATE Player_Stats, Frame set Player_Stats.Pins_Hit = Player_Stats.Pins_Hit +
+  new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 + new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8
+  + new.Hit_Pin_9 + new.Hit_Pin_10 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
 
 
 -- Trigger for date_added
