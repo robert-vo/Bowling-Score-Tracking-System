@@ -112,6 +112,7 @@ if(!isset($_GET['category']))
                         <option value="Spares">Spares</option>
                         <option value="Best_Score">Best Score</option>
                         <option value="Perfect_Games">Perfect Games</option>
+                        <option value="Average_Pin_Left">Average Pins Left</option>
                     </select>
                 </td>
 

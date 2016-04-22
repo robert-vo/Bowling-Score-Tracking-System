@@ -81,14 +81,23 @@ function printPlayersReport($report, $showTop, $orderBy) {
 function printPlayers($report, $result) {
     if($result->num_rows > 0) {
         echo '<table id="report">';
-        echo '<tr class="table_header"><th>Place</th><th>Player Name</th><th>Number of ' . $report . '</th><th>Player\'s Email Address</th></tr>';
+        $reportHeader = "";
+        if($report == "Best_Score")
+            $reportHeader = "Best Score";
+        else if ($report == "Average_Pin_Left")
+            $reportHeader = "Average # of Pins Left";
+        else
+            $reportHeader = "Number of " . $report;
+
+        echo '<tr class="table_header"><th>Place</th><th>Player Name</th><th>' . $reportHeader . '</th><th>Games  Played</th><th>Player\'s Email Address</th></tr>';
         $place = 1;
         while($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo '<td>' . $place . '</td>';
-            echo '<td>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</td>';
-            echo '<td>' . $row[$report] . '</td>';
-            echo '<td>' . $row['Email'] . '</td>';
+            echo '<td align=\'center\'>' . $place . '</td>';
+            echo '<td align=\'center\'>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</td>';
+            echo '<td align=\'center\'>' . $row[$report] . '</td>';
+            echo '<td align=\'center\'>' . $row['Games_Played'] . '</td>';
+            echo '<td align=\'center\'>' . $row['Email'] . '</td>';
             echo '</tr>';
 
             $place++;
@@ -146,6 +155,16 @@ if($category == "players") { // Queries and prints for the 'players' category.
         else
             $order = 'best';
         echo '<h5>Here are the top ' . $showTop . ' players who have the ' . $order . ' high score</h5>';
+        printPlayersReport($reportType, $showTop, $orderBy);
+
+    } else if($reportType == "Average_Pin_Left") {
+        $order = "";
+        if ($orderBy == "ASC")
+            $order = 'lowest';
+        else
+            $order = 'highest';
+
+        echo "<h5>Here are the top " . $showTop . " who have the " . $order . " average number of pins left after the first roll of the frame.</h5>";
         printPlayersReport($reportType, $showTop, $orderBy);
 
     } else {
