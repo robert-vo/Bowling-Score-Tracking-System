@@ -17,13 +17,17 @@ if(isset($_SESSION['sess_user'])){
             echo '<li><a href="about.php">About</a></li>';
         }
 
+        if ($currentPage == "reports.php") {
+            echo '<li><a class="active" href="reports.php">Reports</a></li>';
+        } else {
+            echo '<li><a href="reports.php">Reports</a></li>';
+        }
 
         if ($currentPage == "logout.php") {
             echo '<li style="float:right"><a class="active" href="logout.php">Logout</a></li>';
         } else {
             echo '<li style="float:right"><a href="logout.php">Logout</a></li>';
         }
-
 
         if ($_SESSION['user_role']) {
             $auditPages = array();
@@ -33,6 +37,7 @@ if(isset($_SESSION['sess_user'])){
             $auditPages[] = "updated.php";
             $auditPages[] = "createRow.php";
             $auditPages[] = "created.php";
+
             if (in_array($currentPage, $auditPages)) {
                 echo '<li style="float:right"><a class="active" href="audit.php">Audit</a></li>';
             } else {
@@ -40,17 +45,12 @@ if(isset($_SESSION['sess_user'])){
             }
         }
         else { //not admin
-            if ($currentPage == "scores.php") {
-                echo '<li><a class="active" href="scores.php">High Scores</a></li>';
-            } else {
-                echo '<li><a href="scores.php">High Scores</a></li>';
-            }
-
             if ($currentPage == "team.php" or $currentPage == "leaveTeam.php") {
                 echo '<li style="float:right"><a class="active" href="team.php">Team</a></li>';
             } else {
                 echo '<li style="float:right"><a href="team.php">Team</a></li>';
             }
+
             if ($currentPage == "manager.php") {
                 echo '<li style="float:right"><a class="active" href="manager.php">Manage Team</a></li>';
             } else {
@@ -72,7 +72,7 @@ if(isset($_SESSION['sess_user'])){
             
         }
 
-        if ($currentPage == "loginSuccessful.php") {
+        if ($currentPage == "loginSuccessful.php" || $currentPage == "updateProfile.php" || $currentPage == "runUpdateProfile.php") {
             echo '<li style="float:right"><a class="active" href="loginSuccessful.php">Profile</a></li>';
         } else {
             echo '<li style="float:right"><a href="loginSuccessful.php">Profile</a></li>';
@@ -92,11 +92,10 @@ else {
             echo '<li><a href="index.php">Home</a></li>';
         }
 
-
-        if ($currentPage == "scores.php") {
-            echo '<li><a class="active" href="scores.php">High Scores</a></li>';
+        if ($currentPage == "reports.php") {
+            echo '<li><a class="active" href="reports.php">Reports</a></li>';
         } else {
-            echo '<li><a href="scores.php">High Scores</a></li>';
+            echo '<li><a href="reports.php">Reports</a></li>';
         }
 
         if ($currentPage == "about.php") {
