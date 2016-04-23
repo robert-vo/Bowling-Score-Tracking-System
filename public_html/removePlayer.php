@@ -8,27 +8,52 @@ $teamID = $_POST['team'];
 if($_POST['player'] ==  "Remove Player 1")
 {
     echo 'You are about to delete player number ' . $_POST['player1'];
-        $sql = "update team set Player_1 = null where team.Team_ID = $teamID";
+    $sql = "update team set Player_1 = null where team.Team_ID = $teamID";
+    echo "<script type='text/javascript'>
+            alert('Player has been deleted!');
+            history.go(-1);
+            document.location = 'manager.php';
+        </script>";
 }
 else if($_POST['player'] ==  "Remove Player 2")
 {
     echo 'You are about to delete player number ' . $_POST['player2'];
     $sql = "update team set Player_2 = null where team.Team_ID = $teamID";
+    echo "<script type='text/javascript'>
+            alert('Player has been deleted!');
+            history.go(-1);
+            document.location = 'manager.php';
+        </script>";
 }
 else if($_POST['player'] ==  "Remove Player 3")
 {
     echo 'You are about to delete player number ' . $_POST['player3'];
     $sql = "update team set Player_3 = null where team.Team_ID = $teamID";
+    echo "<script type='text/javascript'>
+            alert('Player has been deleted!');
+            history.go(-1);
+            document.location = 'manager.php';
+        </script>";
 }
 else if($_POST['player'] ==  "Remove Player 4")
 {
     echo 'You are about to delete player number ' . $_POST['player4'];
     $sql = "update team set Player_4 = null where team.Team_ID = $teamID";
+    echo "<script type='text/javascript'>
+            alert('Player has been deleted!');
+            history.go(-1);
+            document.location = 'manager.php';
+        </script>";
 }
 else if($_POST['player'] ==  "Remove Player 5")
 {
     echo 'You are about to delete player number ' . $_POST['player5'];
     $sql = "update team set Player_5 = null where team.Team_ID = $teamID";
+    echo "<script type='text/javascript'>
+            alert('Player has been deleted!');
+            history.go(-1);
+            document.location = 'manager.php';
+        </script>";
 }
 
 //
