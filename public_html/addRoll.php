@@ -10,7 +10,7 @@ if(isset($_POST['submit'])) {
             echo 'No pins hit!';
         }
         else {
-            echo 'You hit ' . count($_POST['pins']) . ' balls!<br>';
+            echo 'You hit ' . count($_POST['pins']) . ' pins!<br>';
             foreach($_POST['pins'] as $pin) {
                 echo 'You have hit pin ' . $pin . '<br>';
             }
