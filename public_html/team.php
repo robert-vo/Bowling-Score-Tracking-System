@@ -41,8 +41,7 @@ if (!isset($_SESSION["sess_user"]))
 {
     header("location:loginForm.php");
 }
-else
-{
+else {
     ?>
     <!doctype html>
     <html>
@@ -71,6 +70,7 @@ else
 
     ?>
     <br>Would you like to create a team today? <a href="createTeam.php">Click here to do so.</a>
+    <br>Would you like to join a team today? <a href="joinTeam.php">Click here to do so.</a>
     <div id="id"><br>Team Members:</div>
 
     </body>
@@ -94,8 +94,8 @@ else
     $query1 = "SELECT * FROM players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
-    if($numrows != 0){
-        while ($row = mysqli_fetch_assoc($result)){
+    if ($numrows != 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $playerid = $row['Player_ID'];
         }
     }
@@ -106,7 +106,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 '$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
-    if($numrows != 0) {
+    if ($numrows != 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $teamname = $row['Name'];
             $teamMember1 = $row['Leader'];
@@ -120,65 +120,59 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
             $teams = createPlayersArray();
             $allEmails = createPlayerEmailArray();
 
-            echo "<br> You are part of team: ". $teamname;
-            if($teamMember1 and $teamMember1 != $playerid) {
-                if($teamMember1 == $playerid) {
+            echo "<br> You are part of team: " . $teamname;
+            if ($teamMember1 and $teamMember1 != $playerid) {
+                if ($teamMember1 == $playerid) {
                     $yourPlayerID = 'Leader';
-                }
-                else {
+                } else {
                     echo "<br> Your team leader is: " . $teams[$teamMember1];
-                    echo "<a href='mailto:".$allEmails[$teamMember1]."'> Email Team Member</a></br>";
+                    echo "<a href='mailto:" . $allEmails[$teamMember1] . "'> Email Team Member</a></br>";
                 }
             }
 
-            if($teamMember2) {
-                if($teamMember2 == $playerid) {
+            if ($teamMember2) {
+                if ($teamMember2 == $playerid) {
                     $yourPlayerID = 'Player_1';
-                }
-                else {
+                } else {
                     echo "<br> Your team member is: " . $teams[$teamMember2];
-                    echo "<a href='mailto:".$allEmails[$teamMember2]."'> Email Team Member</a></br>";
+                    echo "<a href='mailto:" . $allEmails[$teamMember2] . "'> Email Team Member</a></br>";
 
                 }
             }
 
-            if($teamMember3) {
-                if($teamMember3 == $playerid) {
+            if ($teamMember3) {
+                if ($teamMember3 == $playerid) {
                     $yourPlayerID = 'Player_2';
-                }
-                else {
+                } else {
                     echo "<br> Your team member is: " . $teams[$teamMember3];
-                    echo "<a href='mailto:".$allEmails[$teamMember3]."'> Email Team Member</a></br>";
+                    echo "<a href='mailto:" . $allEmails[$teamMember3] . "'> Email Team Member</a></br>";
 
                 }
             }
-            if($teamMember4) {
-                if($teamMember4 == $playerid) {
+            if ($teamMember4) {
+                if ($teamMember4 == $playerid) {
                     $yourPlayerID = 'Player_3';
-                }
-                else {
+                } else {
                     echo "<br> Your team member is: " . $teams[$teamMember4];
-                    echo "<a href='mailto:".$allEmails[$teamMember4]."'> Email Team Member</a></br>";
+                    echo "<a href='mailto:" . $allEmails[$teamMember4] . "'> Email Team Member</a></br>";
 
                 }
             }
-            if($teamMember5) {
-                if($teamMember5 == $playerid) {
+            if ($teamMember5) {
+                if ($teamMember5 == $playerid) {
                     $yourPlayerID = 'Player_4';
-                }
-                else {
+                } else {
                     echo "<br> Your team member is: " . $teams[$teamMember5];
-                    echo "<a href='mailto:".$allEmails[$teamMember5]."'> Email Team Member</a></br>";
+                    echo "<a href='mailto:" . $allEmails[$teamMember5] . "'> Email Team Member</a></br>";
 
                 }
             }
-            if($teamMember6) {
-                if($teamMember6 == $playerid) {
+            if ($teamMember6) {
+                if ($teamMember6 == $playerid) {
                     $yourPlayerID = 'Player_5';
-                }
-                else {
+                } else {
                     echo "<br> Your team member is: " . $teams[$teamMember6];
-                    echo "<a href='mailto:".$allEmails[$teamMember6]."'> Email Team Member</a></br>";
+                    echo "<a href='mailto:" . $allEmails[$teamMember6] . "'> Email Team Member</a></br>";
 
                 }
             }
@@ -210,55 +204,11 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
     $query1 = "SELECT * FROM players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
-    if($numrows != 0){
-        while ($row = mysqli_fetch_assoc($result)){
+    if ($numrows != 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $playerid = $row['Player_ID'];
         }
     }
-
-    //Displays Team Leader
-
-    $query2 = "SELECT * FROM team WHERE Leader = '$playerid'";
-    $result = $conn->query($query2);
-    $numrows = $result->num_rows;
-    if($numrows != 0){
-
-        while ($row = mysqli_fetch_assoc($result)){
-            $teamname = $row['Name'];
-
-        }
-
-        $query3 = "SELECT * FROM team WHERE Name = '$teamname'";
-        $result = $conn->query($query2);
-        $numrows = $result->num_rows;
-        if($numrows != 0){
-
-            while ($row = mysqli_fetch_assoc($result)){
-                $teamname = $row['Name'];
-                $gamecount = $row['Game_Count'];
-                $teamwin = $row['Win_Count'];
-                if($gamecount == 0) {
-                    $percentage = 0;
-                }
-                else {
-                    $percentage =  ($teamwin / $gamecount) * 100;
-                }
-                echo "<br> Stats of Team: ". $teamname;
-                echo "<br> The team you manage has played a total of: ". $gamecount, ' games';
-                echo "<br> The team you manage has a total win of: ". $teamwin;
-                echo "<br> The team you manage has a win percentage of: ". $percentage, '%', "<br>";
-
-            }
-        }
-    }
-    else{
-        echo "<br>Not a team leader, no access is given to team stats";
-    }
-
-
-
-
-
 
 }
 
