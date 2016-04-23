@@ -35,6 +35,8 @@ function createPlayerEmailArray()
 }
 ?>
 
+
+
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"]))
@@ -107,12 +109,12 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
     if ($numrows != 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $teamname = $row['Name'];
-            $teamMember1 = $row['Leader'];
-            $teamMember2 = $row['Player_1'];
-            $teamMember3 = $row['Player_2'];
-            $teamMember4 = $row['Player_3'];
-            $teamMember5 = $row['Player_4'];
-            $teamMember6 = $row['Player_5'];
+            $leader = $row['Leader'];
+            $teamMember1 = $row['Player_1'];
+            $teamMember2 = $row['Player_2'];
+            $teamMember3 = $row['Player_3'];
+            $teamMember4 = $row['Player_4'];
+            $teamMember5 = $row['Player_5'];
             $teamID = $row['Team_ID'];
 
             $teams = createPlayersArray();
@@ -167,79 +169,80 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 $teamname = $row['Name'];
                 $gamecount = $row['Game_Count'];
                 $teamwin = $row['Win_Count'];
-                $teamMember2 = $row['Player_1'];
-                $teamMember3 = $row['Player_2'];
-                $teamMember4 = $row['Player_3'];
-                $teamMember5 = $row['Player_4'];
-                $teamMember6 = $row['Player_5'];
+                $teamMember1 = $row['Player_1'];
+                $teamMember2 = $row['Player_2'];
+                $teamMember3 = $row['Player_3'];
+                $teamMember4 = $row['Player_4'];
+                $teamMember5 = $row['Player_5'];
                 $teamID = $row['Team_ID'];
                 if ($gamecount == 0) {
                     $percentage = 0;
                 } else {
                     $percentage = ($teamwin / $gamecount) * 100;
                 }
-                echo "<br> Stats of Team: " . $teamname;
+
+                echo "<br><h4>Stats of Team: " . $teamname;
                 echo "<br> The team you manage has played a total of: " . $gamecount, ' games';
                 echo "<br> The team you manage has a total win of: " . $teamwin;
-                echo "<br> The team you manage has a win percentage of: " . $percentage, '%', "<br>";
+                echo "<br> The team you manage has a win percentage of: " . $percentage, '%', "<br></h4> ";
 
                 echo "<form action=removePlayer.php method ='POST'>";
-                if ($teamMember2) {
-                    if ($teamMember2 == $playerid) {
+                if ($teamMember1) {
+                    if ($teamMember1 == $playerid) {
                         $yourPlayerID = 'Player_1';
                     } else {
-                        echo "<br> Your team member is: " . $teams[$teamMember2], '<input type="submit" value = "Remove Player" onclick="return confirm(\'Are you sure you want to remove this player?\');"></input>';
-                        echo "<input type=text style='display: none' name='player' value ='player1' ></input>";
+                        echo "<br> Your team member is: " . $teams[$teamMember1] , '<input type="submit" name = "player" class= "inline" value = "Remove Player 1"  onclick="return confirm(\'Are you sure you want to remove Player 1?\');"></input>';
+                        echo "<input type=text style='display: none' name='player1' value ='player1' ></input>";
                         echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
-                        echo "<a href='mailto:" . $allEmails[$teamMember2] . "'> Email Team Member</a></br>";
+                        echo "<br><a href='mailto:" . $allEmails[$teamMember1] . "'> Email Team Member</a></br>";
 
                     }
                 }
 
-                if ($teamMember3) {
-                    if ($teamMember3 == $playerid) {
+                if ($teamMember2) {
+                    if ($teamMember2 == $playerid) {
                         $yourPlayerID = 'Player_2';
                     } else {
-                        echo "<br> Your team member is: " . $teams[$teamMember3], '<input type="submit"  name = "player2" value = "Remove Player" onclick="return confirm(\'Are you sure you want to remove this player?\');"></input>';
-                        echo "<input type=text style='display: none' name='player' value ='player2' ></input>";
+                        echo "<br> Your team member is: " . $teams[$teamMember2], '<input type="submit"  name = "player" class= "inline" value = "Remove Player 2" onclick="return confirm(\'Are you sure you want to remove Player 2?\');"></input>';
+                        echo "<input type=text style='display: none' name='player2' value ='player2' ></input>";
                         echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
-                        echo "<a href='mailto:" . $allEmails[$teamMember3] . "'> Email Team Member</a></br>";
+                        echo "<br><a href='mailto:" . $allEmails[$teamMember2] . "'> Email Team Member</a></br>";
+
+                    }
+                }
+                if ($teamMember3) {
+                    if ($teamMember3 == $playerid) {
+                        $yourPlayerID = 'Player_3';
+                    } else {
+                        echo "<br> Your team member is: " . $teams[$teamMember3], '<input type="submit"  name = "player" class= "inline" value = "Remove Player 3" onclick="return confirm(\'Are you sure you want to remove Player 3?\');"></input>';
+                        echo "<input type=text style='display: none' name='player3' value ='player3' ></input>";
+                        echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
+
+                        echo "<br><a href='mailto:" . $allEmails[$teamMember3] . "'> Email Team Member</a></br>";
 
                     }
                 }
                 if ($teamMember4) {
                     if ($teamMember4 == $playerid) {
-                        $yourPlayerID = 'Player_3';
+                        $yourPlayerID = 'Player_4';
                     } else {
-                        echo "<br> Your team member is: " . $teams[$teamMember4], '<input type="submit"  name = "player3" value = "Remove Player" onclick="return confirm(\'Are you sure you want to remove this player?\');"></input>';
-                        echo "<input type=text style='display: none' name='player' value ='player3' ></input>";
+                        echo "<br> Your team member is: " . $teams[$teamMember4], '<input type="submit" name = "player" class= "inline" value = "Remove Player 4" onclick="return confirm(\'Are you sure you want to remove Player 4?\');"></input>';
+                        echo "<input type=text style='display: none' name='player4' value ='player4' ></input>";
                         echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
 
-                        echo "<a href='mailto:" . $allEmails[$teamMember4] . "'> Email Team Member</a></br>";
+                        echo "<br><a href='mailto:" . $allEmails[$teamMember4] . "'> Email Team Member</a></br>";
 
                     }
                 }
                 if ($teamMember5) {
                     if ($teamMember5 == $playerid) {
-                        $yourPlayerID = 'Player_4';
-                    } else {
-                        echo "<br> Your team member is: " . $teams[$teamMember5], '<input type="submit" name = "player4" value = "Remove Player" onclick="return confirm(\'Are you sure you want to remove this player?\');"></input>';
-                        echo "<input type=text style='display: none' name='player' value ='player4' ></input>";
-                        echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
-
-                        echo "<a href='mailto:" . $allEmails[$teamMember5] . "'> Email Team Member</a></br>";
-
-                    }
-                }
-                if ($teamMember6) {
-                    if ($teamMember6 == $playerid) {
                         $yourPlayerID = 'Player_5';
                     } else {
-                        echo "<br> Your team member is: " . $teams[$teamMember6], '<input type="submit" name = "player5" value = "Remove Player" onclick="return confirm(\'Are you sure you want to remove this player?\');"></input>';
-                        echo "<input type=text style='display: none' name='player' value ='player5' ></input>";
+                        echo "<br> Your team member is: " . $teams[$teamMember5], '<input type="submit" name = "player" class= "inline" value = "Remove Player 5" onclick="return confirm(\'Are you sure you want to remove Player 5?\');"></input>';
+                        echo "<input type=text style='display: none' name='player5' value ='player5' ></input>";
                         echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
 
-                        echo "<a href='mailto:" . $allEmails[$teamMember6] . "'> Email Team Member</a></br>";
+                        echo "<br><a href='mailto:" . $allEmails[$teamMember5] . "'> Email Team Member</a></br>";
 
                     }
                 }
