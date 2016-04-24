@@ -7,7 +7,7 @@ php:
 script: phpunit UnitTest test/CanaryTest.php
 
 env:
-  - DB=mysql
+  - DB=mysql-5.7
 
 dist: trusty
 sudo: required
