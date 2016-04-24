@@ -1,0 +1,16 @@
+table.report {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+}
+
+table.alternate tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+tr.table_header {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+}
