@@ -127,6 +127,12 @@ function createTableOnWebpage($allColumns, $result, $tableName)
                             <input type='hidden' name='rowid' value='$rowid'>
                             <input type='submit' value='Update'>
                         </form>
+                        <form action='archiveRow.php' method='get'>
+                            <input type='hidden' name='table' value='$tableName'>
+                            <input type='hidden' name='column' value='$columnName'>
+                            <input type='hidden' name='rowid' value='$rowid'>
+                            <input type='submit' value='Delete'>
+                        </form>
                     </td>";
 
             echo "</tr>";

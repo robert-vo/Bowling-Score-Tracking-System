@@ -10,7 +10,7 @@ if (!isset($_SESSION["sess_user"])) {
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Profile</title>
         <link rel="stylesheet" type="text/css" href="index.css">
         <style>
             div#id {
@@ -25,7 +25,10 @@ if (!isset($_SESSION["sess_user"])) {
     generateMenuBar(basename(__FILE__));
     ?>
 
+    <br>
     <div id="id">PROFILE:</div>
+    <br>
+
     <?php
     $user = $_SESSION['sess_user'];
     include 'databaseFunctions.php';
@@ -43,20 +46,27 @@ if (!isset($_SESSION["sess_user"])) {
     $fname = ucfirst($fname);
     $lname = ucfirst($lname);
     echo "You are currently logged in as: $fname $lname";
-    echo '<br><br><u>Here is the information you have on file with us:</u>';
+    echo "<br>";
+    echo "<form action='updateProfile.php'>
+              <input type='submit' value='Edit Profile'>
+          </form>";
+
+    echo '<br><u>Here is the information you have on file with us:</u>';
     $query2 = "SELECT * FROM players WHERE Email = '$user'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if($numrows != 0){
         while ($row = mysqli_fetch_assoc($result)){
             $playerid = $row['Player_ID'];
+            echo '<br><br>Your Player ID is ' . $playerid;
             echo '<br>Gender: ' . $row['Gender'];
             echo '<br>Date Of Birth: ' . $row['Date_Of_Birth'];
             echo '<br>Street Address: ' . $row['Street_Address'];
             echo '<br>City: ' . $row['City'];
-            echo '<br>State: ' . $row['State'];
+            echo '<br>State ' . $row['State'];
             echo '<br>Zip Code: ' . $row['Zip_Code'];
             echo '<br>Email: ' . $row['Email'];
+            echo "<br>";
         }
     }
 
@@ -68,9 +78,10 @@ if (!isset($_SESSION["sess_user"])) {
 
         while ($row = mysqli_fetch_assoc($result)){
             $teamname = $row['Name'];
-            echo "<br> You are the team leader of: ". $teamname;
+            echo "<br>You are the team leader of: ". $teamname;
             echo "\n";
         }
+        echo "<br>";
     }
 
     //Listing Player ID
@@ -82,7 +93,7 @@ if (!isset($_SESSION["sess_user"])) {
         while ($row = mysqli_fetch_assoc($result)){
             $teamname = $row['Name'];
         }
-        echo "<br> Your Player ID is: ". $playerid;
+        //echo "<br> Your Player ID is: ". $playerid . "<br>";
 
     }
 

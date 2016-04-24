@@ -40,7 +40,6 @@ CREATE TABLE Players (
   Reset_Key           VARCHAR(100)    DEFAULT '',
   Date_Added          DATETIME,
   Last_Date_Modified  DATETIME
-
 );
 
 CREATE TABLE Team (
@@ -160,6 +159,8 @@ CREATE TABLE Player_Stats (
   Worst_Score         INT NOT NULL DEFAULT 0,
   Pins_Left           INT NOT NULL DEFAULT 0,
   Average_Pin_Left    DOUBLE NOT NULL DEFAULT 0,
+  Foul_Count          INT NOT NULL DEFAULT 0,
+  Pins_Hit            INT NOT NULL DEFAULT 0,
   Date_Added          DATETIME,
   Last_Date_Modified  DATETIME,
   FOREIGN KEY (Player_ID) REFERENCES Players(Player_ID)
