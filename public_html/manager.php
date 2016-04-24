@@ -186,6 +186,22 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 echo "<br> The team you manage has a total win of: " . $teamwin;
                 echo "<br> The team you manage has a win percentage of: " . $percentage, '%', "<br></h4> ";
 
+
+
+                //ADD PLAYERS TO A TEAM
+
+                echo "<form action=addPlayer.php method ='POST'>";
+                echo "<br> Would you like to add a new player to $teamname? Enter player's email:";
+                echo '<input type="text" name="myinput" placeholder = "E-mail" class = "inline" id="myinput">';
+                $onclick = "onclick = return confirm('Are you sure you want to add this player?');";
+                echo '<input type="submit" name = "addplayer" class= "inline" value = "Add Player"  onclick="return confirm(\'Are you sure you want to add this player?\');"></input>';
+                echo "</input>";
+                echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
+
+                echo '</form>';
+
+
+                //REMOVE PLAYERS FROM A TEAM
                 echo "<form action=removePlayer.php method ='POST'>";
                 if ($teamMember1) {
                     if ($teamMember1 == $playerid) {

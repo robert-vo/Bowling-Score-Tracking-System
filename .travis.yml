@@ -7,10 +7,19 @@ php:
 script: phpunit UnitTest test/CanaryTest.php
 
 env:
-  - DB=mysql
+  - DB=mysql-5.7
+
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - mysql-server-5.7
+    - mysql-client-core-5.7
+    - mysql-client-5.7
 
 before_install:
-  - mysql < resources/archive_table.sql
-  - mysql < resources/database_schema.sql
-  - mysql < resources/database_triggers.sql
-  - mysql < resources/insert_data.sql
+  - mysql -u root < resources/archive_table.sql
+  - mysql -u root < resources/database_schema.sql
+  - mysql -u root < resources/database_triggers.sql
+  - mysql -u root < resources/insert_data.sql

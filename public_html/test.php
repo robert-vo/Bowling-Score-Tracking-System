@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'menuBar.php';
-generateMenuBar(basename(__FILE__));
+//include 'menuBar.php';
+//generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 
 if(isset($_POST['submit'])) {
@@ -64,23 +64,178 @@ function generateCheckboxesForAllPins () {
 </head>
 <body>
 
-<p>
-<form action="test.php" method="POST">
-    <input type="submit" value="Click here to add a new ball!" name = "ballInsertion">
-    <?php
-    if(!isset($_GET['orderBy'])) {
-        $toPrint = getAllBalls();
-        printColorSizeWeightFromBall($toPrint);
+<?php
+foreach (range(11,140) as $item) {
+    if($item % 10 == 0) {
+                echo "<br>INSERT INTO bowling.Roll 
+        (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES ($item,  " . rand(1, 20) . ", " .
+            1 . ", " . 0 . ", " . 1 . ", " . 0 . ", " . 1 . ", " . 1 . ", " . 1 . ", " . 0 . ", " . 1 . ", " . 0 . ");";
+        echo "<br>INSERT INTO bowling.Roll 
+        (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Spare) VALUES ($item,  " . rand(1, 20) . ", " .
+            0 . ", " . 1 . ", " . 0 . ", " . 1 . ", " . 0 . ", " . 0 . ", " . 0 . ", " . 1 . ", " . 0 . ", " . 1 . ", 1);";
+
+//        $counter = 0;
+//        $pin1 = rand(0, 1);
+//        $pin2 = rand(0, 1);
+//        $pin3 = rand(0, 1);
+//        $pin4 = rand(0, 1);
+//        $pin5 = rand(0, 1);
+//        $pin6 = rand(0, 1);
+//        $pin7 = rand(0, 1);
+//        $pin8 = rand(0, 1);
+//        $pin9 = rand(0, 1);
+//        $pin10 = rand(0, 1);
+//        echo "<br>INSERT INTO bowling.ROLL
+//        (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES ($item,  " . rand(1, 20) . ", " .
+//            $pin1 . ", " . $pin2 . ", " . $pin3 . ", " . $pin4 . ", " . $pin5 . ", " . $pin6 . ", " . $pin7 . ", " . $pin8 . ", " . $pin9 . ", " . $pin10 . ");";
+//        if($pin1 == 1) {
+//            $counter++;
+//            $pin1 = 0;
+//        }
+//        else {
+//            $pin1 = rand(0, 1);
+//        }
+//        if($pin2 == 1) {
+//            $counter++;
+//            $pin2 = 0;
+//        }
+//        else {
+//            $pin2 = rand(0, 1);
+//        }
+//        if($pin3 == 1) {
+//            $counter++;
+//            $pin3 = 0;
+//        }
+//        else {
+//            $pin3 = rand(0, 1);
+//        }
+//        if($pin4 == 1) {
+//            $counter++;
+//            $pin4 = 0;
+//        }
+//        else {
+//            $pin4 = rand(0, 1);
+//        }
+//        if($pin5 == 1) {
+//            $counter++;
+//            $pin5 = 0;
+//        }
+//        else {
+//            $pin5 = rand(0, 1);
+//        }
+//        if($pin6 == 1) {
+//            $counter++;
+//            $pin6 = 0;
+//        }
+//        else {
+//            $pin6 = rand(0, 1);
+//        }
+//        if($pin7 == 1) {
+//            $counter++;
+//            $pin7 = 0;
+//        }
+//        else {
+//            $pin7 = rand(0, 1);
+//        }
+//        if($pin8 == 1) {
+//            $counter++;
+//            $pin8 = 0;
+//        }
+//        else {
+//            $pin8 = rand(0, 1);
+//        }
+//        if($pin9 == 1) {
+//            $counter++;
+//            $pin9 = 0;
+//        }
+//        else {
+//            $pin9 = rand(0, 1);
+//        }
+//        if($pin10 == 1) {
+//            $counter++;
+//            $pin10 = 0;
+//        }
+//        else {
+//            $pin10 = rand(0, 1);
+//        }
+//        echo "<br>INSERT INTO bowling.ROLL
+//        (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES ($item,  " . rand(1, 20) . ", " .
+//            $pin1 . ", " . $pin2 . ", " . $pin3 . ", " . $pin4 . ", " . $pin5 . ", " . $pin6 . ", " . $pin7 . ", " . $pin8 . ", " . $pin9 . ", " . $pin10 . ");";
+
+//        if($counter == 10) {
+            echo "<br>INSERT INTO bowling.Roll 
+                (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES ($item,  " . rand(1, 20) . ", " .
+                rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ", " . rand(0,1) . ");";
+//        }
+//        else {
+//        }
+
     }
     else {
-        $toPrint = getAllBallsFiltered($_GET['orderBy']);
-        printColorSizeWeightFromBall($toPrint);
-    }?>
-    <?php generateCheckboxesForAllPins() ?>
-    <h5>
-        <input type="submit" value="Submit Roll" name="submit" class="submitButton" onclick="return confirm('Are you sure you have selected the correct pins and a ball for this frame?');">
-    </h5>
-    <br>
-</form>
+        $pin1 = rand(0, 1);
+        $pin2 = rand(0, 1);
+        $pin3 = rand(0, 1);
+        $pin4 = rand(0, 1);
+        $pin5 = rand(0, 1);
+        $pin6 = rand(0, 1);
+        $pin7 = rand(0, 1);
+        $pin8 = rand(0, 1);
+        $pin9 = rand(0, 1);
+        $pin10 = rand(0, 1);
+        $pinsHit = $pin1 + $pin2 + $pin3 + $pin4 + $pin5 + $pin6 + $pin7 + $pin8 + $pin9 + $pin10;
+        if($pinsHit == 10) {
+            echo "<br>INSERT INTO bowling.Roll 
+        (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Strike) VALUES ($item,  " . rand(1, 20) . ", " .
+                $pin1 . ", " . $pin2 . ", " . $pin3 . ", " . $pin4 . ", " . $pin5 . ", " . $pin6 . ", " . $pin7 . ", " . $pin8 . ", " . $pin9 . ", " . $pin10 . ", 1);";
+        }
+        else {
+            echo "<br>INSERT INTO bowling.Roll 
+            (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES ($item,  " . rand(1, 20) . ", " .
+                $pin1 . ", " . $pin2 . ", " . $pin3 . ", " . $pin4 . ", " . $pin5 . ", " . $pin6 . ", " . $pin7 . ", " . $pin8 . ", " . $pin9 . ", " . $pin10 . ");";
+            $pin1 = $pin1 == 1 ? 0 : rand(0, 1);
+            $pin2 = $pin2 == 1 ? 0 : rand(0, 1);
+            $pin3 = $pin3 == 1 ? 0 : rand(0, 1);
+            $pin4 = $pin4 == 1 ? 0 : rand(0, 1);
+            $pin5 = $pin5 == 1 ? 0 : rand(0, 1);
+            $pin6 = $pin6 == 1 ? 0 : rand(0, 1);
+            $pin7 = $pin7 == 1 ? 0 : rand(0, 1);
+            $pin8 = $pin8 == 1 ? 0 : rand(0, 1);
+            $pin9 = $pin9 == 1 ? 0 : rand(0, 1);
+            $pin10 = $pin10 == 1 ? 0 : rand(0, 1);
+            $pinsHit += $pin1 + $pin2 + $pin3 + $pin4 + $pin5 + $pin6 + $pin7 + $pin8 + $pin9 + $pin10;
+            if($pinsHit == 10) {
+                echo "<br>INSERT INTO bowling.Roll 
+                    (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Spare) VALUES ($item,  " . rand(1, 20) . ", " .
+                    $pin1 . ", " . $pin2 . ", " . $pin3 . ", " . $pin4 . ", " . $pin5 . ", " . $pin6 . ", " . $pin7 . ", " . $pin8 . ", " . $pin9 . ", " . $pin10 . ", 1);";
+            }
+            else {
+                echo "<br>INSERT INTO bowling.Roll 
+                (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES ($item,  " . rand(1, 20) . ", " .
+                $pin1 . ", " . $pin2 . ", " . $pin3 . ", " . $pin4 . ", " . $pin5 . ", " . $pin6 . ", " . $pin7 . ", " . $pin8 . ", " . $pin9 . ", " . $pin10 . ");";
+            }
+        }
+    }
+}
+?>
+
+
+<p>
+<!--<form action="test.php" method="POST">-->
+<!--    <input type="submit" value="Click here to add a new ball!" name = "ballInsertion">-->
+<!--    --><?php
+//    if(!isset($_GET['orderBy'])) {
+//        $toPrint = getAllBalls();
+//        printColorSizeWeightFromBall($toPrint);
+//    }
+//    else {
+//        $toPrint = getAllBallsFiltered($_GET['orderBy']);
+//        printColorSizeWeightFromBall($toPrint);
+//    }?>
+<!--    --><?php //generateCheckboxesForAllPins() ?>
+<!--    <h5>-->
+<!--        <input type="submit" value="Submit Roll" name="submit" class="submitButton" onclick="return confirm('Are you sure you have selected the correct pins and a ball for this frame?');">-->
+<!--    </h5>-->
+<!--    <br>-->
+<!--</form>-->
 </body>
 </html>
