@@ -13,16 +13,7 @@ if(!isset($_GET['category']))
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <style>
-        table {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="reports.css">
     <script src="jquery.js"></script>
     <script type="text/javascript" src="submitReport.js"></script>
 </head>
@@ -67,9 +58,9 @@ if(!isset($_GET['category']))
         }
     ?>
     
-<br> <div id="empty"></div>
-
-    <table <?php echo $displayTeams; ?>>
+<br><div id="empty"></div>
+    
+    <table class="report" <?php echo $displayTeams; ?>>
         <tr>
             <form>
                 <td>Report Type:
@@ -103,7 +94,7 @@ if(!isset($_GET['category']))
         </tr>
     </table>
 
-    <table <?php echo $displayPlayers; ?>>
+    <table class="report" <?php echo $displayPlayers; ?>>
         <tr>
             <form>
                 <td>Report Type:
