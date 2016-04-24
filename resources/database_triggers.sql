@@ -2,10 +2,10 @@
 
 -- This trigger automatically creates the date for when the player joins.
 
-# CREATE TRIGGER trigger_name
-#   [before | after]
-#   [delete | insert | update [of column]]
-#   [for each row]
+-- CREATE TRIGGER trigger_name
+--   [before | after]
+--   [delete | insert | update [of column]]
+--   [for each row]
 
 use bowling;
 
