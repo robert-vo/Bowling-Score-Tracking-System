@@ -30,6 +30,14 @@ include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 $conn = connectToDatabase();
+
+function emailPlayer($playerID) {
+    echo 'Emailing....' . $playerID;
+}
+
+function popupMessageAndRedirectBrowser($message) {
+    echo "<script type='text/javascript'>alert('$message');history.go(-1);document.location = 'manager.php';</script>";
+}
 }
     ?>
     </body>
@@ -48,9 +56,11 @@ $inputEmail = $_POST['myinput'];
 $teamID = $_POST['team'];
 $query ="SELECT Player_ID, First_Name, Last_Name, Email from players where Email = '$inputEmail'";
 $result = $conn->query($query);
+
 $numrows = $result->num_rows;
 if ($numrows != 0)
 {
+    $isFull = false;
     while ($row = mysqli_fetch_assoc($result)) {
         $fname = $row['First_Name'];
         $lname = $row['Last_Name'];
@@ -61,68 +71,49 @@ if ($numrows != 0)
             echo "<br>Their player ID is: $playerID";
             echo "<br>Congratulations! $fname $lname is now part of your team!";
 
-            if(!isset($row['Player_1']))
-            {
-                $sql = "UPDATE team SET Player_1 = $playerID where team.Team_ID = $teamID";
-                echo "<script type='text/javascript'>
-                alert('Player has been added to Player_1!');
-                history.go(-1);
-                document.location = 'manager.php';
-                </script>";
-            }
-            elseif(!isset($row['Player_2']))
-            {
-                $sql = "UPDATE team SET Player_2 = $playerID where team.Team_ID = $teamID";
-                echo "<script type='text/javascript'>
-                alert('Player has been added to Player_2!');
-                history.go(-1);
-                document.location = 'manager.php';
-                </script>";
-            }
-            elseif(!isset($row['Player_3']))
-            {
-                $sql = "UPDATE team SET Player_3 = $playerID where team.Team_ID = $teamID";
-                echo "<script type='text/javascript'>
-                alert('Player has been added to Player_3!');
-                history.go(-1);
-                document.location = 'manager.php';
-                </script>";
-            }
-            elseif(!isset($row['Player_4']))
-            {
-                $sql = "UPDATE team SET Player_4 = $playerID where team.Team_ID = $teamID";
-                echo "<script type='text/javascript'>
-                alert('Player has been added to Player_4!');
-                history.go(-1);
-                document.location = 'manager.php';
-                </script>";
-            }
-            elseif(!isset($row['Player_5']))
-            {
-                $sql = "UPDATE team SET Player_5 = $playerID where team.Team_ID = $teamID";
-                echo "<script type='text/javascript'>
-                alert('Player has been added to Player_5!');
-                history.go(-1);
-                document.location = 'manager.php';
-                </script>";
-            }
-            else
-            {
-                echo 'Team is full, cannot add anymore players!';
+            $query2 = "SELECT Player_1, Player_2, Player_3, Player_4, Player_5 from Team where Team_ID = $teamID";
+            $result2 = $conn->query($query2);
+            $message = '';
+            while($row2 = $result2->fetch_assoc()) {
+                if (!isset($row2['Player_1'])) {
+                    echo '<br>Player has been set as #1';
+                    $message = 'Player has been added to 1st player slot! Remember that there is a maximum of 5 other players on a team!';
+                    $sql = "UPDATE team SET Player_1 = $playerID where team.Team_ID = $teamID";
+                } elseif (!isset($row2['Player_2'])) {
+                    echo '<br>Player has been set as #2';
+                    $sql = "UPDATE team SET Player_2 = $playerID where team.Team_ID = $teamID";
+                    $message = 'Player has been added to 2nd player slot! Remember that there is a maximum of 5 other players on a team!';
+                } elseif (!isset($row2['Player_3'])) {
+                    echo '<br>Player has been set as #3';
+                    $sql = "UPDATE team SET Player_3 = $playerID where team.Team_ID = $teamID";
+                    $message = 'Player has been added to 3rd player slot! Remember that there is a maximum of 5 other players on a team!';
+                } elseif (!isset($row2['Player_4'])) {
+                    echo '<br>Player has been set as #4';
+                    $sql = "UPDATE team SET Player_4 = $playerID where team.Team_ID = $teamID";
+                    $message = 'Player has been added to 4th player slot! You can only add one more person to your team!';
+                } elseif (!isset($row2['Player_5'])) {
+                    echo '<br>Player has been set as #5';
+                    $sql = "UPDATE team SET Player_5 = $playerID where team.Team_ID = $teamID";
+                    $message = 'Player has been added to 5th player slot! You are currently maxed out on other team members!';
+                } else {
+                    $message = 'Your team is full, therefore you are unable to add any more players. Please remove some members off of your team if you want room to add other players.';
+                    $isFull = true;
+                }
             }
         }
-        else
-        {
-            echo "Player is not in the database";
-        }
-
     }
-    if (attemptDataManipulationLanguageQuery($sql)) {
+    if (!$isFull and attemptDataManipulationLanguageQuery($sql)) {
+        emailPlayer($playerID);
         echo '<br>Player Added';
     } else {
         echo 'Could not add player!';
     }
+    popupMessageAndRedirectBrowser($message);
 
+}
+else
+{
+    echo "Player is not in the database";
 }
 ?>
 

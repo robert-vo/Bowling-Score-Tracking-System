@@ -193,7 +193,9 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 echo "<form action=addPlayer.php method ='POST'>";
                 echo "<br> Would you like to add a new player to $teamname? Enter player's email:";
                 echo '<input type="text" name="myinput" placeholder = "E-mail" class = "inline" id="myinput">';
-                echo "<input type=submit name = addplayer class =inline value=Add Player onclick='return confirm('Are you sure you want to add this player??');\"></input>";
+                $onclick = "onclick = return confirm('Are you sure you want to add this player?');";
+                echo '<input type="submit" name = "addplayer" class= "inline" value = "Add Player"  onclick="return confirm(\'Are you sure you want to add this player?\');"></input>';
+                echo "</input>";
                 echo "<input type=text style='display: none' name='team' value =$teamID ></input>";
 
                 echo '</form>';
