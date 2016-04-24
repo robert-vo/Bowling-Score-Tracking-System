@@ -9,6 +9,15 @@ script: phpunit UnitTest test/CanaryTest.php
 env:
   - DB=mysql
 
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+
 before_install:
   - mysql < resources/archive_table.sql
   - mysql < resources/database_schema.sql
