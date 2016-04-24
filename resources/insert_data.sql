@@ -1433,10 +1433,9 @@ INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hi
 INSERT INTO bowling.Frame(Frame_ID, Frame_Number, Roll_One_ID, Roll_Two_ID, Game_ID, Team_ID, Player_ID) Values (419, 9, 847, 848, 4, 7, 17);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (419, 20, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (419, 17, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1);
+INSERT INTO bowling.Frame(Frame_ID, Frame_Number, Roll_One_ID, Roll_Two_ID, Game_ID, Team_ID, Player_ID) Values (420, 10, 849, 850, 4, 7, 17);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (420, 19, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (420, 10, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0);
-INSERT INTO bowling.Frame(Frame_ID, Frame_Number, Roll_One_ID, Roll_Two_ID, Game_ID, Team_ID, Player_ID) Values (420, 10, 849, 850, 4, 7, 17);
-
 
 
 INSERT INTO bowling.Frame(Frame_ID, Frame_Number, Roll_One_ID, Roll_Two_ID, Game_ID, Team_ID, Player_ID) Values (421, 1, 851, 852, 4, 7, 13);
