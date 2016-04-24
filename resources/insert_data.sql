@@ -281,12 +281,7 @@ INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (138, 8, 15, 286, 287, null, 9, 4, 1, null, null);
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (139, 9, 15, 288, 289, null, 6, 4, 1, null, null);
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (140, 10, 15, 290, 291, null, 8, 4, 1, null, null);
-INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (141, 0, null, null, null, null, 0, null, null, null, null);
-INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (142, 0, null, null, null, null, 0, null, null, null, null);
-INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (143, 0, null, null, null, null, 0, null, null, null, null);
-INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (144, 0, null, null, null, null, 0, null, null, null, null);
-INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (145, 0, null, null, null, null, 0, null, null, null, null);
-INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (146, 0, null, null, null, null, 0, null, null, null, null);
+
 
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (1, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0);
 INSERT INTO bowling.Roll (Frame_ID, Ball_ID, Is_Strike, Is_Spare, Is_Foul, Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) VALUES (1, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0);
