@@ -78,27 +78,36 @@ function printRollsInformation($playerID, $gameID, $teamID) {
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if($row['Frame_Number'] != 10) {
-                echo "<td colspan='3'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . '</td>';
+                $preparedURL = 'editRoll.php?rollID='.$row["Roll_One_ID"];
+                echo "<td colspan='3'>
+                    <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . "</a></td>";
 
                 if(isset($row['Roll_Two_ID'])) {
-                    echo "<td colspan='3'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . '</td>';
+                    $preparedURL = 'editRoll.php?rollID='.$row["Roll_Two_ID"];
+                    echo "<td colspan='3'>
+                        <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . "</a></td>";
                 }
                 else {
                     echo "<td colspan=3>&nbsp;</td>";
                 }
             }
             else {
-                echo "<td colspan='2'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . '</td>';
-
+                $preparedURL = 'editRoll.php?rollID='.$row["Roll_One_ID"];
+                echo "<td colspan='2'>
+                    <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . "</a></td>";
                 if(isset($row['Roll_Two_ID'])) {
-                    echo "<td colspan='2'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . '</td>';
+                    $preparedURL = 'editRoll.php?rollID='.$row["Roll_Two_ID"];
+                    echo "<td colspan='2'>
+                        <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . "</a></td>";
                 }
                 else {
                     echo "<td colspan=2>&nbsp;</td>";
                 }
 
                 if(isset($row['Roll_Three_ID'])) {
-                    echo "<td colspan='2'>" . getNumberOfPinsHitForRollID($row['Roll_Three_ID']) . '</td>';
+                    $preparedURL = 'editRoll.php?rollID='.$row["Roll_Three_ID"];
+                    echo "<td colspan='2'>
+                        <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_Three_ID']) . "</a></td>";
                 }
                 else {
                     echo "<td colspan=2>&nbsp;</td>";

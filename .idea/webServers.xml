@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="d46b4b42-2d92-44c7-b0dd-ce5727274866" name="asdf" url="http://localhost:8000/PhpstormProjects/Bowling-Score-Tracking-System/">
-        <fileTransfer mountedRoot="" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="" accessType="MOUNT" />
       </webServer>
       <webServer id="71597e33-8f45-499a-8fd1-c4d1e136c88c" name="test" url="http://localhost:8000/PhpstormProjects/Bowling-Score-Tracking-System/">
         <fileTransfer mountedRoot="" accessType="MOUNT" />
