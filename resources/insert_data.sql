@@ -137,31 +137,9 @@ INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('57
 INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('Reliant Pkwy Houston, TX 77054', 'NRG Stadium Complex 1');
 
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,2,3,4', null, 'Casual Games', 1, 1, 0);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,16,15,19', 14, 'Casual Games', 1, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('13,12,14,2,5', 5, 'Half off Tuesdays', 1, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('15,1,5,18,13', 1, 'Half off Tuesdays', 6, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('10,17,1,16,9', 9, 'Student Thursdays', 1, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('18,7,17,19,5', 18, 'Student Thursdays', 1, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,16,3,13,5', 3, 'Freaky Fridays', 2, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('4,2,9,8,16', 9, 'Freaky Fridays', 2, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('5,18,14,2,19', 2, '$100 Prize Tournament', 3, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('12,14,15,2', 12, 'UofH Tournament Qualifier', 4, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('3,5', 5, 'UofH Tournament Qualifier', 4, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,8', 7, 'UofH Tournament Qualifier', 4, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,2', 14, 'UofH Tournament Qualifier', 4, 2, 1);
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('12,5', 5, 'UofH Bowling Tournament', 4, 2, 1);
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,14', 7, 'UofH Bowling Tournament', 4, 2, 1);
 INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('5,7', 5, 'UofH Bowling Championship', 4, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('6,16,3,10,17,5,18', 6, 'Student Thursdays', 1, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,5,18,13,8,7,12', 12, 'Just Another Game', 5, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('18,6,5', null, 'Just Another Game', 5, 1, 0);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,12,16', 16, 'Just Another Game', 5, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('3,17,8,16,15', 3, 'Developer Bowling Meetup', 2, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('2,8,15,3,10', 8, 'Texans Fans Showcase', 7, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('8,17,14,13,4', 13, 'Texans Fans Showcase', 7, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('14,18,19,6,2', 19, 'Freaky Fridays', 2, 1, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('17,8,12,10', 12, 'UofH Employees Tournament', 4, 2, 1);
-
 
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (1, 1, 1, 1, 2, null, 3, 1, 1, null, null);
 INSERT INTO bowling.frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID, Date_Added, Last_Date_Modified) VALUES (2, 2, 1, 3, 4, null, 10, 1, 1, null, null);
