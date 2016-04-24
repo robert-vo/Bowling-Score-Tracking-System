@@ -1,5 +1,13 @@
-table {
-    width: 35%;
+table.fieldset {
+    width: 100%;
+}
+
+table.updated {
+    width: 40%;
+}
+
+table.alternate tr:nth-child(even) {
+    background-color: #e6e6e6;
 }
 
 th {
@@ -11,12 +19,16 @@ th, td {
     padding: 5px;
 }
 
-div#center {
+div.center {
     justify-content: center;
     text-align: center;
 }
 
 fieldset {
     display: inline;
-    margin: auto;
+    position: relative;
+    margin: 10px;
+    background-color: #e6e6e6;
 }
+
+
