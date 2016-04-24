@@ -67,35 +67,21 @@ CREATE TRIGGER delete_from_game_location AFTER DELETE ON Game_Location
 FOR EACH ROW
   insert into Game_Location_Archive VALUES (old.Game_Location_ID, old.Game_Address, old.Game_Location_Name, old.Date_Added, old.Last_Date_Modified, now());
 
-drop trigger if exists update_player_spares;
-create trigger update_player_spares after insert on Roll
-  for each ROW
+drop trigger if exists update_player_stats;
+create trigger update_player_stats after insert on Roll
+  for each ROW begin
+  UPDATE Player_Stats, Frame
+  set Player_Stats.Pins_Hit = Player_Stats.Pins_Hit +
+                    new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 + new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8
+                  + new.Hit_Pin_9 + new.Hit_Pin_10 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
   if(new.Is_Spare = 1) THEN
     update Player_Stats, Frame SET Player_Stats.Spares = Player_Stats.Spares + 1 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
-  END IF;
-
-
-drop trigger if exists update_player_strikes;
-create trigger update_player_strikes after insert on Roll
-for each ROW
-  if(new.Is_Strike = 1) THEN
+  ELSEIF (new.Is_Strike = 1) THEN
     update Player_Stats, Frame SET Player_Stats.Strikes = Player_Stats.Strikes + 1 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
-  END IF;
-
-
-drop trigger if exists update_player_fouls;
-create trigger update_player_fouls after insert on Roll
-for each ROW
-  if(new.Is_Foul = 1) THEN
+  ELSEIF (new.Is_Foul = 1) THEN
     update Player_Stats, Frame SET Player_Stats.Foul_Count = Player_Stats.Foul_Count + 1 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
   END IF;
-
-drop trigger if exists update_player_pins_hit;
-create trigger update_player_pins_hit after insert on Roll
-  for each ROW
-  UPDATE Player_Stats, Frame set Player_Stats.Pins_Hit = Player_Stats.Pins_Hit +
-  new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 + new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8
-  + new.Hit_Pin_9 + new.Hit_Pin_10 where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+end;
 
 
 -- Trigger for date_added
@@ -142,43 +128,43 @@ FOR EACH ROW
 
 -- Trigger for last date modified
 
-# drop trigger if exists Last_Date_Modified_Ball;
-# CREATE TRIGGER Last_Date_Modified_Ball BEFORE UPDATE ON Ball
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Game_Location;
-# CREATE TRIGGER Last_Date_Modified_Game_Location BEFORE UPDATE ON Game_Location
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Frame;
-# CREATE TRIGGER Last_Date_Modified_Frame BEFORE UPDATE ON Frame
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Game;
-# CREATE TRIGGER Last_Date_Modified_Game BEFORE UPDATE ON Game
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Player_Stats;
-# CREATE TRIGGER  Last_Date_Modified_Player_Stats BEFORE UPDATE ON Player_Stats
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Players;
-# CREATE TRIGGER Last_Date_Modified_Players BEFORE UPDATE ON Players
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Roll;
-# CREATE TRIGGER Last_Date_Modified_Roll BEFORE UPDATE ON Roll
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified  = NOW();
-#
-# drop trigger if exists Last_Date_Modified_Team;
-# CREATE TRIGGER Last_Date_Modified_Team BEFORE UPDATE ON Team
-# FOR EACH ROW
-#   SET NEW.Last_Date_Modified = NOW();
+drop trigger if exists Last_Date_Modified_Ball;
+CREATE TRIGGER Last_Date_Modified_Ball BEFORE UPDATE ON Ball
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Game_Location;
+CREATE TRIGGER Last_Date_Modified_Game_Location BEFORE UPDATE ON Game_Location
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Frame;
+CREATE TRIGGER Last_Date_Modified_Frame BEFORE UPDATE ON Frame
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Game;
+CREATE TRIGGER Last_Date_Modified_Game BEFORE UPDATE ON Game
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Player_Stats;
+CREATE TRIGGER  Last_Date_Modified_Player_Stats BEFORE UPDATE ON Player_Stats
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Players;
+CREATE TRIGGER Last_Date_Modified_Players BEFORE UPDATE ON Players
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Roll;
+CREATE TRIGGER Last_Date_Modified_Roll BEFORE UPDATE ON Roll
+FOR EACH ROW
+  SET NEW.Last_Date_Modified  = NOW();
+
+drop trigger if exists Last_Date_Modified_Team;
+CREATE TRIGGER Last_Date_Modified_Team BEFORE UPDATE ON Team
+FOR EACH ROW
+  SET NEW.Last_Date_Modified = NOW();
 
