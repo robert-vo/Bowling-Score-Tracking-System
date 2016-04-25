@@ -113,25 +113,25 @@ echo "<br><br>";
 print_r($pins_hit);
 echo "<br> pins hit: " . count($pins_hit)."<br>";
 
-//print_r($pins_hit);
-//echo "<br> ". count($pins_hit);
 
 
-
-for($i = 1; $i < count($pins_hit);$i++){
-    if($pins_hit[$i] == 10){
-        $pins_hit[$i]+$pins_hit[$i+1]+$pins_hit[$i+2];
-    }
-    else if ($pins_hit[$i] + $pins_hit[$i+1] == 10){
-
-    }
-    echo "(".$pins_hit[$i];
-    if($i+1 <count($pins_hit)){
-        echo ",". $pins_hit[$i+1];
-    }
-    echo ")<br>";
-    $i++;
+//for($i = 1; $i < count($pins_hit);$i++){
+//    if($pins_hit[$i] == 10){
+//        $pins_hit[$i]+$pins_hit[$i+1]+$pins_hit[$i+2];
+//    }
+//    else if ($pins_hit[$i] + $pins_hit[$i+1] == 10){
+//
+//    }
+//    echo "(".$pins_hit[$i];
+//    if($i+1 <count($pins_hit)){
+//        echo ",". $pins_hit[$i+1];
+//    }
+//    echo ")<br>";
+//    $i++;
+//}
+$pins_hit = array_values($pins_hit);
+for($i = 0; $i < count($pins_hit);$i++){
+    echo $pins_hit[$i]."<br>";
 }
-
 
 ?>
