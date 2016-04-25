@@ -6,6 +6,7 @@ php:
 
 
 before_install:
+  - mysql -u root -e 'select version();'
   - mysql -u root < resources/archive_table.sql
   - mysql -u root < resources/database_schema.sql
   - mysql -u root < resources/database_triggers.sql

@@ -89,6 +89,31 @@ FOR EACH ROW
     old.Game_Address, old.Game_Location_Name, old.Date_Added,
     old.Last_Date_Modified, now());
 
+drop trigger if exists update_player_stats;
+CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
+  for each ROW
+  begin
+
+  UPDATE bowling.Player_Stats, Frame
+  set bowling.Player_Stats.Pins_Hit = bowling.Player_Stats.Pins_Hit +
+    new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 +
+    new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8 + new.Hit_Pin_9 + new.Hit_Pin_10
+  where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+
+  if(new.Is_Spare = 1) THEN
+    update Player_Stats, Frame
+    SET Player_Stats.Spares = Player_Stats.Spares + 1
+    where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+  ELSEIF (new.Is_Strike = 1) THEN
+    update Player_Stats, Frame
+    SET Player_Stats.Strikes = Player_Stats.Strikes + 1
+    where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+  ELSEIF (new.Is_Foul = 1) THEN
+    update Player_Stats, Frame
+    SET Player_Stats.Foul_Count = Player_Stats.Foul_Count + 1
+    where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
+  END IF;
+end;
 
 drop trigger if exists Date_Added_Ball;
 CREATE TRIGGER Date_Added_Ball BEFORE INSERT ON Ball
