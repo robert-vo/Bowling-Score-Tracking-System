@@ -34,10 +34,10 @@ for($i = 0; $i < count($frame);$i++){
 
 //print_r($pins);
 //echo "<br>". count($pins);
-$pinsLeft = (count($pins) * 10) - array_sum($pins);
+$pinsLeft = (count($frame) * 10) - array_sum($pins);
 //echo "<br>". $pinsLeft;
 
-$PLA = $pinsLeft / count($pins);
+$PLA = $pinsLeft / count($frame);
 
 
 //echo "<br>". $PLA;
