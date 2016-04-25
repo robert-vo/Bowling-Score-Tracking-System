@@ -110,7 +110,7 @@ if (!isset($_SESSION["sess_user"])) {
             echo "<script>alert('Invalid password');</script>";
             createForm();
         }
-
+        $conn->close();
     }
     ?>
 
