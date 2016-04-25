@@ -1,4 +1,5 @@
 <?php
+include 'databaseFunctions.php';
 function createTeamLeaderArray()
 {
     $conn = connectToDatabase();
@@ -36,8 +37,9 @@ function createPlayerEmailArray()
 ?>
 
 <?php
-
+    $players = createPlayerEmailArray();
     echo 'got id' . $_POST['teamID'];
+    echo '<br> emailing...' . $players[$_POST['teamID']];
 //    include 'sendEmail.php';
 //    echo "<br> You have succesfully requested to join the team!";
 //    echo "<br> The team leader has received your request and will get back to you soon!";
