@@ -64,6 +64,8 @@ function createTableOnWebpage($allColumns)
             array_push($allColumnsAsArray, $row["Column_name"]);
         }
         for ($i = 1; $i < count($allColumnsAsArray); $i++) {
+            if($allColumnsAsArray[$i] == "Date_Added" || $allColumnsAsArray[$i] == "Last_Date_Modified")
+                continue;
             echo "<tr>";
             echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
             echo "<td><input type='text' name='" . $allColumnsAsArray[$i] . "' value=''> </td>";

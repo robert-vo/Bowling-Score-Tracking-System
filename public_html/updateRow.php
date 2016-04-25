@@ -66,7 +66,7 @@ function createTableOnWebpage($allColumns, $result)
                 <input type='hidden' name='id' value='" . $_GET['rowid'] . "'>
                 <input type='hidden' name='table' value='" . $_GET['table'] . "'>
                 <input type='hidden' name='id_column' value='" . $_GET['column'] . "'>
-                    <table align='center'>";
+                    <table class='fieldset' align='center'>";
 
     if ($allColumns->num_rows > 0) {
         while ($row = $allColumns->fetch_assoc()) {
@@ -86,6 +86,8 @@ function createTableOnWebpage($allColumns, $result)
                         echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
                         echo "<td>" . $row[$allColumnsAsArray[$i]] . "</td>";
                         echo "</tr>";
+                    } else if($allColumnsAsArray[$i] == "Date_Added" || $allColumnsAsArray[$i] == "Last_Date_Modified" || $allColumnsAsArray[$i] == "Date_Created") {
+                        continue;
                     } else {
                         echo "<tr>";
                         echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
@@ -102,6 +104,8 @@ function createTableOnWebpage($allColumns, $result)
     echo "</table></fieldset</div>";
     echo "<div id='center'><input type='submit' value='Submit Changes'></form></div>";
 }
+
+
 
 retrieveAndPrintAllFromTable($table, $column, $rowid);
 
