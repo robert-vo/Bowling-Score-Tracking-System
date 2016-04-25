@@ -155,6 +155,8 @@ function getInformationAboutGame($gameID) {
 
 
 function calculateTotalScore() {
+
+
     $totalScore = 300; // TODO - Calculate Total Score. Right now it'll return 300.
     $total = "<th colspan='6' rowspan=2>$totalScore</th>";
     return $total;

@@ -72,7 +72,7 @@ if(isset($_SESSION['sess_user'])){
             
         }
 
-        if ($currentPage == "loginSuccessful.php" || $currentPage == "updateProfile.php" || $currentPage == "runUpdateProfile.php") {
+        if ($currentPage == "loginSuccessful.php" || $currentPage == "updateProfile.php" || $currentPage == "runUpdateProfile.php" || $currentPage == "changeEmail.php" || $currentPage == "changePassword.php") {
             echo '<li style="float:right"><a class="active" href="loginSuccessful.php">Profile</a></li>';
         } else {
             echo '<li style="float:right"><a href="loginSuccessful.php">Profile</a></li>';
