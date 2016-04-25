@@ -91,7 +91,7 @@ function printRollsInformation($playerID, $gameID, $teamID) {
                     echo "<td colspan=3>&nbsp;</td>";
                 }
             }
-            else {
+            else {//tenth frame
                 $preparedURL = 'editRoll.php?rollID='.$row["Roll_One_ID"];
                 echo "<td colspan='2'>
                     <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . "</a></td>";
@@ -103,7 +103,6 @@ function printRollsInformation($playerID, $gameID, $teamID) {
                 else {
                     echo "<td colspan=2>&nbsp;</td>";
                 }
-
                 if(isset($row['Roll_Three_ID'])) {
                     $preparedURL = 'editRoll.php?rollID='.$row["Roll_Three_ID"];
                     echo "<td colspan='2'>
@@ -129,7 +128,17 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
     $teamName = getTeamNameForTeamId($teamID);
     $playerName = getPlayerNameForPlayerId($playerID);
     echo '<tr>';
-    echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+    if($_SESSION['player_id'] == $playerID){
+        echo "<th colspan=6 rowspan=2><form action='addRoll.php' method='post'>
+                <input type='hidden' name='gameID' value='$gameID'>
+                <input type='hidden' name='teamID' value='$teamID'>
+                <input type='hidden' name='playerID' value='$playerID'>
+                <input type='submit' value='Add Roll'>";
+        echo "</form></th>";
+        echo "<th colspan=6 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+    }else{
+        echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+    }
     printRollsInformation($playerID, $gameID, $teamID);
     echo calculateTotalScore();
     echo '</tr>';

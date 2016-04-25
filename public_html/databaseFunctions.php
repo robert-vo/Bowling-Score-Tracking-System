@@ -78,7 +78,7 @@ function printColorSizeWeightFromBall($toPrint) {
 }
 
 function printSvgCircles($ballID, $color) {
-    echo "<th><input type=radio name=color value=$ballID></th>";
+    echo "<th><input type=radio name=ballID value=$ballID></th>";
     echo '<th><svg height = 50 width = 50>';
     echo "<circle cx=25 cy=25 r=20 stroke=black stroke-width=2 fill='$color'/>";
     echo '</svg></th>';
