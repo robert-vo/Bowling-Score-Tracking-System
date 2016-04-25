@@ -2,11 +2,11 @@
 <link rel="stylesheet" type="text/css" href="audit.css">
 
 <?php
-session_start();
-include 'menuBar.php';
-generateMenuBar(basename(__FILE__));
-include 'databaseFunctions.php';
-
+//session_start();
+//include 'menuBar.php';
+//generateMenuBar(basename(__FILE__));
+//include 'databaseFunctions.php';
+include 'practiceScore.php';
 function retrieveAllStats($playerID) {
     $conn = connectToDatabase();
     $sql = "select * from Player_Stats where Player_ID = '$playerID'";
