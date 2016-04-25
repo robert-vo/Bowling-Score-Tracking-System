@@ -35,7 +35,7 @@ for($i = 0; $i < count($frame);$i++){
         }
     }
 }
-
+//
 //print_r($pins);
 //echo "<br>". count($pins);
 $pinsLeft = (count($pins) * 10) - array_sum($pins);
