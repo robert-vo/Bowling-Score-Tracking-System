@@ -4,13 +4,9 @@ php:
   - 5.4
   - 5.5
 
-script: phpunit UnitTest test/CanaryTest.php
-
-env:
-  - DB=mysql
 
 before_install:
-  - mysql < resources/archive_table.sql
-  - mysql < resources/database_schema.sql
-  - mysql < resources/database_triggers.sql
-  - mysql < resources/insert_data.sql
+  - mysql -u root < resources/archive_table.sql
+  - mysql -u root < resources/database_schema.sql
+  - mysql -u root < resources/database_triggers.sql
+  - mysql -u root < resources/insert_data.sql

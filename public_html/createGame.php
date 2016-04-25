@@ -54,7 +54,9 @@ function printAllLocations()
         while($row = $result->fetch_assoc()) {
             echo '<option value=' . $row['Game_Location_ID']. '>' . $row['Game_Location_Name'] . ' located at ' . $row['Game_Address'] . '</option>';
         }
+
     }
+
 }
 
 function printAllEventTypes()
@@ -95,6 +97,12 @@ if(isCurrentPlayerATeamLeader($_SESSION['player_id'])) {
     echo printAllLocations();
 
     echo '</select></p>';
+
+    //Form for Adding A New Location
+
+
+    echo 'Location not there?';
+    echo '<br><a href="createLocation.php">Click here to add a new location!</a></br>';
 
     echo 'Game Title? If this is left empty, the game will be titled \'Generic Game\':  <input type="text" name="game_title" /><br />';
 
