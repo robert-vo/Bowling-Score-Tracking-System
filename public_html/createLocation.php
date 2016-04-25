@@ -31,25 +31,18 @@ else {
     include 'databaseFunctions.php';
     $conn = connectToDatabase();
 
-
-
-    function popupMessageAndRedirectBrowser($message) {
-        echo "<script type='text/javascript'>alert('$message');history.go(-2);document.location = 'createGame.php';</script>";
-    }
 }
 ?>
 
 <?php
-$inputLocation = $_POST['locationInput'];
-$inputAddress = $_POST['addressInput'];
-$sql = "INSERT into game_location(Game_Location_Name, Game_Address) VALUES ('$inputLocation','$inputAddress')";
 
-$message = 'New Game Location has been added!';
-if (attemptDataManipulationLanguageQuery($sql)) {
-    echo '<br>New Location Added!';
+echo "<form action=addLocation.php method ='POST'>";
+echo 'Would you like to add a new location? ';
+echo '<input type="text" name="locationInput" placeholder = "Name of Location" class = "inline" id="locationInput">';
+echo '<input type="text" name="addressInput" placeholder = "Address" class = "inline" id="addressInput">';
+$onclick = "onclick = return confirm('Are you sure you want to add this location?');";
+echo '<input type="submit" name = "addplayer" class= "inline" value = "Add Location"  onclick="return confirm(\'Are you sure you want to add this location?\');"></input>';
+echo "</input>";
+echo '</form>';
 
-} else {
-    echo 'Could not add location!';
-}
-popupMessageAndRedirectBrowser($message);
-  ?>
+?>

@@ -100,15 +100,9 @@ if(isCurrentPlayerATeamLeader($_SESSION['player_id'])) {
 
     //Form for Adding A New Location
 
-    echo "<form action=addLocation.php method ='POST'>";
-    echo 'Location not there?  Add a new location! ';
-    echo '<input type="text" name="locationInput" placeholder = "Name of Location" class = "inline" id="myinput">';
-    echo '<input type="text" name="addressInput" placeholder = "Address" class = "inline" id="myinput">';
-    $onclick = "onclick = return confirm('Are you sure you want to add this location?');";
-    echo '<input type="submit" name = "addplayer" class= "inline" value = "Add Location"  onclick="return confirm(\'Are you sure you want to add this location?\');"></input>';
-    echo "</input>";
-    echo '</form>';
 
+    echo 'Location not there?  Click here to add a new location!! ';
+    echo '<br><a href="createLocation.php">Click here to add a new location!</a></br>';
 
     echo 'Game Title? If this is left empty, the game will be titled \'Generic Game\':  <input type="text" name="game_title" /><br />';
 
