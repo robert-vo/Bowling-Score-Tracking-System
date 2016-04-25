@@ -18,6 +18,7 @@ function createTeamLeaderArray()
 }
 ?>
 
+
 <?php
 function nameArray()
 {
@@ -69,8 +70,9 @@ function popupMessageAndRedirectBrowser($message) {
     include 'sendEmail.php';
 //    echo "<br> You have succesfully requested to join the team!";
     $message = "The team leader has received your request and will get back to you soon!";
-    sendEmailTo($players[$_POST['teamID']],$name[$_SESSION['player_id']], $players[$_SESSION['player_id']]);
+    sendEmailTo($players[$_POST['teamID']],$name[$_SESSION['player_id']], $players[$_SESSION['player_id']], $_POST['teamName']);
     popupMessageAndRedirectBrowser($message);
+
 
 
 ?>

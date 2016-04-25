@@ -1,10 +1,10 @@
 <?php
-function sendEmailTo($email, $name, $playerEmail) {
+function sendEmailTo($email, $name, $playerEmail, $team) {
     $url = 'https://api.sendgrid.com/';
     $user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
     $pass = 'cosc3380';
     $link = "http://bowling-score-tracking-system.azurewebsites.net/public_html/manager.php";
-    $message = "Hello! <br>$name &lt;$playerEmail&gt; has requested to join your team! <a href=$link>Click here to visit the bowling score website to add this new member!</a><br><br>Have a good day!";
+    $message = "Hello! <br>$name &lt;$playerEmail&gt; has requested to join $team! <a href=$link>Click here to visit the bowling score website to add this new member!</a><br><br>Have a good day!";
 
 
 
