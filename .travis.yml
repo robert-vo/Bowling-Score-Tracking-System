@@ -4,19 +4,6 @@ php:
   - 5.4
   - 5.5
 
-script: phpunit UnitTest test/CanaryTest.php
-
-env:
-  - DB=mysql-5.7
-
-dist: trusty
-sudo: required
-addons:
-  apt:
-    packages:
-    - mysql-server-5.7
-    - mysql-client-core-5.7
-    - mysql-client-5.7
 
 before_install:
   - mysql -u root < resources/archive_table.sql
