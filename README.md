@@ -15,6 +15,7 @@ Technologies used include:
 * Microsoft Azure (web hosting)
 * Trello (project management)
 * GroupMe (team communication)
+* SendGrid (email service)
 
 ## Running The Project
 Before running this project locally, you will need PHP version 5.5, or higher, and a working MySQL environment. 

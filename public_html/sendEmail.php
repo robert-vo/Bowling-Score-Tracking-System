@@ -1,9 +1,12 @@
 <?php
-function sendEmailTo($email, $firstName, $lastName) {
+function sendEmailTo($email, $name, $playerEmail) {
     $url = 'https://api.sendgrid.com/';
     $user = 'azure_14ef7c1218f26530d7a8a25a9f15aae4@azure.com';
     $pass = 'cosc3380';
-    $message = "$firstName $lastName has requested to join your team!";
+    $link = "http://bowling-score-tracking-system.azurewebsites.net/public_html/manager.php";
+    $message = "Hello! <br>$name &lt;$playerEmail&gt; has requested to join your team! <a href=$link>Click here to visit the bowling score website to add this new member!</a><br><br>Have a good day!";
+
+
 
     $params = array(
         'api_user' => $user,
@@ -23,7 +26,7 @@ function sendEmailTo($email, $firstName, $lastName) {
     $response = curl_exec($session);
     if (curl_errno($session)) { echo 'Curl error: ' . curl_error($session); }
     curl_close($session);
-    print_r($response);
+
 
 }
 ?>
