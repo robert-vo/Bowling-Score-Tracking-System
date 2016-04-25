@@ -5,20 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <style>
-        table#report{
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        tr:nth-child(even) {
-            background-color: #e6e6e6;
-        }
-
-        tr.table_header {
-            background-color: #4CAF50;
-            color: #FFFFFF;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="reports.css">
 </head>
 
 <?php
@@ -80,7 +67,7 @@ function printPlayersReport($report, $showTop, $orderBy) {
 
 function printPlayers($report, $result) {
     if($result->num_rows > 0) {
-        echo '<table id="report">';
+        echo '<table class="report alternate">';
         $reportHeader = "";
         if($report == "Best_Score")
             $reportHeader = "Best Score";
@@ -112,20 +99,20 @@ function printPlayers($report, $result) {
 
 function printResult($result) {
     if($result->num_rows > 0) {
-        echo "<table id='report'>";
+        echo "<table class='report alternate'>";
         echo "<tr class='table_header'><th>Place</th><th>Team Name</th><th>Leader Name</th><th>Games Played</th><th>Win Count</th><th>Win Percentage</th></tr>";
         $place = 1;
         $teams = createPlayersArray();
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td align='center'>$place</td>";
-            echo "<td align='center'>" . $row['Name'] . "</td>";
-            echo "<td align='center'>" . $teams[$row['Leader']] . "</td>";
-            echo "<td align='center'>" . $row['Game_Count'] . "</td>";
-            echo "<td align='center'>" . $row['Win_Count'] . "</td>";
+            echo "<td>$place</td>";
+            echo "<td>" . $row['Name'] . "</td>";
+            echo "<td>" . $teams[$row['Leader']] . "</td>";
+            echo "<td>" . $row['Game_Count'] . "</td>";
+            echo "<td>" . $row['Win_Count'] . "</td>";
 
             $percentage = (100 * $row['Win_Count']/$row['Game_Count']);
-            echo "<td align='center'>" . number_format($percentage, 0, '.', '') . " %</td>";
+            echo "<td>" . number_format($percentage, 0, '.', '') . " %</td>";
             echo "</tr>";
 
             $place++;
