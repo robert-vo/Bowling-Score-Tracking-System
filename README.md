@@ -22,4 +22,4 @@ Once extracted, instantiate a PHP server using, in command line or terminal
 
 If the command is successfully worked, it will display that it is listening on `http://localhost:xxxx`, and the document root is `$dir`. In a web browser of choice, navigate to `http://localhost:xxxx/path/to/project/public_html/index.php` and enjoy!
 
-# Team 12 - Spring 2016
+### Team 12 - Spring 2016
