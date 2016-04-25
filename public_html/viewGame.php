@@ -3,6 +3,11 @@ session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
+error_reporting(0);
+include 'src/game.php';
+include '../src/game.php';
+error_reporting(E_ALL);
+
 
 function printColumnLegend() {
     echo '<tr>';
@@ -140,7 +145,11 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
         echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
     }
     printRollsInformation($playerID, $gameID, $teamID);
-    echo calculateTotalScore();
+    $game = calculateTotalScore($playerID, $gameID, $teamID);
+
+    $score = $game->score();
+    echo "<th colspan='6' rowspan=2>$score</th>";
+    printOutFrameTotals($playerID, $gameID, $teamID, $game->score_by_frame());
     echo '</tr>';
 }
 
@@ -154,25 +163,47 @@ function getInformationAboutGame($gameID) {
 }
 
 
-function calculateTotalScore() {
+function calculateTotalScore($playerID, $gameID, $teamID) {
+    $game = new \bowling\game();
+    $conn = connectToDatabase();
+    $getAllFrames = "SELECT Frame_Number, Roll_One_ID, Roll_Two_ID, Roll_Three_ID From Frame where Team_ID = $teamID and Game_ID = $gameID and Frame.Player_ID = $playerID";
+    $resultOfPlayers = $conn->query($getAllFrames);
 
+    if($resultOfPlayers) {
+        while ($rowOfPlayers = $resultOfPlayers->fetch_assoc()) {
 
-    $totalScore = 300; // TODO - Calculate Total Score. Right now it'll return 300.
-    $total = "<th colspan='6' rowspan=2>$totalScore</th>";
-    return $total;
+            if ($rowOfPlayers['Frame_Number'] == 10) {
+                if (isset($rowOfPlayers['Roll_Three_ID'])) {
+                    $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Three_ID']));
+                } else if (isset($rowOfPlayers['Roll_Two_ID'])) {
+                    $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']));
+                } else {
+                    $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']));
+                }
+            } else {
+                if (isset($rowOfPlayers['Roll_Two_ID'])) {
+                    $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']));
+                } else {
+                    $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']));
+                }
+            }
+        }
+    }
+
+    return $game;
 }
 
-function printOutFrameTotals($playerID, $gameID, $teamID) {
+function printOutFrameTotals($playerID, $gameID, $teamID, $game) {
     echo '<tr>';
 
+    $sql = "SELECT * FROM FRAME WHERE FRAME.Game_ID = $gameID and FRAME.Team_ID = $teamID and Frame.Player_ID = $playerID";
     $conn = connectToDatabase();
-    $sql = "SELECT Frame_ID, Frame_Number, Score FROM Frame where Frame.Player_ID = $playerID and Frame.Team_ID = $teamID and Frame.Game_ID = $gameID";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $preparedURL = 'viewFrame.php?frameID=' . $row["Frame_ID"] . '&frameNumber=' . $row['Frame_Number'];
-            echo '<td colspan=6><a href=' . $preparedURL . '>' . $row["Score"] . '</a></td colspan=6>';
+            echo '<td colspan=6><a href=' . $preparedURL . '>' . $game[$row['Frame_Number']] . '</a></td colspan=6>';
         }
     }
     echo '</tr>';
@@ -233,27 +264,27 @@ function printGameInfoForEachPlayer($teamID, $gameID) {
         while ($row = $result->fetch_assoc()) {
             if(isset($row['Leader'])) {
                 printOutPlayerInfoOnTeam($row['Leader'], $gameID, $teamID, 'Leader');
-                printOutFrameTotals($row['Leader'], $gameID, $teamID);
+//                printOutFrameTotals($row['Leader'], $gameID, $teamID);
             }
             if(isset($row['Player_1'])) {
                 printOutPlayerInfoOnTeam($row['Player_1'], $gameID, $teamID, 'Player 1');
-                printOutFrameTotals($row['Player_1'], $gameID, $teamID);
+//                printOutFrameTotals($row['Player_1'], $gameID, $teamID);
             }
             if(isset($row['Player_2'])) {
                 printOutPlayerInfoOnTeam($row['Player_2'], $gameID, $teamID, 'Player 2');
-                printOutFrameTotals($row['Player_2'], $gameID, $teamID);
+//                printOutFrameTotals($row['Player_2'], $gameID, $teamID);
             }
             if(isset($row['Player_3'])) {
                 printOutPlayerInfoOnTeam($row['Player_3'], $gameID, $teamID, 'Player 3');
-                printOutFrameTotals($row['Player_3'], $gameID, $teamID);
+//                printOutFrameTotals($row['Player_3'], $gameID, $teamID);
             }
             if(isset($row['Player_4'])) {
                 printOutPlayerInfoOnTeam($row['Player_4'], $gameID, $teamID, 'Player 4');
-                printOutFrameTotals($row['Player_4'], $gameID, $teamID);
+//                printOutFrameTotals($row['Player_4'], $gameID, $teamID);
             }
             if(isset($row['Player_5'])) {
                 printOutPlayerInfoOnTeam($row['Player_5'], $gameID, $teamID, 'Player 5');
-                printOutFrameTotals($row['Player_5'], $gameID, $teamID);
+//                printOutFrameTotals($row['Player_5'], $gameID, $teamID);
             }
         }
     } else {
