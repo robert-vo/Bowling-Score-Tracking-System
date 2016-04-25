@@ -93,7 +93,9 @@ function displayMessage()
     $values = array(); // Array that holds the values to be inserted.
 
     for ($i = 1; $i < count($columnNames); $i++) {
-        if ($_POST[$columnNames[$i]] == "") {
+        if($columnNames[$i] == "Date_Added" || $columnNames[$i] == "Last_Date_Modified")
+            continue;
+        else if ($_POST[$columnNames[$i]] == "") {
             continue;
         } else {
             array_push($columns, $columnNames[$i]);
@@ -119,7 +121,7 @@ function displayMessage()
         $result = retrieveRow($table, $id);
 
         echo "<p>The " . $_POST['table'] . " has been updated to</p>";
-        echo "<table>";
+        echo "<table class='updated'>";
 
         if ((count($columnNames) > 0) and ($result->num_rows > 0)) {
             while ($row = $result->fetch_assoc()) {

@@ -5,7 +5,7 @@ include 'databaseFunctions.php';
 function printBallPopularity($orderBy, $showTop) {
     $conn = connectToDatabase();
 
-    $query = "SELECT roll.Ball_ID, Count(roll.Ball_ID) as numOfRolls, ball.Color
+    $query = "SELECT roll.Ball_ID, Count(roll.Ball_ID) as numOfRolls, ball.Color, ball.Weight, ball.Size
                 FROM roll, ball
                 WHERE roll.Ball_ID = ball.Ball_ID
                 GROUP by Ball_ID
@@ -22,14 +22,18 @@ function printTable($result) {
     if($result->num_rows > 0) {
         $reportHeader = "Number of Rolls";
         echo "<table class='report alternate'>";
-        echo "<tr class='table_header'><th>Place</th><th>Ball ID</th><th>$reportHeader</th><th>Color</th></tr>";
+        echo "<tr class='table_header'><th>Place</th><th>Weight</th><th>Size</th><th>Color</th><th>$reportHeader</th></tr>";
         $place = 1;
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>$place</td>";
-            echo "<td>" . $row['Ball_ID'] . "</td>";
+            echo "<td>" . $row['Weight'] . "</td>";
+            echo "<td>" . $row['Size'] . "</td>";
+            //echo "<td>" . $row['Color'] . "</td>";
+            echo    "<td>
+                <svg height='50' width='50'><circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='" . $row['Color'] . "'/></svg>
+                    </td>";
             echo "<td>" . $row['numOfRolls'] . "</td>";
-            echo "<td>" . $row['Color'] . "</td>";
             echo "</tr>";
 
             $place++;
