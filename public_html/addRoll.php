@@ -14,10 +14,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
-$allFrames = $conn->query($query);
-$temp = $allFrames->fetch_assoc();
-$max = $temp['max'];
+//$query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
+//$allFrames = $conn->query($query);
+//$temp = $allFrames->fetch_assoc();
+//$max = $temp['max'];
+
+$max = $_POST['frameNumber'];//called 'max' from previous incarnation
 
 $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $max";
 $result = $conn->query($query);
