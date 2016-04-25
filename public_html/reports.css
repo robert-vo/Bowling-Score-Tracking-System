@@ -14,3 +14,7 @@ tr.table_header {
     background-color: #4CAF50;
     color: #FFFFFF;
 }
+
+table.report tr td {
+    text-align: center;
+}
