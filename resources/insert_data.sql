@@ -34,7 +34,8 @@ VALUES (2, '71239395858', null, '2000-06-15', '2222 Calhoun Street', 'Houston', 
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
 VALUES (1, '8329449240', null, '1992-03-18', '4800 Calhoun Road', 'Houston', 'TX', 77004, 'Melinda', 'Cougar', 'U', 'uofh@cougar.com', '$2y$10$rtbBDISVt2PzWcJEGj8t.uWRtnw7rwhdI6zU4nS82OKdv4RDxx9iy');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
-VALUES (1, '9720492949', null, '1980-07-22', '1234 Bowling Alley', 'New York', 'NY', 10001, 'Juan', 'Chavez', 1, 'bowlingisfun@notreally.com', '$2y$10$YK/5peAg3WeD3J3txeDIteLL1QzBh.Fgq.9d03lZpyHC9WU/2yjIa');
+VALUES (1, '9720492949', null, '1980-07-22', '1234 Bowling Alley', 'New York', 'NY', 10001, 'Juan', 'Chavez', 1, 'wnguyen23@yahoo.com', '$2y$10$YK/5peAg3WeD3J3txeDIteLL1QzBh.Fgq.9d03lZpyHC9WU/2yjIa');
+-- bowlingisfun@notreally.com is the login and password for Juan Chavez
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)
 VALUES (2, '2132132134', null, '1985-01-02', '5555 Hollywood Blvd', 'Los Angeles', 'CA', 90020, 'Adam', 'Smith', 'V', 'adam@smith.com', '$2y$10$DCjT/q0VV4ZXjGZNFZIYreh7tlu3U74K2xwLQArQs5zADUttnlIEW');
 INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password)

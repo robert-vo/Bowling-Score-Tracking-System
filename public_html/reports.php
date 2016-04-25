@@ -87,7 +87,7 @@ if(!isset($_GET['category']))
                     </select>
                 </td>
                 <input type='hidden' id='category' value='$category'>
-                <td><input id='submit_teams' type='submit' value='$category'></td>
+                <td><input id='submit_teams' type='submit' value='Submit'></td>
 
             </form>
         </tr>
@@ -130,7 +130,7 @@ if(!isset($_GET['category']))
                     </select>
                 </td>
                 <input type='hidden' id='category' value='$category'>
-                <td><input id='submit_players' type='submit' value='$category'></td>
+                <td><input id='submit_players' type='submit' value='Submit'></td>
 
             </form>
         </tr>
@@ -169,7 +169,7 @@ if(!isset($_GET['category']))
                     </select>
                 </td>
                 <input type='hidden' id='category' value='$category'>
-                <td><input id='submit_ball' type='submit' value='$category'></td>
+                <td><input id='submit_ball' type='submit' value='Submit'></td>
 
             </form>
         </tr>

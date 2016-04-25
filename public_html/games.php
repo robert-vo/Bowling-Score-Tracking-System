@@ -173,7 +173,8 @@ function findAllGamesATeamIsAPartOf($teamID, $gameStatus) {
                 game.Game_Finished = $gameStatus and (
                   game.Teams like '$teamID,%'
                     or game.Teams like '%,$teamID'
-                    or game.Teams like '%,$teamID,%')";
+                    or game.Teams like '%,$teamID,%'
+                    or game.Teams like '$teamID')";
 
     $conn = connectToDatabase();
     $result = $conn->query($query);

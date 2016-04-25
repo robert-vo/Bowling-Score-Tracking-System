@@ -93,7 +93,6 @@ drop trigger if exists update_player_stats;
 CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
   for each ROW
   begin
-
   UPDATE bowling.Player_Stats, Frame
   set bowling.Player_Stats.Pins_Hit = bowling.Player_Stats.Pins_Hit +
     new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 +
@@ -114,6 +113,43 @@ CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
     where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
   END IF;
 end;
+
+CREATE FUNCTION SPLIT_STR(
+  x VARCHAR(255),
+  delim VARCHAR(12),
+  pos INT
+)
+  RETURNS VARCHAR(255)
+  RETURN REPLACE(SUBSTRING(SUBSTRING_INDEX(x, delim, pos),
+                           LENGTH(SUBSTRING_INDEX(x, delim, pos -1)) + 1),
+                 delim, '');
+
+drop trigger if exists created_new_game;
+CREATE TRIGGER created_new_game after insert ON Game
+FOR EACH ROW
+  BEGIN
+    DECLARE team INT DEFAULT 0;
+    label1: LOOP
+      SET team = team + 1;
+      IF team < 20 THEN
+        update Team
+        set Team.Game_Count = Team.Game_Count + 1
+        where Team_ID = SPLIT_STR(new.Teams, ',', team);
+        ITERATE label1;
+      END IF;
+      LEAVE label1;
+    END LOOP label1;
+  END;
+
+drop trigger if exists update_win_count;
+CREATE TRIGGER update_win_count after update ON game
+FOR EACH ROW
+  if(new.Game_Finished = 1 and new.Winner_Team_ID > 0) THEN
+    update team
+      set Win_Count = Win_Count + 1 where game.Winner_Team_ID = Team.Team_ID;
+  END IF;
+
+
 
 drop trigger if exists Date_Added_Ball;
 CREATE TRIGGER Date_Added_Ball BEFORE INSERT ON Ball
