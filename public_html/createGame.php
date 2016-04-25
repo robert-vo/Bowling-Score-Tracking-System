@@ -101,7 +101,7 @@ if(isCurrentPlayerATeamLeader($_SESSION['player_id'])) {
     //Form for Adding A New Location
 
 
-    echo 'Location not there?  Click here to add a new location!! ';
+    echo 'Location not there?';
     echo '<br><a href="createLocation.php">Click here to add a new location!</a></br>';
 
     echo 'Game Title? If this is left empty, the game will be titled \'Generic Game\':  <input type="text" name="game_title" /><br />';

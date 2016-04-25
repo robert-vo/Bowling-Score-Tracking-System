@@ -42,9 +42,16 @@ else {
 <?php
 $inputLocation = $_POST['locationInput'];
 $inputAddress = $_POST['addressInput'];
-$sql = "INSERT into game_location(Game_Location_Name, Game_Address) VALUES ('$inputLocation','$inputAddress')";
 
-$message = 'New Game Location has been added!';
+if($inputLocation == '' or $inputAddress == '')
+{
+    echo 'Please fill out the form';
+}
+else {
+    $sql = "INSERT into game_location(Game_Location_Name, Game_Address) VALUES ('$inputLocation','$inputAddress')";
+
+    $message = 'New Game Location has been added!';
+}
 if (attemptDataManipulationLanguageQuery($sql)) {
     echo '<br>New Location Added!';
 
