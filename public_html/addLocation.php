@@ -43,20 +43,21 @@ else {
 $inputLocation = $_POST['locationInput'];
 $inputAddress = $_POST['addressInput'];
 
-if($inputLocation == '' or $inputAddress == '')
+if(strlen($inputLocation) < 8 or strlen($inputAddress) < 8)
 {
-    echo 'Please fill out the form';
+    $message = 'Invalid form. Please try to enter a location and address of 8 characters of more.';
 }
 else {
     $sql = "INSERT into game_location(Game_Location_Name, Game_Address) VALUES ('$inputLocation','$inputAddress')";
+    if (attemptDataManipulationLanguageQuery($sql)) {
+        echo '<br>New Location Added!';
+        $message = 'New Game Location has been added!';
 
-    $message = 'New Game Location has been added!';
-}
-if (attemptDataManipulationLanguageQuery($sql)) {
-    echo '<br>New Location Added!';
-
-} else {
-    echo 'Could not add location!';
+    } else {
+        $message = 'Could not add location!';
+    }
 }
 popupMessageAndRedirectBrowser($message);
+
+
   ?>
