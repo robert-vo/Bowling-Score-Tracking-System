@@ -1,6 +1,11 @@
 <?php
 session_start();
 include 'databaseFunctions.php';
+error_reporting(0);
+include 'src/game.php';
+include '../src/game.php';
+error_reporting(E_ALL);
+
 $playerid = $_SESSION['player_id'];
 $conn = connectToDatabase();
 $sql = "SELECT * FROM Team WHERE  Player_1 = '$playerid' or Player_2 = '$playerid' or Player_3 = '$playerid' or Player_4 = '$playerid' or Player_5 = '$playerid' or Leader = '$playerid' ";

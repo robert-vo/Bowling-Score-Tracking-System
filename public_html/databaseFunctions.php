@@ -32,7 +32,9 @@ function attemptDataManipulationLanguageQuery($query) {
 
 function returnResultForQuery($query) {
     $connection = connectToDatabase();
-    return $connection->query($query);
+    $result = $connection->query($query);
+    $connection->close();
+    return $result;
 }
     
 function getAllTeamsForAPlayerID($playerID) {
@@ -96,5 +98,29 @@ function attemptToInsertIntoBalls($color, $weight, $size) {
         echo $result;
     }
 }
+
+function getIntegerNumberOfPinsHitForRollID($rollID) {
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from roll where roll_id = $rollID;";
+
+    $result = returnResultForQuery($sql);
+
+    if($result) {
+        while($row = $result->fetch_assoc()) {
+            return calculateIntegerNumberOfPinsHit($row['Hit_Pin_1'],
+                $row['Hit_Pin_2'], $row['Hit_Pin_3'], $row['Hit_Pin_4'],
+                $row['Hit_Pin_5'], $row['Hit_Pin_6'], $row['Hit_Pin_7'],
+                $row['Hit_Pin_8'], $row['Hit_Pin_9'], $row['Hit_Pin_10']);
+        }
+    }
+    else {
+        return 0;
+    }
+    return 0;
+}
+
+function calculateIntegerNumberOfPinsHit(...$pins) {
+    return array_sum($pins);
+}
+
 
 ?>
