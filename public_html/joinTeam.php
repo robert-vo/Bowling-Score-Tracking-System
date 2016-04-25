@@ -77,7 +77,8 @@ if($numrows != 0){
             echo "<br> $teamName and the team leader is $teamLeader[$leaderID]";
             echo "<br> Got a question? Send the team leader a question here! =>";
             echo "<a href='mailto:" . $allEmails[$leaderID] . "'> Email Team Leader</a></br>";
-            echo '<form action=sendEmailToTeamLeader.php>';
+            echo "<form action=sendEmailToTeamLeader.php method='post'>";
+            echo "<input type =hidden value=$leaderID name=teamID>";
             echo '<input type="submit" value = "Request to Join Team" onclick="return confirm(\'Are you sure you want to join the team?\');"></input>';
             echo '</form>';
             //place button that calls a function

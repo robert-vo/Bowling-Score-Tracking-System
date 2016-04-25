@@ -37,10 +37,11 @@ function createPlayerEmailArray()
 
 <?php
 
-    include 'sendEmail.php';
-    echo "<br> You have succesfully requested to join the team!";
-    echo "<br> The team leader has received your request and will get back to you soon!";
-    sendEmailTo("wnguyen23@yahoo.com","William","Nguyen");
+    echo 'got id' . $_POST['teamID'];
+//    include 'sendEmail.php';
+//    echo "<br> You have succesfully requested to join the team!";
+//    echo "<br> The team leader has received your request and will get back to you soon!";
+//    sendEmailTo("wnguyen23@yahoo.com","William","Nguyen");
 
 ?>
 
