@@ -143,20 +143,34 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
         $allFrames = $conn->query($query);
         $temp = $allFrames->fetch_assoc();
         $maxFrame = $temp['max'];
-        //see if game is done, in case of thenth frame
+        $gameIsDone = 0;
+
+        //see if game is done, in case of tenth frame
         $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
         $result = $conn->query($query);
-        $gameIsDone = 0;
         if($result){
             $row = $result->fetch_assoc();
-            $rollThreeID = $row['Roll_Three_ID'];
-            $query = "SELECT * FROM Roll WHERE Roll_ID = $rollThreeID";
-            $result2 = $conn->query($query);
-            if($result2){
+
+            //check if roll three should be set
+            $pinsDown1 = getNumberOfPinsHitForRollID($row['Roll_One_ID']);
+            $pinsDown2 = getNumberOfPinsHitForRollID($row['Roll_Two_ID']);
+            if($pinsDown1 == 10 && $pinsDown2 == 10){
+                //check if roll three is set
+                $rollThreeID = $row['Roll_Three_ID'];
+                $query = "SELECT * FROM Roll WHERE Roll_ID = $rollThreeID";
+                $result2 = $conn->query($query);
+                if($result2){
+                    $gameIsDone = 1;
+                }
+                else
+                    $gameIsDone = 0;
+            }
+            else{
+                //roll three should be null, game is done
                 $gameIsDone = 1;
             }
-            else
-                $gameIsDone = 0;
+
+
         }
         //check if button shows
         if($maxFrame <= 10 && !$gameIsDone) {//show button
