@@ -69,26 +69,27 @@ INSERT INTO bowling.Players (Gender, Phone_Number, Date_Joined, Date_Of_Birth, S
 VALUES (1, '1234567890', null, '1970-01-01', '1 Corporate Bowling', 'Chicago', 'IL', 60290, 'Admin', 'Admin', 'A', 'robert.vo@outlook.com', '$2y$10$uiyTPJ882yXWy8F98/L9dexriQw5diCDIbI9pYd8OvDQ2u5NNuigy', 1);
 
 
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (1, 4, 10, 1, 17, 300, 25, 1420, 2.333);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (2, 5, 15, 0, 18, 245, 21, 1235, 4.55);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (3, 6, 23, 0, 9, 200, 23, 1231, 4.2);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (4, 8, 12, 0, 10, 157, 25, 1952, 6.2);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (5, 2, 14, 0, 6, 162, 24, 1235, 4.2);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (6, 5, 20, 0, 7, 122, 21, 1462, 4.1111);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (7, 6, 10, 0, 8, 132, 20, 1423, 4.33);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (8, 7, 20, 0, 9, 167, 22, 1251, 4.77);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (9, 2, 12, 0, 10, 185, 28, 2132, 6.22);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (10, 3, 6, 0, 6, 211, 30, 2145, 5.234);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (11, 5, 4, 0, 8, 200, 29, 2121, 6.232);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (12, 4, 8, 0, 12, 240, 35, 2300, 5.99);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (13, 6, 5, 0, 9, 230, 32, 1523, 4.23);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (14, 8, 6, 0, 11, 241, 36, 1244, 3.542);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (15, 9, 9, 0, 17, 230, 34, 1233, 4.222);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (16, 5, 8, 0, 20, 146, 38, 1111, 2.6666);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (17, 1, 7, 0, 18, 142, 40, 1023, 1.99);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (18, 3, 5, 0, 13, 133, 32, 1200, 2.5);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (19, 7, 19, 0, 15, 175, 40, 1542, 2.67);
-INSERT INTO bowling.Player_Stats (Player_ID, Strikes, Games_Played, Perfect_Games, Spares, Best_Score, Worst_Score, Pins_Left, Average_Pin_Left) VALUES (20, 5, 15, 0, 15, 188, 10, 1562, 2.6667);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (1);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (2);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (3);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (4);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (5);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (6);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (7);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (8);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (9);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (10);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (11);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (12);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (13);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (14);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (15);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (16);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (17);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (18);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (19);
+INSERT INTO bowling.Player_Stats (Player_ID) VALUES (20);
+
 
 INSERT INTO bowling.Team (Name, Leader, Game_Count, Win_Count, Player_1, Player_2, Player_3, Player_4, Player_5)
 VALUES ('The Bowling Maniacs', 1, 10, 2, 2, 3, 4, 5, 6);

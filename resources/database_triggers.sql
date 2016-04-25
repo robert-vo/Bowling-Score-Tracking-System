@@ -135,6 +135,15 @@ FOR EACH ROW
         update Team
         set Team.Game_Count = Team.Game_Count + 1
         where Team_ID = SPLIT_STR(new.Teams, ',', team);
+
+        update Player_Stats ps
+          JOIN Team t
+          ON t.Leader = ps.Player_ID or t.Player_1 = ps.Player_ID or
+             t.Player_2 = ps.Player_ID or t.Player_3 = ps.Player_ID OR
+             t.Player_4 = ps.Player_ID or t.Player_5 = ps.Player_ID
+        set ps.Games_Played = ps.Games_Played + 1
+        where t.Team_ID = SPLIT_STR(new.Teams, ',', team);
+
         ITERATE label1;
       END IF;
       LEAVE label1;
