@@ -12,8 +12,7 @@ Run script from command line
 
 namespace bowling;
 use mysqli;
-include '../public_html/databaseFunctions.php';
-define('NL',PHP_EOL);
+define('NL','<br>');
 
 error_reporting(-1);
 ini_set('display_errors','On');
@@ -27,6 +26,11 @@ class game {
     private $roll_idx  = 1;
     private $frames    = array();
     private $frame_idx = 1;
+
+    public function __construct()
+    {
+        
+    }
 
     public function roll( $pin_count ) {
         echo '<br>number of pins = '. $pin_count;
@@ -113,47 +117,49 @@ class game {
         }
     }
 
-}
+    public function run() {
+        echo '<br><br><br><br>';
 
-try {
+        $game = new game;
 
-    echo '<br><br><br><br>';
+        foreach (range(1, 10) as $item) {
 
-    $game = new game;
-
-    foreach (range(1, 10) as $item) {
-
-        $sql = "SELECT group_concat(roll_one_id) as '1',
+            $sql = "SELECT group_concat(roll_one_id) as '1',
       group_concat(Roll_Two_ID) as '2',
       group_concat(Roll_Three_ID) as '3',
       Frame_Number
     FROM frame where Game_ID = 1 and Player_ID = 1 and Frame_Number = $item;";
 
-        $conn = connectToDatabase();
-        $result = $conn->query($sql);
+            $conn = connectToDatabase();
+            $result = $conn->query($sql);
 
-        if($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                if($row['Frame_Number'] == 10) {
-                    echo '<br>row 1 is: ' . $row['1'];
-                    echo '<br>row 2 is: ' . $row['2'];
-                    echo '<br>row 3 is: ' . $row['3'];
-                    $game->frame(getIntegerNumberOfPinsHitForRollID($row['1']), getIntegerNumberOfPinsHitForRollID($row['2']), getIntegerNumberOfPinsHitForRollID($row['3']));
-                }
-                else {
-                    echo '<br>row 1 is: ' . $row['1'];
-                    echo '<br>row 2 is: ' . $row['2'];
-                    $game->frame(getIntegerNumberOfPinsHitForRollID($row['1']), getIntegerNumberOfPinsHitForRollID($row['2']));
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    if($row['Frame_Number'] == 10) {
+                        echo '<br>row 1 is: ' . $row['1'];
+                        echo '<br>row 2 is: ' . $row['2'];
+                        echo '<br>row 3 is: ' . $row['3'];
+                        $game->frame(getIntegerNumberOfPinsHitForRollID($row['1']), getIntegerNumberOfPinsHitForRollID($row['2']), getIntegerNumberOfPinsHitForRollID($row['3']));
+                    }
+                    else {
+                        echo '<br>row 1 is: ' . $row['1'];
+                        echo '<br>row 2 is: ' . $row['2'];
+                        $game->frame(getIntegerNumberOfPinsHitForRollID($row['1']), getIntegerNumberOfPinsHitForRollID($row['2']));
+                    }
                 }
             }
+
         }
-
+        echo '<br><br><br><br>';
+        $game->stats();
+        echo NL;
+        echo '<br><br><br><br>';
     }
-    echo '<br><br><br><br>';
-    $game->stats();
-    echo NL;
-    echo '<br><br><br><br>';
+}
 
+try {
+    //    $game = new game;
+//    $game->run();
 }
 catch( \Exception $e ) {
     echo $e->getMessage() . NL;
