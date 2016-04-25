@@ -16,7 +16,7 @@ Using a MySQL client (MySQL Workbench, for example), execute the following four 
 
 
 To run this project locally, click "Download ZIP" on the top right portion of this page. Extract the .zip file a directory of choice. Once extracted, instantiate a PHP server using, in command line or terminal - 
-[code] php -S localhost:xxxx [/code]
+` php -S localhost:xxxx `
 If the command is successfully worked, it will display that it is listening on http://localhost:xxxx, and the document root is $dir. In a web browser of choice, navigate to http://localhost:xxxx/path/to/project/public_html/index.php and enjoy!
 
 Team 12
