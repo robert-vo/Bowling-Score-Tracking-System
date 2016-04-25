@@ -9,13 +9,13 @@ It can also be viewed through this link http://bowling-score-tracking-system.azu
 Before running this project locally, you will need PHP version 5.5, or higher, and a working MySQL environment. 
 
 Using a MySQL client (MySQL Workbench, for example), execute the following four files, in order, found in the resources/ folder.
-* mysql < archive_table.sql
-* mysql < database_schema.sql
-* mysql < database_triggers.sql
-* mysql < insert_data.sql
+* `mysql < archive_table.sql`
+* `mysql < database_schema.sql`
+* `mysql < database_triggers.sql`
+* `mysql < insert_data.sql`
 
 
-To run this project locally, click "Download ZIP" on the top right portion of this page. Extract the .zip file a directory of choice. 
+To run this project locally, click "Download ZIP" on the top right portion of this page. Extract the .zip file to a directory of choice. 
 
 Once extracted, instantiate a PHP server using, in command line or terminal
 ` php -S localhost:xxxx `
