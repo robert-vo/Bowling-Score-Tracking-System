@@ -20,6 +20,10 @@ if($numrows != 0){
 
 
 $frame = array_values($frame);
+
+
+
+// add all the pins together of each roll
 $pins = array ();
 for($i = 0; $i < count($frame);$i++){
     $sql = "select * from roll where Frame_ID = '$frame[$i]'";
@@ -34,10 +38,10 @@ for($i = 0; $i < count($frame);$i++){
 
 //print_r($pins);
 //echo "<br>". count($pins);
-$pinsLeft = (count($frame) * 10) - array_sum($pins);
+$pinsLeft = (count($pins) * 10) - array_sum($pins);
 //echo "<br>". $pinsLeft;
 
-$PLA = $pinsLeft / count($frame);
+$PLA = $pinsLeft / count($pins);
 
 
 //echo "<br>". $PLA;
