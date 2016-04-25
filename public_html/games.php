@@ -5,7 +5,7 @@ session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
-
+include '../src/game.php';
 
 function printResult($result) {
     if ($result->num_rows > 0) {
@@ -64,7 +64,7 @@ function printGames($result, $teamID) {
             echo '<br><a href=viewGame.php?gameID=' . $row['Game_ID'];
             echo '>View the game here!</a>';
             echo '</caption>';
-            echo '<tr><th>Team Name</th><th>Total Score</th><th>Winner</th></tr>';
+            echo '<tr><th>Team Name</th><th>Average Score Per Player</th><th>Winner</th></tr>';
             $allTeams = $row['Teams'];
             $separatedTeams = explode(",", $allTeams);
 
@@ -78,8 +78,7 @@ function printGames($result, $teamID) {
                 }
                 echo '</th>';
 
-                //TODO somehow calculate score :(
-                echo '<th>123</th>';
+                echo '<th>' . calculateAverageScoreFor($row['Game_ID'], $team) . '</th>';
 
                 echo '<th>';
 
@@ -102,6 +101,52 @@ function printGames($result, $teamID) {
     } else {
 
     }
+}
+
+function calculateAverageScoreFor($gameID, $teamID) {
+    $sql = "SELECT group_concat(DISTINCT player_id) as 'ids' from Frame where Team_ID = $teamID and Game_ID = $gameID";
+    $conn = connectToDatabase();
+    $result = $conn->query($sql);
+
+    $totalScore = 0;
+
+    if($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $allPlayers = explode(',', $row['ids']);
+            foreach ($allPlayers as $player) {
+                $game = new \bowling\game();
+                $getAllFrames = "SELECT Frame_Number, Roll_One_ID, Roll_Two_ID, Roll_Three_ID From Frame where Team_ID = $teamID and Game_ID = $gameID and Frame.Player_ID = $player";
+                $resultOfPlayers = $conn->query($getAllFrames);
+
+                if($resultOfPlayers) {
+                    while ($rowOfPlayers = $resultOfPlayers->fetch_assoc()) {
+
+                        if ($rowOfPlayers['Frame_Number'] == 10) {
+                            if (isset($rowOfPlayers['Roll_Three_ID'])) {
+                                $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Three_ID']));
+                            } else if (isset($rowOfPlayers['Roll_Two_ID'])) {
+                                $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']));
+                            } else {
+                                $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']));
+                            }
+                        } else {
+                            if (isset($rowOfPlayers['Roll_Two_ID'])) {
+                                $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']));
+                            } else {
+                                $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']));
+                            }
+                        }
+                    }
+                    $totalScore += $game->score();
+                }
+
+            }
+        }
+    }
+    else {
+        return 0;
+    }
+    return round($totalScore/count($allPlayers), 3);
 }
 
 function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {

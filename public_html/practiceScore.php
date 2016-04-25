@@ -3,7 +3,7 @@ session_start();
 include 'databaseFunctions.php';
 $playerid = $_SESSION['player_id'];
 $conn = connectToDatabase();
-$sql = "SELECT * FROM Team WHERE Leader = '$playerid' or Player_1 = '$playerid' or Player_2 = '$playerid' or Player_3 = '$playerid' or Player_4 = '$playerid' or Player_5 = '$playerid'";
+$sql = "SELECT * FROM Team WHERE  Player_1 = '$playerid' or Player_2 = '$playerid' or Player_3 = '$playerid' or Player_4 = '$playerid' or Player_5 = '$playerid' or Leader = '$playerid' ";
 $result = $conn->query($sql);
 $numrows = $result->num_rows;
 $team = array();
@@ -13,17 +13,19 @@ if($numrows != 0){
     }
 }
 $team = array_values($team);
-
 print_r($team);
 echo "<br> teams: " . count($team)."<br>";
 
 
-$game = array();
 
+
+
+
+$game = array();
 $int2 = 0;
 for($int = 0; $int  < count($team);$int++){
     
-    $sql = "SELECT * FROM Game WHERE Teams LIKE '$team[$int],%' OR Teams LIKE '%,$team[$int],%' OR Teams LIKE '%,$team[$int]'";
+    $sql = "SELECT * FROM Game WHERE Teams LIKE '%,$team[$int]' OR Teams LIKE '%,$team[$int],%' OR Teams LIKE '$team[$int],%'";
     $result = $conn->query($sql);
     $numrows = $result->num_rows;
 
@@ -41,29 +43,36 @@ echo "<br> games: ". count($game)."<br>";
 
 
 
-$frame = array();
 
+
+
+
+
+$frame = array();
 for($int = 0; $int < count($game);$int++){
-    $sql = "SELECT * FROM Frame WHERE Game_ID = '$game[$int]' AND Player_ID = $playerid";
+    $sql = "SELECT * FROM Frame WHERE Game_ID = '$game[$int]'";
     $result = $conn->query($sql);
     $numrows = $result->num_rows;
     if($numrows != 0){
         while ($row = mysqli_fetch_assoc($result)){
 
              $frame[$row['Frame_ID']] = $row['Frame_ID'];
+
         }
     }
 
 }
-
-
 $frame = array_values($frame);
-
 print_r($frame);
-echo "<br> frames: " . count($frame)."<br>";
+echo "<br> frames all the games: " . count($frame)."<br><br>";
 
 
 
+
+
+
+
+$int2 = 0;
 for($int = 0; $int < count($frame);$int++){
     $sql = "SELECT * FROM Roll WHERE Frame_ID = '$frame[$int]'";
     $result = $conn->query($sql);
@@ -71,16 +80,22 @@ for($int = 0; $int < count($frame);$int++){
     if($numrows != 0){
         while ($row = mysqli_fetch_assoc($result)){
 
-            $roll[$row['Roll_ID']] = $row['Roll_ID'];
+            $roll[$int2] = $row['Roll_ID'];
+            $int2++;
         }
     }
 
 }
-
-
 $roll = array_values($roll);
 print_r($roll);
 echo "<br> rolls: " . count($roll)."<br>";
+
+
+
+
+
+
+
 
 //check for sprike and spare for each for then add
 for($int = 0; $int < count($roll);$int++){
@@ -113,25 +128,25 @@ echo "<br><br>";
 print_r($pins_hit);
 echo "<br> pins hit: " . count($pins_hit)."<br>";
 
-//print_r($pins_hit);
-//echo "<br> ". count($pins_hit);
 
 
-
-for($i = 1; $i < count($pins_hit);$i++){
-    if($pins_hit[$i] == 10){
-        $pins_hit[$i]+$pins_hit[$i+1]+$pins_hit[$i+2];
-    }
-    else if ($pins_hit[$i] + $pins_hit[$i+1] == 10){
-
-    }
-    echo "(".$pins_hit[$i];
-    if($i+1 <count($pins_hit)){
-        echo ",". $pins_hit[$i+1];
-    }
-    echo ")<br>";
-    $i++;
+//for($i = 1; $i < count($pins_hit);$i++){
+//    if($pins_hit[$i] == 10){
+//        $pins_hit[$i]+$pins_hit[$i+1]+$pins_hit[$i+2];
+//    }
+//    else if ($pins_hit[$i] + $pins_hit[$i+1] == 10){
+//
+//    }
+//    echo "(".$pins_hit[$i];
+//    if($i+1 <count($pins_hit)){
+//        echo ",". $pins_hit[$i+1];
+//    }
+//    echo ")<br>";
+//    $i++;
+//}
+$pins_hit = array_values($pins_hit);
+for($i = 0; $i < count($pins_hit);$i++){
+    echo $pins_hit[$i]."<br>";
 }
-
 
 ?>
