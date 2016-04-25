@@ -1,4 +1,7 @@
+
+
 function showSelection(category) {
+    console.log(category);
     if(category == "") {
         document.getElementById("empty").innerHTML = "";
     }
@@ -67,6 +70,36 @@ $(document).delegate('#submit_players', 'click', function(){
         $.ajax({
             type: "POST",
             url: "getReport.php",
+            data: dataString,
+            cache: false,
+            success: function(result){
+                //alert(result);
+                document.getElementById("reports").innerHTML = result;
+            }
+        });
+    }
+    return false;
+
+});
+
+
+$(document).delegate('#submit_ball', 'click', function(){
+    var reportType = $("#ballReportType").val();
+    var orderBy = $("#ballOrderBy").val();
+    var category = $("#category").val();
+    var showTop = $("#ballShowTop").val();
+    // Returns successful data submission message when the entered information is stored in database.
+    var dataString = category + 'ReportType='+ reportType + '&' + category + 'OrderBy='+ orderBy + '&category='+ category + '&' + category + 'ShowTop='+ showTop; // inserts the category in front of the var (ShowTop ==> teamsShowTop)
+    console.log(dataString);
+    if(reportType==''||orderBy==''||category==''||showTop=='')
+    {
+        alert("Please Fill All Fields");
+    }
+    else
+    {
+        $.ajax({
+            type: "POST",
+            url: "ballReport.php",
             data: dataString,
             cache: false,
             success: function(result){
