@@ -33,7 +33,7 @@ class game {
     }
 
     public function roll( $pin_count ) {
-        echo '<br>number of pins = '. $pin_count;
+//        echo '<br>number of pins = '. $pin_count;
         if ( !is_int( $pin_count ) ) {
             throw new \InvalidArgumentException('roll() function requires an integer as an argument');
         }
