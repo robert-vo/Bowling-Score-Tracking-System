@@ -6,6 +6,7 @@ php:
   - 5.6
 
 script: phpunit UnitTest test/CanaryTest.php
+script: phpunit UnitTest test/GameTest.php
 
 env:
   - DB=mysql

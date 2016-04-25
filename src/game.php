@@ -1,15 +1,4 @@
 <?php
-
-/*
-
-Bowling Score Calculator
-Written by: Kyle Keith (kkeith29@cox.net)
-Date: 02-22-2014
-
-Run script from command line
-
-*/
-
 namespace bowling;
 use mysqli;
 define('NL','<br>');
@@ -19,73 +8,66 @@ ini_set('display_errors','On');
 
 class game {
 
-    const frame_count = 10;
-    const total_pins  = 10;
 
     private $rolls     = array();
-    private $roll_idx  = 1;
+    private $roll      = 1;
     private $frames    = array();
-    private $frame_idx = 1;
-
-    public function __construct()
-    {
-        
-    }
+    private $frame     = 1;
 
     public function roll( $pin_count ) {
 //        echo '<br>number of pins = '. $pin_count;
         if ( !is_int( $pin_count ) ) {
             throw new \InvalidArgumentException('roll() function requires an integer as an argument');
         }
-        if ( $pin_count < 0 || $pin_count > self::total_pins ) {
+        if ( $pin_count < 0 || $pin_count > 10 ) {
             throw new \RangeException('roll() function requires an integer between 0 and 10');
         }
-        $this->rolls[$this->roll_idx] = $pin_count;
-        if ( !isset( $this->frames[$this->frame_idx] ) ) {
-            $this->frames[$this->frame_idx] = array();
+        $this->rolls[$this->roll] = $pin_count;
+        if ( !isset( $this->frames[$this->frame] ) ) {
+            $this->frames[$this->frame] = array();
         }
-        $ball = ( count( $this->frames[$this->frame_idx] ) + 1 );
-        $this->frames[$this->frame_idx][$ball] = $this->roll_idx;
-        if ( $this->frame_idx !== self::frame_count && ( $ball === 2 || $pin_count === self::total_pins ) ) {
-            $this->frame_idx++;
+        $ball = ( count( $this->frames[$this->frame] ) + 1 );
+        $this->frames[$this->frame][$ball] = $this->roll;
+        if ( $this->frame !== 10 && ( $ball === 2 || $pin_count === 10 ) ) {
+            $this->frame++;
         }
-        $this->roll_idx++;
+        $this->roll++;
     }
 
     public function frame( $roll_1,$roll_2=false,$roll_3=false ) {
         $this->roll( $roll_1 );
-        if ( $roll_1 === self::total_pins ) {
+        if ( $roll_1 === 10 ) {
             return;
         }
         if ( $roll_2 === false ) {
-            throw new \InvalidArgumentException( 'frame() function requires second parameter if first does not equal ' . self::total_pins );
+            throw new \InvalidArgumentException( 'frame() function requires second parameter if first does not equal ' . 10 );
         }
-        $frame_idx = $this->frame_idx;
+        $frame = $this->frame;
         $this->roll( $roll_2 );
-        if ( $frame_idx !== self::frame_count || ( $roll_1 + $roll_2 ) !== self::total_pins ) {
+        if ( $frame !== 10 || ( $roll_1 + $roll_2 ) !== 10 ) {
             return;
         }
         if ( $roll_3 === false ) {
-            throw new \InvalidArgumentException( 'frame() function requires third parameter if first two equal ' . self::total_pins );
+            throw new \InvalidArgumentException( 'frame() function requires third parameter if first two equal ' . 10 );
         }
         $this->roll( $roll_3 );
     }
 
-    private function frame_score( $frame_idx ) {
-        $frame = $this->frames[$frame_idx];
+    private function frame_score( $frame ) {
+        $frame = $this->frames[$frame];
         $ball_count = count( $frame );
         $pin_count = 0;
-        foreach( $frame as $ball => $roll_idx ) {
-            $pin_count += $this->rolls[$roll_idx];
+        foreach( $frame as $ball => $roll ) {
+            $pin_count += $this->rolls[$roll];
         }
-        $bonus_rolls = ( $pin_count === self::total_pins ? ( $ball_count === 2 ? 1 : 2 ) : 0 );
+        $bonus_rolls = ( $pin_count === 10 ? ( $ball_count === 2 ? 1 : 2 ) : 0 );
         if ( $bonus_rolls > 0 ) {
             for ( $i=1;$i <= $bonus_rolls;$i++ ) {
-                $next_roll_idx = ( $roll_idx + $i );
-                if ( !isset( $this->rolls[$next_roll_idx] ) ) {
+                $next_roll = ( $roll + $i );
+                if ( !isset( $this->rolls[$next_roll] ) ) {
                     break;
                 }
-                $pin_count += $this->rolls[$next_roll_idx];
+                $pin_count += $this->rolls[$next_roll];
             }
         }
         return $pin_count;
@@ -98,9 +80,9 @@ class game {
     public function score_by_frame() {
         $frames = array();
         $score = 0;
-        foreach( array_keys( $this->frames ) as $frame_idx ) {
-            $score += $this->frame_score( $frame_idx );
-            $frames[$frame_idx] = $score;
+        foreach( array_keys( $this->frames ) as $frame ) {
+            $score += $this->frame_score( $frame );
+            $frames[$frame] = $score;
         }
         return $frames;
     }
@@ -112,11 +94,12 @@ class game {
         echo 'Frames: ' . count( $this->frames ) . NL;
         echo 'Frame Breakdown:' . NL;
         $frames = $this->score_by_frame();
-        foreach( $frames as $frame_idx => $score ) {
-            echo "\tFrame {$frame_idx}: {$score}" . NL;
+        foreach( $frames as $frame => $score ) {
+            echo "\tFrame {$frame}: {$score}" . NL;
         }
     }
 
+    //Test Stuff
     public function run() {
         echo '<br><br><br><br>';
 
