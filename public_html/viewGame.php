@@ -129,13 +129,41 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
     $playerName = getPlayerNameForPlayerId($playerID);
     echo '<tr>';
     if($_SESSION['player_id'] == $playerID){
-        echo "<th colspan=6 rowspan=2><form action='addRoll.php' method='post'>
+        //check if any rolls remaining
+        $conn = connectToDatabase();
+
+        $query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
+        $allFrames = $conn->query($query);
+        $temp = $allFrames->fetch_assoc();
+        $maxFrame = $temp['max'];
+
+        $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
+        $result = $conn->query($query);
+        if($result){
+            $row = $result->fetch_assoc();
+            $rollThreeID = $row['Roll_Three_ID'];
+            $query = "SELECT * FROM Roll WHERE Roll_ID = $rollThreeID";
+            $result2 = $conn->query($query);
+            if($result2){
+                $gameIsDone = 1;
+            }
+            else
+                $gameIsDone = 0;
+//
+        }
+        if($maxFrame <= 10 && !$gameIsDone) {//show button
+            echo "<th colspan=6 rowspan=2><form action='addRoll.php' method='post'>
                 <input type='hidden' name='gameID' value='$gameID'>
                 <input type='hidden' name='teamID' value='$teamID'>
                 <input type='hidden' name='playerID' value='$playerID'>
+                <input type='hidden' name='frameNumber' value='max'>
                 <input type='submit' value='Add Roll'>";
-        echo "</form></th>";
-        echo "<th colspan=6 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+            echo "</form></th>";
+            echo "<th colspan=6 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+        }
+        else{//show normal box
+            echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
+        }
     }else{
         echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
     }
