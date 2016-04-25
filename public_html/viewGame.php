@@ -265,15 +265,16 @@ function printGameInfoForEachPlayer($teamID, $gameID) {
 
 
 <br>
-<?php echo getNumberOfPinsHitForRollID(300); ?>
 
 <div id='scoresheet'>
     <table id='scoresheetTable' class='scoresheet' cellpadding='1' cellspacing='0'>
         <?php
-        $gameID = $_GET['gameID'];
-        $result = getInformationAboutGame($gameID);
-        printColumnLegend();
-        printInformationAboutGame($result, $gameID);
+        if(isset($_GET['gameID'])) {
+            $gameID = $_GET['gameID'];
+            $result = getInformationAboutGame($gameID);
+            printColumnLegend();
+            printInformationAboutGame($result, $gameID);
+        }
         ?>
     </table>
 </div>
