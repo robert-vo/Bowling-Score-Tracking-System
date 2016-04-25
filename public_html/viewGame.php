@@ -82,36 +82,26 @@ function printRollsInformation($playerID, $gameID, $teamID) {
     $result = $conn->query($sql);
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            if($row['Frame_Number'] != 10) {
-                $preparedURL = 'editRoll.php?rollID='.$row["Roll_One_ID"];
-                echo "<td colspan='3'>
-                    <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . "</a></td>";
+            if($row['Frame_Number'] != 10) {//not tenth frame
 
+                linkToEditRoll($row["Roll_One_ID"],$playerID,3);
                 if(isset($row['Roll_Two_ID'])) {
-                    $preparedURL = 'editRoll.php?rollID='.$row["Roll_Two_ID"];
-                    echo "<td colspan='3'>
-                        <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . "</a></td>";
+                    linkToEditRoll($row["Roll_Two_ID"],$playerID,3);
                 }
                 else {
                     echo "<td colspan=3>&nbsp;</td>";
                 }
             }
             else {//tenth frame
-                $preparedURL = 'editRoll.php?rollID='.$row["Roll_One_ID"];
-                echo "<td colspan='2'>
-                    <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_One_ID']) . "</a></td>";
+                linkToEditRoll($row["Roll_One_ID"],$playerID,2);
                 if(isset($row['Roll_Two_ID'])) {
-                    $preparedURL = 'editRoll.php?rollID='.$row["Roll_Two_ID"];
-                    echo "<td colspan='2'>
-                        <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_Two_ID']) . "</a></td>";
+                    linkToEditRoll($row["Roll_Two_ID"],$playerID,2);
                 }
                 else {
                     echo "<td colspan=2>&nbsp;</td>";
                 }
                 if(isset($row['Roll_Three_ID'])) {
-                    $preparedURL = 'editRoll.php?rollID='.$row["Roll_Three_ID"];
-                    echo "<td colspan='2'>
-                        <a href='$preparedURL'>" . getNumberOfPinsHitForRollID($row['Roll_Three_ID']) . "</a></td>";
+                    linkToEditRoll($row["Roll_Three_ID"],$playerID,2);
                 }
                 else {
                     echo "<td colspan=2>&nbsp;</td>";
@@ -129,21 +119,34 @@ function printRollsInformation($playerID, $gameID, $teamID) {
 
     }
 }
+
+function linkToEditRoll($rollID, $playerID,$width){
+    //check user id, allow or reject edit access
+    if($_SESSION['player_id'] == $playerID) {
+        $preparedURL = 'editRoll.php?rollID=' . $rollID;
+        echo "<td colspan='$width'><a href='$preparedURL'>" . getNumberOfPinsHitForRollID($rollID) . "</a></td>";
+    }
+    else{
+        echo "<td colspan='$width'>".getNumberOfPinsHitForRollID($rollID)."</td>";
+    }
+
+}
+
 function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
     $teamName = getTeamNameForTeamId($teamID);
     $playerName = getPlayerNameForPlayerId($playerID);
     echo '<tr>';
     if($_SESSION['player_id'] == $playerID){
-        //check if any rolls remaining
         $conn = connectToDatabase();
-
+        //get number of last frame
         $query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
         $allFrames = $conn->query($query);
         $temp = $allFrames->fetch_assoc();
         $maxFrame = $temp['max'];
-
+        //see if game is done, in case of thenth frame
         $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
         $result = $conn->query($query);
+        $gameIsDone = 0;
         if($result){
             $row = $result->fetch_assoc();
             $rollThreeID = $row['Roll_Three_ID'];
@@ -154,8 +157,8 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
             }
             else
                 $gameIsDone = 0;
-//
         }
+        //check if button shows
         if($maxFrame <= 10 && !$gameIsDone) {//show button
             echo "<th colspan=6 rowspan=2><form action='addRoll.php' method='post'>
                 <input type='hidden' name='gameID' value='$gameID'>
@@ -169,7 +172,7 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
         else{//show normal box
             echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
         }
-    }else{
+    }else{//not the logged in player
         echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
     }
     printRollsInformation($playerID, $gameID, $teamID);
