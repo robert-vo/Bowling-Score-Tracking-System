@@ -138,7 +138,7 @@ if(isset($_POST['submit'])) {
 
         $result = $conn->query($query);
         if($result){
-            echo "<script type='text/javascript'>alert('You made a roll!');</script>";
+            echo "<script type='text/javascript'>alert('You made a roll!');history.go(-1);document.location = 'viewGame.php?gameID=$gameID'</script>";
         }
         else{
             echo "<script type='text/javascript'>alert('The roll could not be recorded!');</script>";
