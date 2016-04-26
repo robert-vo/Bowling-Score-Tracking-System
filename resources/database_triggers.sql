@@ -150,14 +150,6 @@ FOR EACH ROW
     END LOOP label1;
   END;
 
-drop trigger if exists update_win_count;
-CREATE TRIGGER update_win_count after update ON game
-FOR EACH ROW
-  if(new.Game_Finished = 1 and new.Winner_Team_ID > 0) THEN
-    update team
-      set Win_Count = Win_Count + 1 where game.Winner_Team_ID = Team.Team_ID;
-  END IF;
-
 drop trigger if exists add_strike;
 create trigger add_strike after update on roll
   for each ROW
