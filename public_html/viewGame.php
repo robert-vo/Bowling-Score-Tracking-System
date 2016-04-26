@@ -123,7 +123,9 @@ function printRollsInformation($playerID, $gameID, $teamID) {
 function linkToEditRoll($rollID, $playerID,$width){
     //check user id, allow or reject edit access
     if($_SESSION['player_id'] == $playerID) {
+//        $preparedURL = 'editRoll.php?rollID=' . $rollID . '&gameID=' . $_GET['gameID'];
         $preparedURL = 'editRoll.php?rollID=' . $rollID;
+
         echo "<td colspan='$width'><a href='$preparedURL'>" . getNumberOfPinsHitForRollID($rollID) . "</a></td>";
     }
     else{
@@ -170,15 +172,17 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
                 $gameIsDone = 1;
             }
 
-
         }
         //check if button shows
         if($maxFrame <= 10 && !$gameIsDone) {//show button
+            $frameNumber = $maxFrame;
+            if($frameNumber < 1) $frameNumber = 1;
+
             echo "<th colspan=6 rowspan=2><form action='addRoll.php' method='post'>
                 <input type='hidden' name='gameID' value='$gameID'>
                 <input type='hidden' name='teamID' value='$teamID'>
                 <input type='hidden' name='playerID' value='$playerID'>
-                <input type='hidden' name='frameNumber' value='max'>
+                <input type='hidden' name='frameNumber' value='$frameNumber'>
                 <input type='submit' value='Add Roll'>";
             echo "</form></th>";
             echo "<th colspan=6 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
