@@ -64,11 +64,11 @@ function createTableOnWebpage($allColumns)
             array_push($allColumnsAsArray, $row["Column_name"]);
         }
         for ($i = 1; $i < count($allColumnsAsArray); $i++) {
-            if($allColumnsAsArray[$i] == "Date_Added" || $allColumnsAsArray[$i] == "Last_Date_Modified")
+            if($allColumnsAsArray[$i] == "Date_Added" || $allColumnsAsArray[$i] == "Last_Date_Modified" || $allColumnsAsArray[$i] == "Date_Joined" || $allColumnsAsArray[$i] == "Date_Deleted")
                 continue;
             echo "<tr>";
             echo "<td><b>" . $allColumnsAsArray[$i] . "</b></td>";
-            echo "<td><input type='text' name='" . $allColumnsAsArray[$i] . "' value=''> </td>";
+            echo "<td><input type='text' required name='" . $allColumnsAsArray[$i] . "' value=''> </td>";
             echo "</tr>";
         }
 

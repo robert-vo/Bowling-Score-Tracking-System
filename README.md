@@ -2,17 +2,12 @@
 
 Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various statistics about players such as single-pin spares left, strike percentage, split-conversion percentage, etc.)
 
-Website can be viewed [here](http://bowling-score-tracking-system.azurewebsites.net/public_html/index.php).
-
-It can also be viewed through this link http://bowling-score-tracking-system.azurewebsites.net/public_html/index.php
-
 Technologies used include:
 * PHP/HTML/CSS/JS (front-end) 
 * Amazon RDS MySQL (back-end)
 * TravisCI (continuous integration)
 * PhpUnit (testing framework)
 * GitHub (version control)
-* Microsoft Azure (web hosting)
 * Trello (project management)
 * GroupMe (team communication)
 * SendGrid (email service)

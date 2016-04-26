@@ -85,14 +85,12 @@ CREATE TABLE Game (
   Teams               VARCHAR(100) not null, -- CSV of all teams
   Game_Start_Time     DATETIME,
   Game_End_Time       DATETIME,
-  Winner_Team_ID      INT          null,
   Title               VARCHAR(100)  not null,
   Location_ID         INT,
   Event_Type          ENUM('Casual', 'Tournament') DEFAULT 'Casual',
   Game_Finished       BOOLEAN DEFAULT FALSE,
   Date_Added          DATETIME,
   Last_Date_Modified  DATETIME,
-  FOREIGN KEY (Winner_Team_ID) REFERENCES Team(Team_ID),
   FOREIGN KEY (Location_ID) REFERENCES Game_Location(Game_Location_ID)
 );
 
@@ -168,8 +166,6 @@ CREATE TABLE Player_Stats (
   CHECK (Games_Played >= 0),
   CHECK (Perfect_Games >= 0),
   CHECK (Spares >= 0),
-  CHECK (Best_Score >= 0),
-  CHECK (Worst_Score >= 0),
   CHECK (Pins_Left >= 0),
   CHECK (Average_Pin_Left >= 0)
 );

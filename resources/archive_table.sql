@@ -78,7 +78,6 @@ CREATE TABLE Game_Archive (
   Teams               VARCHAR(100) not null, -- CSV of all teams
   Game_Start_Time     DATETIME,
   Game_End_Time       DATETIME,
-  Winner_Team_ID      INT,
   Title               VARCHAR(100),
   Location_ID         INT,
   Event_Type          ENUM('Casual', 'Tournament') DEFAULT 'Casual',

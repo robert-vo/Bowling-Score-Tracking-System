@@ -11,7 +11,7 @@ function connectToDatabase()
         $password = "bowlingdb";
         $dbname = "bowling";
     } else {
-        $servername = "localhost:3306";
+        $servername = "localhost:3307";
         $username = "root";
         $password = "password";
         $dbname = "bowling";

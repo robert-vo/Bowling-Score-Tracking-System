@@ -70,7 +70,7 @@ drop trigger if exists delete_from_Game;
 CREATE TRIGGER delete_from_Game AFTER DELETE ON Game
 FOR EACH ROW
   insert into Game_Archive VALUES (old.Game_ID, old.Teams,
-    old.Game_Start_Time, old.Game_End_Time, old.Winner_Team_ID,
+    old.Game_Start_Time, old.Game_End_Time,
     old.Title, old.Location_ID, old.Event_Type, old.Game_Finished ,
     old.Date_Added, old.Last_Date_Modified, now());
 
@@ -79,7 +79,7 @@ CREATE TRIGGER delete_from_PlayerStats AFTER DELETE ON Player_Stats
 FOR EACH ROW
   insert into Player_Stats_Archive VALUES (old.Stat_ID, old.Player_ID,
     old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares,
-    old.Best_Score, old.Worst_Score, old.Pins_Left, old.Average_Pin_Left, old.Date_Added,
+    old.Pins_Left, old.Average_Pin_Left, old.Date_Added,
     old.Last_Date_Modified, old.Foul_Count, old.Pins_Hit, now());
 
 drop trigger if exists delete_from_game_location;
@@ -149,14 +149,6 @@ FOR EACH ROW
       LEAVE label1;
     END LOOP label1;
   END;
-
-drop trigger if exists update_win_count;
-CREATE TRIGGER update_win_count after update ON game
-FOR EACH ROW
-  if(new.Game_Finished = 1 and new.Winner_Team_ID > 0) THEN
-    update team
-      set Win_Count = Win_Count + 1 where game.Winner_Team_ID = Team.Team_ID;
-  END IF;
 
 drop trigger if exists add_strike;
 create trigger add_strike after update on roll

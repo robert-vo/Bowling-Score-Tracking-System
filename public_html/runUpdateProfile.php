@@ -55,16 +55,15 @@ if (!isset($_SESSION["sess_user"])) {
 
         $updatedFields = array();
         $updatedFieldColumns = array();
-        for($i = 0; $i < count($columnNames); $i++) {
-            if (isset($_POST[$columnNames[$i]]) && ($_POST[$columnNames[$i]] != "")) {
-                //echo $_POST[$columnNames[$i]] . ' ';
-                array_push($updatedFields, $_POST[$columnNames[$i]]);
-                array_push($updatedFieldColumns, $columnNames[$i]);
-            }
-        }
 
-        for($i = 0; $i < count($updatedFields); $i++) {
-            //echo $updatedFieldColumns[$i] . ': ' . $updatedFields[$i] . "<br>";
+        for($i = 0; $i < count($columnNames); $i++) {
+            if(isset($_POST[$columnNames[$i]])) {
+                $value = trim($_POST[$columnNames[$i]]);
+                if($value != "") {
+                    array_push($updatedFields, $_POST[$columnNames[$i]]);
+                    array_push($updatedFieldColumns, $columnNames[$i]);
+                }
+            }
         }
 
         //Update..
@@ -84,7 +83,6 @@ if (!isset($_SESSION["sess_user"])) {
     $conn = connectToDatabase();
 
     $query = generateUpdateQuery();
-
 
     // Success message
     if((mysqli_query($conn, $query) == TRUE)) {

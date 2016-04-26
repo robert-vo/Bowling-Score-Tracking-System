@@ -91,9 +91,13 @@ function displayMessage()
     $values = array(); // Array that holds values to be inserted
 
     for ($i = 1; $i < count($columnNames); $i++) {
-        if ($_POST[$columnNames[$i]] == "") {
+        if($columnNames[$i] == "Date_Added" || $columnNames[$i] == "Last_Date_Modified" || $columnNames[$i] == "Date_Joined" || $columnNames[$i] == "Date_Deleted") {
             continue;
-        } else {
+        }
+        else if ($_POST[$columnNames[$i]] == "") {
+            continue;
+        }
+        else {
             array_push($columns, $columnNames[$i]);
             array_push($values, $_POST[$columnNames[$i]]);
         }
@@ -146,15 +150,14 @@ function displayMessage()
             </form>";
 
     } else {
-        $error = "Unable to update.\n\nError: " . $conn->error;
-        //echo $error;
+        $error = "<br>Unable to update. Error: " . $conn->error;
+        echo $error . "<br><br>";
+        
+        echo "<form action='runAudit.php' method='post'>
+                <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
+                <input type='submit' value='Back to table'>
+            </form>";
 
-        $error = json_encode($error);
-        echo "
-        <script type='text/javascript'>
-            alert($error);
-            history.go(-1);
-        </script>";
     }
 
     $conn->close();

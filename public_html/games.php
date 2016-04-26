@@ -68,7 +68,7 @@ function printGames($result, $teamID) {
             echo '<br><a href=viewGame.php?gameID=' . $row['Game_ID'];
             echo '>View the game here!</a>';
             echo '</caption>';
-            echo '<tr><th>Team Name</th><th>Average Score Per Player</th><th>Winner</th></tr>';
+            echo '<tr><th>Team Name</th><th>Average Score Per Player</th></tr>';
             $allTeams = $row['Teams'];
             $separatedTeams = explode(",", $allTeams);
 
@@ -83,18 +83,6 @@ function printGames($result, $teamID) {
                 echo '</th>';
 
                 echo '<th>' . calculateAverageScoreFor($row['Game_ID'], $team) . '</th>';
-
-                echo '<th>';
-
-                if($row['Winner_Team_ID'] == $team) {
-                    echo '🔥✓🔥';
-                }
-                else {
-                    echo '✖';
-                }
-
-                echo '</th>';
-
                 echo '</tr>';
             }
             echo '</table>';
@@ -181,10 +169,10 @@ function findAllGamesATeamIsAPartOf($teamID, $gameStatus) {
     printGames($result, $teamID);
 }
 
-echo '<a href="createGame.php">Click here to start a new game!</a></b>';
-echo '<h3>Here are the incompleted games that you are participating in!</h3>';
+echo '<h3><a href="createGame.php">Want to start a new game? Click here to start a new game!</a></b></h3>';
+echo '<h3>Here are the games that you are a part of!</h3>';
+
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 0);
-echo '<h3>Here are the completed games that you participated in!</h3>';
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 1);
 
 ?>
