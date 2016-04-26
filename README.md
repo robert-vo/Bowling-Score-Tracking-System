@@ -8,7 +8,6 @@ Technologies used include:
 * TravisCI (continuous integration)
 * PhpUnit (testing framework)
 * GitHub (version control)
-* Microsoft Azure (web hosting)
 * Trello (project management)
 * GroupMe (team communication)
 * SendGrid (email service)
