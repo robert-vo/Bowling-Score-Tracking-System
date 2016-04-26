@@ -16,6 +16,17 @@ function prepareSqlQuery($yourTeam, $otherTeams, $gameTitle, $gameLocation, $gam
         }
     }
 
+    $sql = "insert into Game(Teams, Title, Location_ID, Event_Type) VALUES ('$allTeams', '$gameTitle', '$gameLocation', '$gameType')";
+
+    return $sql;
+}
+
+function prepareSqlQuery2($yourTeam, $gameTitle, $gameLocation, $gameType) {
+    $allTeams = $yourTeam;
+
+    if(!$gameTitle) {
+        $gameTitle = 'Generic Game';
+    }
 
     $sql = "insert into Game(Teams, Title, Location_ID, Event_Type) VALUES ('$allTeams', '$gameTitle', '$gameLocation', '$gameType')";
 
@@ -23,11 +34,16 @@ function prepareSqlQuery($yourTeam, $otherTeams, $gameTitle, $gameLocation, $gam
 }
 
 function performInsertQuery() {
-    $sql = prepareSqlQuery($_POST['yourTeam'], $_POST['formTeams'], $_POST['game_title'], $_POST['location'], $_POST['eventType']);
+    if(!isset($_POST['formTeams'])) {
+        $sql = prepareSqlQuery2($_POST['yourTeam'], $_POST['game_title'], $_POST['location'], $_POST['eventType']);
+    }
+    else {
+        $sql = prepareSqlQuery($_POST['yourTeam'], $_POST['formTeams'], $_POST['game_title'], $_POST['location'], $_POST['eventType']);
+    }
     $conn = connectToDatabase();
     if (mysqli_query($conn, $sql) == TRUE) {
         echo "<br>New game has been created! Please click <a href='games.php'>here</a> to see all of your games!";
-        updateAllTeamsGameCount($_POST['yourTeam'], $_POST['formTeams']);
+//        updateAllTeamsGameCount($_POST['yourTeam'], $_POST['formTeams']);
     } else {
         echo "<div id=\"error\">Sorry, $conn->error,  please try creating a team again. </div><br>";
     }

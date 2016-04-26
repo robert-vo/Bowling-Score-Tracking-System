@@ -135,6 +135,15 @@ FOR EACH ROW
         update Team
         set Team.Game_Count = Team.Game_Count + 1
         where Team_ID = SPLIT_STR(new.Teams, ',', team);
+
+        update Player_Stats ps
+          JOIN Team t
+          ON t.Leader = ps.Player_ID or t.Player_1 = ps.Player_ID or
+             t.Player_2 = ps.Player_ID or t.Player_3 = ps.Player_ID OR
+             t.Player_4 = ps.Player_ID or t.Player_5 = ps.Player_ID
+        set ps.Games_Played = ps.Games_Played + 1
+        where t.Team_ID = SPLIT_STR(new.Teams, ',', team);
+
         ITERATE label1;
       END IF;
       LEAVE label1;
@@ -149,7 +158,14 @@ FOR EACH ROW
       set Win_Count = Win_Count + 1 where game.Winner_Team_ID = Team.Team_ID;
   END IF;
 
-
+drop trigger if exists add_strike;
+create trigger add_strike after update on roll
+  for each ROW
+    if(new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 + new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8 + new.Hit_Pin_9 + new.Hit_Pin_10 = 10) THEN
+      update frame
+        set Is_Strike = 1
+        where frame.Roll_One_ID = new.Roll_ID;
+    END IF;
 
 drop trigger if exists Date_Added_Ball;
 CREATE TRIGGER Date_Added_Ball BEFORE INSERT ON Ball
