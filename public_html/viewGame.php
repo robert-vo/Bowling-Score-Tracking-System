@@ -141,73 +141,136 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
     if($_SESSION['player_id'] == $playerID){
         $conn = connectToDatabase();
         //get number of last frame
+        $frameNumber = 1;
         $query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
         $allFrames = $conn->query($query);
         $temp = $allFrames->fetch_assoc();
         $maxFrame = $temp['max'];
         $gameIsDone = 0;
 
-        //set current frame
-        if($maxFrame == 10) {
+        //set current frame number and roll ID
+        $rollID='';
+        if($maxFrame == 10) {//on the tenth frame
             //see if game is done, in case of tenth frame
             $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
             $result = $conn->query($query);
-            if ($result) {
+            if ($result) {//frame exists
                 $row = $result->fetch_assoc();
 
-                //check if roll three should be set
-                $pinsDown1 = getNumberOfPinsHitForRollID($row['Roll_One_ID']);
-                $pinsDown2 = getNumberOfPinsHitForRollID($row['Roll_Two_ID']);
-                $total = $pinsDown1 + $pinsDown2;
-                if ($total >= 10) {
-                    //check if roll three is set
-                    $rollThreeID = $row['Roll_Three_ID'];
-                    $query = "SELECT * FROM Roll WHERE Roll_ID = $rollThreeID";
-                    $result2 = $conn->query($query);
-                    if ($result2) {
-                        $gameIsDone = 1;
-                    } else
-                        $gameIsDone = 0;
-                } else {
-                    //roll three should be null, game is done
-                    $gameIsDone = 1;
-                }
+                $rollOneID = $row['Roll_One_ID'];
+                $query = "SELECT * FROM Roll WHERE Roll_ID = $rollOneID";
+                $result2 = $conn->query($query);
+                if($result2){//roll one exists
+                    $pinsDown1 = getNumberOfPinsHitForRollID($rollOneID);
+                    if($pinsDown1 > 0) {//roll one is full
+                        //look for roll 2
+                        $rollTwoID = $row['Roll_Two_ID'];
+                        $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
+                        $result2 = $conn->query($query);
+                        if ($result2) {//roll two exists
+                            $pinsDown2 = getNumberOfPinsHitForRollID($rollTwoID);
+                            if($pinsDown2 > 0) {//roll two is full
+                                //check if roll three should be set
+                                $pinsDown1 = getNumberOfPinsHitForRollID($row['Roll_One_ID']);
+                                $pinsDown2 = getNumberOfPinsHitForRollID($row['Roll_Two_ID']);
+                                $total = $pinsDown1 + $pinsDown2;
+                                if ($total >= 10) {//roll three needed
+                                    //check if roll three is set
+                                    $rollThreeID = $row['Roll_Three_ID'];
+                                    $query = "SELECT * FROM Roll WHERE Roll_ID = $rollThreeID";
+                                    $result2 = $conn->query($query);
+                                    if ($result2) {//roll three exists
+                                        $gameIsDone = 1;
+                                    } else {//roll three does not exist
+                                        $gameIsDone = 0;
+                                    }
 
+                                }else {//roll three should be null, game is done
+                                    $gameIsDone = 1;
+                                }
+                            }else{//roll two is empty
+                                $rollID = $rollTwoID;
+                                $frameNumber = $maxFrame;
+                            }
+                        }else{//roll two doesn't exist
+                            $rollID = $rollTwoID;
+                            $frameNumber = $maxFrame;
+                        }
+                    }else{//row one is empty
+                        $rollID = $rollOneID;
+                        $frameNumber = $maxFrame;
+                    }
+                }
             }
         }
-        else{//max is less than 10
+        else if($maxFrame > 0){//max is less than 10
             //see if game is done, in case of normal frame
             $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
             $result = $conn->query($query);
-            if ($result) {
+            if ($result) {//frame exists
                 $row = $result->fetch_assoc();
 
-                $rollTwoID = $row['Roll_Two_ID'];
-                $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
+                $rollOneID = $row['Roll_One_ID'];
+                $query = "SELECT * FROM Roll WHERE Roll_ID = $rollOneID";
                 $result2 = $conn->query($query);
-                if ($result2) {
-                    $gameIsDone = 1;
-                } else
-                    $gameIsDone = 0;
+                if ($result2) {//roll one exists
+                    $pinsDown1 = getNumberOfPinsHitForRollID($rollOneID);
+                    if($pinsDown1 > 0){//roll one is full
+                        if($pinsDown1==10){// roll one is a strike
+                            //look to next frame
+                            $frameNumber = $maxFrame+1;
+                        }
+                        else{//roll one is not a strike
+                            //look for roll 2
+                            $rollTwoID = $row['Roll_Two_ID'];
+                            $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
+                            $result2 = $conn->query($query);
+                            if ($result2) {//roll two exists
+                                $pinsDown2 = getNumberOfPinsHitForRollID($rollTwoID);
+                                if($pinsDown2 > 0){//roll two is full
+                                    //look to next frame
+                                    $frameNumber = $maxFrame+1;
+                                }
+                                else{//roll two is empty
+                                    $rollID = $rollTwoID;
+                                    $frameNumber = $maxFrame;
+                                }
+                            } else{//frame two doesn't exist
+                                $rollID = $rollTwoID;
+                                $frameNumber = $maxFrame;
+                            }
+                        }
+                    }
+                    else{//row one is empty
+                        $rollID = $rollOneID;
+                        $frameNumber = $maxFrame;
+                    }
+                } else{//frame one doesn't exist
+                    $rollID = $rollOneID;
+                    $frameNumber = $maxFrame;
+                }
             }
         }
+        //if maxFrames is 0, then frame number stays as 1
 
 
         //check if button shows
         if(!$gameIsDone) {//show button
 
+//            echo "current frame = $frameNumber";
+//            echo "roll ID = $rollID";
             echo "<th colspan=6 rowspan=2><form action='addRoll.php' method='post'>
                 <input type='hidden' name='gameID' value='$gameID'>
                 <input type='hidden' name='teamID' value='$teamID'>
                 <input type='hidden' name='playerID' value='$playerID'>
                 <input type='hidden' name='frameNumber' value='$frameNumber'>
+                <input type='hidden' name='rollID' value='$rollID'>
                 <input type='submit' value='Add Roll'>";
             echo "</form></th>";
             echo "<th colspan=6 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
         }
         else{//show normal box
-            echo "game done ".$gameIsDone;
-            echo "max ".$maxFrame;
+            
             echo "<th colspan=12 rowspan=2>$teamName<br>$playerTitle: $playerName</th>";
         }
     }else{//not the logged in player

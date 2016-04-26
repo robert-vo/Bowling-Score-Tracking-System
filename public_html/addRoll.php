@@ -8,7 +8,7 @@ $gameID = $_POST['gameID'];
 $teamID =  $_POST['teamID'];
 $playerID = $_POST['playerID'];
 $frameNumber = $_POST['frameNumber'];
-echo "current frame $frameNumber<br>";
+$rollID = $_POST['rollID'];
 
 $conn = connectToDatabase();
 
@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $frameNumber";
 $result = $conn->query($query);
 if($result->num_rows > 0) {//frame exists
-    echo "existing frame<br>";
+    echo "The current frame is $frameNumber.<br>";
     $row = $result->fetch_assoc();
     $currentRoll;
     $frameID = $row['Frame_ID'];
@@ -35,39 +35,51 @@ if($result->num_rows > 0) {//frame exists
         $query = "SELECT * FROM Roll WHERE Roll_ID = $rollOneID";
         $result = $conn->query($query);
         if($result->num_rows <= 0){
-//            echo "make roll 1-";
+
             $currentRoll = $rollOneID;
         }
         else{
             $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
             $result = $conn->query($query);
             if($result->num_rows <= 0){
-//                echo "make roll 2-";
+
                 $currentRoll = $rollTwoID;
             }
             else{
                 $query = "SELECT * FROM Roll WHERE Roll_ID = $rollThreeID";
                 $result = $conn->query($query);
                 if($result->num_rows <= 0){
-//                    echo "make roll 3-";
+
                     $currentRoll = $rollThreeID;
                 }
             }
         }
     }
     else if($frameNumber < 10){//finish current frame
-        //query to test which roll is null: 1->2->3
+        //select next empty roll ID into currentRoll
         $query = "SELECT * FROM Roll WHERE Roll_ID = $rollOneID";
         $result = $conn->query($query);
-        if($result->num_rows <= 0){//cant find roll ID
-            $currentRoll = $rollOneID;
-        }
-        else {//look for next roll
-            $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
-            $result = $conn->query($query);
-            if ($result->num_rows <= 0) {//cant find roll id
-                $currentRoll = $rollTwoID;
+
+        if($result->num_rows > 0){//roll 1 exists
+            $pinsDown1 = getNumberOfPinsHitForRollID($rollOneID);
+            if($pinsDown1 > 0){//roll one is full
+
+                //look for next roll
+                $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {//roll 2 exists
+                    $pinsDown2 = getNumberOfPinsHitForRollID($rollTwoID);
+                    if($pinsDown2 > 0){
+                    }
+                }
+                else{//roll 2 does not exists
+                    $currentRoll = $rollTwoID;
+                }
             }
+
+        }
+        else{//roll 1 does not exists
+            $currentRoll = $rollOneID;
         }
     }
 }
@@ -91,15 +103,13 @@ else{//query was null, make new frame
               ($newFrameID, $frameNumber, $playerID, $newRollID, $newRollID2, $teamID, $gameID, NOW())";
     $result = $conn->query($query);
     if($result){
-        echo "new frame created";
     }
     else{
-        echo "frame not created";
+        echo "error: frame not created";
     }
 
     $currentRoll = $newRollID;
     $frameID = $newFrameID;
-
 }
 
 //we have currentRoll, now get page submit info
@@ -146,7 +156,10 @@ if(isset($_POST['submit'])) {
         }
         $result = $conn->query($query);
         if($result){
-            echo "<script type='text/javascript'>alert('You made a roll!');history.go(-1);document.location = 'viewGame.php?gameID=$gameID'</script>";
+            echo "<script type='text/javascript'>
+                   alert('You made a roll!');
+                   document.location = 'viewGame.php?gameID=$gameID'
+                   </script>";
         }
         else{
             echo "<script type='text/javascript'>alert('The roll could not be recorded!');</script>";
@@ -169,6 +182,40 @@ function generateCheckboxesForAllPins () {
         echo "<label for = 'pin$pin'>$pin</label>";
         echo "</span>";
     }
+}
+
+function getNumberOfPinsHitForRollID($rollID) {
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from roll where roll_id = $rollID;";
+    $conn = connectToDatabase();
+
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if($row['Is_Foul']) {
+                return 'F';
+            }
+            else if ($row['Is_Spare']) {
+                return '/';
+            }
+            else if($row['Is_Strike']) {
+                return 'X';
+            }
+            else {
+                return calculateNumberOfPinsHit($row['Hit_Pin_1'],
+                    $row['Hit_Pin_2'], $row['Hit_Pin_3'], $row['Hit_Pin_4'],
+                    $row['Hit_Pin_5'], $row['Hit_Pin_6'], $row['Hit_Pin_7'],
+                    $row['Hit_Pin_8'], $row['Hit_Pin_9'], $row['Hit_Pin_10']
+                );
+            }
+        }
+    }
+    return '&nbsp';
+}
+
+
+function calculateNumberOfPinsHit(...$pins) {
+    return array_sum($pins) == 0 ? '-' : array_sum($pins);
 }
 ?>
 <html>
@@ -196,11 +243,12 @@ function generateCheckboxesForAllPins () {
     <?php generateCheckboxesForAllPins() ?>
     <h5>
         <?php
-        $frameNumber++;
+        
         echo "<input type='hidden' name='gameID' value=$gameID>
             <input type='hidden' name='teamID' value=$teamID>
             <input type='hidden' name='playerID' value=$playerID>
-            <input type='hidden' name='frameNumber' value=$frameNumber>";
+            <input type='hidden' name='frameNumber' value=$frameNumber>
+            <input type='hidden' name='rollID' value='$rollID'>";
         ?>
         <input type="radio" name="isFoul" class="submitButton">foul
         <br>
