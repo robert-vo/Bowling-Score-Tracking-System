@@ -32,7 +32,7 @@ function displayAllStatsForPlayer($playerID) {
             echo '<th>' . $row['Best_Score'] . '</th>';
             echo '<th>' . $row['Worst_Score'] . '</th>';
             echo '<th>' . $row['Pins_Left'] . '</th>';
-            echo '<th>' . $row['Average_Pin_Left'] . '</th>';
+            echo '<th>' . round($row['Average_Pin_Left'], 3) . '</th>';
             echo '<th>' . $row['Foul_Count'] . '</th>';
             echo '<th>' . $row['Pins_Hit'] . '</th>';
 
