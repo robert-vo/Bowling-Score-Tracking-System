@@ -107,7 +107,6 @@ if(!isset($_GET['category']))
                     <select id='playersReportType' name='playersReportType'>
                         <option value='Strikes'>Strikes</option>
                         <option value='Spares'>Spares</option>
-                        <option value='Best_Score'>Best Score</option>
                         <option value='Perfect_Games'>Perfect Games</option>
                         <option value='Average_Pin_Left'>Average Pins Left</option>
                     </select>

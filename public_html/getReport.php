@@ -58,7 +58,7 @@ function printTop10TeamsGamesPlayed($orderBy, $showTop) {
 function printPlayersReport($report, $showTop, $orderBy) {
     $conn = connectToDatabase();
     $query = 'SELECT * FROM Player_Stats, Players where Player_Stats.Player_ID = Players.Player_ID and Player_Stats.' . $report . ' > 0 ORDER BY Player_Stats.' . $report . ' ' . $orderBy . ' LIMIT ' . $showTop . ';';
-    //echo $query;
+    echo $query;
     $result = $conn->query($query);
     printPlayers($report, $result);
     $conn->close();
@@ -69,9 +69,7 @@ function printPlayers($report, $result) {
     if($result->num_rows > 0) {
         echo '<table class="report alternate">';
         $reportHeader = "";
-        if($report == "Best_Score")
-            $reportHeader = "Best Score";
-        else if ($report == "Average_Pin_Left")
+        if ($report == "Average_Pin_Left")
             $reportHeader = "Average # of Pins Left";
         else
             $reportHeader = "Number of " . $report;
@@ -92,7 +90,7 @@ function printPlayers($report, $result) {
         echo '</table>';
     }
     else {
-        echo 'Fatal error! No team exists.';
+        echo '0 results';
     }
 }
 
@@ -119,7 +117,7 @@ function printResult($result) {
         }
         echo "</table>";
     } else {
-        echo "Fatal error! No teams exist.";
+        echo "0 results.";
     }
 }
 
@@ -134,17 +132,7 @@ $showTop = $_POST[ $category . 'ShowTop' ];
 
 if($category == "players") { // Queries and prints for the 'players' category.
 
-    if($reportType == "Best_Score"){
-
-        $order = "";
-        if ($orderBy == "ASC")
-            $order = 'worst';
-        else
-            $order = 'best';
-        echo '<h5>Here are the top ' . $showTop . ' players who have the ' . $order . ' high score</h5>';
-        printPlayersReport($reportType, $showTop, $orderBy);
-
-    } else if($reportType == "Average_Pin_Left") {
+    if($reportType == "Average_Pin_Left") {
         $order = "";
         if ($orderBy == "ASC")
             $order = 'lowest';
