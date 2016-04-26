@@ -126,7 +126,7 @@ function linkToEditRoll($rollID, $playerID,$width){
 //        $preparedURL = 'editRoll.php?rollID=' . $rollID . '&gameID=' . $_GET['gameID'];
         $preparedURL = 'editRoll.php?rollID=' . $rollID;
 
-        echo "<td colspan='$width'><a href='$preparedURL'>" . getNumberOfPinsHitForRollID($rollID) . "</a></td>";
+        echo "<td colspan='$width'>" . getNumberOfPinsHitForRollID($rollID) . "</td>";
     }
     else{
         echo "<td colspan='$width'>".getNumberOfPinsHitForRollID($rollID)."</td>";
