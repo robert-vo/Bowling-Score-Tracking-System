@@ -92,14 +92,14 @@ function displayMessage()
     $columns = array(); // Array that holds the column names of the values to be inserted.
     $values = array(); // Array that holds the values to be inserted.
 
+
     for ($i = 1; $i < count($columnNames); $i++) {
-        if($columnNames[$i] == "Date_Added" || $columnNames[$i] == "Last_Date_Modified")
-            continue;
-        else if ($_POST[$columnNames[$i]] == "") {
-            continue;
-        } else {
-            array_push($columns, $columnNames[$i]);
-            array_push($values, $_POST[$columnNames[$i]]);
+        if(isset($_POST[$columnNames[$i]])) {
+            $value = trim($_POST[$columnNames[$i]]);
+            if($value != "") {
+                array_push($columns, $columnNames[$i]);
+                array_push($values, $value);
+            }
         }
     }
 
