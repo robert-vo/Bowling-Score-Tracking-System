@@ -178,7 +178,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
                 if ($gamecount == 0) {
                     $percentage = 0;
                 } else {
-                    $percentage = ($teamwin / $gamecount) * 100;
+                    $percentage = round(($teamwin / $gamecount) * 100, 3);
                 }
 
                 echo "<br><h4>Stats of Team: " . $teamname;
