@@ -7,6 +7,8 @@ include 'databaseFunctions.php';
 $gameID = $_POST['gameID'];
 $teamID =  $_POST['teamID'];
 $playerID = $_POST['playerID'];
+$frameNumber = $_POST['frameNumber'];
+echo "current frame $frameNumber<br>";
 
 $conn = connectToDatabase();
 
@@ -14,16 +16,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//$query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
-//$allFrames = $conn->query($query);
-//$temp = $allFrames->fetch_assoc();
-//$max = $temp['max'];
-
-$max = $_POST['frameNumber'];//called 'max' from previous incarnation
-
-$query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $max";
+$query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $frameNumber";
 $result = $conn->query($query);
-if($result) {
+if($result->num_rows > 0) {//frame exists
+    echo "existing frame<br>";
     $row = $result->fetch_assoc();
     $currentRoll;
     $frameID = $row['Frame_ID'];
@@ -33,7 +29,7 @@ if($result) {
 
     //pick the next empty roll
 
-    if($max == 10){ //finish final frame
+    if($frameNumber == 10){ //finish final frame
 
         //query to test which roll is null
         $query = "SELECT * FROM Roll WHERE Roll_ID = $rollOneID";
@@ -59,29 +55,51 @@ if($result) {
             }
         }
     }
-    else if($max < 10){//finish current frame
+    else if($frameNumber < 10){//finish current frame
         //query to test which roll is null: 1->2->3
         $query = "SELECT * FROM Roll WHERE Roll_ID = $rollOneID";
         $result = $conn->query($query);
-        if($result->num_rows <= 0){
-//            echo "make roll 1-";
+        if($result->num_rows <= 0){//cant find roll ID
             $currentRoll = $rollOneID;
         }
-        else {
+        else {//look for next roll
             $query = "SELECT * FROM Roll WHERE Roll_ID = $rollTwoID";
             $result = $conn->query($query);
-            if ($result->num_rows <= 0) {
-//                echo "make roll 2-";
+            if ($result->num_rows <= 0) {//cant find roll id
                 $currentRoll = $rollTwoID;
             }
         }
     }
-    else if($max == null){//add frame
-        $currentRoll = $rollOneID;
-    }
 }
-else{//query is null
-    echo "Frame does not exist";
+else{//query was null, make new frame
+
+    //get next frame ID
+    $query = "SELECT max(Frame_ID) as 'max' FROM Frame";
+    $result = $conn->query($query);
+    $temp = $result->fetch_assoc();
+    $newFrameID = $temp['max'] + 1;
+
+    //get next roll ID
+    $query = "SELECT max(Roll_ID) as 'max' FROM Roll";
+    $result = $conn->query($query);
+    $temp = $result->fetch_assoc();
+    $newRollID = $temp['max'] + 1;
+    $newRollID2 = $newRollID + 1;
+
+    //insert into frame (...)
+    $query = "INSERT INTO Frame (Frame_ID, Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Team_ID, Game_ID, Date_Added) values 
+              ($newFrameID, $frameNumber, $playerID, $newRollID, $newRollID2, $teamID, $gameID, NOW())";
+    $result = $conn->query($query);
+    if($result){
+        echo "new frame created";
+    }
+    else{
+        echo "frame not created";
+    }
+
+    $currentRoll = $newRollID;
+    $frameID = $newFrameID;
+
 }
 
 //we have currentRoll, now get page submit info
@@ -170,9 +188,11 @@ function generateCheckboxesForAllPins () {
     <?php generateCheckboxesForAllPins() ?>
     <h5>
         <?php
+        $frameNumber++;
         echo "<input type='hidden' name='gameID' value=$gameID>
             <input type='hidden' name='teamID' value=$teamID>
-            <input type='hidden' name='playerID' value=$playerID>";
+            <input type='hidden' name='playerID' value=$playerID>
+            <input type='hidden' name='frameNumber' value=$frameNumber>";
         ?>
         <input type="radio" name="isFoul" class="submitButton">foul
         <br>

@@ -49,7 +49,10 @@ if(isset($_GET['key'])) {
     }
 
     if (isset($_POST['valid'])) {
-        if (!empty($_POST["password"]) and strlen($_POST["password"]) < 8) {
+        if(!isset($_POST["password"])) {
+            $alertMessage = 'Please enter in a password.';
+        }
+        else if (!empty($_POST["password"]) and strlen($_POST["password"]) < 8) {
             $alertMessage = 'Password must be at least 8 characters of length.';
         } else if (strcmp($_POST['verifyPassword'], $_POST['password']) != 0) {
             $alertMessage = 'Passwords do not match!';
