@@ -125,17 +125,25 @@ if(isset($_POST['submit'])) {
         $isFoul = 0;
         if(isset($_POST['isFoul'])){
             $isFoul = 1;
+            $query = "INSERT INTO roll(Roll_ID, Frame_ID, Ball_ID, Is_Foul) VALUES ($currentRoll, $frameID, $ballID, $isFoul)";
         }
-        if(array_sum($pinHit) == 10){
+        else if(array_sum($pinHit) == 10){
             $isStrike = 1;
+            $query = "INSERT INTO roll 
+                  (Roll_ID, Frame_ID, Ball_ID, Is_Strike,
+                  Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) 
+                  values 
+                  ($currentRoll, $frameID, $ballID, $isStrike, $isFoul,
+                  $pinHit[0],$pinHit[1],$pinHit[2],$pinHit[3],$pinHit[4],$pinHit[5],$pinHit[6],$pinHit[7],$pinHit[8],$pinHit[9])";
         }
-        $query = "INSERT INTO roll 
+        else {
+            $query = "INSERT INTO roll 
                   (Roll_ID, Frame_ID, Ball_ID, Is_Strike, Is_Foul, 
                   Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) 
                   values 
                   ($currentRoll, $frameID, $ballID, $isStrike, $isFoul,
                   $pinHit[0],$pinHit[1],$pinHit[2],$pinHit[3],$pinHit[4],$pinHit[5],$pinHit[6],$pinHit[7],$pinHit[8],$pinHit[9])";
-
+        }
         $result = $conn->query($query);
         if($result){
             echo "<script type='text/javascript'>alert('You made a roll!');history.go(-1);document.location = 'viewGame.php?gameID=$gameID'</script>";
