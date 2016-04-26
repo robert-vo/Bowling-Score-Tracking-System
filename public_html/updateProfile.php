@@ -15,6 +15,7 @@ if (!isset($_SESSION["sess_user"])) {
         <title>Update Profile</title>
         <link rel="stylesheet" type="text/css" href="index.css">
         <link rel="stylesheet" type="text/css" href="update.css">
+        <link rel="stylesheet" type="text/css" href="updateProfile.css">
 
     </head>
 
@@ -43,10 +44,14 @@ if (!isset($_SESSION["sess_user"])) {
     
     $query = "SELECT * FROM players WHERE Email = '$username'";
     $result = $conn->query($query);
+    
+    echo "<table>";
+    echo "<tr>";
+    echo "<td class='pad'><a class='edit update' href='changeEmail.php'>Change email</a></td>";
+    echo "<td class='pad'><a class='edit update' href='changePassword.php'>Change password</a></td>";
+    echo "</tr>";
+    echo "</table>";
 
-    echo "<a href='changeEmail.php'>Change email</a>";
-    echo "<br><br>";
-    echo "<a href='changePassword.php'>Change password</a>";
 
     echo "<br><br>";
     echo "<fieldset><legend>Edit my profile</legend>";

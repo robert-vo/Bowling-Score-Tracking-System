@@ -1,0 +1,22 @@
+
+a:link.update, a:visited.update {
+    border-radius: 2px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:link.edit, a:visited.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+a:hover.edit, a:active.edit {
+    background-color: #69c367;
+    color: white;
+}
+
+td.pad {
+    padding: 0px 3px 0px 0px;
+}
