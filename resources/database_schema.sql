@@ -85,7 +85,6 @@ CREATE TABLE Game (
   Teams               VARCHAR(100) not null, -- CSV of all teams
   Game_Start_Time     DATETIME,
   Game_End_Time       DATETIME,
-  Winner_Team_ID      INT          null,
   Title               VARCHAR(100)  not null,
   Location_ID         INT,
   Event_Type          ENUM('Casual', 'Tournament') DEFAULT 'Casual',
