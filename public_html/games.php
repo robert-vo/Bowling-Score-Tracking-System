@@ -169,7 +169,7 @@ function findAllGamesATeamIsAPartOf($teamID, $gameStatus) {
     printGames($result, $teamID);
 }
 
-echo '<a href="createGame.php">Click here to start a new game!</a></b>';
+echo '<h3><a href="createGame.php">Want to start a new game? Click here to start a new game!</a></b></h3>';
 echo '<h3>Here are the games that you are a part of!</h3>';
 
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 0);
