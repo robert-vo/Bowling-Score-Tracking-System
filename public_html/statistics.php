@@ -20,7 +20,7 @@ function displayAllStatsForPlayer($playerID) {
     if($result->num_rows > 0) {
         echo '<br><table>';
         echo '<tr><th>Number of Strikes</th><th>Total Games Played</th><th>Number of Perfect Games</th><th>Total Number of Spares</th>';
-        echo '<th>Your current high score</th><th>Your lowest score</th><th>Pins Left</th><th>Average Pins Left</th><th>Foul Count</th><th>Pins Hit</th>';
+        echo '<th>Pins Left</th><th>Average Pins Left</th><th>Foul Count</th><th>Pins Hit</th>';
         echo '</tr>';
         while($row = $result->fetch_assoc()) {
             echo '<tr>';
@@ -29,8 +29,6 @@ function displayAllStatsForPlayer($playerID) {
             echo '<th>' . $row['Games_Played'] . '</th>';
             echo '<th>' . $row['Perfect_Games'] . '</th>';
             echo '<th>' . $row['Spares'] . '</th>';
-            echo '<th>' . $row['Best_Score'] . '</th>';
-            echo '<th>' . $row['Worst_Score'] . '</th>';
             echo '<th>' . $row['Pins_Left'] . '</th>';
             echo '<th>' . round($row['Average_Pin_Left'], 3) . '</th>';
             echo '<th>' . $row['Foul_Count'] . '</th>';

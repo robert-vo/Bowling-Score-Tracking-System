@@ -133,8 +133,6 @@ CREATE TABLE Player_Stats_Archive (
   Games_Played        INT NOT NULL DEFAULT 0,
   Perfect_Games       INT NOT NULL DEFAULT 0,
   Spares              INT NOT NULL DEFAULT 0,
-  Best_Score          INT NOT NULL DEFAULT 0,
-  Worst_Score         INT NOT NULL DEFAULT 0,
   Pins_Left           INT NOT NULL DEFAULT 0,
   Average_Pin_Left    DOUBLE NOT NULL DEFAULT 0,
   Date_Deleted        DATETIME,
