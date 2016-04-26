@@ -32,7 +32,7 @@ include 'databaseFunctions.php';
 $conn = connectToDatabase();
 
 function emailPlayer($playerID) {
-    echo 'Emailing....' . $playerID;
+//    echo 'Emailing....' . $playerID;
 }
 
 function popupMessageAndRedirectBrowser($message) {
@@ -74,7 +74,8 @@ if ($numrows != 0)
             $message = '';
             while ($row2 = $result2->fetch_assoc()) {
                 if($row2['Leader'] == $playerID or $row2['Player_1'] == $playerID or $row2['Player_2'] == $playerID or $row2['Player_3'] == $playerID or $row2['Player_4'] == $playerID or $row2['Player_5'] == $playerID ) {
-                    echo '<br> The email you entered is already on this team!<br>';
+//                    echo '<br> The email you entered is already on this team!<br>';
+                    popupMessageAndRedirectBrowser('The email you entered is already on this team!.   ');
                 }
                 else{
 
@@ -117,15 +118,20 @@ if ($numrows != 0)
                         $message = 'Your team is full, therefore you are unable to add any more players. Please remove some members off of your team if you want room to add other players.';
                         $isFull = true;
                     }
+                    popupMessageAndRedirectBrowser($message);
                 }
+
             }
         }
     }
-    if (!$isFull and attemptDataManipulationLanguageQuery($sql)) {
+    if (!$isFull AND attemptDataManipulationLanguageQuery($sql))
+    {
         emailPlayer($playerID);
         echo '<br>Player Added';
-    } else {
-        $message = 'Unable to add the player! It seems that the player already exists on the team!';
+    } else
+    {
+        $message = 'Unable to add the player! ';
+
     }
     popupMessageAndRedirectBrowser($message);
 
