@@ -72,11 +72,11 @@ if ($numrows != 0)
             $result2 = $conn->query($query2);
             $numrows = $result2->num_rows;
             $message = '';
-                while ($row2 = $result2->fetch_assoc()) {
-                    if($row2['Leader'] == $playerID or $row2['Player_1'] == $playerID or $row2['Player_2'] == $playerID or $row2['Player_3'] == $playerID or $row2['Player_4'] == $playerID or $row2['Player_5'] == $playerID ) {
-                        echo '<br> The email you entered is already on this team!<br>';
-                    }
-                    else{
+            while ($row2 = $result2->fetch_assoc()) {
+                if($row2['Leader'] == $playerID or $row2['Player_1'] == $playerID or $row2['Player_2'] == $playerID or $row2['Player_3'] == $playerID or $row2['Player_4'] == $playerID or $row2['Player_5'] == $playerID ) {
+                    echo '<br> The email you entered is already on this team!<br>';
+                }
+                else{
 
                     if (!isset($row2['Player_1'])) {
                         echo 'You are trying to add the e-mail ' . $_POST['myinput'], ' to your team';
@@ -132,6 +132,6 @@ if ($numrows != 0)
 }
 else
 {
-    echo "Player is not in the database";
+    popupMessageAndRedirectBrowser('Player does not exist! Please ensure that what you have entered is correct and valid.   ');
 }
 ?>
