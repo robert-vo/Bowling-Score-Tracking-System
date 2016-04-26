@@ -125,7 +125,7 @@ if ($numrows != 0)
         emailPlayer($playerID);
         echo '<br>Player Added';
     } else {
-        echo 'Could not add player!';
+        $message = 'Unable to add the player! It seems that the player already exists on the team!';
     }
     popupMessageAndRedirectBrowser($message);
 
