@@ -138,10 +138,10 @@ INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('19
 INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('5700 Grover Ave, Austin, TX 78756', 'Austin Bowling Alley');
 INSERT INTO bowling.Game_Location (Game_Address, Game_Location_Name) VALUES ('Reliant Pkwy Houston, TX 77054', 'NRG Stadium Complex 1');
 
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,2,3,4', null, 'Casual Games', 1, 1, 0);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('12,5', 5, 'UofH Bowling Tournament', 4, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,14', 7, 'UofH Bowling Tournament', 4, 2, 1);
-INSERT INTO bowling.Game (Teams, Winner_Team_ID, Title, Location_ID, Event_Type, Game_Finished) VALUES ('5,7', 5, 'UofH Bowling Championship', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Title, Location_ID, Event_Type, Game_Finished) VALUES ('1,2,3,4', 'Casual Games', 1, 1, 0);
+INSERT INTO bowling.Game (Teams, Title, Location_ID, Event_Type, Game_Finished) VALUES ('12,5', 'UofH Bowling Tournament', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Title, Location_ID, Event_Type, Game_Finished) VALUES ('7,14', 'UofH Bowling Tournament', 4, 2, 1);
+INSERT INTO bowling.Game (Teams, Title, Location_ID, Event_Type, Game_Finished) VALUES ('5,7', 'UofH Bowling Championship', 4, 2, 1);
 
 INSERT INTO bowling.Frame (Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID) VALUES (1, 1, 1, 2, null, 3, 1, 1);
 INSERT INTO bowling.Frame (Frame_Number, Player_ID, Roll_One_ID, Roll_Two_ID, Roll_Three_ID, Score, Team_ID, Game_ID) VALUES (2, 1, 3, 4, null, 10, 1, 1);
