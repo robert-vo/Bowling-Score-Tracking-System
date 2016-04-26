@@ -58,7 +58,6 @@ function printTop10TeamsGamesPlayed($orderBy, $showTop) {
 function printPlayersReport($report, $showTop, $orderBy) {
     $conn = connectToDatabase();
     $query = 'SELECT * FROM Player_Stats, Players where Player_Stats.Player_ID = Players.Player_ID and Player_Stats.' . $report . ' > 0 ORDER BY Player_Stats.' . $report . ' ' . $orderBy . ' LIMIT ' . $showTop . ';';
-    echo $query;
     $result = $conn->query($query);
     printPlayers($report, $result);
     $conn->close();
