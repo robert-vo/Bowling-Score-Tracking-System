@@ -58,7 +58,7 @@ if ($numrows != 0) {
 
 
 
-$query2 = "SELECT Name,Leader from team";
+$query2 = "SELECT Name,Leader from Team";
 $result = $conn->query($query2);
 $numrows = $result->num_rows;
 
