@@ -62,7 +62,7 @@ session_start();
 function popupMessageAndRedirectBrowser($message) {
     echo "<script type='text/javascript'>alert('$message');history.go(-1);document.location = 'joinTeam.php';</script>";
 }
-    $players = createPlayerEmailArray();
+    $Players = createPlayerEmailArray();
     $name = nameArray();
 
 //    echo 'got id' . $_POST['teamID'];

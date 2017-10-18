@@ -54,7 +54,7 @@ function popupMessageAndRedirectBrowser($message) {
 
 $inputEmail = $_POST['myinput'];
 $teamID = $_POST['team'];
-$query ="SELECT Player_ID, First_Name, Last_Name, Email from players where Email = '$inputEmail'";
+$query ="SELECT Player_ID, First_Name, Last_Name, Email from Players where Email = '$inputEmail'";
 $result = $conn->query($query);
 
 $numrows = $result->num_rows;

@@ -52,7 +52,7 @@ include 'databaseFunctions.php';
         $password = $_POST['password'];
 
         $conn = connectToDatabase();
-        $query = "SELECT * FROM players WHERE Email = '$username'";
+        $query = "SELECT * FROM Players WHERE Email = '$username'";
         $result = $conn->query($query);
         $numrows = $result->num_rows;
 

@@ -78,7 +78,7 @@ else {
 
     <?php
     $user = $_SESSION['sess_user'];
-    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $query1 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -91,7 +91,7 @@ else {
     $lname = ucfirst($lname);
 
 
-    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $query1 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -188,7 +188,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 
     //display stats
 
-    $query = "SELECT * FROM players WHERE Email = '$user'";
+    $query = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -201,7 +201,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
     $lname = ucfirst($lname);
 //    echo "$fname $lname";
 
-    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $query1 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if ($numrows != 0) {

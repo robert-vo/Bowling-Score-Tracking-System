@@ -33,7 +33,7 @@ if (!isset($_SESSION["sess_user"])) {
     $user = $_SESSION['sess_user'];
     include 'databaseFunctions.php';
     $conn = connectToDatabase();
-    $query = "SELECT * FROM players WHERE Email = '$user'";
+    $query = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -52,7 +52,7 @@ if (!isset($_SESSION["sess_user"])) {
           </form>";
 
     echo '<br><u>Here is the information you have on file with us:</u>';
-    $query2 = "SELECT * FROM players WHERE Email = '$user'";
+    $query2 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if($numrows != 0){
@@ -137,7 +137,7 @@ if (!isset($_SESSION["sess_user"])) {
 
     //Displays Team Member Name
 
-//    $query5 = "SELECT * FROM players WHERE Player_ID = '$teamMember1' OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID = '$teamMember6'";
+//    $query5 = "SELECT * FROM Players WHERE Player_ID = '$teamMember1' OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID = '$teamMember6'";
 //    $result = $conn->query($query5);
 //    $numrows = $result->num_rows;
 //    if ($numrows != 0) {

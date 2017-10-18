@@ -26,10 +26,10 @@ function createEmailToPlayerIDList() {
     return $emailToID;
 }
 
-function allPlayersEmailsAreValid(...$players) {
+function allPlayersEmailsAreValid(...$Players) {
     $isValid = true;
     $emailToID = createEmailToPlayerIDList();
-    foreach ($players as $player) {
+    foreach ($Players as $player) {
         if(isset($emailToID[$player])) {
             $isValid = true;
         }

@@ -77,7 +77,7 @@ if (!isset($_SESSION["sess_user"])) {
             $new_email = $_POST['new_email'];
 
             if(strcmp($_POST['new_email'], $_POST['confirm_email'] == 0)) { // Emails match
-                $changeEmailQuery = "UPDATE players SET Email=" . "'$new_email'" . " WHERE Player_ID=" . $_SESSION['player_id'];
+                $changeEmailQuery = "UPDATE Players SET Email=" . "'$new_email'" . " WHERE Player_ID=" . $_SESSION['player_id'];
 
                 if(mysqli_query($conn, $changeEmailQuery)) {  // Runs the query and returns true if there were no errors
                     $email = "";

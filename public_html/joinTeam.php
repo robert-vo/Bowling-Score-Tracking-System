@@ -45,7 +45,7 @@ include 'databaseFunctions.php';
 $conn = connectToDatabase();
 
 $user = $_SESSION['sess_user'];
-$query1 = "SELECT * FROM players WHERE Email = '$user'";
+$query1 = "SELECT * FROM Players WHERE Email = '$user'";
 $result = $conn->query($query1);
 $numrows = $result->num_rows;
 if ($numrows != 0) {

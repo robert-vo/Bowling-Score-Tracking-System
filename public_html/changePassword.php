@@ -84,7 +84,7 @@ if (!isset($_SESSION["sess_user"])) {
                 createForm();
             }
             else if(strcmp($_POST['new_pw'], $_POST['confirm_pw']) == 0) { // Emails match
-                $changePasswordQuery = "UPDATE players SET Password=" . "'$passwordHash'" . " WHERE Player_ID=" . $_SESSION['player_id'];
+                $changePasswordQuery = "UPDATE Players SET Password=" . "'$passwordHash'" . " WHERE Player_ID=" . $_SESSION['player_id'];
 
                 if(mysqli_query($conn, $changePasswordQuery)) { // Runs the query and returns true if there were no errors
                     echo "<BR>Password has been updated.<BR><BR>";

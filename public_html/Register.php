@@ -137,7 +137,7 @@ if (postReturnsValidData()) {
     $birth = "$doby-$dobm-$dobd";
     $email = $_POST['email'];
     $conn = connectToDatabase();
-    $sql = "INSERT INTO players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
+    $sql = "INSERT INTO Players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
                                  VALUES ('$gender', '$phone', '$birth', '$street', '$city', '$state', '$zip', '$firstName', '$lastName', '$middle', '$email', '$password', 0) ";
     if (mysqli_query($conn, $sql) == TRUE) {
         echo "Insertion successful";
