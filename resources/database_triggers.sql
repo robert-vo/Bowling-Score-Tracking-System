@@ -90,6 +90,7 @@ FOR EACH ROW
     old.Last_Date_Modified, now());
 
 drop trigger if exists update_player_stats;
+DELIMITER $$
 CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
   for each ROW
   begin
@@ -112,7 +113,8 @@ CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
     SET Player_Stats.Foul_Count = Player_Stats.Foul_Count + 1
     where (new.Frame_ID = Frame.Frame_ID) and frame.Player_ID = Player_Stats.Player_ID;
   END IF;
-end;
+END
+$$
 
 CREATE FUNCTION SPLIT_STR(
   x VARCHAR(255),
@@ -151,13 +153,15 @@ FOR EACH ROW
   END;
 
 drop trigger if exists add_strike;
-create trigger add_strike after update on roll
+DELIMITER $$
+create trigger add_strike after update on Roll
   for each ROW
     if(new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 + new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8 + new.Hit_Pin_9 + new.Hit_Pin_10 = 10) THEN
       update frame
         set Is_Strike = 1
         where frame.Roll_One_ID = new.Roll_ID;
     END IF;
+$$
 
 drop trigger if exists Date_Added_Ball;
 CREATE TRIGGER Date_Added_Ball BEFORE INSERT ON Ball
@@ -240,4 +244,3 @@ drop trigger if exists Last_Date_Modified_Team;
 CREATE TRIGGER Last_Date_Modified_Team BEFORE UPDATE ON Team
 FOR EACH ROW
   SET NEW.Last_Date_Modified = NOW();
-
