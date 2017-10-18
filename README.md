@@ -1,4 +1,4 @@
-# Bowling Score Tracking System [![Build Status](https://travis-ci.org/robert-vo/Bowling-Score-Tracking-System.svg?branch=master)](https://travis-ci.org/robert-vo/Bowling-Score-Tracking-System)
+# Bowling Score Tracking System [![Build Status](https://travis-ci.org/bglopez/Bowling-Score-Tracking-System.svg?branch=master)](https://travis-ci.org/bglopez/Bowling-Score-Tracking-System)
 
 Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various statistics about players such as single-pin spares left, strike percentage, split-conversion percentage, etc.)
 
