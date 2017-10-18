@@ -7,7 +7,7 @@ include 'databaseFunctions.php';
 
 function leaveTeam($teamID, $playerPosition) {
     $conn = connectToDatabase();
-    $sql = "UPDATE TEAM SET " . $playerPosition . " = NULL where Team_ID = $teamID";
+    $sql = "UPDATE Team SET " . $playerPosition . " = NULL where Team_ID = $teamID";
 
     if(mysqli_query($conn, $sql) == TRUE) {
         echo '<br>Boo hoo! Your team members will miss you. <a href=team.php>Click Here</a> to go back to the team page.';

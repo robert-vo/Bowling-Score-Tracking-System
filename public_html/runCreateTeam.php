@@ -41,7 +41,7 @@ function allPlayersEmailsAreValid(...$Players) {
 }
 
 function constructPlayers($numberOfPlayers) {
-    $sql = "INSERT INTO TEAM(Leader, Name,";
+    $sql = "INSERT INTO Team(Leader, Name,";
     $teamName = $_POST['name'];
     $emailToID = createEmailToPlayerIDList();
 

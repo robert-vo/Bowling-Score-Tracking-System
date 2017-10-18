@@ -6,7 +6,7 @@ generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 
 function isCurrentPlayerATeamLeader($player_id) {
-    $query = "select leader, count(Leader) as count from Team where Leader = $player_id group by Leader";
+    $query = "select Leader, count(Leader) as count from Team where Leader = $player_id group by Leader";
     $conn = connectToDatabase();
     $result = $conn->query($query);
 

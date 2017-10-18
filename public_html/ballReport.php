@@ -5,9 +5,9 @@ include 'databaseFunctions.php';
 function printBallPopularity($orderBy, $showTop) {
     $conn = connectToDatabase();
 
-    $query = "SELECT roll.Ball_ID, Count(roll.Ball_ID) as numOfRolls, ball.Color, ball.Weight, ball.Size
-                FROM roll, ball
-                WHERE roll.Ball_ID = ball.Ball_ID
+    $query = "SELECT Roll.Ball_ID, Count(Roll.Ball_ID) as numOfRolls, Ball.Color, Ball.Weight, Ball.Size
+                FROM Roll, Ball
+                WHERE Roll.Ball_ID = Ball.Ball_ID
                 GROUP by Ball_ID
                 ORDER BY COUNT(Ball_ID) $orderBy LIMIT $showTop";
 

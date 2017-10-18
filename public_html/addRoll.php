@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $frameNumber";
+$query = "SELECT * FROM Frame WHERE Player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $frameNumber";
 $result = $conn->query($query);
 if($result->num_rows > 0) {//frame exists
     echo "The current frame is $frameNumber.<br>";
@@ -135,11 +135,11 @@ if(isset($_POST['submit'])) {
         $isFoul = 0;
         if(isset($_POST['isFoul'])){
             $isFoul = 1;
-            $query = "INSERT INTO roll(Roll_ID, Frame_ID, Ball_ID, Is_Foul) VALUES ($currentRoll, $frameID, $ballID, $isFoul)";
+            $query = "INSERT INTO Roll(Roll_ID, Frame_ID, Ball_ID, Is_Foul) VALUES ($currentRoll, $frameID, $ballID, $isFoul)";
         }
         else if(array_sum($pinHit) == 10){
             $isStrike = 1;
-            $query = "INSERT INTO roll 
+            $query = "INSERT INTO Roll 
                   (Roll_ID, Frame_ID, Ball_ID, Is_Strike,
                   Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) 
                   values 
@@ -147,7 +147,7 @@ if(isset($_POST['submit'])) {
                   $pinHit[0],$pinHit[1],$pinHit[2],$pinHit[3],$pinHit[4],$pinHit[5],$pinHit[6],$pinHit[7],$pinHit[8],$pinHit[9])";
         }
         else {
-            $query = "INSERT INTO roll 
+            $query = "INSERT INTO Roll 
                   (Roll_ID, Frame_ID, Ball_ID, Is_Strike, Is_Foul, 
                   Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10) 
                   values 
@@ -185,7 +185,7 @@ function generateCheckboxesForAllPins () {
 }
 
 function getNumberOfPinsHitForRollID($rollID) {
-    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from roll where roll_id = $rollID;";
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_id = $rollID;";
     $conn = connectToDatabase();
 
     $result = $conn->query($sql);

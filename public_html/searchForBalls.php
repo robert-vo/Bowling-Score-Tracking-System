@@ -10,7 +10,7 @@ function getAllBallsForColor($colorOfBall)
         die("Connection failed: " . $conn->connect_error);
     }
     
-    $query = "SELECT * FROM BALL WHERE Ball.Color = '$colorOfBall'";
+    $query = "SELECT * FROM Ball WHERE Ball.Color = '$colorOfBall'";
     
     $result = $conn->query($query);
     

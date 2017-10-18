@@ -72,7 +72,7 @@ function getPlayerNameForPlayerId($playerId)
 
 function printRollsInformation($playerID, $gameID, $teamID) {
     $sql = "select Frame_Number, Roll_One_ID, Roll_Two_ID, Roll_Three_ID 
-            from frame 
+            from Frame 
             where Game_ID = $gameID 
               and Team_ID = $teamID 
               and Player_ID = $playerID";
@@ -142,7 +142,7 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
         $conn = connectToDatabase();
         //get number of last frame
         $frameNumber = 1;
-        $query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
+        $query = "SELECT max(Frame_Number) as 'max' FROM Frame WHERE Player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID";
         $allFrames = $conn->query($query);
         $temp = $allFrames->fetch_assoc();
         $maxFrame = $temp['max'];
@@ -152,7 +152,7 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
         $rollID='';
         if($maxFrame == 10) {//on the tenth frame
             //see if game is done, in case of tenth frame
-            $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
+            $query = "SELECT * FROM Frame WHERE Player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
             $result = $conn->query($query);
             if ($result) {//frame exists
                 $row = $result->fetch_assoc();
@@ -205,7 +205,7 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
         }
         else if($maxFrame > 0){//max is less than 10
             //see if game is done, in case of normal frame
-            $query = "SELECT * FROM Frame WHERE player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
+            $query = "SELECT * FROM Frame WHERE Player_ID = $playerID AND Game_ID = $gameID AND Team_ID = $teamID AND Frame_Number = $maxFrame";
             $result = $conn->query($query);
             if ($result) {//frame exists
                 $row = $result->fetch_assoc();
@@ -287,7 +287,7 @@ function printOutPlayerInfoOnTeam($playerID, $gameID, $teamID, $playerTitle) {
 
 function getInformationAboutGame($gameID) {
     $conn = connectToDatabase();
-    $sql = "SELECT * FROM GAME, Game_Location WHERE Game.Game_ID = $gameID and Game.Location_ID = Game_Location.Game_Location_ID";
+    $sql = "SELECT * FROM Game, Game_Location WHERE Game.Game_ID = $gameID and Game.Location_ID = Game_Location.Game_Location_ID";
 
     $result = $conn->query($sql);
 
@@ -328,7 +328,7 @@ function calculateTotalScore($playerID, $gameID, $teamID) {
 function printOutFrameTotals($playerID, $gameID, $teamID, $game) {
     echo '<tr>';
 
-    $sql = "SELECT * FROM FRAME WHERE FRAME.Game_ID = $gameID and FRAME.Team_ID = $teamID and Frame.Player_ID = $playerID";
+    $sql = "SELECT * FROM Frame WHERE Frame.Game_ID = $gameID and Frame.Team_ID = $teamID and Frame.Player_ID = $playerID";
     $conn = connectToDatabase();
     $result = $conn->query($sql);
 
@@ -342,7 +342,7 @@ function printOutFrameTotals($playerID, $gameID, $teamID, $game) {
 }
 
 function getNumberOfPinsHitForRollID($rollID) {
-    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from roll where roll_id = $rollID;";
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_id = $rollID;";
     $conn = connectToDatabase();
 
     $result = $conn->query($sql);

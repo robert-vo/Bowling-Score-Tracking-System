@@ -96,7 +96,7 @@ function printGames($result, $teamID) {
 }
 
 function calculateAverageScoreFor($gameID, $teamID) {
-    $sql = "SELECT group_concat(DISTINCT player_id) as 'ids' from Frame where Team_ID = $teamID and Game_ID = $gameID";
+    $sql = "SELECT group_concat(DISTINCT Player_id) as 'ids' from Frame where Team_ID = $teamID and Game_ID = $gameID";
     $conn = connectToDatabase();
     $result = $conn->query($sql);
 
@@ -142,7 +142,7 @@ function calculateAverageScoreFor($gameID, $teamID) {
 }
 
 function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {
-    $findAllTeamsQuery = "select TEAM_ID from Team where Leader = $playerID or Player_1 = $playerID or Player_2 = $playerID or Player_3 = $playerID or Player_4 = $playerID or Player_5 = $playerID";
+    $findAllTeamsQuery = "select Team_ID from Team where Leader = $playerID or Player_1 = $playerID or Player_2 = $playerID or Player_3 = $playerID or Player_4 = $playerID or Player_5 = $playerID";
     $conn = connectToDatabase();
     $result = $conn->query($findAllTeamsQuery);
 
@@ -157,12 +157,12 @@ function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {
 }
 
 function findAllGamesATeamIsAPartOf($teamID, $gameStatus) {
-    $query = "select * from game where 
-                game.Game_Finished = $gameStatus and (
-                  game.Teams like '$teamID,%'
-                    or game.Teams like '%,$teamID'
-                    or game.Teams like '%,$teamID,%'
-                    or game.Teams like '$teamID')";
+    $query = "select * from Game where 
+                Game.Game_Finished = $gameStatus and (
+                  Game.Teams like '$teamID,%'
+                    or Game.Teams like '%,$teamID'
+                    or Game.Teams like '%,$teamID,%'
+                    or Game.Teams like '$teamID')";
 
     $conn = connectToDatabase();
     $result = $conn->query($query);

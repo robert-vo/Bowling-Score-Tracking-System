@@ -1,7 +1,7 @@
 <?php
 include 'databaseFunctions.php';
 $conn = connectToDatabase();
-$sql = "select * from roll where Hit_Pin_1 = 1 and Hit_Pin_2 = 1 and Hit_Pin_3 = 1 and Hit_Pin_4 = 1 and Hit_Pin_5 = 1 and Hit_Pin_6 = 1 and Hit_Pin_7 = 0 and Hit_Pin_8 = 1 and Hit_Pin_9 = 1 and Hit_Pin_10 = 0";
+$sql = "select * from Roll where Hit_Pin_1 = 1 and Hit_Pin_2 = 1 and Hit_Pin_3 = 1 and Hit_Pin_4 = 1 and Hit_Pin_5 = 1 and Hit_Pin_6 = 1 and Hit_Pin_7 = 0 and Hit_Pin_8 = 1 and Hit_Pin_9 = 1 and Hit_Pin_10 = 0";
 $result = $conn->query($sql);
 $numrows = $result->num_rows;
 $rollid = array();
@@ -19,7 +19,7 @@ for($i = 0; $i < count($rollid);$i++) {
 
 $numsplit = 0;
 for($i = 0; $i < count($rollid);$i++){
-    $sql = "select * from roll where Roll_ID = '$rollid[$i]'";
+    $sql = "select * from Roll where Roll_ID = '$rollid[$i]'";
     $result = $conn->query($sql);
     $numrows = $result->num_rows;
     if($numrows != 0){

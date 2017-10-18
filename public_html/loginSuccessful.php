@@ -71,7 +71,7 @@ if (!isset($_SESSION["sess_user"])) {
     }
 
     //Displays Team Leader
-    $query2 = "SELECT * FROM team WHERE Leader = '$playerid'";
+    $query2 = "SELECT * FROM Team WHERE Leader = '$playerid'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if($numrows != 0){
@@ -86,7 +86,7 @@ if (!isset($_SESSION["sess_user"])) {
 
     //Listing Player ID
 
-    $query3 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+    $query3 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query3);
     $numrows = $result->num_rows;
     if($numrows != 0){
@@ -99,7 +99,7 @@ if (!isset($_SESSION["sess_user"])) {
 
     //List all teams you are part of
 
-    $query4 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+    $query4 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query4);
     $numrows = $result->num_rows;
     if($numrows != 0){
@@ -113,7 +113,7 @@ if (!isset($_SESSION["sess_user"])) {
     //Display Team Members ID
 
 
-    $query4 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+    $query4 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query4);
     $numrows = $result->num_rows;
     if($numrows != 0){

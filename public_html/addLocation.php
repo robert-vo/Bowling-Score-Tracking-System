@@ -48,7 +48,7 @@ if(strlen($inputLocation) < 8 or strlen($inputAddress) < 8)
     $message = 'Invalid form. Please try to enter a location and address of 8 characters of more.';
 }
 else {
-    $sql = "INSERT into game_location(Game_Location_Name, Game_Address) VALUES ('$inputLocation','$inputAddress')";
+    $sql = "INSERT into Game_Location(Game_Location_Name, Game_Address) VALUES ('$inputLocation','$inputAddress')";
     if (attemptDataManipulationLanguageQuery($sql)) {
         echo '<br>New Location Added!';
         $message = 'New Game Location has been added!';

@@ -101,7 +101,7 @@ else {
     }
 
 
-    $query1 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR
+    $query1 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR
 Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 '$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query1);

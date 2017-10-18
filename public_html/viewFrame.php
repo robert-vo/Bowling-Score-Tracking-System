@@ -26,7 +26,7 @@ function printBall($pinNumber, $checked) {
 function getRollInformationForFrame($frameID, $frameNumber) {
 
     $conn = connectToDatabase();
-    $sql = "SELECT * FROM ROLL, BALL WHERE Roll.Frame_ID = $frameID and Roll.Ball_ID = Ball.Ball_ID";
+    $sql = "SELECT * FROM Roll, Ball WHERE Roll.Frame_ID = $frameID and Roll.Ball_ID = Ball.Ball_ID";
 
     $result = $conn->query($sql);
 
