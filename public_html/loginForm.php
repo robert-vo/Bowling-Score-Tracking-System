@@ -41,7 +41,7 @@ else {
 
 </div>
 <br>
-<div id="centerT"><a href="register.php">Create account</a></div>
+<div id="centerT"><a href="Register.php">Create account</a></div>
 <div id="centerT"><a href="passwordReset.php">Forgot your password?</a></div>
 
 <?php
