@@ -116,6 +116,7 @@ CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
 END
 $$
 
+DELIMITER $$
 CREATE FUNCTION SPLIT_STR(
   x VARCHAR(255),
   delim VARCHAR(12),
@@ -125,7 +126,9 @@ CREATE FUNCTION SPLIT_STR(
   RETURN REPLACE(SUBSTRING(SUBSTRING_INDEX(x, delim, pos),
                            LENGTH(SUBSTRING_INDEX(x, delim, pos -1)) + 1),
                  delim, '');
+$$
 
+DELIMITER $$
 drop trigger if exists created_new_game;
 CREATE TRIGGER created_new_game after insert ON Game
 FOR EACH ROW
@@ -151,9 +154,10 @@ FOR EACH ROW
       LEAVE label1;
     END LOOP label1;
   END;
+$$
 
-drop trigger if exists add_strike;
 DELIMITER $$
+drop trigger if exists add_strike;
 create trigger add_strike after update on Roll
   for each ROW
     if(new.Hit_Pin_1 + new.Hit_Pin_2 + new.Hit_Pin_3 + new.Hit_Pin_4 + new.Hit_Pin_5 + new.Hit_Pin_6 + new.Hit_Pin_7 + new.Hit_Pin_8 + new.Hit_Pin_9 + new.Hit_Pin_10 = 10) THEN
@@ -163,84 +167,116 @@ create trigger add_strike after update on Roll
     END IF;
 $$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Ball;
 CREATE TRIGGER Date_Added_Ball BEFORE INSERT ON Ball
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Game_Location;
 CREATE TRIGGER Date_Added_Game_Location BEFORE INSERT ON Game_Location
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Game_Frame;
 CREATE TRIGGER Date_Added_Game_Frame BEFORE INSERT ON Frame
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Game;
 CREATE TRIGGER Date_Added_Game BEFORE INSERT ON Game
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+
+DELIMITER $$
 drop trigger if exists Date_Added_Player_Stats;
 CREATE TRIGGER Date_Added_Player_Stats BEFORE INSERT ON Player_Stats
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Player;
 CREATE TRIGGER Date_Added_Player BEFORE INSERT ON Players
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Roll;
 CREATE TRIGGER Date_Added_Roll BEFORE INSERT ON Roll
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Date_Added_Team;
 CREATE TRIGGER Date_Added_Team BEFORE INSERT ON Team
 FOR EACH ROW
   SET NEW.Date_Added = NOW();
-
+$$
 -- Trigger for last date modified
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Ball;
 CREATE TRIGGER Last_Date_Modified_Ball BEFORE UPDATE ON Ball
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Game_Location;
 CREATE TRIGGER Last_Date_Modified_Game_Location BEFORE UPDATE ON Game_Location
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Frame;
 CREATE TRIGGER Last_Date_Modified_Frame BEFORE UPDATE ON Frame
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Game;
 CREATE TRIGGER Last_Date_Modified_Game BEFORE UPDATE ON Game
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Player_Stats;
 CREATE TRIGGER  Last_Date_Modified_Player_Stats BEFORE UPDATE ON Player_Stats
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Players;
 CREATE TRIGGER Last_Date_Modified_Players BEFORE UPDATE ON Players
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Roll;
 CREATE TRIGGER Last_Date_Modified_Roll BEFORE UPDATE ON Roll
 FOR EACH ROW
   SET NEW.Last_Date_Modified  = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists Last_Date_Modified_Team;
 CREATE TRIGGER Last_Date_Modified_Team BEFORE UPDATE ON Team
 FOR EACH ROW
   SET NEW.Last_Date_Modified = NOW();
+$$
