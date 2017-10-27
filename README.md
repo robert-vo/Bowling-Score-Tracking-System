@@ -32,4 +32,3 @@ If the command is successfully worked, it will display that it is listening on `
 
 Once there, the welcome message, "Welcome to Bowling Score Tracking System!", should appear. Enjoy!
 
-### Team 12 - Spring 2016
