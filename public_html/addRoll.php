@@ -214,7 +214,7 @@ function getNumberOfPinsHitForRollID($rollID) {
 }
 
 
-function calculateNumberOfPinsHit($pins) {
+function calculateNumberOfPinsHit(...$pins) {
     return array_sum($pins) == 0 ? '-' : array_sum($pins);
 }
 ?>

@@ -118,7 +118,7 @@ function getIntegerNumberOfPinsHitForRollID($rollID) {
     return 0;
 }
 
-function calculateIntegerNumberOfPinsHit($pins) {
+function calculateIntegerNumberOfPinsHit(...$pins) {
     return array_sum($pins);
 }
 

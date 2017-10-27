@@ -5,7 +5,6 @@ generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 error_reporting(0);
 include 'src/game.php';
-include '../src/game.php';
 error_reporting(E_ALL);
 
 
@@ -370,7 +369,7 @@ function getNumberOfPinsHitForRollID($rollID) {
     return '&nbsp';
 }
 
-function calculateNumberOfPinsHit($pins) {
+function calculateNumberOfPinsHit(...$pins) {
     return array_sum($pins) == 0 ? '-' : array_sum($pins);
 }
 

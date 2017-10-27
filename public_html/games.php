@@ -7,7 +7,6 @@ generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 error_reporting(0);
 include 'src/game.php';
-include '../src/game.php';
 error_reporting(E_ALL);
 
 
