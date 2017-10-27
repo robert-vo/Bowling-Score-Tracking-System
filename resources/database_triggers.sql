@@ -10,29 +10,39 @@
 use bowling;
 
 -- Auto populates the Date_Joined attribute of Players to the current time.
+DELIMITER $$
 drop trigger if exists players_date_joined;
 CREATE TRIGGER players_date_joined BEFORE INSERT ON Players
 FOR EACH ROW
   SET NEW.Date_Joined = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists team_date_joined;
 CREATE TRIGGER team_date_joined BEFORE INSERT ON Team
 FOR EACH ROW
   SET NEW.Date_Created = NOW();
+$$
 
+DELIMITER $$
 drop trigger if exists game_start_time;
 CREATE TRIGGER game_start_time BEFORE INSERT ON Game
 FOR EACH ROW
   SET NEW.Game_Start_Time = NOW();
+$$
 
+-- Create a Player_Stats entry for new players
 
 -- Other triggers for archiving other tables
+DELIMITER $$
 drop trigger if exists delete_from_ball;
 CREATE TRIGGER delete_from_ball AFTER DELETE ON Ball
   FOR EACH ROW
   insert into Ball_Archive VALUES (old.Ball_ID,
     old.Color, old.Weight, old.Size, old.Date_Added, old.Last_Date_Modified, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_player;
 CREATE TRIGGER delete_from_player AFTER DELETE ON Players
   FOR EACH ROW
@@ -41,7 +51,9 @@ CREATE TRIGGER delete_from_player AFTER DELETE ON Players
     old.City, old.State, old.Zip_Code, old.First_Name, old.Last_Name, old.Middle_Initial,
     old.Email, old.Password, old.Is_Admin, old.Reset_Key, old.Date_Added,
                                       old.Last_Date_Modified, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_teams;
 CREATE TRIGGER delete_from_teams AFTER DELETE ON Team
   FOR EACH ROW
@@ -49,14 +61,18 @@ CREATE TRIGGER delete_from_teams AFTER DELETE ON Team
     old.Date_Created, old.Game_Count, old.Win_Count, old.Player_1,
     old.Player_2, old.Player_3, old.Player_4, old.Player_5,
     old.Date_Added, old.Last_Date_Modified, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_Frame;
 CREATE TRIGGER delete_from_Frame AFTER DELETE ON Frame
 FOR EACH ROW
   insert into Frame_Archive VALUES (old.Frame_ID, old.Frame_Number,
     old.Player_ID, old.Roll_One_ID, old.Roll_Two_ID, old.Roll_Three_ID,
     old.Score, old.Team_ID, old.Game_ID, old.Date_Added, old.Last_Date_Modified, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_Roll;
 CREATE TRIGGER delete_from_Roll AFTER DELETE ON Roll
 FOR EACH ROW
@@ -65,7 +81,9 @@ FOR EACH ROW
     old.Is_Foul, old.Hit_Pin_1, old.Hit_Pin_2, old.Hit_Pin_3,
     old.Hit_Pin_4, old.Hit_Pin_5, old.Hit_Pin_6, old.Hit_Pin_7,
     old.Hit_Pin_8, old.Hit_Pin_9, old.Hit_Pin_10, old.Date_Added, old.Last_Date_Modified, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_Game;
 CREATE TRIGGER delete_from_Game AFTER DELETE ON Game
 FOR EACH ROW
@@ -73,7 +91,9 @@ FOR EACH ROW
     old.Game_Start_Time, old.Game_End_Time,
     old.Title, old.Location_ID, old.Event_Type, old.Game_Finished ,
     old.Date_Added, old.Last_Date_Modified, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_PlayerStats;
 CREATE TRIGGER delete_from_PlayerStats AFTER DELETE ON Player_Stats
 FOR EACH ROW
@@ -81,16 +101,19 @@ FOR EACH ROW
     old.Strikes, old.Games_Played, old.Perfect_Games, old.Spares,
     old.Pins_Left, old.Average_Pin_Left, old.Date_Added,
     old.Last_Date_Modified, old.Foul_Count, old.Pins_Hit, now());
+$$
 
+DELIMITER $$
 drop trigger if exists delete_from_game_location;
 CREATE TRIGGER delete_from_game_location AFTER DELETE ON Game_Location
 FOR EACH ROW
   insert into Game_Location_Archive VALUES (old.Game_Location_ID,
     old.Game_Address, old.Game_Location_Name, old.Date_Added,
     old.Last_Date_Modified, now());
+$$
 
-drop trigger if exists update_player_stats;
 DELIMITER $$
+drop trigger if exists update_player_stats;
 CREATE TRIGGER update_player_stats AFTER INSERT ON Roll
   for each ROW
   begin
