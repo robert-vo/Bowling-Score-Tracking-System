@@ -1,5 +1,5 @@
 <?php
-require '../src/game.php';
+require 'src/game.php';
 class GameTest extends PHPUnit_Framework_TestCase {
     /** @test */
     public function canaryTest() {
