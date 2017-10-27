@@ -21,7 +21,7 @@ $result = $conn->query($query);
 if($result->num_rows > 0) {//frame exists
     echo "The current frame is $frameNumber.<br>";
     $row = $result->fetch_assoc();
-    $currentRoll;
+    $currentRoll = '';
     $frameID = $row['Frame_ID'];
     $rollOneID = $row['Roll_One_ID'];
     $rollTwoID = $row['Roll_Two_ID'];
@@ -187,19 +187,18 @@ function generateCheckboxesForAllPins () {
 function getNumberOfPinsHitForRollID($rollID) {
     $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_ID = $rollID;";
     $conn = connectToDatabase();
-
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if($row['Is_Foul']) {
-                return 'F';
+                return '10';
             }
             else if ($row['Is_Spare']) {
-                return '/';
+                return '10';
             }
             else if($row['Is_Strike']) {
-                return 'X';
+                return '10';
             }
             else {
                 return calculateNumberOfPinsHit($row['Hit_Pin_1'],
@@ -215,7 +214,7 @@ function getNumberOfPinsHitForRollID($rollID) {
 
 
 function calculateNumberOfPinsHit(...$pins) {
-    return array_sum($pins) == 0 ? '-' : array_sum($pins);
+    return array_sum($pins) == 0 ? '0' : array_sum($pins);
 }
 ?>
 <html>
