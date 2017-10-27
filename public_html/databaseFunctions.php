@@ -87,7 +87,7 @@ function printSvgCircles($ballID, $color) {
 }
 
 function attemptToInsertIntoBalls($color, $weight, $size) {
-    $query = "INSERT INTO Ball(Color, Weight, Size) VALUES ('$color', $weight, $size)";
+    $query = "INSERT INTO Ball (Color, Weight, Size) VALUES ('$color', $weight, $size)";
 
     $result = attemptDataManipulationLanguageQuery($query);
 
@@ -100,7 +100,7 @@ function attemptToInsertIntoBalls($color, $weight, $size) {
 }
 
 function getIntegerNumberOfPinsHitForRollID($rollID) {
-    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_id = $rollID;";
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_ID = $rollID;";
 
     $result = returnResultForQuery($sql);
 

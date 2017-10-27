@@ -45,7 +45,7 @@ function getRollInformation($rollID) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM Roll, Ball WHERE Roll_ID= $rollID and Roll.Ball_ID = Ball.Ball_ID";
+    $sql = "SELECT * FROM Roll, Ball WHERE Roll_ID = $rollID and Roll.Ball_ID = Ball.Ball_ID";
     $result = $conn->query($sql);
     
     if($result->num_rows > 0){

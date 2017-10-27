@@ -135,7 +135,7 @@ if(isset($_POST['submit'])) {
         $isFoul = 0;
         if(isset($_POST['isFoul'])){
             $isFoul = 1;
-            $query = "INSERT INTO Roll(Roll_ID, Frame_ID, Ball_ID, Is_Foul) VALUES ($currentRoll, $frameID, $ballID, $isFoul)";
+            $query = "INSERT INTO Roll (Roll_ID, Frame_ID, Ball_ID, Is_Foul) VALUES ($currentRoll, $frameID, $ballID, $isFoul)";
         }
         else if(array_sum($pinHit) == 10){
             $isStrike = 1;
@@ -185,7 +185,7 @@ function generateCheckboxesForAllPins () {
 }
 
 function getNumberOfPinsHitForRollID($rollID) {
-    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_id = $rollID;";
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_ID = $rollID;";
     $conn = connectToDatabase();
 
     $result = $conn->query($sql);
@@ -214,7 +214,7 @@ function getNumberOfPinsHitForRollID($rollID) {
 }
 
 
-function calculateNumberOfPinsHit(...$pins) {
+function calculateNumberOfPinsHit($pins) {
     return array_sum($pins) == 0 ? '-' : array_sum($pins);
 }
 ?>

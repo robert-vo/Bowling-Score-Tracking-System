@@ -107,7 +107,7 @@ class game {
 
         foreach (range(1, 10) as $item) {
 
-            $sql = "SELECT group_concat(roll_one_id) as '1',
+            $sql = "SELECT group_concat(Roll_One_ID) as '1',
       group_concat(Roll_Two_ID) as '2',
       group_concat(Roll_Three_ID) as '3',
       Frame_Number

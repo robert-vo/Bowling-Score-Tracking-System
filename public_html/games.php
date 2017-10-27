@@ -96,7 +96,7 @@ function printGames($result, $teamID) {
 }
 
 function calculateAverageScoreFor($gameID, $teamID) {
-    $sql = "SELECT group_concat(DISTINCT Player_id) as 'ids' from Frame where Team_ID = $teamID and Game_ID = $gameID";
+    $sql = "SELECT group_concat(DISTINCT Player_ID) as 'ids' from Frame where Team_ID = $teamID and Game_ID = $gameID";
     $conn = connectToDatabase();
     $result = $conn->query($sql);
 

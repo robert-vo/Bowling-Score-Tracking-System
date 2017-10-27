@@ -342,7 +342,7 @@ function printOutFrameTotals($playerID, $gameID, $teamID, $game) {
 }
 
 function getNumberOfPinsHitForRollID($rollID) {
-    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_id = $rollID;";
+    $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_ID = $rollID;";
     $conn = connectToDatabase();
 
     $result = $conn->query($sql);
@@ -370,7 +370,7 @@ function getNumberOfPinsHitForRollID($rollID) {
     return '&nbsp';
 }
 
-function calculateNumberOfPinsHit(...$pins) {
+function calculateNumberOfPinsHit($pins) {
     return array_sum($pins) == 0 ? '-' : array_sum($pins);
 }
 

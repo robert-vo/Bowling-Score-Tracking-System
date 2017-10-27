@@ -46,11 +46,11 @@ $PLA = $pinsLeft / count($pins);
 
 //echo "<br>". $PLA;
 
-$sql = "update Player_Stats set Player_stats.Pins_Left = '$pinsLeft' where Player_ID = '$playerid'";
+$sql = "update Player_Stats set Player_Stats.Pins_Left = '$pinsLeft' where Player_ID = '$playerid'";
 $conn = connectToDatabase();
 $conn->query($sql);
 
-$sql = "update Player_Stats set Player_stats.Average_Pin_Left = '$PLA' where Player_ID = '$playerid'";
+$sql = "update Player_Stats set Player_Stats.Average_Pin_Left = '$PLA' where Player_ID = '$playerid'";
 $conn = connectToDatabase();
 $conn->query($sql);
 
