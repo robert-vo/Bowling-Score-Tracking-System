@@ -7,62 +7,43 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="update.css">
 </head>
-
 <body>
-
 <?php
 session_start();
-
 include 'menuBar.php';
 include 'databaseFunctions.php';
 generateMenuBar(basename(__FILE__));
 echo "<br>";
-
-
 //Starts the session (logged in user)
-
 //IS_ADMIN returns a 0 or 1, or also false or true, respectively.
 //This if statement is equivalent to $_SESSION['user_role'] == 1
 //To see how this session variable is accessible, check loginForm.php, line 62.
 if (!$_SESSION['user_role']) {
     header("location:loginForm.php");
-}
-else
-{
+} else {
 ?>
-
-
 <?php
 $table = $_GET['table'];
 $column = $_GET['column'];
 $rowid = $_GET['rowid'];
 //$auditValue = $_GET[''];
-
-
 function retrieveAndPrintRow($tableName, $id_column, $rowid)
 {
     $conn = connectToDatabase();
-
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
     $queryAllColumns = "SELECT distinct Column_name FROM Information_schema.columns WHERE Table_name LIKE '$tableName';";
     $allColumns = $conn->query($queryAllColumns);
-
     $queryToGetAllDataOfARow = "SELECT * FROM $tableName WHERE $id_column = $rowid";
     $result = $conn->query($queryToGetAllDataOfARow);
-
     createTableOnWebpage($allColumns, $result);
-
     $conn->close();
 }
 
 function createTableOnWebpage($allColumns, $result)
 {
     $allColumnsAsArray = array();
-
-    //$allColumnsAsArray = array();
     echo "<div>
         <div>
             Are you sure you want to delete this row?    
@@ -88,12 +69,9 @@ function createTableOnWebpage($allColumns, $result)
             array_push($allColumnsAsArray, $row["Column_name"]);
             echo "<th><b>" . $row["Column_name"] . "</b></th>";
         }
-//        echo "<th> Perform Action </th>";
-//        echo "</tr>";
     } else {
         echo "0 results";
     }
-
     //---ROW INFO---//
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -107,41 +85,18 @@ function createTableOnWebpage($allColumns, $result)
                 }
                 echo "<td align='center'>" . $row[$column] . "</td>";
             }
-
-//            echo "<td align='center'>
-//                        <form action='updateRow.php' method='get'>
-//                            <input type='hidden' name='table' value='".$_GET['table']."'>
-//                            <input type='hidden' name='rowid' value='".$_GET['rowid']."'>
-//                            <input type='submit' value='Update'>
-//                        </form>
-//                        <form action='archiveRow.php' method='get'>
-//                            <input type='hidden' name='table' value='".$_GET['table']."'>
-//                            <input type='hidden' name='rowid' value='".$_GET['rowid']."'>
-//                            <input type='submit' value='Delete'>
-//                        </form>
-//                    </td>";
-
             echo "</tr>";
         }
     } else {
         echo "0 results";
     }
-
     echo "</tr></table></div>";
-
     echo "</div>";
 }
-
 retrieveAndPrintRow($table, $column, $rowid);
-
 ?>
-
-
 </body>
-
 </html>
-
-
 <?php
 }
 ?>

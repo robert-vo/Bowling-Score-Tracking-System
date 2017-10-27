@@ -3,27 +3,22 @@ session_start();
 if (!isset($_SESSION["sess_user"]))
 {
     header("location:loginForm.php");
-}
-else {
+} else {
 ?>
-    <!doctype html>
+<!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title> Team Members </title>
-
     <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css"
-          href="loginAndRegistrationForm.css">
+    <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
     <link rel="stylesheet" type="text/css" href="team.css">
-
     <style>
         div#error {
             color: red;
         }
     </style>
 </head>
-
 <body>
 <?php
 include 'menuBar.php';
@@ -42,7 +37,6 @@ function popupMessageAndRedirectBrowser($message) {
 ?>
 </body>
 </html>
-
 <?php
 
 //do a sql query that will attempt to see if the email exists
@@ -54,7 +48,7 @@ function popupMessageAndRedirectBrowser($message) {
 
 $inputEmail = $_POST['myinput'];
 $teamID = $_POST['team'];
-$query ="SELECT Player_ID, First_Name, Last_Name, Email from Players where Email = '$inputEmail'";
+$query = "SELECT Player_ID, First_Name, Last_Name, Email from Players where Email = '$inputEmail'";
 $result = $conn->query($query);
 
 $numrows = $result->num_rows;
@@ -67,18 +61,15 @@ if ($numrows != 0)
         $playerID = $row['Player_ID'];
         if ($result->num_rows > 0)
         {
-
-            $query2 = "SELECT Leader,Player_1, Player_2, Player_3, Player_4, Player_5 from Team where Team_ID = $teamID";
+            $query2 = "SELECT Leader, Player_1, Player_2, Player_3, Player_4, Player_5 from Team where Team_ID = $teamID";
             $result2 = $conn->query($query2);
             $numrows = $result2->num_rows;
             $message = '';
             while ($row2 = $result2->fetch_assoc()) {
                 if($row2['Leader'] == $playerID or $row2['Player_1'] == $playerID or $row2['Player_2'] == $playerID or $row2['Player_3'] == $playerID or $row2['Player_4'] == $playerID or $row2['Player_5'] == $playerID ) {
-//                    echo '<br> The email you entered is already on this team!<br>';
                     popupMessageAndRedirectBrowser('The email you entered is already on this team!.   ');
                 }
-                else{
-
+                else {
                     if (!isset($row2['Player_1'])) {
                         echo 'You are trying to add the e-mail ' . $_POST['myinput'], ' to your team';
                         echo "<br>Their player ID is: $playerID";
@@ -120,7 +111,6 @@ if ($numrows != 0)
                     }
                     popupMessageAndRedirectBrowser($message);
                 }
-
             }
         }
     }
@@ -131,13 +121,11 @@ if ($numrows != 0)
     } else
     {
         $message = 'Unable to add the player! ';
-
     }
     popupMessageAndRedirectBrowser($message);
-
 }
 else
 {
-    popupMessageAndRedirectBrowser('Player does not exist! Please ensure that what you have entered is correct and valid.   ');
+    popupMessageAndRedirectBrowser('Player does not exist! Please ensure that what you have entered is correct and valid.');
 }
 ?>

@@ -7,10 +7,8 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="reports.css">
 </head>
-
 <?php
 include 'databaseFunctions.php';
-
 
 function createPlayersArray() {
     $conn = connectToDatabase();
@@ -27,7 +25,6 @@ function createPlayersArray() {
     return $teams;
 }
 
-
 function printTop10Teams($orderBy, $showTop) {
     $conn = connectToDatabase();
     $query = "SELECT * FROM Team ORDER BY Win_Count " . $orderBy . " LIMIT " . $showTop;
@@ -35,7 +32,6 @@ function printTop10Teams($orderBy, $showTop) {
     printResult($result);
     $conn->close();
 }
-
 
 function printTop10TeamsByPercentage($orderBy, $showTop) {
     $conn = connectToDatabase();
@@ -45,7 +41,6 @@ function printTop10TeamsByPercentage($orderBy, $showTop) {
     $conn->close();
 }
 
-
 function printTop10TeamsGamesPlayed($orderBy, $showTop) {
     $conn = connectToDatabase();
     $query = "SELECT Name, Leader, Game_Count, Win_Count, 100*Win_Count/Team.Game_Count FROM TEAM ORDER BY Game_Count " . $orderBy . " LIMIT " . $showTop;
@@ -53,7 +48,6 @@ function printTop10TeamsGamesPlayed($orderBy, $showTop) {
     printResult($result);
     $conn->close();
 }
-
 
 function printPlayersReport($report, $showTop, $orderBy) {
     $conn = connectToDatabase();
@@ -63,16 +57,15 @@ function printPlayersReport($report, $showTop, $orderBy) {
     $conn->close();
 }
 
-
 function printPlayers($report, $result) {
     if($result->num_rows > 0) {
         echo '<table class="report alternate">';
         $reportHeader = "";
-        if ($report == "Average_Pin_Left")
+        if ($report == "Average_Pin_Left") {
             $reportHeader = "Average # of Pins Left";
-        else
+        } else {
             $reportHeader = "Number of " . $report;
-
+        }
         echo '<tr class="table_header"><th>Place</th><th>Player Name</th><th>' . $reportHeader . '</th><th>Games  Played</th><th>Player\'s Email Address</th></tr>';
         $place = 1;
         while($row = $result->fetch_assoc()) {
@@ -83,16 +76,13 @@ function printPlayers($report, $result) {
             echo '<td align=\'center\'>' . $row['Games_Played'] . '</td>';
             echo '<td align=\'center\'>' . $row['Email'] . '</td>';
             echo '</tr>';
-
             $place++;
         }
         echo '</table>';
-    }
-    else {
+    } else {
         echo '0 results';
     }
 }
-
 
 function printResult($result) {
     if($result->num_rows > 0) {
@@ -107,11 +97,9 @@ function printResult($result) {
             echo "<td>" . $teams[$row['Leader']] . "</td>";
             echo "<td>" . $row['Game_Count'] . "</td>";
             echo "<td>" . $row['Win_Count'] . "</td>";
-
             $percentage = (100 * $row['Win_Count']/$row['Game_Count']);
             echo "<td>" . number_format($percentage, 0, '.', '') . " %</td>";
             echo "</tr>";
-
             $place++;
         }
         echo "</table>";
@@ -120,89 +108,62 @@ function printResult($result) {
     }
 }
 
-
-
 $category = $_POST['category'];
 $reportType = $_POST[ $category . 'ReportType'] ;
 $orderBy = $_POST[ $category . 'OrderBy' ];
 $showTop = $_POST[ $category . 'ShowTop' ];
 
-//echo $reportType . " " . $orderBy . " " . $category . " " . $showTop;
-
 if($category == "players") { // Queries and prints for the 'players' category.
-
     if($reportType == "Average_Pin_Left") {
         $order = "";
-        if ($orderBy == "ASC")
+        if ($orderBy == "ASC") {
             $order = 'lowest';
-        else
+        } else {
             $order = 'highest';
-
+        }
         echo "<h5>Here are the top " . $showTop . " who have the " . $order . " average number of pins left after the first roll of the frame.</h5>";
         printPlayersReport($reportType, $showTop, $orderBy);
-
     } else {
-
         $order = "";
-        if ($orderBy == "ASC")
+        if ($orderBy == "ASC") {
             $order = 'least';
-        else
+        } else {
             $order = 'most';
-
+        }
         echo '<h5>Here are the top ' . $showTop . ' players who have rolled the ' . $order . ' ' . $reportType . '</h5>';
         printPlayersReport($reportType, $showTop, $orderBy);
     }
-
-}
-else if ($category == "teams") { // Queries and prints for the 'teams' category.
-
+} else if ($category == "teams") { // Queries and prints for the 'teams' category.
     if($reportType == "win_count") {
-
         $order = "";
         if($orderBy == "ASC") {
             $order = 'lowest';
-        }
-        else {
+        } else {
             $order = 'highest';
         }
-
         echo '<h5>Here are the current top ' . $showTop . ' teams with the ' . $order . ' win count</h5>';
         printTop10Teams($orderBy, $showTop);
-        
-    } 
-    else if ($reportType == "win_percentage") {
-
+    } else if ($reportType == "win_percentage") {
         $order = "";
         if($orderBy == "ASC") {
             $order = 'lowest';
-        }
-        else {
+        } else {
             $order = 'highest';
         }
-
         echo '<h5>Here are the current top ' . $showTop . ' teams with the ' . $order . ' win percentage</h5>';
         printTop10TeamsByPercentage($orderBy, $showTop);
-        
-    }
-    else if ($reportType == "games_played") {
-        
+    } else if ($reportType == "games_played") {
         $order = "";
         if($orderBy == "ASC") {
             $order = 'least';
-        }
-        else {
+        } else {
             $order = 'most';
         }
-
         echo '<h5>Here are the current top ' . $showTop . ' teams who have played the ' . $order . ' games</h5>';
         printTop10TeamsGamesPlayed($orderBy, $showTop);
     }
 }
-
 ?>
-
-
 <body>
-
 </body>
 </html>

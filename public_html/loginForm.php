@@ -12,20 +12,16 @@
         }
     </style>
 </head>
-
 <body>
-
 <?php
 session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
-
 if (isset($_SESSION['user_role'])) {
     header("location:index.php");
 }
 else {
 ?>
-
 <br>
 <div id="box1">
     <div id="boxH">
@@ -38,24 +34,19 @@ else {
             <input type="submit" name="valid" value="Login">
         </form>
     </div>
-
 </div>
 <br>
 <div id="centerT"><a href="Register.php">Create account</a></div>
 <div id="centerT"><a href="passwordReset.php">Forgot your password?</a></div>
-
 <?php
 include 'databaseFunctions.php';
-
     if (isset($_POST["valid"])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-
         $conn = connectToDatabase();
         $query = "SELECT * FROM Players WHERE Email = '$username'";
         $result = $conn->query($query);
         $numrows = $result->num_rows;
-
         if ($numrows != 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $dbuser = $row['Email'];
@@ -63,7 +54,6 @@ include 'databaseFunctions.php';
                 $userRole = $row['Is_Admin'];
                 $playerID = $row['Player_ID'];
             }
-
             if ($username == $dbuser and password_verify($password, $dbpass)) {
                 session_start();
                 $_SESSION['sess_user'] = $username;
@@ -80,10 +70,8 @@ include 'databaseFunctions.php';
             <div id="error">Invalid username or password</div>
             <?php
         }
-
     }
 }
 ?>
-
 </body>
 </html>

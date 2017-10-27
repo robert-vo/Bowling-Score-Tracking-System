@@ -1,8 +1,6 @@
 <?php
-
 //Change to Remote to test deployment on
 $typeOfConnection = getenv('typeOfConnection');
-
 function connectToDatabase()
 {
     if ($GLOBALS['typeOfConnection'] == 'Remote') {
@@ -21,7 +19,6 @@ function connectToDatabase()
 
 function attemptDataManipulationLanguageQuery($query) {
     $connection = connectToDatabase();
-
     if(mysqli_query($connection, $query) == TRUE) {
         return true;
     }
@@ -38,14 +35,7 @@ function returnResultForQuery($query) {
 }
     
 function getAllTeamsForAPlayerID($playerID) {
-    $query = "SELECT * FROM Team 
-              WHERE Leader = '$playerID' 
-                OR Player_1 = '$playerID' 
-                OR Player_2 = '$playerID' 
-                OR Player_3 = '$playerID' 
-                OR Player_4 = '$playerID' 
-                OR Player_5 = '$playerID'";
-
+    $query = "SELECT * FROM Team WHERE Leader = '$playerID' OR Player_1 = '$playerID' OR Player_2 = '$playerID' OR Player_3 = '$playerID' OR Player_4 = '$playerID' OR Player_5 = '$playerID'";
     return returnResultForQuery($query);
 }
 
@@ -88,22 +78,17 @@ function printSvgCircles($ballID, $color) {
 
 function attemptToInsertIntoBalls($color, $weight, $size) {
     $query = "INSERT INTO Ball (Color, Weight, Size) VALUES ('$color', $weight, $size)";
-
     $result = attemptDataManipulationLanguageQuery($query);
-
     if($result == TRUE) {
         echo '<br>Ball successfully created! You can go back to the previous page to use your new ball!';
-    }
-    else {
+    } else {
         echo $result;
     }
 }
 
 function getIntegerNumberOfPinsHitForRollID($rollID) {
     $sql = "select Hit_Pin_1, Hit_Pin_2, Hit_Pin_3, Hit_Pin_4, Hit_Pin_5, Hit_Pin_6, Hit_Pin_7, Hit_Pin_8, Hit_Pin_9, Hit_Pin_10, Is_Foul, Is_Spare, Is_Strike from Roll where Roll_ID = $rollID;";
-
     $result = returnResultForQuery($sql);
-
     if($result) {
         while($row = $result->fetch_assoc()) {
             return calculateIntegerNumberOfPinsHit($row['Hit_Pin_1'],
@@ -112,15 +97,10 @@ function getIntegerNumberOfPinsHitForRollID($rollID) {
                 $row['Hit_Pin_8'], $row['Hit_Pin_9'], $row['Hit_Pin_10']);
         }
     }
-    else {
-        return 0;
-    }
     return 0;
 }
 
 function calculateIntegerNumberOfPinsHit(...$pins) {
     return array_sum($pins);
 }
-
-
 ?>

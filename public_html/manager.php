@@ -35,15 +35,12 @@ function createPlayerEmailArray()
 }
 ?>
 
-
-
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"]))
 {
     header("location:loginForm.php");
-}
-else {
+} else {
     ?>
     <!doctype html>
     <html>

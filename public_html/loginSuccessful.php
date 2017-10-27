@@ -1,141 +1,119 @@
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"])) {
-
     header("location:loginForm.php");
-
 } else {
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Profile</title>
-        <link rel="stylesheet" type="text/css" href="index.css">
-        <style>
-            div#id {
-                font-size: x-large;
-                font-weight: bold;
-                color: #4CAF50;
-            }
-        </style>
-    </head>
-    <body>
-    <?php include 'menuBar.php';
-    generateMenuBar(basename(__FILE__));
-    ?>
-
-    <br>
-    <div id="id">PROFILE:</div>
-    <br>
-
-    <?php
-    $user = $_SESSION['sess_user'];
-    include 'databaseFunctions.php';
-    $conn = connectToDatabase();
-    $query = "SELECT * FROM Players WHERE Email = '$user'";
-    $result = $conn->query($query);
-    $numrows = $result->num_rows;
-    if ($numrows != 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $fname = $row['First_Name'];
-            $lname = $row['Last_Name'];
-
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <style>
+        div#id {
+            font-size: x-large;
+            font-weight: bold;
+            color: #4CAF50;
         }
+    </style>
+</head>
+<body>
+<?php include 'menuBar.php';
+generateMenuBar(basename(__FILE__));
+?>
+<br>
+<div id="id">PROFILE:</div>
+<br>
+<?php
+$user = $_SESSION['sess_user'];
+include 'databaseFunctions.php';
+$conn = connectToDatabase();
+$query = "SELECT * FROM Players WHERE Email = '$user'";
+$result = $conn->query($query);
+$numrows = $result->num_rows;
+if ($numrows != 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $fname = $row['First_Name'];
+        $lname = $row['Last_Name'];
     }
-    $fname = ucfirst($fname);
-    $lname = ucfirst($lname);
-    echo "You are currently logged in as: $fname $lname";
-    echo "<br>";
-    echo "<form action='updateProfile.php'>
-              <input type='submit' value='Edit Profile'>
-          </form>";
-
-    echo '<br><u>Here is the information you have on file with us:</u>';
-    $query2 = "SELECT * FROM Players WHERE Email = '$user'";
-    $result = $conn->query($query2);
-    $numrows = $result->num_rows;
-    if($numrows != 0){
-        while ($row = mysqli_fetch_assoc($result)){
-            $playerid = $row['Player_ID'];
-            echo '<br><br>Your Player ID is ' . $playerid;
-            echo '<br>Gender: ' . $row['Gender'];
-            echo '<br>Date Of Birth: ' . $row['Date_Of_Birth'];
-            echo '<br>Street Address: ' . $row['Street_Address'];
-            echo '<br>City: ' . $row['City'];
-            echo '<br>State ' . $row['State'];
-            echo '<br>Zip Code: ' . $row['Zip_Code'];
-            echo '<br>Email: ' . $row['Email'];
-            echo "<br>";
-        }
-    }
-
-    //Displays Team Leader
-    $query2 = "SELECT * FROM Team WHERE Leader = '$playerid'";
-    $result = $conn->query($query2);
-    $numrows = $result->num_rows;
-    if($numrows != 0){
-
-        while ($row = mysqli_fetch_assoc($result)){
-            $teamname = $row['Name'];
-            echo "<br>You are the team leader of: ". $teamname;
-            echo "\n";
-        }
+}
+$fname = ucfirst($fname);
+$lname = ucfirst($lname);
+echo "You are currently logged in as: $fname $lname";
+echo "<br>";
+echo "<form action='updateProfile.php'>
+            <input type='submit' value='Edit Profile'>
+        </form>";
+echo '<br><u>Here is the information you have on file with us:</u>';
+$query2 = "SELECT * FROM Players WHERE Email = '$user'";
+$result = $conn->query($query2);
+$numrows = $result->num_rows;
+if($numrows != 0){
+    while ($row = mysqli_fetch_assoc($result)){
+        $playerid = $row['Player_ID'];
+        echo '<br><br>Your Player ID is ' . $playerid;
+        echo '<br>Gender: ' . $row['Gender'];
+        echo '<br>Date Of Birth: ' . $row['Date_Of_Birth'];
+        echo '<br>Street Address: ' . $row['Street_Address'];
+        echo '<br>City: ' . $row['City'];
+        echo '<br>State ' . $row['State'];
+        echo '<br>Zip Code: ' . $row['Zip_Code'];
+        echo '<br>Email: ' . $row['Email'];
         echo "<br>";
     }
+}
 
-    //Listing Player ID
-
-    $query3 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
-    $result = $conn->query($query3);
-    $numrows = $result->num_rows;
-    if($numrows != 0){
-        while ($row = mysqli_fetch_assoc($result)){
-            $teamname = $row['Name'];
-        }
-        //echo "<br> Your Player ID is: ". $playerid . "<br>";
-
+// Display team leader
+$query2 = "SELECT * FROM Team WHERE Leader = '$playerid'";
+$result = $conn->query($query2);
+$numrows = $result->num_rows;
+if($numrows != 0){
+    while ($row = mysqli_fetch_assoc($result)){
+        $teamname = $row['Name'];
+        echo "<br>You are the team leader of: ". $teamname;
+        echo "\n";
     }
+    echo "<br>";
+}
 
-    //List all teams you are part of
-
-    $query4 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
-    $result = $conn->query($query4);
-    $numrows = $result->num_rows;
-    if($numrows != 0){
-        while ($row = mysqli_fetch_assoc($result)){
-            $partOfTeam = $row['Name'];
-            echo "<br> Your are part of team: ". $partOfTeam;
-        }
-
+//Listing Player ID
+$query3 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+$result = $conn->query($query3);
+$numrows = $result->num_rows;
+if($numrows != 0){
+    while ($row = mysqli_fetch_assoc($result)){
+        $teamname = $row['Name'];
     }
+}
 
-    //Display Team Members ID
-
-
-    $query4 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
-    $result = $conn->query($query4);
-    $numrows = $result->num_rows;
-    if($numrows != 0){
-        while ($row = mysqli_fetch_assoc($result)){
-            $teamMember1 = $row['Leader'];
-            $teamMember2 = $row['Player_1'];
-            $teamMember3 = $row['Player_2'];
-            $teamMember4 = $row['Player_3'];
-            $teamMember5 = $row['Player_4'];
-            $teamMember6 = $row['Player_5'];
-        }
-        ;
-//        echo "<br> Your team members id  are: ". $teamMember1;
-//        echo "<br> Your team members id are: ". $teamMember2;
-//        echo "<br> Your team members id are: ". $teamMember3;
-//        echo "<br> Your team members id are: ". $teamMember4;
-//        echo "<br> Your team members id are: ". $teamMember5;
-//        echo "<br> Your team members id are: ". $teamMember6;
-
+//List all teams you are part of
+$query4 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+$result = $conn->query($query4);
+$numrows = $result->num_rows;
+if($numrows != 0){
+    while ($row = mysqli_fetch_assoc($result)){
+        $partOfTeam = $row['Name'];
+        echo "<br> Your are part of team: ". $partOfTeam;
     }
+}
 
-    //Displays Team Member Name
+//Display Team Members ID
+$query4 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 = '$playerid' OR Player_5 = '$playerid'";
+$result = $conn->query($query4);
+$numrows = $result->num_rows;
+if($numrows != 0){
+    while ($row = mysqli_fetch_assoc($result)){
+        $teamMember1 = $row['Leader'];
+        $teamMember2 = $row['Player_1'];
+        $teamMember3 = $row['Player_2'];
+        $teamMember4 = $row['Player_3'];
+        $teamMember5 = $row['Player_4'];
+        $teamMember6 = $row['Player_5'];
+    }
+}
+
+//Displays Team Member Name
 
 //    $query5 = "SELECT * FROM Players WHERE Player_ID = '$teamMember1' OR Player_ID = '$teamMember2' OR Player_ID = '$teamMember3' OR Player_ID = '$teamMember4' OR Player_ID = '$teamMember5' OR Player_ID = '$teamMember6'";
 //    $result = $conn->query($query5);
@@ -148,16 +126,9 @@ if (!isset($_SESSION["sess_user"])) {
 //        }
 //
 //    }
-
-
-
-
-
-    ?>
-
-    </body>
-    </html>
-
-    <?php
+?>
+</body>
+</html>
+<?php
 }
 ?>

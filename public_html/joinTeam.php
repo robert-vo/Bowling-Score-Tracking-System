@@ -34,16 +34,12 @@ function createPlayerEmailArray()
     return $emails;
 }
 ?>
-
-
-
 <?php
 session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 $conn = connectToDatabase();
-
 $user = $_SESSION['sess_user'];
 $query1 = "SELECT * FROM Players WHERE Email = '$user'";
 $result = $conn->query($query1);
@@ -51,17 +47,11 @@ $numrows = $result->num_rows;
 if ($numrows != 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $playerID = $row['Player_ID'];
-//        echo "$playerID";
-////This will display the logged in users Player ID
     }
 }
-
-
-
-$query2 = "SELECT Name,Leader from Team";
+$query2 = "SELECT Name, Leader from Team";
 $result = $conn->query($query2);
 $numrows = $result->num_rows;
-
 echo "<br> Here is a list of all the teams you can join: <br>";
 if($numrows != 0){
     while ($row = mysqli_fetch_assoc($result)) {
@@ -82,20 +72,7 @@ if($numrows != 0){
             echo "<input type = hidden value='$teamName' name = teamName>";
             echo '<input type="submit" value = "Request to Join Team" onclick="return confirm(\'Are you sure you want to join the team?\');"></input>';
             echo '</form>';
-            //place button that calls a function
-
         }
-
     }
 }
 ?>
-
-
-
-
-
-
-
-
-
-

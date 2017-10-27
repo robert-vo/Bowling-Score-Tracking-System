@@ -1,5 +1,4 @@
 <link rel="stylesheet" type="text/css" href="audit.css">
-
 <?php
 session_start();
 include 'menuBar.php';
@@ -9,10 +8,8 @@ error_reporting(0);
 include 'src/game.php';
 error_reporting(E_ALL);
 
-
 function printResult($result) {
     if ($result->num_rows > 0) {
-        // output data of each row
         while ($row = $result->fetch_assoc()) {
             echo "<br>" . $row['Team_ID'] . "<br>" . $row['Name'];
     }
@@ -23,10 +20,8 @@ function printResult($result) {
 
 function getTeamNameForTeamId($teamId) {
     $conn = connectToDatabase();
-    $sql = "select Team_ID, Team.Name from Team where Team.Team_ID = '$teamId'";
-
+    $sql = "select Team_ID, Name from Team where Team_ID = '$teamId'";
     $result = $conn->query($sql);
-
     $teamName = '';
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -42,7 +37,6 @@ function getLocationForId($location_id) {
     $conn = connectToDatabase();
     $sql = "select Game_Location_Name from Game_Location where Game_Location_ID = '$location_id'";
     $result = $conn->query($sql);
-
     $location = '';
     if($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -58,7 +52,6 @@ function printGames($result, $teamID) {
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-
             echo '<table>';
             echo '<caption>';
             echo 'Game Title: ' . $row['Title'] . '<br>Type of game: ' . $row['Event_Type'];
@@ -70,17 +63,14 @@ function printGames($result, $teamID) {
             echo '<tr><th>Team Name</th><th>Average Score Per Player</th></tr>';
             $allTeams = $row['Teams'];
             $separatedTeams = explode(",", $allTeams);
-
             foreach ($separatedTeams as $team) {
                 echo '<tr><th>';
                 if($teamID == $team) {
                     echo '<u>' . getTeamNameForTeamId($team) . '</u>';
-                }
-                else {
+                } else {
                     echo getTeamNameForTeamId($team);
                 }
                 echo '</th>';
-
                 echo '<th>' . calculateAverageScoreFor($row['Game_ID'], $team) . '</th>';
                 echo '</tr>';
             }
@@ -89,18 +79,14 @@ function printGames($result, $teamID) {
             echo "<br>";
             echo "<br>";
         }
-    } else {
-
-    }
+     }
 }
 
 function calculateAverageScoreFor($gameID, $teamID) {
     $sql = "SELECT group_concat(DISTINCT Player_ID) as 'ids' from Frame where Team_ID = $teamID and Game_ID = $gameID";
     $conn = connectToDatabase();
     $result = $conn->query($sql);
-
     $totalScore = 0;
-
     if($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $allPlayers = explode(',', $row['ids']);
@@ -108,10 +94,8 @@ function calculateAverageScoreFor($gameID, $teamID) {
                 $game = new \bowling\game();
                 $getAllFrames = "SELECT Frame_Number, Roll_One_ID, Roll_Two_ID, Roll_Three_ID From Frame where Team_ID = $teamID and Game_ID = $gameID and Frame.Player_ID = $player";
                 $resultOfPlayers = $conn->query($getAllFrames);
-
                 if($resultOfPlayers) {
                     while ($rowOfPlayers = $resultOfPlayers->fetch_assoc()) {
-
                         if ($rowOfPlayers['Frame_Number'] == 10) {
                             if (isset($rowOfPlayers['Roll_Three_ID'])) {
                                 $game->frame(getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_One_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Two_ID']), getIntegerNumberOfPinsHitForRollID($rowOfPlayers['Roll_Three_ID']));
@@ -130,11 +114,9 @@ function calculateAverageScoreFor($gameID, $teamID) {
                     }
                     $totalScore += $game->score();
                 }
-
             }
         }
-    }
-    else {
+    } else {
         return 0;
     }
     return round($totalScore/count($allPlayers), 3);
@@ -144,8 +126,6 @@ function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {
     $findAllTeamsQuery = "select Team_ID from Team where Leader = $playerID or Player_1 = $playerID or Player_2 = $playerID or Player_3 = $playerID or Player_4 = $playerID or Player_5 = $playerID";
     $conn = connectToDatabase();
     $result = $conn->query($findAllTeamsQuery);
-
-
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             findAllGamesATeamIsAPartOf($row['TEAM_ID'], $gameStatus);
@@ -156,25 +136,13 @@ function findAllTeamsAPlayerIsAPartOf($playerID, $gameStatus) {
 }
 
 function findAllGamesATeamIsAPartOf($teamID, $gameStatus) {
-    $query = "select * from Game where 
-                Game.Game_Finished = $gameStatus and (
-                  Game.Teams like '$teamID,%'
-                    or Game.Teams like '%,$teamID'
-                    or Game.Teams like '%,$teamID,%'
-                    or Game.Teams like '$teamID')";
-
+    $query = "select * from Game where Game.Game_Finished = $gameStatus and (Game.Teams like '$teamID,%' or Game.Teams like '%,$teamID' or Game.Teams like '%,$teamID,%' or Game.Teams like '$teamID')";
     $conn = connectToDatabase();
     $result = $conn->query($query);
     printGames($result, $teamID);
 }
-
 echo '<h3><a href="createGame.php">Want to start a new game? Click here to start a new game!</a></b></h3>';
 echo '<h3>Here are the games that you are a part of!</h3>';
-
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 0);
 findAllTeamsAPlayerIsAPartOf($_SESSION['player_id'], 1);
-
 ?>
-
-
-

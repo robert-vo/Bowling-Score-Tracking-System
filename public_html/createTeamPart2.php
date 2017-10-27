@@ -1,18 +1,14 @@
 <link rel="stylesheet" type="text/css" href="index.css">
 <link rel="stylesheet" type="text/css" href="loginAndRegistrationForm.css">
-
-
 <?php
 session_start();
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
 include 'databaseFunctions.php';
 
-
 if(!isset($_POST['name']) or $_POST['name'] == null) {
     echo "Empty Team Name. Please go back and try again.<form action='createTeam.php'><input type='submit' value='Go back'></form><br>";
-}
-else {
+} else {
     if($_POST['numberOfPlayers'] == 0) {
         $conn = connectToDatabase();
         $playerID = $_SESSION['player_id'];
@@ -25,12 +21,9 @@ else {
         else {
             echo 'Unable to create a team for you. ';
             echo "Please go back and try again.<form action='createTeam.php'><input type='submit' value='Go back'></form><br>";
-
         }
-    }
-    else {
+    } else {
         echo 'Please enter in the email addresses for each player you want to create a team for.<br>';
-
         echo '<form action="runCreateTeam.php" method="post">';
         for($i = 1; $i <= $_POST['numberOfPlayers']; $i++) {
             echo "<input type=text name=name$i placeholder=" . "Player$i" . "><br>";
