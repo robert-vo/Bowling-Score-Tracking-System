@@ -6,7 +6,7 @@ generateMenuBar(basename(__FILE__));
 $playerid = $_SESSION['player_id'];
 
 $conn = connectToDatabase();
-$sql = "Select * from frame where Player_ID = '$playerid'";
+$sql = "Select * from Frame where Player_ID = '$playerid'";
 $result = $conn->query($sql);
 $numrows = $result->num_rows;
 $frame = array ();
@@ -26,7 +26,7 @@ $frame = array_values($frame);
 // add all the pins together of each roll
 $pins = array ();
 for($i = 0; $i < count($frame);$i++){
-    $sql = "select * from roll where Frame_ID = '$frame[$i]'";
+    $sql = "select * from Roll where Frame_ID = '$frame[$i]'";
     $result = $conn->query($sql);
     $numrows = $result->num_rows;
     if($numrows != 0){
@@ -46,11 +46,11 @@ $PLA = $pinsLeft / count($pins);
 
 //echo "<br>". $PLA;
 
-$sql = "update Player_Stats set player_stats.Pins_Left = '$pinsLeft' where Player_ID = '$playerid'";
+$sql = "update Player_Stats set Player_Stats.Pins_Left = '$pinsLeft' where Player_ID = '$playerid'";
 $conn = connectToDatabase();
 $conn->query($sql);
 
-$sql = "update Player_Stats set player_stats.Average_Pin_Left = '$PLA' where Player_ID = '$playerid'";
+$sql = "update Player_Stats set Player_Stats.Average_Pin_Left = '$PLA' where Player_ID = '$playerid'";
 $conn = connectToDatabase();
 $conn->query($sql);
 

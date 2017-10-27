@@ -67,7 +67,7 @@ if (!isset($_SESSION["sess_user"])) {
         }
 
         //Update..
-        $query = "UPDATE players SET ";
+        $query = "UPDATE Players SET ";
         for($i = 0; $i < count($updatedFields); $i++) {
             $query .= "$updatedFieldColumns[$i] = " . "'" . $updatedFields[$i] . "'";
             if ($i + 1 < count($updatedFields)) {
@@ -87,7 +87,7 @@ if (!isset($_SESSION["sess_user"])) {
     // Success message
     if((mysqli_query($conn, $query) == TRUE)) {
         $username = $_SESSION['sess_user'];
-        $query = "SELECT * FROM players WHERE Email = '$username';";
+        $query = "SELECT * FROM Players WHERE Email = '$username';";
         $result = $conn->query($query);
 
         echo "<br> Profile has been successfully updated to the following values:<br><br>";

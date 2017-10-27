@@ -35,15 +35,12 @@ function createPlayerEmailArray()
 }
 ?>
 
-
-
 <?php
 session_start();
 if (!isset($_SESSION["sess_user"]))
 {
     header("location:loginForm.php");
-}
-else {
+} else {
     ?>
     <!doctype html>
     <html>
@@ -78,7 +75,7 @@ else {
 
     <?php
     $user = $_SESSION['sess_user'];
-    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $query1 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -91,7 +88,7 @@ else {
     $lname = ucfirst($lname);
 
 
-    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $query1 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -101,7 +98,7 @@ else {
     }
 
 
-    $query1 = "SELECT * FROM team WHERE Player_1 = '$playerid' OR
+    $query1 = "SELECT * FROM Team WHERE Player_1 = '$playerid' OR
 Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 '$playerid' OR Player_5 = '$playerid'";
     $result = $conn->query($query1);
@@ -126,7 +123,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 
     //display stats
 
-    $query = "SELECT * FROM players WHERE Email = '$user'";
+    $query = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -139,7 +136,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
     $lname = ucfirst($lname);
 //    echo "$fname $lname";
 
-    $query1 = "SELECT * FROM players WHERE Email = '$user'";
+    $query1 = "SELECT * FROM Players WHERE Email = '$user'";
     $result = $conn->query($query1);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -150,7 +147,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 
     //Displays Team Leader
 
-    $query2 = "SELECT * FROM team WHERE Leader = '$playerid'";
+    $query2 = "SELECT * FROM Team WHERE Leader = '$playerid'";
     $result = $conn->query($query2);
     $numrows = $result->num_rows;
     if ($numrows != 0) {
@@ -160,7 +157,7 @@ Player_2 = '$playerid' OR Player_3 = '$playerid' OR Player_4 =
 
         }
 
-        $query3 = "SELECT * FROM team WHERE Name = '$teamname'";
+        $query3 = "SELECT * FROM Team WHERE Name = '$teamname'";
         $result = $conn->query($query2);
         $numrows = $result->num_rows;
         if ($numrows != 0) {

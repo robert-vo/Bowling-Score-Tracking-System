@@ -137,12 +137,12 @@ if (postReturnsValidData()) {
     $birth = "$doby-$dobm-$dobd";
     $email = $_POST['email'];
     $conn = connectToDatabase();
-    $sql = "INSERT INTO players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
+    $sql = "INSERT INTO Players (Gender, Phone_Number, Date_Of_Birth, Street_Address, City, State, Zip_Code, First_Name, Last_Name, Middle_Initial, Email, Password, Is_Admin)
                                  VALUES ('$gender', '$phone', '$birth', '$street', '$city', '$state', '$zip', '$firstName', '$lastName', '$middle', '$email', '$password', 0) ";
     if (mysqli_query($conn, $sql) == TRUE) {
         echo "Insertion successful";
     } else {
-        echo "<div id=\"error\">Sorry, $conn->error,  please try registering again. </div> <br>Click <a href=\"register.php\">here</a> to go back to the registration page.</div>";
+        echo "<div id=\"error\">Sorry, $conn->error,  please try registering again. </div> <br>Click <a href=\"Register.php\">here</a> to go back to the registration page.</div>";
     }
     $conn->close();
     }
@@ -150,7 +150,7 @@ else {
     echo '<div id="box"><div id="boxH">REGISTER</div>
             <span style="margin:auto" class = "error">* Denotes a required field.</span>
             <div id="boxF">
-            <form action="register.php" method="POST">
+            <form action="Register.php" method="POST">
             <input type="text" name="firstName" placeholder="First Name">';
 
     echo '<span class="error">*' . $firstNameError . '</span>';

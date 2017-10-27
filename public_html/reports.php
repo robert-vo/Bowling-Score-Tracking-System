@@ -31,21 +31,21 @@ if(!isset($_GET['category']))
         $category = "";
         if(isset($_GET['category'])) {      // Selects the default option when the page is reloaded.
             $category = $_GET['category'];
-            if($category == "players") {
-                echo "<option value='players' selected>Players</option>";
+            if($category == "Players") {
+                echo "<option value='Players' selected>Players</option>";
                 echo "<option value='teams'>Teams</option>";
                 echo "<option value='ball'>Bowling Balls</option>";
             } else if ($category == "teams") {
-                echo "<option value='players'>Players</option>";
+                echo "<option value='Players'>Players</option>";
                 echo "<option value='teams' selected>Teams</option>";
                 echo "<option value='ball'>Bowling Balls</option>";
             } else if ($category == "ball") {
-                echo "<option value='players'>Players</option>";
+                echo "<option value='Players'>Players</option>";
                 echo "<option value='teams'>Teams</option>";
                 echo "<option value='ball' selected>Bowling Balls</option>";
             }
         } else {
-            echo "<option value='players'>Players</option>";
+            echo "<option value='Players'>Players</option>";
             echo "<option value='teams'>Teams</option>";
             echo "<option value='ball'>Bowling Balls</option>";
         }
@@ -97,14 +97,14 @@ if(!isset($_GET['category']))
     }
 
 
-    function createPlayersReportForm($category) { // Creates the form for the user to select desired report for players
+    function createPlayersReportForm($category) { // Creates the form for the user to select desired report for Players
         echo "<br><div id='empty'></div>";
 
         echo " <table class='report'>
         <tr>
             <form>
                 <td>Report Type:
-                    <select id='playersReportType' name='playersReportType'>
+                    <select id='PlayersReportType' name='PlayersReportType'>
                         <option value='Strikes'>Strikes</option>
                         <option value='Spares'>Spares</option>
                         <option value='Perfect_Games'>Perfect Games</option>
@@ -113,14 +113,14 @@ if(!isset($_GET['category']))
                 </td>
 
                 <td>Order by:
-                    <select id='playersOrderBy' name='playersOrderBy'>
+                    <select id='PlayersOrderBy' name='PlayersOrderBy'>
                         <option value='DESC'>High to low</option>
                         <option value='ASC'>Low to high</option>
                     </select>
                 </td>
 
                 <td>Show top:
-                    <select id='playersShowTop' name='playersShowTop'>
+                    <select id='PlayersShowTop' name='PlayersShowTop'>
                         <option value='5'>5</option>
                         <option value='10'>10</option>
                         <option value='25'>25</option>
@@ -129,7 +129,7 @@ if(!isset($_GET['category']))
                     </select>
                 </td>
                 <input type='hidden' id='category' value='$category'>
-                <td><input id='submit_players' type='submit' value='Submit'></td>
+                <td><input id='submit_Players' type='submit' value='Submit'></td>
 
             </form>
         </tr>
@@ -180,7 +180,7 @@ if(!isset($_GET['category']))
     if(isset($_GET['category'])) {
         $category = $_GET['category'];
 
-        if($category == "players") {
+        if($category == "Players") {
             createPlayersReportForm($category);
         }
         else if($category == "teams") {

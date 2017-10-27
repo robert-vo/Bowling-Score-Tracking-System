@@ -3,19 +3,13 @@ namespace bowling;
 use mysqli;
 define('NL','<br>');
 
-error_reporting(-1);
-ini_set('display_errors','On');
-
 class game {
-
-
     private $rolls     = array();
     private $roll      = 1;
     private $frames    = array();
     private $frame     = 1;
 
     public function roll( $pin_count ) {
-//        echo '<br>number of pins = '. $pin_count;
         if ( !is_int( $pin_count ) ) {
             throw new \InvalidArgumentException('roll() function requires an integer as an argument');
         }
@@ -87,7 +81,6 @@ class game {
         return $frames;
     }
 
-
     public function stats() {
         echo 'Total Score: ' . $this->score() . NL;
         echo 'Rolls: ' . count( $this->rolls ) . NL;
@@ -99,7 +92,6 @@ class game {
         }
     }
 
-    //Test Stuff
     public function run() {
         echo '<br><br><br><br>';
 
@@ -107,11 +99,7 @@ class game {
 
         foreach (range(1, 10) as $item) {
 
-            $sql = "SELECT group_concat(roll_one_id) as '1',
-      group_concat(Roll_Two_ID) as '2',
-      group_concat(Roll_Three_ID) as '3',
-      Frame_Number
-    FROM frame where Game_ID = 1 and Player_ID = 1 and Frame_Number = $item;";
+            $sql = "SELECT group_concat(Roll_One_ID) as '1', group_concat(Roll_Two_ID) as '2', group_concat(Roll_Three_ID) as '3', Frame_Number FROM Frame where Game_ID = 1 and Player_ID = 1 and Frame_Number = $item;";
 
             $conn = connectToDatabase();
             $result = $conn->query($sql);

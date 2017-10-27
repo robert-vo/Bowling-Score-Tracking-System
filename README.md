@@ -1,4 +1,4 @@
-# Bowling Score Tracking System [![Build Status](https://travis-ci.org/robert-vo/Bowling-Score-Tracking-System.svg?branch=master)](https://travis-ci.org/robert-vo/Bowling-Score-Tracking-System)
+# Bowling Score Tracking System [![Build Status](https://travis-ci.org/bglopez/Bowling-Score-Tracking-System.svg?branch=master)](https://travis-ci.org/bglopez/Bowling-Score-Tracking-System)
 
 Database to collect scores, events, pin falls, players, balls used, etc. The reports could be various statistics about players such as single-pin spares left, strike percentage, split-conversion percentage, etc.)
 
@@ -32,4 +32,3 @@ If the command is successfully worked, it will display that it is listening on `
 
 Once there, the welcome message, "Welcome to Bowling Score Tracking System!", should appear. Enjoy!
 
-### Team 12 - Spring 2016

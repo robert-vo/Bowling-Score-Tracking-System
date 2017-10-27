@@ -29,7 +29,7 @@ if (!isset($_SESSION["sess_user"])) {
 
     $conn = connectToDatabase();
 
-    $columnQuery = "SELECT distinct Column_name FROM Information_schema.columns WHERE Table_name LIKE 'players';";
+    $columnQuery = "SELECT distinct Column_name FROM Information_schema.columns WHERE Table_name LIKE 'Players';";
 
     $resultColumns = $conn->query($columnQuery);
     $columnNames = array();
@@ -42,7 +42,7 @@ if (!isset($_SESSION["sess_user"])) {
         echo "0 results";
     }
     
-    $query = "SELECT * FROM players WHERE Email = '$username'";
+    $query = "SELECT * FROM Players WHERE Email = '$username'";
     $result = $conn->query($query);
     
     echo "<table>";

@@ -26,10 +26,10 @@ function createEmailToPlayerIDList() {
     return $emailToID;
 }
 
-function allPlayersEmailsAreValid(...$players) {
+function allPlayersEmailsAreValid($Players) {
     $isValid = true;
     $emailToID = createEmailToPlayerIDList();
-    foreach ($players as $player) {
+    foreach ($Players as $player) {
         if(isset($emailToID[$player])) {
             $isValid = true;
         }
@@ -41,7 +41,7 @@ function allPlayersEmailsAreValid(...$players) {
 }
 
 function constructPlayers($numberOfPlayers) {
-    $sql = "INSERT INTO TEAM(Leader, Name,";
+    $sql = "INSERT INTO Team (Leader, Name,";
     $teamName = $_POST['name'];
     $emailToID = createEmailToPlayerIDList();
 

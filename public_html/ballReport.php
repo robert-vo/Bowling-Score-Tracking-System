@@ -1,22 +1,12 @@
 <?php
 include 'databaseFunctions.php';
-
-
 function printBallPopularity($orderBy, $showTop) {
     $conn = connectToDatabase();
-
-    $query = "SELECT roll.Ball_ID, Count(roll.Ball_ID) as numOfRolls, ball.Color, ball.Weight, ball.Size
-                FROM roll, ball
-                WHERE roll.Ball_ID = ball.Ball_ID
-                GROUP by Ball_ID
-                ORDER BY COUNT(Ball_ID) $orderBy LIMIT $showTop";
-
+    $query = "SELECT Roll.Ball_ID, Count(Roll.Ball_ID) as numOfRolls, Ball.Color, Ball.Weight, Ball.Size FROM Roll, Ball WHERE Roll.Ball_ID = Ball.Ball_ID GROUP by Ball_ID ORDER BY COUNT(Ball_ID) $orderBy LIMIT $showTop";
     $result = $conn->query($query);
     printTable($result);
-
     $conn->close();
 }
-
 
 function printTable($result) {
     if($result->num_rows > 0) {
@@ -35,7 +25,6 @@ function printTable($result) {
                     </td>";
             echo "<td>" . $row['numOfRolls'] . "</td>";
             echo "</tr>";
-
             $place++;
         }
         echo "</table>";
@@ -43,7 +32,6 @@ function printTable($result) {
         echo "Fatal Error! No bowling balls exist.";
     }
 }
-
 
 $category = $_POST['category'];
 $reportType = $_POST[ $category . 'ReportType'] ;
@@ -57,6 +45,5 @@ if($reportType == "ball_pop") {
         $order = 'most';
     echo "<h5>Here are the top $showTop bowling balls that are the $order popular.</h5>";
     printBallPopularity($orderBy, $showTop);
-
 }
 ?>

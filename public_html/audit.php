@@ -7,29 +7,20 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="audit.css">
 </head>
-
 <body>
-
-
 <?php
-//Starts the session (logged in user)
 session_start();
-
 include 'menuBar.php';
 generateMenuBar(basename(__FILE__));
-
 //IS_ADMIN returns a 0 or 1, or also false or true, respectively. 
 //This if statement is equivalent to $_SESSION['user_role'] == 1
 //To see how this session variable is accessible, check loginForm.php, line 62. 
 if (!$_SESSION['user_role']) {
     header("location:loginForm.php");
-}
-else
-{
+} else {
 ?>
-
 <p>
-    Which table do you want to edit?
+Which table do you want to edit?
 <form action="runAudit.php" method="post">
     <select name="bowlingAudit">
         <option value="">Select...</option>
@@ -53,15 +44,8 @@ else
     <input type="submit" value="Submit">
 </form>
 </p>
-
-
 </body>
 </html>
-
-
 <?php
 }
 ?>
-
-
-

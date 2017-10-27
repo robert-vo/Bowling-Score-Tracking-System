@@ -16,7 +16,7 @@ function prepareSqlQuery($yourTeam, $otherTeams, $gameTitle, $gameLocation, $gam
         }
     }
 
-    $sql = "insert into Game(Teams, Title, Location_ID, Event_Type) VALUES ('$allTeams', '$gameTitle', '$gameLocation', '$gameType')";
+    $sql = "insert into Game (Teams, Title, Location_ID, Event_Type) VALUES ('$allTeams', '$gameTitle', '$gameLocation', '$gameType')";
 
     return $sql;
 }
@@ -28,7 +28,7 @@ function prepareSqlQuery2($yourTeam, $gameTitle, $gameLocation, $gameType) {
         $gameTitle = 'Generic Game';
     }
 
-    $sql = "insert into Game(Teams, Title, Location_ID, Event_Type) VALUES ('$allTeams', '$gameTitle', '$gameLocation', '$gameType')";
+    $sql = "insert into Game (Teams, Title, Location_ID, Event_Type) VALUES ('$allTeams', '$gameTitle', '$gameLocation', '$gameType')";
 
     return $sql;
 }

@@ -7,20 +7,12 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="update.css">
 </head>
-
 <body>
-
-
-
-
 <?php
 session_start();
-
 include 'menuBar.php';
 include 'databaseFunctions.php';
 generateMenuBar(basename(__FILE__));
-
-
 //Starts the session (logged in user)
 
 //IS_ADMIN returns a 0 or 1, or also false or true, respectively.
@@ -42,29 +34,15 @@ function displayMessage()
     }
     $table = $_POST['table'];
     $id = $_POST['id'];
-
-
     $query = "DELETE FROM $table WHERE ".$_POST['id_column']." = $id";
-
     if (mysqli_query($conn, $query) == TRUE) {
-
         echo "<p>The ".$_POST['table']." with ID:".$id." has been deleted.</p>";
-
         echo "<form action='runAudit.php' method='post'>
                 <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
                 <input type='submit' value='Back to table'>
             </form>";
-
     } else {
-//        echo "<br><br><form action='runAudit.php' method='post'>
-//                <input type='hidden' name='bowlingAudit' value='" . $_POST['table'] . "'>
-//                <input type='submit' value='Back to table'>
-//            </form>";
-
         $error = "Unable to update.\n\nError: " . $conn->error;
-
-        //echo $error;
-
         $error = json_encode($error);
         echo "
         <script type='text/javascript'>
@@ -72,22 +50,12 @@ function displayMessage()
             history.go(-1);
         </script>";
     }
-
-
-
     $conn->close();
 }
-
-
 displayMessage();
-
 ?>
-
-
 </body>
-
 </html>
-
 <?php
 }
 ?>
